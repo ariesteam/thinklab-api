@@ -27,7 +27,7 @@ import org.integratedmodelling.thinklab.api.runtime.ISession;
  * @date Jan 25th, 2008.
  * 
  */
-public interface IModel extends IConceptualizable, IModelObject {
+public interface IModel extends IModelObject {
 	
 	
 	/**

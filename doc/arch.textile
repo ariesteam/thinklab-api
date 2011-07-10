@@ -1,22 +1,73 @@
 h1. Introduction
 
-h1. Model objects
+h1. Knowledge in thinklab
 
-h2. IObservation
+h2. Knowledge objects
 
-h2. IContext
+h2. Semantic query
 
-h2. IModel
+h2. Persistent semantic storage
 
-h2. IAnnotation
+h2. Conceptualization of objects and literals
 
-h2. IAgent
+h1. Modeling API
+
+h2. Generalities
+
+h2. Model objects
+
+* Implement INamespaceQualified and IMetadataHolder
+
+h3. IObservation
+
+h4. IObservation class hierarchy
+
+h4. Indirect observations
+
+h5. Mediators, extractors and datasources
+
+h5. Computing accessors
+
+h4. IExtent
+
+h5. Introduction to the Context
+
+h4. Transforming observations
+
+h4. IState
+
+* States always have fully specified extents
+* States can always produce all values of their observable in each context state.
+* States cannot have dependencies
+
+h4. IAccessor
+
+h3. IContext
+
+h3. IModel
+
+h3. IAnnotation
+
+h3. IAgent
+
+h3. IScenario
+
+h2. Structurally variable modeling
+
+h3. Contextual model definition
+
+h3. Entification of states
 
 h1. Synopsis of thinklab operations
 
-h2. Factories
+h2. Runtime environment: ISession and IUserModel
+
+h2. Factories and creation of objects
+
+h3. Contextualization
 
 h2. Thinklab projects
 
-h2. Modeling language requirements
+h2. Modeling language
+
 

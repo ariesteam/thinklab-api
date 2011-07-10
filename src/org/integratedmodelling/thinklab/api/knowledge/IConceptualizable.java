@@ -49,5 +49,11 @@ import org.integratedmodelling.list.Polylist;
  */
 public interface IConceptualizable {
 	
+	/**
+	 * Conceptualize to an instance list. 
+	 * @param object
+	 * @return
+	 * @throws ThinklabException
+	 */
 	Polylist conceptualize() throws ThinklabException;
 }
