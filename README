@@ -1,0 +1,18 @@
+This project defines the official Thinklab API as a set of documented Java interfaces. Any 
+implementation of the Thinklab semantic modeling platform must implement it. The reference 
+implementation is the thinklab project, which will be made compliant before release 1.0.
+
+The API only refers to the runtime side and does not mandate any language conventions for the
+language that defines the modeling objects. It does, however, specify what those objects should
+do and how they should be known to thinklab. All model objects are expected to have a source code
+counterpart. The thinklab project implements a full clojure-based modeling language. The language
+parser should eventually become a separate projects from thinklab and use a plug-in factory to 
+create the model objects.
+
+The files in doc/ constitute some basic documentation of the concepts and language elements in
+thinklab. They are written in textile markup language.
+
+Along with the API, the library provides a minimum number of support classes that implement
+standard exceptions, basic language elements such as quantifiers and connectors, and minimal 
+storage structures such as pairs and triples. This library is intended to be standalone and 
+have no dependencies other than a Java 1.5+ runtime.

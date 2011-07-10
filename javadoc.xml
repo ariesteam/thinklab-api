@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="public" author="true" classpath="." destdir="doc/api" doctitle="Thinklab API" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="org.integratedmodelling.thinklab.api.runtime,org.integratedmodelling.thinklab.api.modelling,org.integratedmodelling.thinklab.api.listeners,org.integratedmodelling.lang,org.integratedmodelling.thinklab.api.knowledge,org.integratedmodelling.thinklab.api.knowledge.storage,org.integratedmodelling.thinklab.api.knowledge.query,org.integratedmodelling.thinklab.api,org.integratedmodelling.thinklab.api.knowledge.factories,org.integratedmodelling.thinklab.api.modelling.factories,org.integratedmodelling.thinklab.api.modelling.compiler,org.integratedmodelling.thinklab.api.modelling.metadata,org.integratedmodelling.list,org.integratedmodelling.thinklab.api.modelling.classification,org.integratedmodelling.collections,org.integratedmodelling.exceptions" source="1.6" sourcepath="src" splitindex="true" use="true" version="true"/>
+    </target>
+</project>
