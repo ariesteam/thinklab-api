@@ -20,10 +20,8 @@ public interface IKnowledgeFactory {
 
 	public abstract IConcept retrieveConcept(String prop);
 
-
-
 	public abstract IConcept getLeastGeneralCommonConcept(String semanticType, String otherConcept)
-			throws ThinklabValidationException;
+			throws ThinklabException;
 
 	/**
 	 * Return the least general ancestor of both concepts passed, or null if there is none.

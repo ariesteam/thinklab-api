@@ -65,5 +65,19 @@ public interface IValue {
 	 * @return
 	 */
 	public abstract Object demote();
+
+	public abstract IInstance asObject();
+
+	public abstract boolean asBoolean();
+
+	public abstract double asDouble();
+
+	public abstract int asInteger();
+
+	public abstract String asText();
+
+	public abstract boolean isLiteral();
+
+	public abstract boolean isClass();
 	
 }

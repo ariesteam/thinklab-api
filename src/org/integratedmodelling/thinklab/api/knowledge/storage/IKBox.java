@@ -38,11 +38,13 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.integratedmodelling.exceptions.ThinklabException;
+import org.integratedmodelling.lang.Quantifier;
 import org.integratedmodelling.list.Polylist;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.IInstance;
 import org.integratedmodelling.thinklab.api.knowledge.IValue;
 import org.integratedmodelling.thinklab.api.knowledge.query.IQueriable;
+import org.integratedmodelling.thinklab.api.knowledge.query.IQuery;
 import org.integratedmodelling.thinklab.api.runtime.ISession;
 
 /**
@@ -73,6 +75,90 @@ import org.integratedmodelling.thinklab.api.runtime.ISession;
  */
 public abstract interface IKBox extends IQueriable {
     
+	
+	public static interface Capabilities {
+
+		/**
+		 * True if any type of nontrivial query is supported.
+		 * @return
+		 */
+		public abstract boolean canQuery();
+		
+		/**
+		 * True if the null/empty query will retrieve all objects.
+		 * @return
+		 */
+		public abstract boolean canQueryAll();
+		
+		/**
+		 * True if retrieving an object by ID will work.
+		 * @return
+		 */
+		public abstract boolean canRetrieveInstance();
+		
+		/**
+		 * True if an object can be retrieved by ID as a list.
+		 * @return
+		 */
+		public abstract boolean canRetrieveAsList();
+
+		/**
+		 * True if an object can be stored by passing a list.
+		 * @return
+		 */
+		public abstract boolean canStoreList();
+		
+		/**
+		 * True if an instance can be stored at all.
+		 * @return
+		 */
+		public abstract boolean canStoreInstance();
+		
+		/**
+		 * True if the kbox will use the reference table passed to the storage functions that use one.
+		 * @return
+		 */
+		public abstract boolean canUseReferencesWhileStoring();
+
+		/**
+		 * True if the kbox will use the reference table passed to the retrieval functions that use one.
+		 * @return
+		 */
+		public abstract boolean canUseReferencesWhileRetrieving();
+
+		/**
+		 * True if the given quantifier in the query will be honored.
+		 * @param q
+		 * @return
+		 */
+		public abstract boolean honorsQuantifier(Quantifier q);
+		
+		/**
+		 * True if the given schema is understood.
+		 * @param schema
+		 * @return
+		 */
+		public abstract boolean supportsSchema(Polylist schema);
+		
+		/**
+		 * True if the given operator (possibly with a given operand) will be understood when applied
+		 * to an object of the given class.
+		 * 
+		 * @param target
+		 * @param operand
+		 * @param op
+		 * @return
+		 */
+		public abstract boolean supportsOperator(IConcept target, IConcept operand, String op);
+		
+		/**
+		 * True if the given query class can be used on the associated kbox.
+		 * @param query
+		 * @return
+		 */
+		public abstract boolean supportsQuery(Class<IQuery> query);
+		
+	}
 	/**
 	 * String constants to identify accepted properties for the .kbox property file.
 	 * MANDATORY: registered protocol of requested kbox.
@@ -220,7 +306,7 @@ public abstract interface IKBox extends IQueriable {
 	 * 
 	 * @return
 	 */
-	public IKBoxCapabilities getCapabilities();
+	public Capabilities getCapabilities();
 
 	/**
 	 * KBoxes must be capable to return the number of objects they contain.
@@ -248,6 +334,12 @@ public abstract interface IKBox extends IQueriable {
 	 * @throws ThinklabException TODO
 	 */
 	public abstract void resetToEmpty() throws ThinklabException;
+
+	IInstance getObjectFromID(String id, ISession session,
+			HashMap<String, String> refTable) throws ThinklabException;
+
+	IInstance getObjectFromID(String id, ISession session)
+			throws ThinklabException;
 
 
 }

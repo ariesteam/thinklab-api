@@ -54,7 +54,7 @@ public interface IQuery {
 	 * @param query
 	 * @throws ThinklabValidationException
 	 */
-	abstract void parse(String query) throws ThinklabValidationException;
+	public abstract void parse(String query) throws ThinklabValidationException;
 	
 	/**
 	 * Queries should always be capable of returning a textual specification that can later
@@ -62,14 +62,14 @@ public interface IQuery {
 	 * 
 	 * @return
 	 */
-	abstract String asText();
+	public abstract String asText();
 	
 	/**
 	 * Return true if the query is empty, meaning that it will select everything that's queriable. 
 	 * 
 	 * @return
 	 */
-	abstract boolean isEmpty();
+	public abstract boolean isEmpty();
 
 	/**
 	 * Return a new query which is the logical connection of self with the passed one.
@@ -78,6 +78,6 @@ public interface IQuery {
 	 * @param intersection
 	 * @return
 	 */
-	abstract IQuery merge(IQuery constraint, LogicalConnector intersection) throws ThinklabException ;
+	public abstract IQuery merge(IQuery constraint, LogicalConnector intersection) throws ThinklabException ;
 	
 }

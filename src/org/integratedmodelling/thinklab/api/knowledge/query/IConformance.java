@@ -59,8 +59,8 @@ import org.integratedmodelling.thinklab.api.knowledge.IInstance;
 public interface IConformance {
 
 	/**
-	 * Return a constraint that selects conformant objects, reflecting this
-	 * conformance notion.
+	 * Return a query that selects objects conformant to the passed one, reflecting the
+	 * constraints of this conformance policy.
 	 * 
 	 * @return
 	 */

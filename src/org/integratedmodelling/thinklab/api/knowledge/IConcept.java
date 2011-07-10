@@ -132,6 +132,8 @@ public interface IConcept extends IKnowledgeSubject {
 	 * @return
 	 */
 	public abstract Collection<IProperty> getAnnotationProperties();
+
+	public abstract IConcept getLeastGeneralCommonConcept(IConcept c);
 	
 	
 }
