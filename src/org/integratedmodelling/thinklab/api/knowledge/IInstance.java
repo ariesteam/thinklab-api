@@ -35,12 +35,12 @@ package org.integratedmodelling.thinklab.api.knowledge;
 
 import java.net.URI;
 import java.util.Collection;
-import java.util.HashMap;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.exceptions.ThinklabValidationException;
 import org.integratedmodelling.list.Polylist;
 import org.integratedmodelling.thinklab.api.knowledge.query.IConformance;
+import org.integratedmodelling.thinklab.api.runtime.ISession;
 
 /**
  * <p>
@@ -93,39 +93,6 @@ import org.integratedmodelling.thinklab.api.knowledge.query.IConformance;
  * @see ISession
  */
 public interface IInstance extends IKnowledgeSubject {
-
-	/**
-	 * Return a collection of all relationships of this to classes, objects, or literals.
-	 * @return
-	 * @throws ThinklabException TODO
-	 */
-	public abstract Collection<IRelationship> getRelationships() throws ThinklabException;
-	
-	/**
-	 * Return a collection of all relationships to other classes, objects or literals connected to this via the named property.
-     * @param property the semantic type of the property (versions with SemanticType and IProperty will follow)
-     * @return a collection, possibly empty
-     * @throws ThinklabException in various obvious cases
-	 */
-	public abstract Collection<IRelationship> getRelationships(String property) throws ThinklabException;
-
-	/**
-	 * Return a collection of all relationships to other classes, objects or literals connected to this via the named property
-	 * or any of its subproperties.
-     * @param property the semantic type of the property (versions with SemanticType and IProperty will follow)
-     * @return a collection, possibly empty
-     * @throws ThinklabException in various obvious cases
-	 */
-	public abstract Collection<IRelationship> getRelationshipsTransitive(String property) throws ThinklabException;
-	
-	/**
-	 * Get the number of relationships in the instance that happen through the given
-	 * property.
-	 * @param property
-	 * @return
-	 */
-	public abstract int getRelationshipsCount(String property) throws ThinklabException;
-
 	
 	/**
 	 * The basic function to extract the value of a property. Could have a better name but
@@ -162,19 +129,6 @@ public interface IInstance extends IKnowledgeSubject {
 	 */
 	public abstract Polylist asList(String oref) throws ThinklabException;
 
-	/**
-	 * Like toList() but passing a preexisting table of references that have been stored
-	 * previously, and must be only referenced and not defined in the resulting list. Expected
-	 * to add any defined instance to the reference table with its (ID,URI) pair if the
-	 * object is not already present.
-	 * 
-	 * @param oref
-	 * @param refTable
-	 * @return
-	 * @throws ThinklabException
-	 */
-	public abstract Polylist toList(String oref,
-			HashMap<String, String> refTable) throws ThinklabException;
 
 	/**
 	 * Add a relationship between the instance and a class through passed

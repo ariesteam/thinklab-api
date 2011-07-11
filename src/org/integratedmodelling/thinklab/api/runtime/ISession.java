@@ -45,21 +45,23 @@ import org.integratedmodelling.exceptions.ThinklabValidationException;
 import org.integratedmodelling.list.Polylist;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.IInstance;
-import org.integratedmodelling.thinklab.api.knowledge.IOntology;
 import org.integratedmodelling.thinklab.api.knowledge.storage.IKBox;
 import org.integratedmodelling.thinklab.api.listeners.IThinklabSessionListener;
 
 
 /**
  * A Session is a temporary concept space that contains all instances that are
- * created during a user session. The ontology metadata also contain details
- * about session creation. Typically, all operations on sessions
- * are synchronized. 
+ * created during a user session. A session should be an ontology or contain one, but
+ * its identity as a IOntology is not mandated. Sessions are normally memory-based but
+ * should be able to persist themselves.
+ * 
+ * All operations on the same session are synchronous so there's no need to
+ * worry about concurrency.
  * 
  * @author Ferdinando Villa
  * 
  */
-public interface ISession extends IOntology {
+public interface ISession {
 	
 	// standard variable names for notification levels
 	public static final String DEBUG = "session.debug";

@@ -88,7 +88,7 @@ public abstract interface IKnowledgeSubject extends IKnowledge {
 	 * @param property
 	 * @return
 	 */
-	public abstract int getNumberOfRelationships(String property) throws ThinklabException;
+	public abstract int getRelationshipsCount(String property) throws ThinklabException;
 
 	
 	/**
