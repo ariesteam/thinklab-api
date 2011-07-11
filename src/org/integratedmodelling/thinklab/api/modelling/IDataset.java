@@ -1,6 +1,7 @@
 package org.integratedmodelling.thinklab.api.modelling;
 
 import org.integratedmodelling.exceptions.ThinklabException;
+import org.integratedmodelling.thinklab.api.modelling.observation.IContext;
 
 /**
  * A dataset is a persistent IContext. Should be capable of

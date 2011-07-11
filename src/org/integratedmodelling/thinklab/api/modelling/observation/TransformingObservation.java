@@ -1,4 +1,4 @@
-package org.integratedmodelling.thinklab.api.modelling;
+package org.integratedmodelling.thinklab.api.modelling.observation;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;

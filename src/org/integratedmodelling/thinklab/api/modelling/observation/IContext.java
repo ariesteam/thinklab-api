@@ -1,9 +1,10 @@
-package org.integratedmodelling.thinklab.api.modelling;
+package org.integratedmodelling.thinklab.api.modelling.observation;
 
 import java.util.Collection;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
+import org.integratedmodelling.thinklab.api.modelling.IModelObject;
 
 /**
  * A IContext is a named template to build an IObservationContext for an observation 

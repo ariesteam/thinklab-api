@@ -1,4 +1,4 @@
-package org.integratedmodelling.thinklab.api.modelling;
+package org.integratedmodelling.thinklab.api.modelling.observation;
 
 /**
  * Tag interface to distinguish observations that are capable of merging the

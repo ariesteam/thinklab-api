@@ -2,6 +2,8 @@ package org.integratedmodelling.thinklab.api.modelling;
 
 import java.util.Collection;
 
+import org.integratedmodelling.thinklab.api.modelling.observation.IState;
+
 /**
  * Semantic annotations are essentially models whose result observation is
  * entirely specified, i.e. they must be instances of IState. Conceptualized to

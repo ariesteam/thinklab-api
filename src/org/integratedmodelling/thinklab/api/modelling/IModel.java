@@ -6,6 +6,8 @@ import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.IConceptualizable;
 import org.integratedmodelling.thinklab.api.knowledge.storage.IKBox;
+import org.integratedmodelling.thinklab.api.modelling.observation.IContext;
+import org.integratedmodelling.thinklab.api.modelling.observation.IObservationIterator;
 import org.integratedmodelling.thinklab.api.runtime.ISession;
 
 /**

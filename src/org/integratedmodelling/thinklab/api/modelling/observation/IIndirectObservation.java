@@ -1,4 +1,4 @@
-package org.integratedmodelling.thinklab.api.modelling;
+package org.integratedmodelling.thinklab.api.modelling.observation;
 
 
 public interface IIndirectObservation extends IObservation {
