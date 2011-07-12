@@ -222,5 +222,5 @@ public interface IOntology  extends IResource {
 	 * @return a pair <concept, boolean> with the boolean set to true if the concept was there already.
 	 * @throws ThinklabValidationException 
 	 */
-	public IConcept createConcept(String localName, IConcept[] parents, boolean persist) throws ThinklabException;
+	public IConcept createConcept(String localName, IConcept[] parents) throws ThinklabException;
 }

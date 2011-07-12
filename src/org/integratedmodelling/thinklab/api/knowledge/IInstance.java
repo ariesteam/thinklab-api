@@ -92,7 +92,7 @@ import org.integratedmodelling.thinklab.api.runtime.ISession;
  * @author Ioannis N. Athanasiadis
  * @see ISession
  */
-public interface IInstance extends IKnowledgeSubject {
+public interface IInstance extends IKnowledge {
 	
 	/**
 	 * The basic function to extract the value of a property. Could have a better name but
@@ -106,6 +106,40 @@ public interface IInstance extends IKnowledgeSubject {
 	 */
 	public abstract IValue get(String property) throws ThinklabException;
 
+	/**
+	 * Return a collection of all relationships of this to classes, objects, or literals.
+	 * @return
+	 * @throws ThinklabException TODO
+	 */
+	public abstract Collection<IRelationship> getRelationships() throws ThinklabException;
+	
+	/**
+	 * Return a collection of all relationships to other classes, objects or literals connected to this via the named property.
+     * @param property the semantic type of the property (versions with SemanticType and IProperty will follow)
+     * @return a collection, possibly empty
+     * @throws ThinklabException in various obvious cases
+	 */
+	public abstract Collection<IRelationship> getRelationships(String property) throws ThinklabException;
+
+	/**
+	 * Return a collection of all relationships to other classes, objects or literals connected to this via the named property
+	 * or any of its subproperties.
+     * @param property the semantic type of the property (versions with SemanticType and IProperty will follow)
+     * @return a collection, possibly empty
+     * @throws ThinklabException in various obvious cases
+	 */
+	public abstract Collection<IRelationship> getRelationshipsTransitive(String property) throws ThinklabException;
+	
+	/**
+	 * Get the number of relationships in the instance that happen through the given
+	 * property.
+	 * @param property
+	 * @return
+	 */
+	public abstract int getRelationshipsCount(String property) throws ThinklabException;
+
+	
+	
 	/**
 	 * Get the Java implementation, if any, created by the appropriate
 	 * ConceptManager after validation.
@@ -279,7 +313,7 @@ public interface IInstance extends IKnowledgeSubject {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public IInstance clone(IOntology session) throws ThinklabException;
+	public IInstance clone(IOntology ontology) throws ThinklabException;
 
 	/**
 	 * Return true if the passed instance conforms to this according to the

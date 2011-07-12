@@ -4,7 +4,6 @@ import java.util.Collection;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
-import org.integratedmodelling.thinklab.api.knowledge.IConceptualizable;
 import org.integratedmodelling.thinklab.api.knowledge.storage.IKBox;
 import org.integratedmodelling.thinklab.api.modelling.observation.IContext;
 import org.integratedmodelling.thinklab.api.modelling.observation.IObservationIterator;
@@ -51,14 +50,19 @@ public interface IModel extends IModelObject {
 	public IObservationIterator observe(IKBox kbox, ISession session, IContext context) throws ThinklabException;
 
 	/**
-	 * Train the model to match any specified output observation (in the :observed
-	 * clause, if any). Not all models may be trainable. Returns a new trained model
-	 * that has learned to reproduce the models observed on the passed kbox.
+	 * Train the model to match any output state that can be
+	 * observed in the kbox/context. Details of how to choose or subset the output states are
+	 * left to the implementation. Not all models will be trainable - if not trainable,
+	 * this one should return the same model (with the option of logging a warning).
+	 * 
+	 * It should never modify the model it's called on - would be a const if there
+	 * was such a thing in Java. 
 	 * 
 	 * @param kbox
 	 * @param session
 	 * @param params
-	 * @return
+	 * @return a new trained model that has learned to reproduce the output states 
+	 * 		   observed on the passed kbox.
 	 * @throws ThinklabException
 	 */
 	public IModel train(IKBox kbox, ISession session,  IContext context) throws ThinklabException;
@@ -75,8 +79,10 @@ public interface IModel extends IModelObject {
 	public IModel applyScenario(IScenario scenario) throws ThinklabException;
 
 	/**
-	 * Get the models that this one depend upon. Return an empty collection, not null, if
-	 * none exist.
+	 * Get the models that this one directly depends upon. Return an empty 
+	 * collection, not null, if none exist - it should always be legal to iterate
+	 * over the return value.
+	 * 
 	 * @return
 	 */
 	public abstract Collection<IModel> getDependencies();

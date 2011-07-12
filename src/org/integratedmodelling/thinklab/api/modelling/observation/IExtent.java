@@ -47,7 +47,8 @@ import org.integratedmodelling.thinklab.api.knowledge.query.IQuery;
  * of extents.
  * 
  * Extents must be conceptualizable and the result of conceptualizing
- * them must be an observation describing the extent.
+ * them must be an observation describing the extent. They are also expected
+ * to implement equals() and hash() in a fast way (e.g. by using signatures).
  * 
  * @author Ferdinando Villa
  *
@@ -80,17 +81,20 @@ public abstract interface IExtent extends IState, ITopologicallyComparable {
 	}
 	
 	/**
-	 * Collapse the multiplicity and return the 1-dimensional extent that corresponds to the 
-	 * full extent of our topology.
+	 * Collapse the multiplicity and return the extent that represents
+	 * the full extent of our topology in one single state. This extent may
+	 * not necessarily be of the same class.
 	 * 
-	 * @return
+	 * @return a new extent with getValueCount() == 1.
 	 */
 	public IExtent collapse();
 	
 	/**
-	 * Return the n-th member of the ordered topology.
-	 * @param granule
-	 * @return
+	 * Return the n-th state of the ordered topology as a new extent with one
+	 * state.
+	 * 
+	 * @param granule 
+	 * @return a new extent with getValueCount() == 1.
 	 */
 	public IExtent getExtent(int granule);
 	
@@ -100,20 +104,20 @@ public abstract interface IExtent extends IState, ITopologicallyComparable {
 	 * for any state defined over this extent.
 	 * 
 	 * @param granule
-	 * @return
+	 * @return whether there is an observable world at the given location.
 	 */
 	public abstract boolean isCovered(int granule);
 
-	/*
-	 * FIXME still rough - return a restriction that will match observations with
-	 * similar topology, using the parameter to define the relationship (which should be
-	 * a formal enum or topological operator)
+	/**
+	 * Return a semantic query that will match observations that are in the passed
+	 * relationship with this extent. 
 	 */
-	public abstract IQuery getConstraint(String operator) throws ThinklabException;
+	public abstract IQuery getConstraint(IOperator operator) throws ThinklabException;
 
 	/**
 	 * Return the transformation, if any, that will be necessary to operate on a 
-	 * datasource that conforms to us so that it matches the passed extent.
+	 * datasource that conforms to us so that it matches the passed extent. If 
+	 * no transformation is necessary, return an identity transformation.
 	 * 
 	 * @param mainObservable the observable for the main observation that owns the extent
 	 * 		  (what the states mean)
@@ -123,15 +127,6 @@ public abstract interface IExtent extends IState, ITopologicallyComparable {
 	 */
 	public IDataSource.Transformation getDatasourceTransformation(
 			IConcept mainObservable, IExtent extent) throws ThinklabException;
-
-	/**
-	 * Create a string signature that has no spaces, represents the extent accurately,
-	 * and is the same for extents that are equal. Used to cache data across runs and
-	 * within runs of the same model.
-	 * 
-	 * @return
-	 */
-	public abstract String getSignature();
 
 	/**
 	 * Return a list of location references to use in expressions and
@@ -155,12 +150,13 @@ public abstract interface IExtent extends IState, ITopologicallyComparable {
 	 * Should return whether the coverage of the domain is discontinuous to the
 	 * point of breaking the internal rules of the represented topologies. E.g.,
 	 * if we represent continuous uninterrupted space, discontinuities will break
-	 * neighborhood relationships that models may need to count on. This may come
-	 * as a result of intersecting partial extents.
+	 * neighborhood relationships that models may to count on. This may come
+	 * as a result of intersecting partial extents. If discontinuity is not an
+	 * issue for this domain, just return false.
 	 * 
 	 * @return
 	 */
-	public boolean checkDomainDiscontinuity() throws ThinklabException;
+	public boolean isDiscontinuous() throws ThinklabException;
 
 
 	/**
@@ -187,7 +183,7 @@ public abstract interface IExtent extends IState, ITopologicallyComparable {
 	 * Return an extent that is capable of representing the passed one 
 	 * exactly. If the passed one is of the same class, it can just return
 	 * the passed one, but it's provided to give the extent a chance of 
-	 * adjustments or of raising errors. 
+	 * adjustments or of raising errors when complex matches are done. 
 	 * 
 	 * @param extent
 	 * @return

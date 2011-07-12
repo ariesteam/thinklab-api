@@ -1,8 +1,8 @@
 package org.integratedmodelling.thinklab.api.modelling.observation;
 
 /**
- * Tag interface to distinguish observations that are capable of merging the
- * states of their dependencies.
+ * Indirect observation that is capable of merging the
+ * states of multiple contingent observation. 
  * 
  * @author ferdinando.villa
  *

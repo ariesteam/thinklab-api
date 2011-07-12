@@ -45,7 +45,7 @@ import org.integratedmodelling.thinklab.api.knowledge.query.IQuery;
  * of all ops on concepts should be the same for the same ontologies regardless of the implementation choices.
  * @author Ferdinando Villa
  */
-public interface IConcept extends IKnowledgeSubject {
+public interface IConcept extends IKnowledge {
 
     /**
      * Return a collection of all the direct parent classes.
@@ -134,6 +134,8 @@ public interface IConcept extends IKnowledgeSubject {
 	public abstract Collection<IProperty> getAnnotationProperties();
 
 	public abstract IConcept getLeastGeneralCommonConcept(IConcept c);
+	
+	public abstract IQuery getDefinition();
 	
 	
 }
