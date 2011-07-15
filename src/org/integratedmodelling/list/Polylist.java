@@ -914,30 +914,6 @@ public class Polylist {
 	 * map maps an object of class Function1 over a Polylist returning a 
 	 * Polylist
 	 */
-
-	public Polylist map(Function1 F) {
-		if (isEmpty())
-			return nil;
-		else
-			return cons(F.apply(first()), rest().map(F));
-	}
-
-	/**
-	 * reduce reduces a Polylist by a Function2 object, with unit
-	 * 
-	 */
-
-	public Object reduce(Function2 F, Object unit) {
-		Object result = unit;
-		Polylist L = this;
-
-		for (; L.nonEmpty(); L = L.rest()) {
-			result = F.apply(result, L.first());
-		}
-
-		return result;
-	}
-
 	public boolean hasMemberOfClass(Class<?> cls) {
 		boolean ret = false;
 		for (Object o : array())

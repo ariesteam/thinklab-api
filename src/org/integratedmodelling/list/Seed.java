@@ -41,7 +41,6 @@ package org.integratedmodelling.list;
 /**
   * A Seed can grow into any other Object.
  **/
-
 class Seed
   {
   Object value;

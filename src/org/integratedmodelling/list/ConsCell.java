@@ -42,7 +42,6 @@ package org.integratedmodelling.list;
   *  NonEmptyList is the sub-class of List consisting of non-empty 
   *  lists.  Every NonEmptyList has a first and a rest.
  **/
-
 class ConsCell
   {
   private Object First;
