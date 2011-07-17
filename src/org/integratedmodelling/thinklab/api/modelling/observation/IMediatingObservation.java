@@ -2,7 +2,7 @@ package org.integratedmodelling.thinklab.api.modelling.observation;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 
-public interface MediatingObservation extends IIndirectObservation {
+public interface IMediatingObservation extends IIndirectObservation {
 
 	/**
 	 * If this observation is acting as a mediator for another, return it. If

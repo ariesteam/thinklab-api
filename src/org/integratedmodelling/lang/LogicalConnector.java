@@ -36,12 +36,15 @@ package org.integratedmodelling.lang;
 import org.integratedmodelling.exceptions.ThinklabValidationException;
 
 /**
- * <p>A logical connector, representing one of the possible four connectors.</p>
+ * <p>A logical connector, representing one of the possible four connectors (union (or), intersection (and), 
+ *    exclusion (not), disjunction (xor)).</p>
+
  * <p>A bit complicated as a wrapper for an int, but it solves several problems related to string conversions and
  * equality. Private constructors force use of parseLogicalConnector to obtain one of the four possible static
  * instances. Because only the static members are used, == can be used to check for equality, although equals()
  * can be also used with both integers, LogicalConnectors and Strings. toString() will work properly.</p>
- * @author villa
+ * 
+ * @author Ferdinando Villa
  */
 public class LogicalConnector {
 

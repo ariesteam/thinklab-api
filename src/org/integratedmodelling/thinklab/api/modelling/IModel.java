@@ -10,23 +10,8 @@ import org.integratedmodelling.thinklab.api.modelling.observation.IObservationIt
 import org.integratedmodelling.thinklab.api.runtime.ISession;
 
 /**
- * The most high-level notion in Thinklab. Essentially a query that returns 
- * observations of a concept given a kbox and a session. It is nothing but a set
- * of axioms, and it should be serializable to an appropriately restricted
- * observation class; it is here represented as a Java class for practical
- * reasons (of efficiency, storage and cleanup of unneeded axioms); make it a
- * IConceptualizable to implement the behavior if needed, it's likely to be
- * unneeded overhead for now.
- * 
- * The Java side is usable as is but the whole model definition machinery is
- * meant to be used from Clojure, which provides an elegant and compact syntax for
- * model specification. See the examples/ folder in the plugin directory.
- * 
- * More docs will come or I'm not a real academic...
- * 
- * @author Ferdinando Villa
- * @date Jan 25th, 2008.
- * 
+ * A Model
+ *  * 
  */
 public interface IModel extends IModelObject {
 	
@@ -37,7 +22,6 @@ public interface IModel extends IModelObject {
 	 * @return
 	 */
 	public abstract IConcept getObservableClass();
-	
 
 	/**
 	 * 
@@ -47,7 +31,7 @@ public interface IModel extends IModelObject {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public IObservationIterator observe(IKBox kbox, ISession session, IContext context) throws ThinklabException;
+	public IObservationIterator observe(IContext context, IKBox kbox, ISession session) throws ThinklabException;
 
 	/**
 	 * Train the model to match any output state that can be
@@ -65,7 +49,7 @@ public interface IModel extends IModelObject {
 	 * 		   observed on the passed kbox.
 	 * @throws ThinklabException
 	 */
-	public IModel train(IKBox kbox, ISession session,  IContext context) throws ThinklabException;
+	public IModel train(IContext context, IKBox kbox, ISession session) throws ThinklabException;
 
 	/**
 	 * A scenario is a model modifier, containing alternative models for given observables.

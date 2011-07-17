@@ -97,4 +97,5 @@ public interface IState extends IIndirectObservation, IConceptualizable, IInstan
 	 * @return
 	 */
 	public abstract boolean isTemporallyDistributed();
+	
 }
