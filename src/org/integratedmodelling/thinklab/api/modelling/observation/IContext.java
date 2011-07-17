@@ -112,9 +112,12 @@ public interface IContext extends IModelObject {
 
 	/**
 	 * Return a new context with the given dimension collapsed to its 
-	 * total extent (1 state only), thereby eliminating the 
-	 * distribution in that dimension. IState has an aggregate() function that
+	 * total extent (1 state only), thereby eliminating any multiplicity in the 
+	 * distribution of states in that dimension. IState has an aggregate() function that
 	 * will create the correspondent aggregated state.
+	 * 
+	 * If dimension is null, this function must aggregate all extents in their
+	 * sorted order, resulting in a one-state overall aggregate.
 	 * 
 	 * @param dimension
 	 * @return
@@ -124,14 +127,17 @@ public interface IContext extends IModelObject {
 
 	/**
 	 * Return a context mapper that translates linear state coordinates to the equivalent ones for the
-	 * passed context. The passed context must be isomorphic with this, i.e. it must have the same 
-	 * multiplicity or multiplicity 1 along any common dimension and have no multiple 
+	 * context defined by the extents of the passed observation. 
+	 * 
+	 * The passed observation must have been harmonized by the contextualizer already, i.e. its context 
+	 * must have the same multiplicity or multiplicity 1 along any common dimension and have no multiple \
 	 * dimensions than this doesn't have.
 	 * 
 	 * @param context
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public abstract IContextMapper map(IContext context) throws ThinklabException;
+	public abstract IContextMapper mapContext(IObservation observation)
+			throws ThinklabException;
 
 }
