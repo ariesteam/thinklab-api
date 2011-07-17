@@ -93,13 +93,11 @@ public interface IModelFactory {
 	 * @param model
 	 * @param kbox
 	 * @param session
-	 * @param listeners
 	 * @param context
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public abstract IContext run(IModel model, IKBox kbox, ISession session,
-			Collection<IContextualizationListener> listeners, IContext context)
+	public abstract IContext run(IModel model, IKBox kbox, ISession session, IContext context)
 			throws ThinklabException;
 
 	/**

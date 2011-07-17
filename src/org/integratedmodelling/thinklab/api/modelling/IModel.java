@@ -15,7 +15,6 @@ import org.integratedmodelling.thinklab.api.runtime.ISession;
  */
 public interface IModel extends IModelObject {
 	
-	
 	/**
 	 * Return the base observable concept
 	 * 

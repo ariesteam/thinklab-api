@@ -33,8 +33,18 @@ public interface IContext extends IModelObject {
 	 */
 	public abstract Collection<IExtent> getExtents();
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public abstract int getMultiplicity();
 
+	/**
+	 * 
+	 * @param concept
+	 * @return
+	 * @throws ThinklabException
+	 */
 	public abstract int getMultiplicity(IConcept concept) throws ThinklabException;
 
 	/**
@@ -63,17 +73,7 @@ public interface IContext extends IModelObject {
 	 * @return
 	 */
 	public abstract IState getState(IConcept observable);
-	
-	/**
-	 * Return a newly initialized IObservationContext to be used to contextualize the passed
-	 * observation. This will build the common context and contextualization strategy for the
-	 * obs, so it may be a long operation.
-	 * 
-	 * @param observation
-	 * @return
-	 * @throws ThinklabException 
-	 */
-	public abstract IContext getObservationContext(IObservation observation) throws ThinklabException;
+
 
 	/**
 	 * Return true if all the extents in this context are either absent in the passed one, or if present
