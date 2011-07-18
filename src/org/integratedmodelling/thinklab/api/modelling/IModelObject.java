@@ -4,7 +4,7 @@ import java.util.Set;
 
 import org.integratedmodelling.thinklab.api.IMetadataHolder;
 import org.integratedmodelling.thinklab.api.INamespaceQualified;
-import org.integratedmodelling.thinklab.api.knowledge.IConcept;
+import org.integratedmodelling.thinklab.api.knowledge.IInstance;
 
 /**
  * Tag interface for any object that can be stored in the model map. Currently that
@@ -20,5 +20,5 @@ public interface IModelObject extends INamespaceQualified, IMetadataHolder {
 	 * Return the set of all concepts observed in this model object
 	 * @return
 	 */
-	public Set<IConcept> getObservables();
+	public Set<IInstance> getObservables();
 }
