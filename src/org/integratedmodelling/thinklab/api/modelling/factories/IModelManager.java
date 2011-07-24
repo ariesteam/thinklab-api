@@ -4,13 +4,12 @@ import java.util.Collection;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.exceptions.ThinklabIOException;
-import org.integratedmodelling.thinklab.api.knowledge.IOntology;
 import org.integratedmodelling.thinklab.api.knowledge.storage.IKBox;
-import org.integratedmodelling.thinklab.api.listeners.IContextualizationListener;
 import org.integratedmodelling.thinklab.api.modelling.IAgentModel;
 import org.integratedmodelling.thinklab.api.modelling.IAnnotation;
 import org.integratedmodelling.thinklab.api.modelling.IModel;
 import org.integratedmodelling.thinklab.api.modelling.IModelObject;
+import org.integratedmodelling.thinklab.api.modelling.INamespace;
 import org.integratedmodelling.thinklab.api.modelling.IScenario;
 import org.integratedmodelling.thinklab.api.modelling.observation.IContext;
 import org.integratedmodelling.thinklab.api.runtime.ISession;
@@ -25,46 +24,30 @@ import org.integratedmodelling.thinklab.api.runtime.ISession;
  * @author Ferdinando
  *
  */
-public interface IModelFactory {
+public interface IModelManager {
 
-	public abstract IAnnotation retrieveAnnotation(String s);
+	public abstract IAnnotation getAnnotation(String s);
 
-	public abstract IAnnotation requireAnnotation(String s)
-			throws ThinklabException;
-
-	public abstract IModel retrieveModel(String s);
-
-	public abstract IModel requireModel(String s) throws ThinklabException;
+	public abstract IModel getModel(String s);
 	
-	public abstract IAgentModel retrieveAgentModel(String s);
+	public abstract IAgentModel getAgentModel(String s);
 
-	public abstract IAgentModel requireAgentModel(String s) throws ThinklabException;
+	public abstract IScenario getScenario(String s);
 
-	public abstract IScenario retrieveScenario(String s);
+	public abstract IContext getContext(String s);
 
-	public abstract IScenario requireScenario(String s) throws ThinklabException;
-
-	public abstract IContext retrieveContext(String s);
-
-	public abstract IContext requireContext(String s) throws ThinklabException;
+	public abstract INamespace getNamespace(String ns);
 
 	public abstract void releaseNamespace(String namespace);
 
-	public String getSource(String object) throws ThinklabException;
-	
-	public Collection<IModelObject> getDependencies(String object) 
-		throws ThinklabException;
-	
-	public long getNamespaceLastModification(String ns);
-	
-	public IOntology getNamespaceOntology(String ns);
+	public abstract IModelObject getModelObject(String object);
 
-	public Collection<String> getNamespaces();
+	public abstract String getSource(String object);
 	
-	public Collection<IModelObject> listNamespace(String ns);
-
-	public IModelObject getModelObject(String name) throws ThinklabException;
+	public Collection<IModelObject> getDependencies(String object);
 	
+	public Collection<INamespace> getNamespaces();
+		
 	/**
 	 * Return a context that describes the coverage of a particular
 	 * model in a given kbox along all applicable dimensions. 
