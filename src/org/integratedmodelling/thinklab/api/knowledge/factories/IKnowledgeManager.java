@@ -11,7 +11,23 @@ public interface IKnowledgeManager {
 	public abstract IProperty getProperty(String prop);
 
 	public abstract IConcept getConcept(String prop);
+	
+	/**
+	 * Return the concept associated to a class.
+	 * 
+	 * @param cls
+	 * @return
+	 */
+	public abstract IConcept getConceptForClass(Class<?> cls);
 
+	/**
+	 * Return the Java class that serves as a peer for a concept.
+	 * 
+	 * @param cls
+	 * @return
+	 */
+	public abstract Class<?> getClassForConcept(IConcept cls);
+	
 	/**
 	 * Return the least general common concept in a collection of concept, or null if there
 	 * is none.

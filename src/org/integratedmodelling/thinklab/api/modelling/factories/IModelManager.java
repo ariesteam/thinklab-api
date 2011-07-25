@@ -90,7 +90,7 @@ public interface IModelManager {
 	 * @return the namespace defined
 	 * @throws ThinklabIOException 
 	 */
-	public abstract String loadFile(final String resourceId)
+	public abstract INamespace loadFile(final String resourceId)
 			throws ThinklabException;
 
 }
