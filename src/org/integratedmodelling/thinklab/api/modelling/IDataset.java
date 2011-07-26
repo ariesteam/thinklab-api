@@ -4,29 +4,26 @@ import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.modelling.observation.IContext;
 
 /**
- * A dataset is a persistent IContext. Should be capable of
- * reconstructing the context it came from.
- * 
- * @author Ferdinando Villa
+ * A dataset is a persistent IContext. Should be capable of reconstructing the context it came from.
+ * @author   Ferdinando Villa
  */
 public interface IDataset {
 
 	/**
-	 * Set the context for the dataset. If there is one, ensure compatibility of extents
-	 * and merge states from it.
-	 * 
+	 * Set the context for the dataset. If there is one, ensure compatibility of extents and merge states from it.
 	 * @param context
 	 * @throws ThinklabException
+	 * @uml.property  name="context"
 	 */
 	public abstract void setContext(IContext context) throws ThinklabException;
 	
 	/**
-	 * Return the context we represent, creating it if we were loaded from persistent
-	 * storage.
-	 * 
+	 * Return the context we represent, creating it if we were loaded from persistent storage.
 	 * @param context
 	 * @return
 	 * @throws ThinklabException
+	 * @uml.property  name="context"
+	 * @uml.associationEnd  
 	 */
 	public abstract IContext getContext();
 

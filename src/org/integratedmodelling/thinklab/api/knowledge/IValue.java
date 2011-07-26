@@ -34,6 +34,9 @@
 package org.integratedmodelling.thinklab.api.knowledge;
 
 
+/**
+ * @author  Ferd
+ */
 public interface IValue {
 
 	public abstract boolean isNumber();
@@ -55,8 +58,9 @@ public interface IValue {
 
 	/**
 	 * Return the concept expressed in the value.
-	 * 
 	 * @return
+	 * @uml.property  name="concept"
+	 * @uml.associationEnd  
 	 */
 	public abstract IConcept getConcept();
 	

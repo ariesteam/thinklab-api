@@ -11,14 +11,14 @@ import org.integratedmodelling.thinklab.api.runtime.ISession;
 
 /**
  * A Model
- *  * 
  */
 public interface IModel extends IModelObject {
 	
 	/**
 	 * Return the base observable concept
-	 * 
 	 * @return
+	 * @uml.property  name="observableClass"
+	 * @uml.associationEnd  
 	 */
 	public abstract IConcept getObservableClass();
 

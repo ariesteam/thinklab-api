@@ -14,10 +14,29 @@ import org.integratedmodelling.thinklab.api.knowledge.IConceptualizable;
  */
 public interface IClassification extends IConceptualizable {
 
+	/**
+	 * @author   Ferd
+	 */
 	public enum Type {
+		/**
+		 * @uml.property  name="uNORDERED"
+		 * @uml.associationEnd  
+		 */
 		UNORDERED,
+		/**
+		 * @uml.property  name="bOOLEAN_RANKING"
+		 * @uml.associationEnd  
+		 */
 		BOOLEAN_RANKING,
+		/**
+		 * @uml.property  name="oRDERED_RANKING"
+		 * @uml.associationEnd  
+		 */
 		ORDERED_RANKING,
+		/**
+		 * @uml.property  name="oRDERED_RANGE_MAPPING"
+		 * @uml.associationEnd  
+		 */
 		ORDERED_RANGE_MAPPING
 	}
 	

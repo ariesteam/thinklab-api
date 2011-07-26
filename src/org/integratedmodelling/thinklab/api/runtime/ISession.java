@@ -50,16 +50,8 @@ import org.integratedmodelling.thinklab.api.listeners.IThinklabSessionListener;
 
 
 /**
- * A Session is a temporary concept space that contains all instances that are
- * created during a user session. A session should be an ontology or contain one, but
- * its identity as a IOntology is not mandated. Sessions are normally memory-based but
- * should be able to persist themselves.
- * 
- * All operations on the same session are synchronous so there's no need to
- * worry about concurrency.
- * 
- * @author Ferdinando Villa
- * 
+ * A Session is a temporary concept space that contains all instances that are created during a user session. A session should be an ontology or contain one, but its identity as a IOntology is not mandated. Sessions are normally memory-based but should be able to persist themselves. All operations on the same session are synchronous so there's no need to worry about concurrency.
+ * @author  Ferdinando Villa
  */
 public interface ISession {
 	
@@ -71,14 +63,15 @@ public interface ISession {
 	
 	/**
 	 * Each session has a unique ID assigned by the Knowledge manager. 
-	 * @return the session's ID.
+	 * @return  the session's ID.
+	 * @uml.property  name="sessionID"
 	 */
 	public abstract String getSessionID();
 	
 	/**
-	 * A session must have properties that users and plugins can set. This method must
-	 * return a valid properties object.
-	 * @return the session's properties.
+	 * A session must have properties that users and plugins can set. This method must return a valid properties object.
+	 * @return  the session's properties.
+	 * @uml.property  name="sessionProperties"
 	 */
 	public abstract Properties getSessionProperties();
 	
@@ -250,22 +243,23 @@ public interface ISession {
 	public abstract Collection<String> getLocalKBoxes();
 	
 	/**
-	 * Return the user model for the session. If the session is not interactive, the user model
-	 * may be null.
-	 * 
+	 * Return the user model for the session. If the session is not interactive, the user model may be null.
 	 * @return
+	 * @uml.property  name="userModel"
+	 * @uml.associationEnd  
 	 */
 	public abstract IUserModel getUserModel();
 
 	/**
 	 * Get the input stream if the user model has it, or return null.
-	 * 
 	 * @return
+	 * @uml.property  name="inputStream"
 	 */
 	public abstract InputStream getInputStream(); 
 	
 	/**
 	 * get the output stream if the user model defines one, otherwise return null.
+	 * @uml.property  name="outputStream"
 	 */
 	public PrintStream getOutputStream();
 	
@@ -300,10 +294,9 @@ public interface ISession {
 	public abstract Object getVariable(String varname);
 
 	/**
-	 * Return a unique directory name for the session's workspace, in case applications request it. The directory 
-	 * should be a simple identifier.
-	 * 
+	 * Return a unique directory name for the session's workspace, in case applications request it. The directory  should be a simple identifier.
 	 * @return
+	 * @uml.property  name="sessionWorkspace"
 	 */
 	public abstract String getSessionWorkspace();
 

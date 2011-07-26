@@ -48,30 +48,10 @@ import org.integratedmodelling.thinklab.api.knowledge.query.IQuery;
 import org.integratedmodelling.thinklab.api.runtime.ISession;
 
 /**
- * <p>Objects implementing IKBox contain instances and support insertion, retrieval, deletion and query. In general, they are optimized for
- * large storage and fast query, contrary to Ontologies. The IKBox (for Knowledge
- * Box, as a slightly friendlier version of the more proper "Assertion Box" or abox) can be implemented in any way, usually on top of a
- * RDBMS, XML database, or other RDF store. KBoxes and their content are always identified by a URL, and the Knowledge Manager
- * must be taught how to interpret each URL protocol as a kbox plug-in and create the kbox from it.</p>
- * 
- * <p>An Ontology is a proper implementation of a KBox but typically not an efficient one. On a KBox, we expect support of indexing,
- * transparent permanent storage, distributed access, and configurable query paradigms that can be extended to support literals of
- * various kinds (e.g. GIS operations on shapes). Full reasoning is not an option as it is not realistic to expect to compute the
- * semantic closure of a large collection. On the other hand, many operations that are done using reasoners on an Abox can be 
- * replicated with properly constructed Constraints.</p>
- *
- * <p>Each kbox is identified by a URI which must be enough for the system to understand what class to use to access it. For this
- * reason, the KM has methods that can match a plug-in handler class to the protocol identifier of the URI. The rest of the URI contains
- * access and configuration information that is passed to the kbox for "handshaking" with the KM. The fragment part of the URI can be
- * used to identify an object within the KBox.</p> 
- * 
- * <p>Once installed in the KM, a KBox gets its own ID and a semantic type is all it takes to obtain one of its instances from the KM. The
- * query method of the KM uses all the installed KBoxes unless one is mentioned specifically, and merges results. A priority can be
- * specified to define which kboxes should be searched first when the search is bounded to a specified max number of results.</p>
- * 
- * @author Ferdinando Villa
+ * <p>Objects implementing IKBox contain instances and support insertion, retrieval, deletion and query. In general, they are optimized for large storage and fast query, contrary to Ontologies. The IKBox (for Knowledge Box, as a slightly friendlier version of the more proper "Assertion Box" or abox) can be implemented in any way, usually on top of a RDBMS, XML database, or other RDF store. KBoxes and their content are always identified by a URL, and the Knowledge Manager must be taught how to interpret each URL protocol as a kbox plug-in and create the kbox from it.</p> <p>An Ontology is a proper implementation of a KBox but typically not an efficient one. On a KBox, we expect support of indexing, transparent permanent storage, distributed access, and configurable query paradigms that can be extended to support literals of various kinds (e.g. GIS operations on shapes). Full reasoning is not an option as it is not realistic to expect to compute the semantic closure of a large collection. On the other hand, many operations that are done using reasoners on an Abox can be  replicated with properly constructed Constraints.</p> <p>Each kbox is identified by a URI which must be enough for the system to understand what class to use to access it. For this reason, the KM has methods that can match a plug-in handler class to the protocol identifier of the URI. The rest of the URI contains access and configuration information that is passed to the kbox for "handshaking" with the KM. The fragment part of the URI can be used to identify an object within the KBox.</p>  <p>Once installed in the KM, a KBox gets its own ID and a semantic type is all it takes to obtain one of its instances from the KM. The query method of the KM uses all the installed KBoxes unless one is mentioned specifically, and merges results. A priority can be specified to define which kboxes should be searched first when the search is bounded to a specified max number of results.</p>
+ * @author  Ferdinando Villa
  * @see KnowledgeManager
- * @see ISession
+ * @see  ISession
  */
 public abstract interface IKBox extends IQueriable {
     
@@ -207,11 +187,9 @@ public abstract interface IKBox extends IQueriable {
 	public final String KBOX_PARAMETER_PREFIX = "kbox.parameter.";
 
 	/**
-	 * Most KBoxes should have properties, so that instances can check for 
-	 * base URLs or other things when loading. If you don't need properties, return
-	 * an empty map.
-	 * 
-	 * @return the kbox's properties. Can be empty, but should never return null.
+	 * Most KBoxes should have properties, so that instances can check for  base URLs or other things when loading. If you don't need properties, return an empty map.
+	 * @return  the kbox's properties. Can be empty, but should never return null.
+	 * @uml.property  name="properties"
 	 */
 	public abstract Properties getProperties();
 	
@@ -301,10 +279,10 @@ public abstract interface IKBox extends IQueriable {
 	public abstract String storeObject(IInstance object, String id, Map<String, IValue> metadata, ISession session, HashMap<String, String> references) throws ThinklabException;
 
 	/**
-	 * Return an object that we can query to know what operators and such are supported by
-	 * this kbox implementation.
-	 * 
+	 * Return an object that we can query to know what operators and such are supported by this kbox implementation.
 	 * @return
+	 * @uml.property  name="capabilities"
+	 * @uml.associationEnd  
 	 */
 	public Capabilities getCapabilities();
 
@@ -323,8 +301,8 @@ public abstract interface IKBox extends IQueriable {
 	public Map<String, IConcept> getMetadataSchema() throws ThinklabException;
 
 	/**
-	 * 
 	 * @return
+	 * @uml.property  name="uri"
 	 */
 	public abstract String getUri();
 

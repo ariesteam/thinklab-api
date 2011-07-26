@@ -35,34 +35,36 @@ package org.integratedmodelling.thinklab.api.knowledge;
 
 /**
  * Basic methods that any RDF resource must implement.
- * @author Ferdinando Villa, Ecoinformatics Collaboratory, UVM
- *
+ * @author  Ferdinando Villa, Ecoinformatics Collaboratory, UVM
  */
 public interface IResource {
 	
 	
 	/**
-	 * The ID of the concept space (the first field or the semantic type). All Resources
-	 * have (or ARE) a concept space.
-	 * @return the concept space ID. Can't fail.
+	 * The ID of the concept space (the first field or the semantic type). All Resources have (or ARE) a concept space.
+	 * @return  the concept space ID. Can't fail.
+	 * @uml.property  name="conceptSpace"
 	 */
 	public String       getConceptSpace();
 	
 	/**
 	 * The fully specified URI of the resource. All resources have a URI.
-	 * @return the URI. Can't fail.
+	 * @return  the URI. Can't fail.
+	 * @uml.property  name="uRI"
 	 */
 	public String       getURI();
 	
 	/**
 	 * The label associated with the resource in the default language, set in preferences.
-	 * @return the label, or an empty string if not found.
+	 * @return  the label, or an empty string if not found.
+	 * @uml.property  name="label"
 	 */
 	public String       getLabel();
 	
 	/**
 	 * The description associated with the resource in the default language, set in preferences.
-	 * @return the description, or an empty string if not found.
+	 * @return  the description, or an empty string if not found.
+	 * @uml.property  name="description"
 	 */
 	public String       getDescription();
 	
@@ -110,6 +112,8 @@ public interface IResource {
 
 	/**
 	 * Return the ontology this comes from.
+	 * @uml.property  name="ontology"
+	 * @uml.associationEnd  
 	 */
 	public abstract IOntology getOntology();
 	

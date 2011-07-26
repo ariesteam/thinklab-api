@@ -4,6 +4,9 @@ import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.runtime.ISession;
 
+/**
+ * @author  Ferd
+ */
 public interface ITransformingObservation extends IObservation {
 
 	
@@ -18,6 +21,8 @@ public interface ITransformingObservation extends IObservation {
 	/**
 	 * Return the class of the transformed observation
 	 * @return
+	 * @uml.property  name="transformedObservationClass"
+	 * @uml.associationEnd  
 	 */
 	public IConcept getTransformedObservationClass();
 	

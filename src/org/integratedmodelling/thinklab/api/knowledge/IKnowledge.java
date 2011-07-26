@@ -35,13 +35,8 @@ package org.integratedmodelling.thinklab.api.knowledge;
 
 
 /**
- * IKnowledge defines the methods that are common to both IConcepts and
- * IInstances. As IConcept can be both concrete and abstract, and IInstances are always
- * concrete, IKnowledge has all the methods that pertain to IRelationships of this
- * with other IKnowledge objects. 
- * 
- * @author Ferdinando Villa
- *
+ * IKnowledge defines the methods that are common to both IConcepts and IInstances. As IConcept can be both concrete and abstract, and IInstances are always concrete, IKnowledge has all the methods that pertain to IRelationships of this with other IKnowledge objects. 
+ * @author  Ferdinando Villa
  */
 public interface IKnowledge extends IResource {
 
@@ -49,6 +44,7 @@ public interface IKnowledge extends IResource {
 	/**
 	 * All IKnowledge objects have a local name 
 	 * @return
+	 * @uml.property  name="localName"
 	 */
 	public String getLocalName();
 	

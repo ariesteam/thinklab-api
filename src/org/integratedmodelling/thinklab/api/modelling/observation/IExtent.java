@@ -68,13 +68,24 @@ public abstract interface IExtent extends IState, ITopologicallyComparable {
 	
 	/**
 	 * Returned by getAggregationParameters
-	 * @author ferdinando.villa
-	 *
+	 * @author  ferdinando.villa
 	 */
 	public static interface AggregationParameters {
 		
+		/**
+		 * @uml.property  name="aggregator" default="null"
+		 * @uml.associationEnd  
+		 */
 		public Aggregator     aggregator = null;
+		/**
+		 * @uml.property  name="aggregatedUnit" default="null"
+		 * @uml.associationEnd  
+		 */
 		public IUnit          aggregatedUnit = null;
+		/**
+		 * @uml.property  name="aggregatedNature" default="null"
+		 * @uml.associationEnd  
+		 */
 		public PhysicalNature aggregatedNature = null;
 		public String         aggregationOperator = IOperator.AVG;
 		public String         uncertaintyOperator = IOperator.CV; 

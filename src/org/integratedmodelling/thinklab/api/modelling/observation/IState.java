@@ -7,14 +7,8 @@ import org.integratedmodelling.thinklab.api.knowledge.IConceptualizable;
 import org.integratedmodelling.thinklab.api.knowledge.IInstanceImplementation;
 
 /**
- * A State is an observation resulting from the contextualization of a stateful observation. 
- * It can conceptualize back to the semantic annotation for the observation it represents. 
- * States are the only type of observation that is stored in KBoxes, and have either an external
- * datasource or an inline state. States must always have explicit extents; if a state has
- * no extents, it must be a constant.
- * 
- * @author Ferdinando
- * 
+ * A State is an observation resulting from the contextualization of a stateful observation.  It can conceptualize back to the semantic annotation for the observation it represents.  States are the only type of observation that is stored in KBoxes, and have either an external datasource or an inline state. States must always have explicit extents; if a state has no extents, it must be a constant.
+ * @author  Ferdinando
  */
 public interface IState extends IIndirectObservation, IConceptualizable, IInstanceImplementation {
 
@@ -29,11 +23,9 @@ public interface IState extends IIndirectObservation, IConceptualizable, IInstan
 	public Object getValue(int offset);
 
 	/**
-	 * This will return an array of the appropriate type without any further allocation.
-	 * It's terrifying to use in Java, but just fine for dynamically typed embedded
-	 * languages. 
-	 * 
+	 * This will return an array of the appropriate type without any further allocation. It's terrifying to use in Java, but just fine for dynamically typed embedded languages. 
 	 * @return
+	 * @uml.property  name="rawData"
 	 */
 	public Object getRawData();
 
@@ -60,12 +52,15 @@ public interface IState extends IIndirectObservation, IConceptualizable, IInstan
 	/**
 	 * Return the class of what our contents observe.
 	 * @return
+	 * @uml.property  name="observableClass"
+	 * @uml.associationEnd  
 	 */
 	public IConcept getObservableClass();
 
 	/**
-	 * States exist within a context, and must be able to
-	 * return the context they are part of.
+	 * States exist within a context, and must be able to return the context they are part of.
+	 * @uml.property  name="observationContext"
+	 * @uml.associationEnd  
 	 */
 	public abstract IContext getObservationContext();
 

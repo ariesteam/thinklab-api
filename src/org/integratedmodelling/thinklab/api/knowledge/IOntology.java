@@ -43,10 +43,8 @@ import org.integratedmodelling.exceptions.ThinklabValidationException;
 import org.integratedmodelling.list.Polylist;
 
 /**
- * <p>The generalized ontology interface. Ontology objects are usually not accessed by the typical API user, who deals with
- * concepts and with the knowledge manager directly. Yet, we need an ontology generalization layer to provide a smooth interface
- * to most operations.</p>
- * @author Ferdinando Villa, Ecoinformatics Collaboratory, UVM
+ * <p>The generalized ontology interface. Ontology objects are usually not accessed by the typical API user, who deals with concepts and with the knowledge manager directly. Yet, we need an ontology generalization layer to provide a smooth interface to most operations.</p>
+ * @author  Ferdinando Villa, Ecoinformatics Collaboratory, UVM
  */
 public interface IOntology  extends IResource {
 
@@ -147,7 +145,8 @@ public interface IOntology  extends IResource {
 
 	/**
 	 * The ID of the ontology concept space (its the XML namespace).
-	 * @return the concept space ID. Can't fail.
+	 * @return  the concept space ID. Can't fail.
+	 * @uml.property  name="conceptSpace"
 	 */
 	public String  getConceptSpace();
 
@@ -162,7 +161,7 @@ public interface IOntology  extends IResource {
 	public void read(URL url);
 
 	/**
-	 * 
+	 * @uml.property  name="uRI"
 	 */
 	public String getURI();
 

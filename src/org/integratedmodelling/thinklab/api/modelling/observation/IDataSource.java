@@ -3,6 +3,9 @@ package org.integratedmodelling.thinklab.api.modelling.observation;
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 
+/**
+ * @author  Ferd
+ */
 public interface IDataSource {
 	
 	/**
@@ -19,10 +22,10 @@ public interface IDataSource {
 	}
 	
 	/**
-	 * All datasources must report to the conceptual model what kind of
-	 * value they are going to return.
-	 * 
+	 * All datasources must report to the conceptual model what kind of value they are going to return.
 	 * @return
+	 * @uml.property  name="valueType"
+	 * @uml.associationEnd  
 	 */
 	public abstract IConcept getValueType();
 

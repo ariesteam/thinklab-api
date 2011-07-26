@@ -6,24 +6,25 @@ import org.integratedmodelling.thinklab.api.IMetadataHolder;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.IInstance;
 
+/**
+ * @author  Ferd
+ */
 public interface IObservation extends IMetadataHolder {
 
 	/**
-	 * Return the observable instance. Can't be null. If this observation is a
-	 * mediator and doesn't have an observable, scan the mediation chain until
-	 * one is found.
-	 * 
-	 * @return the observable for this observation
+	 * Return the observable instance. Can't be null. If this observation is a mediator and doesn't have an observable, scan the mediation chain until one is found.
+	 * @return   the observable for this observation
+	 * @uml.property  name="observable"
+	 * @uml.associationEnd  
 	 */
 	public abstract IInstance getObservable();
 
 	/**
-	 * Get the class of the main observable. If this observation is a mediator
-	 * and doesn't have an observable, scan the mediation chain until one is
-	 * found.
-	 * 
+	 * Get the class of the main observable. If this observation is a mediator and doesn't have an observable, scan the mediation chain until one is found.
 	 * @return
 	 * @model
+	 * @uml.property  name="observableClass"
+	 * @uml.associationEnd  
 	 */
 	public abstract IConcept getObservableClass();
 

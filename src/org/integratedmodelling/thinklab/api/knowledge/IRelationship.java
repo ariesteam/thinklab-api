@@ -36,26 +36,26 @@ package org.integratedmodelling.thinklab.api.knowledge;
 
 
 /**
- * <p>We use relationships to simplify the frame-based Concept interface. All the relationships that a class or instance
- * entertains with anything are returned as IRelationship objects. These can be queried to check if the relationship
- * is actually just the assertion of a property (like in most Concepts) or actually has a value, which can be a
- * literal (of any kind supported by the IMA), an object (instance), or a class (no matter whether we're using
- * OWL-DL or not).</p> 
- * @author Ferdinando Villa, Ecoinformatics Collaboratory, UVM
+ * <p>We use relationships to simplify the frame-based Concept interface. All the relationships that a class or instance entertains with anything are returned as IRelationship objects. These can be queried to check if the relationship is actually just the assertion of a property (like in most Concepts) or actually has a value, which can be a literal (of any kind supported by the IMA), an object (instance), or a class (no matter whether we're using OWL-DL or not).</p> 
+ * @author  Ferdinando Villa, Ecoinformatics Collaboratory, UVM
  * @see IConcept#getRelated()
- * @see IInstance#getRelated()
+ * @see  IInstance#getRelated()
  */
 public interface IRelationship {
 
 	/**
 	 * Get the property that defines the relationship. 
-	 * @return a property. Never fails.
+	 * @return   a property. Never fails.
+	 * @uml.property  name="property"
+	 * @uml.associationEnd  
 	 */
 	public abstract IProperty getProperty();
 	
 	/**
 	 * <p>Get the value that our property points to. Returns null if this is just the statement of a property.</p>
-	 * @return a Value or null.
+	 * @return   a Value or null.
+	 * @uml.property  name="value"
+	 * @uml.associationEnd  
 	 */
 	public abstract IValue getValue();
 	
@@ -109,9 +109,11 @@ public interface IRelationship {
     public abstract String toString();
 
     /**
-     * Return the concept of the related object. Must be non-null.
-     * @return
-     */
+	 * Return the concept of the related object. Must be non-null.
+	 * @return
+	 * @uml.property  name="concept"
+	 * @uml.associationEnd  
+	 */
 	public abstract IConcept getConcept();
 
 }

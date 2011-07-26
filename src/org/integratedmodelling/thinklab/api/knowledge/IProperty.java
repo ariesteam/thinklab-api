@@ -38,17 +38,8 @@ import java.util.Collection;
 import org.integratedmodelling.exceptions.ThinklabException;
 
 /**
- * The interface for a Property. 
- *
- * Most of the interface is meant to check the subtype of property we're dealing with. Some of the
- * available subtypes are standard in OWL, others (such as classification) are IMA-specific and are 
- * normally figured out by checking whether the property inherits by specific upper ontology ones. 
- * 
- * Also, for now we just ignore functionality, simmetry, transitivity etc, given that the reasoner 
- * operates on the underlying OWL model. We'll see if they're needed.
- * 
- * @author Ferdinando Villa, Ecoinformatics Collaboratory, UVM
- *
+ * The interface for a Property.  Most of the interface is meant to check the subtype of property we're dealing with. Some of the available subtypes are standard in OWL, others (such as classification) are IMA-specific and are  normally figured out by checking whether the property inherits by specific upper ontology ones.  Also, for now we just ignore functionality, simmetry, transitivity etc, given that the reasoner  operates on the underlying OWL model. We'll see if they're needed.
+ * @author  Ferdinando Villa, Ecoinformatics Collaboratory, UVM
  */
 public interface IProperty extends IKnowledge {
 
@@ -85,9 +76,11 @@ public interface IProperty extends IKnowledge {
     public abstract boolean isAnnotation();
     
     /**
-     *Returns the inverse of a IProperty. Null if there is no inverse.
-     * @return the inverse IProperty
-     */
+	 * Returns the inverse of a IProperty. Null if there is no inverse.
+	 * @return   the inverse IProperty
+	 * @uml.property  name="inverseProperty"
+	 * @uml.associationEnd  
+	 */
     public IProperty getInverseProperty();
     
     /**
@@ -112,8 +105,10 @@ public interface IProperty extends IKnowledge {
     public abstract boolean isAbstract();
     
     /**
-     * Return the (only) parent property, or throw an exception if there's more than one parent.
-     */
+	 * Return the (only) parent property, or throw an exception if there's more than one parent.
+	 * @uml.property  name="parent"
+	 * @uml.associationEnd  
+	 */
 	public abstract IProperty getParent() throws ThinklabException;
 
 	public abstract Collection<IProperty> getParents();

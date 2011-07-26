@@ -41,16 +41,8 @@ import org.integratedmodelling.thinklab.api.knowledge.IValue;
 import org.integratedmodelling.thinklab.api.runtime.ISession;
 
 /**
- * Queries in thinklab return knowledge, of course, and they may use a "schema"
- * to specify things that we want to know about these objects. Typically we
- * don't want query result to contain initialized objects but we want the query
- * to return either elements from the result schema or list representations that
- * objects can be created from. So we do not pass sessions to any of these
- * methods. Query results should store the queriable and the query so that paged
- * access is possible without having to go back to the queriables.
- * 
- * @author Ferdinando
- * 
+ * Queries in thinklab return knowledge, of course, and they may use a "schema" to specify things that we want to know about these objects. Typically we don't want query result to contain initialized objects but we want the query to return either elements from the result schema or list representations that objects can be created from. So we do not pass sessions to any of these methods. Query results should store the queriable and the query so that paged access is possible without having to go back to the queriables.
+ * @author  Ferdinando
  */
 public interface IQueryResult {
 
@@ -62,12 +54,16 @@ public interface IQueryResult {
 	/**
 	 * Return the queriable object that was queried to produce us.
 	 * @return
+	 * @uml.property  name="queriable"
+	 * @uml.associationEnd  
 	 */
 	public abstract IQueriable getQueriable();
 
 	/**
 	 * Return the query that produces us.
 	 * @return
+	 * @uml.property  name="query"
+	 * @uml.associationEnd  
 	 */
 	public abstract IQuery getQuery();
 

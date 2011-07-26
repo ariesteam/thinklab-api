@@ -43,54 +43,10 @@ import org.integratedmodelling.thinklab.api.knowledge.query.IConformance;
 import org.integratedmodelling.thinklab.api.runtime.ISession;
 
 /**
- * <p>
- * Instances are the "objects" in the knowledge base. Instances can be contained
- * in the shared knowledge base (and retrieved through the knowledge manager),
- * in Sessions (where they can be added and retrieved directly) and in KBoxes
- * (where they are added and retrieved directly or through queries). In these
- * docs, the words "Instance" and "Object" are used interchangeably.
- * </p>
- * 
- * <p>
- * <b>NOTE:</b> you're not supposed to create an instance directly. Only an
- * appropriate container (e.g. a Session) can do that, either on request through
- * the API or as the result of a load operation. If created through the API, an
- * instance won't be part of the container until validated (see below).
- * </p>
- * 
- * <p>
- * Instances can have a Java "implementation" which is created by the
- * appropriate concept manager after successful validation, if a concept manager
- * with a constructor is defined for the class or one of its parents. This
- * provides the instance with arbitrary Java content that implementations can
- * use as necessary.
- * </p>
- * 
- * <p>
- * Instances are the only knowledge objects that can be created through the API.
- * It is required to validate an instance after it's been defined, or the
- * implementation will not be created. Classes implementing IInstance should be
- * able to distinguish non-validated instances and refuse to use, store, and
- * make them visible through the retrieval interface.
- * </p>
- * 
- * <p>
- * The IMA Instance definition interface provides (I believe) the simplest
- * paradigm to creating knowledge through an API. Relationships are classified
- * into three possible classes and methods are provided for each of them. OWL
- * underpinnings are dealt with transparently and OWL-DL compatibility is
- * preserved even in OWL-FULL constructs (e.g. classification relationships).
- * </p>
- * 
- * <p>
- * In addition to representing knowledge, instances are also capable of
- * executing commands and this functionality interfaces with the IMA-supported
- * expression languages in ways that depend on the implementation.
- * </p>
- * 
- * @author Ferdinando Villa, Ecoinformatics Collaboratory, UVM
- * @author Ioannis N. Athanasiadis
- * @see ISession
+ * <p> Instances are the "objects" in the knowledge base. Instances can be contained in the shared knowledge base (and retrieved through the knowledge manager), in Sessions (where they can be added and retrieved directly) and in KBoxes (where they are added and retrieved directly or through queries). In these docs, the words "Instance" and "Object" are used interchangeably. </p> <p> <b>NOTE:</b> you're not supposed to create an instance directly. Only an appropriate container (e.g. a Session) can do that, either on request through the API or as the result of a load operation. If created through the API, an instance won't be part of the container until validated (see below). </p> <p> Instances can have a Java "implementation" which is created by the appropriate concept manager after successful validation, if a concept manager with a constructor is defined for the class or one of its parents. This provides the instance with arbitrary Java content that implementations can use as necessary. </p> <p> Instances are the only knowledge objects that can be created through the API. It is required to validate an instance after it's been defined, or the implementation will not be created. Classes implementing IInstance should be able to distinguish non-validated instances and refuse to use, store, and make them visible through the retrieval interface. </p> <p> The IMA Instance definition interface provides (I believe) the simplest paradigm to creating knowledge through an API. Relationships are classified into three possible classes and methods are provided for each of them. OWL underpinnings are dealt with transparently and OWL-DL compatibility is preserved even in OWL-FULL constructs (e.g. classification relationships). </p> <p> In addition to representing knowledge, instances are also capable of executing commands and this functionality interfaces with the IMA-supported expression languages in ways that depend on the implementation. </p>
+ * @author  Ferdinando Villa, Ecoinformatics Collaboratory, UVM
+ * @author  Ioannis N. Athanasiadis
+ * @see  ISession
  */
 public interface IInstance extends IKnowledge {
 	
@@ -141,11 +97,11 @@ public interface IInstance extends IKnowledge {
 	
 	
 	/**
-	 * Get the Java implementation, if any, created by the appropriate
-	 * ConceptManager after validation.
-	 * 
-	 * @return the Java implementation of the instance, or null if none exists.
+	 * Get the Java implementation, if any, created by the appropriate ConceptManager after validation.
+	 * @return   the Java implementation of the instance, or null if none exists.
 	 * @throws ThinklabException
+	 * @uml.property  name="implementation"
+	 * @uml.associationEnd  
 	 */
 	public abstract IInstanceImplementation getImplementation()
 			throws ThinklabException;
@@ -294,6 +250,8 @@ public interface IInstance extends IKnowledge {
 	/**
 	 * Get the direct type, i.e. the concept this is a direct instance of.
 	 * @return
+	 * @uml.property  name="directType"
+	 * @uml.associationEnd  
 	 */
 	public IConcept getDirectType();
 

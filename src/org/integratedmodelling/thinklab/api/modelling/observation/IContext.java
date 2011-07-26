@@ -7,23 +7,8 @@ import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.modelling.IModelObject;
 
 /**
- * A Context represents the observed world during a modelling session. It contains a set 
- * of observations with explicit states (State) that belong to the same observation session. 
- * 
- * Contexts are populated with observations by running models in
- * them. A context is usually started by observing a topology of reference (space and/or
- * time), i.e. adding Extents to it. When a model is run in a context, it creates States 
- * for that context and adds them to it. Any requirement of the model that is already in the context is
- * taken from it even if there is a model for it, and all States in the same context
- * have a representation compatible with the set of Extents contained. The context has
- * specialized methods to operate on states and extents.
- *
- * The modeling language defines contexts as named templates that build a Context for an observation 
- * structure. Such structures are contexts "primed" with temporal/spatial observations and/or
- * global observations for parameters.
- * 
- * @author ferdinando.villa
- *
+ * A Context represents the observed world during a modelling session. It contains a set  of observations with explicit states (State) that belong to the same observation session.  Contexts are populated with observations by running models in them. A context is usually started by observing a topology of reference (space and/or time), i.e. adding Extents to it. When a model is run in a context, it creates States  for that context and adds them to it. Any requirement of the model that is already in the context is taken from it even if there is a model for it, and all States in the same context have a representation compatible with the set of Extents contained. The context has specialized methods to operate on states and extents. The modeling language defines contexts as named templates that build a Context for an observation  structure. Such structures are contexts "primed" with temporal/spatial observations and/or global observations for parameters.
+ * @author  ferdinando.villa
  */
 public interface IContext extends IModelObject {
 
@@ -86,14 +71,16 @@ public interface IContext extends IModelObject {
 	public abstract boolean intersects(IContext context) throws ThinklabException;
 
 	/**
-	 * 
 	 * @return
+	 * @uml.property  name="time"
+	 * @uml.associationEnd  
 	 */
 	public IExtent getTime();
 
 	/**
-	 * 
 	 * @return
+	 * @uml.property  name="space"
+	 * @uml.associationEnd  
 	 */
 	public IExtent getSpace();
 
