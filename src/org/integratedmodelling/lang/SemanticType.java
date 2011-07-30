@@ -42,6 +42,7 @@ import org.integratedmodelling.thinklab.api.knowledge.IInstance;
 import org.integratedmodelling.thinklab.api.knowledge.IKnowledge;
 import org.integratedmodelling.thinklab.api.knowledge.IProperty;
 import org.integratedmodelling.thinklab.api.knowledge.IResource;
+import org.integratedmodelling.thinklab.api.knowledge.factories.IKnowledgeManager;
 
 /**
  * <p>
@@ -51,6 +52,17 @@ import org.integratedmodelling.thinklab.api.knowledge.IResource;
  * second the local ID within the concept space (local name). Each semantic type
  * must be unique in the KM.
  * </p>
+ * 
+ * <p>At this time using a semantic type is not required in the knowledge API (all 
+ * access is through string or knowledge, to avoid unordinate replication of methods) 
+ * but semantic types can be used for deferred evaluation of concepts, validation, and
+ * general tagging of IDs that are expected to correspond to knowledge. They also
+ * compare to strings, knowledge objects and other semantic types, and 
+ * can be used as keys. So they're ideal as "string" keys in maps that
+ * are expected to correspond to knowledge even if there is not a corresponding
+ * ontology loaded in the knowledge manager. They have no dependency on
+ * actual knowledge implementations, so they can be created as fields in
+ * an API interface.</p>
  * 
  * <p>
  * Objects that are identified by semantic types are: Concepts, Properties, and
@@ -111,10 +123,7 @@ public final class SemanticType implements Serializable {
 	public SemanticType(IKnowledge res) {
 		try {
 			this.assign(res.toString());
-		}
-		// supposedly the IResource should be correct.
-		// if something goes wrong send it to the log
-		catch (ThinklabValidationException e) {
+		} catch (ThinklabValidationException e) {
 			throw new ThinklabRuntimeException(e);
 		}
 	}
@@ -176,15 +185,21 @@ public final class SemanticType implements Serializable {
 		return ret;
 	}
 
+	@Override
 	public boolean equals(Object s) {
-		if (s instanceof SemanticType) {
-			SemanticType st = (SemanticType) s;
-			return st.toString().equals(toString());
-		} else
-			return false;
+		
+		if (s instanceof SemanticType || s instanceof IKnowledge || s instanceof String) {
+			return s.toString().equals(this.toString());
+		} 
+		return false;
 	}
 
+	@Override
 	public int hashCode() {
 		return toString().hashCode();
+	}
+	
+	public IConcept getConcept(IKnowledgeManager km) {
+		return km.getConcept(this.toString());
 	}
 }

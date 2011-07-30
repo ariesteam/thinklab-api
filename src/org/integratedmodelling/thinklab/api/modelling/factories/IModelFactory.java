@@ -2,8 +2,8 @@ package org.integratedmodelling.thinklab.api.modelling.factories;
 
 import java.util.Map;
 
+import org.integratedmodelling.lang.SemanticType;
 import org.integratedmodelling.list.Polylist;
-import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.modelling.IModel;
 import org.integratedmodelling.thinklab.api.modelling.IModelObject;
 import org.integratedmodelling.thinklab.api.modelling.INamespace;
@@ -14,33 +14,51 @@ import org.integratedmodelling.thinklab.api.modelling.INamespace;
  */
 public interface IModelFactory {
 
-	// Concepts for the different model types.
-	public final IConcept C_MODEL = null;
-	
+	// Concepts for model types
+	public final SemanticType C_MODEL = new SemanticType("modelling:Model");
+	public final SemanticType C_MEASUREMENT = new SemanticType("modelling:Measurement");
+	public final SemanticType C_CLASSIFICATION = new SemanticType("modelling:Classification");
+	public final SemanticType C_RANKING = new SemanticType("modelling:Ranking");
+	public final SemanticType C_BOOLEANRANKING = new SemanticType("modelling:BooleanRanking");
+	public final SemanticType C_NUMERICCODING = new SemanticType("modelling:NumericCoding");
+	public final SemanticType C_PROBABILISTICMEASUREMENT = new SemanticType("modelling:ProbabilisticMeasurement");
+	public final SemanticType C_PROBABILISTICRANKING = new SemanticType("modelling:ProbabilisticRanking");
+	public final SemanticType C_PROBABILISTICCLASSIFICATION = new SemanticType("modelling:ProbabilisticClassification");
+
 	// keys for model generator map. Can also be others for different models.
 	public final static String K_DEPENDENCIES = "dependencies";
-	public final static String K_REQUIRED = "dependencies";
-	public final static String K_KEEP = "dependencies";
-	public final static String K_UNIT = "dependencies";
-	public final static String K_RANGE = "dependencies";
-	public final static String K_STATETYPE = "dependencies";
-	public final static String K_CONTEXTMODEL = "dependencies";
-	public final static String K_STATEEXPRESSION = "dependencies";
-	public final static String K_UPDATEEXPRESSION = "dependencies";
-	public final static String K_MOVEEXPRESSION = "dependencies";
-	public final static String K_UPDATERATE = "dependencies";
-	public final static String K_MOVERATE = "dependencies";
+	public final static String K_REQUIRED = "required";
+	public final static String K_KEEP = "keep";
+	public final static String K_UNIT = "unit";
+	public final static String K_RANGE = "range";
+	public final static String K_STATETYPE = "statetype";
+	public final static String K_CONTEXTMODEL = "contextmodel";
+	public final static String K_STATEEXPRESSION = "stateexpression";
+	public final static String K_UPDATEEXPRESSION = "updateexpression";
+	public final static String K_MOVEEXPRESSION = "moveexpression";
+	public final static String K_UPDATERATE = "updaterate";
+	public final static String K_MOVERATE = "moverate";
 	public final static String K_CLASSIFICATION = "classification";
-	public final static String K_IMPORT = "classification";
-	public final static String K_FORMALNAME = "classification";
-	// the next two are in sync
-	public final static String K_CONDITIONALS = "classification";
-	public final static String K_DEFINITION = "classification";
-
-	public abstract INamespace createNamespace(String namespace, Polylist ontology);
-
+	public final static String K_IMPORT = "import";
+	public final static String K_FORMALNAME = "formalname";
+	public final String K_OBSERVABLE = "observable"; // an InstanceList
 	
-	public abstract IModel createModel(INamespace namespace, IConcept modelType, Map<String, Object> definition);
+	// the next two are in sync
+	public final static String K_CONDITIONALS = "conditionals";
+	public final static String K_DEFINITION = "definition";
+
+	public abstract INamespace createNamespace(String namespace, String ontologyId, Polylist ontology);
+
+
+	/**
+	 * This one creates a model of the passed semantic type. 
+	 * 
+	 * @param namespace
+	 * @param modelType
+	 * @param definition
+	 * @return
+	 */
+	public abstract IModel createModel(INamespace namespace, SemanticType modelType, Map<String, Object> definition);
 
 	/**
 	 * A default namespace is used when no namespace is specified. While it should be  enforced that each model file declares a namespace, interactive sessions may not do so. All model objects must live in namespaces, so this must never return null. If a user session is active, the default namespace should be linked to it and the namespace ontology should be the session's ontology. TODO see how to pass it without confusing the API for the language interpreter.

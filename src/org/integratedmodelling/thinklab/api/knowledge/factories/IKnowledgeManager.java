@@ -8,8 +8,19 @@ import org.integratedmodelling.thinklab.api.knowledge.IValue;
 
 public interface IKnowledgeManager {
 	
+	
+	/**
+	 * 
+	 * @param prop
+	 * @return
+	 */
 	public abstract IProperty getProperty(String prop);
 
+	/**
+	 * 
+	 * @param prop
+	 * @return
+	 */
 	public abstract IConcept getConcept(String prop);
 	
 	/**
