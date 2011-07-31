@@ -6,7 +6,7 @@ import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.storage.IKBox;
 import org.integratedmodelling.thinklab.api.modelling.observation.IContext;
-import org.integratedmodelling.thinklab.api.modelling.observation.IObservationIterator;
+import org.integratedmodelling.thinklab.api.modelling.observation.IObservationList;
 import org.integratedmodelling.thinklab.api.runtime.ISession;
 
 /**
@@ -30,7 +30,7 @@ public interface IModel extends IModelObject {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public IObservationIterator observe(IContext context, IKBox kbox, ISession session) throws ThinklabException;
+	public IObservationList observe(IContext context, IKBox kbox, ISession session) throws ThinklabException;
 
 	/**
 	 * Train the model to match any output state that can be
