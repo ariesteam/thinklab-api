@@ -34,7 +34,7 @@
 package org.integratedmodelling.thinklab.api.knowledge;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.list.Polylist;
+import org.integratedmodelling.list.IList;
 
 
 /**
@@ -55,5 +55,5 @@ public interface IConceptualizable {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	Polylist conceptualize() throws ThinklabException;
+	IList conceptualize() throws ThinklabException;
 }

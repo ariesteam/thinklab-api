@@ -34,6 +34,7 @@
 package org.integratedmodelling.lang;
 
 import org.integratedmodelling.exceptions.ThinklabValidationException;
+import org.integratedmodelling.thinklab.api.lang.IParseable;
 
 public class Quantifier implements IParseable {
 

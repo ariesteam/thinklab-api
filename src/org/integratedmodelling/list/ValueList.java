@@ -41,7 +41,7 @@ import org.integratedmodelling.thinklab.api.knowledge.factories.IKnowledgeManage
 public class ValueList {
 
 	String sValue = null;
-	Polylist lValue = null;
+	IList lValue = null;
 	IConcept cValue = null;
 	IKnowledgeManager _km;
 	
@@ -49,8 +49,8 @@ public class ValueList {
 		
 		_km = km;	
 		
-		if (o instanceof Polylist) {
-			lValue = (Polylist)o;
+		if (o instanceof IList) {
+			lValue = (IList)o;
 		} else if (o instanceof IConcept) {
 			cValue = (IConcept)o;
 		} else {

@@ -62,7 +62,7 @@ import org.integratedmodelling.exceptions.ThinklabValidationException;
  rest(). 
  </pre>
  */
-public class Polylist {
+public class Polylist implements IList {
 	/**
 	 *  nil is the empty-list constant
 	 */
@@ -89,7 +89,7 @@ public class Polylist {
 	/**
 	 *  construct non-empty Polylist from a First and Rest
 	 */
-	Polylist(Object First, Polylist Rest) {
+	Polylist(Object First, IList Rest) {
 		ptr = new ConsCell(First, Rest);
 	}
 
@@ -100,9 +100,10 @@ public class Polylist {
 		ptr = new ConsCell(First, Rest);
 	}
 
-	/**
-	 *  isEmpty() tells whether the Polylist is empty.
+	/* (non-Javadoc)
+	 * @see org.integratedmodelling.list.IList#isEmpty()
 	 */
+	@Override
 	public boolean isEmpty() {
 		return ptr == null;
 	}
@@ -114,11 +115,10 @@ public class Polylist {
 		return ptr != null;
 	}
 
-	/**
-	 *  first() returns the first element of a non-empty Polylist.
-	 * @exception NullPointerException Can't take first of an empty Polylist.
-	 *
+	/* (non-Javadoc)
+	 * @see org.integratedmodelling.list.IList#first()
 	 */
+	@Override
 	public Object first() {
 		return ptr.first();
 	}
@@ -132,15 +132,19 @@ public class Polylist {
 		ptr.setFirst(ob);
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.integratedmodelling.list.IList#prettyPrint()
+	 */
+	@Override
 	public String prettyPrint() {
 		return prettyPrint(this);
 	}
 	
-	public static String prettyPrint(Polylist list) {
+	public static String prettyPrint(IList list) {
 		return prettyPrintInternal(list, 0, 2);
 	}
 
-	public static String prettyPrint(Polylist list, int indent) {
+	public static String prettyPrint(IList list, int indent) {
 		return prettyPrintInternal(list, indent, 2);
 	}
 	
@@ -170,7 +174,7 @@ public class Polylist {
 		return true;
 	}
 	
-	private static String prettyPrintInternal(Polylist list, int indentLevel, int indentAmount) {
+	private static String prettyPrintInternal(IList list, int indentLevel, int indentAmount) {
 
 		String ret = "";
 		String inds = "";
@@ -189,7 +193,7 @@ public class Polylist {
 		for (Object o : list.array()) {
 			
 			if (o instanceof Polylist) {
-				ret += "\n" + prettyPrintInternal((Polylist)o, indentLevel+1, indentAmount);
+				ret += "\n" + prettyPrintInternal((IList)o, indentLevel+1, indentAmount);
 			} else {
 				String sep = " ";
 				String z = o == null ? "nil" : o.toString();
@@ -228,20 +232,20 @@ public class Polylist {
 		Object ret = null;
 
 		if (o.getClass() == Polylist.class && ((Polylist) o).nonEmpty()
-				&& ((Polylist) o).first().getClass() == String.class
-				&& ((Polylist) o).first().toString().equals(what)) {
+				&& ((IList) o).first().getClass() == String.class
+				&& ((IList) o).first().toString().equals(what)) {
 			ret = ((Polylist) o).second();
 		}
 
 		return ret;
 	}
 
-	/**
-	 *  rest() returns the rest of a non-empty Polylist.
-	 * @exception NullPointerException Can't take rest of an empty Polylist.
+	/* (non-Javadoc)
+	 * @see org.integratedmodelling.list.IList#rest()
 	 */
 
-	public Polylist rest() {
+	@Override
+	public IList rest() {
 		return ptr.rest();
 	}
 
@@ -264,7 +268,7 @@ public class Polylist {
 		else if (nonEmpty()) {
 
 			buff.append(first());
-			Polylist L = rest();
+			IList L = rest();
 
 			// print the rest of the items
 
@@ -284,11 +288,12 @@ public class Polylist {
 		return buff.toString();
 	}
 
-	/**
-	 * cons returns a new Polylist given a First and this as a Rest
+	/* (non-Javadoc)
+	 * @see org.integratedmodelling.list.IList#cons(java.lang.Object)
 	 */
 
-	public Polylist cons(Object First) {
+	@Override
+	public IList cons(Object First) {
 		return new Polylist(First, this);
 	}
 
@@ -296,8 +301,8 @@ public class Polylist {
 	 *  static cons returns a new Polylist given a First and a Rest.
 	 */
 
-	public static Polylist cons(Object First, Polylist Rest) {
-		return Rest.cons(First);
+	public static IList cons(Object First, IList Rest) {
+		return ((Polylist)Rest).cons(First);
 	}
 
 	/**
@@ -305,7 +310,7 @@ public class Polylist {
 	 *  the list can be grown incrementally.
 	 */
 
-	public static Polylist cons(Object First, Seed Rest) {
+	public static IList cons(Object First, Seed Rest) {
 		return new Polylist(First, Rest);
 	}
 
@@ -313,7 +318,7 @@ public class Polylist {
 	 *  PolylistFromEnum makes a Polylist out of any Enumeration.
 	 */
 
-	public static Polylist PolylistFromEnum(java.util.Enumeration<?> e) {
+	public static IList PolylistFromEnum(java.util.Enumeration<?> e) {
 		if (e.hasMoreElements())
 			return cons(e.nextElement(), PolylistFromEnum(e));
 		else
@@ -324,22 +329,23 @@ public class Polylist {
 	 *  return a list of no elements
 	 */
 
-	public static Polylist list() {
+	public static IList list() {
 		return nil;
 	}
 
-	public static Polylist list(Object ... objs) {
+	public static IList list(Object ... objs) {
 		return PolylistFromArray(objs);
 	}
 
-	public static Polylist listNotNull(Object ... objs) {
+	public static IList listNotNull(Object ... objs) {
 		return PolylistFromArrayNotNull(objs);
 	}
 
-	/**
-	 *  return the length of this list
+	/* (non-Javadoc)
+	 * @see org.integratedmodelling.list.IList#length()
 	 */
 
+	@Override
 	public int length() {
 		int len = 0;
 		for (Enumeration<?> e = elements(); e.hasMoreElements(); e.nextElement()) {
@@ -362,7 +368,7 @@ public class Polylist {
 	 * @exception NullPointerException Can't take first of empty List.
 	 */
 
-	static public Object first(Polylist L) {
+	static public Object first(IList L) {
 		return L.first();
 	}
 
@@ -371,38 +377,39 @@ public class Polylist {
 	 * @exception NullPointerException Can't take rest of empty Polylist.
 	 */
 
-	static public Polylist rest(Polylist L) {
+	static public IList rest(IList L) {
 		return L.rest();
 	}
 
-	/**
-	 *  reverse(L) returns the reverse of this
+	/* (non-Javadoc)
+	 * @see org.integratedmodelling.list.IList#reverse()
 	 */
 
-	public Polylist reverse() {
-		Polylist rev = nil;
+	@Override
+	public IList reverse() {
+		IList rev = nil;
 		for (Enumeration<?> e = elements(); e.hasMoreElements();) {
 			rev = cons(e.nextElement(), rev);
 		}
 		return rev;
 	}
 
-	/**
-	 *  append(M) returns a Polylist consisting of the elements of this
-	 *  followed by those of M.
+//	/**
+//	 *  append(M) returns a Polylist consisting of the elements of this
+//	 *  followed by those of M.
+//	 */
+//	public IList append(IList M) {
+//		if (isEmpty())
+//			return M;
+//		else
+//			return cons(first(), rest().append(M));
+//	}
+
+	/* (non-Javadoc)
+	 * @see org.integratedmodelling.list.IList#member(java.lang.Object)
 	 */
 
-	public Polylist append(Polylist M) {
-		if (isEmpty())
-			return M;
-		else
-			return cons(first(), rest().append(M));
-	}
-
-	/**
-	 *  member(A, L) tells whether A is a member of this
-	 */
-
+	@Override
 	public boolean member(Object A) {
 		for (Enumeration<?> e = elements(); e.hasMoreElements();)
 			if (Arith.equal(e.nextElement(), A))
@@ -414,7 +421,7 @@ public class Polylist {
 	 *  range(M, N) returns a Polylist of the form (M M+1 .... N)
 	 */
 
-	public static Polylist range(long M, long N) {
+	public static IList range(long M, long N) {
 		if (M > N)
 			return nil;
 		else
@@ -425,7 +432,7 @@ public class Polylist {
 	 *  range(M, N, S) returns a Polylist of the form (M M+S .... N)
 	 */
 
-	public static Polylist range(long M, long N, long S) {
+	public static IList range(long M, long N, long S) {
 		if (S >= 0)
 			return rangeUp(M, N, S);
 		else
@@ -436,7 +443,7 @@ public class Polylist {
 	 *  rangeUp(M, N, S) is an auxiliary function for range
 	 */
 
-	static Polylist rangeUp(long M, long N, long S) {
+	static IList rangeUp(long M, long N, long S) {
 		if (M > N)
 			return nil;
 		else
@@ -447,7 +454,7 @@ public class Polylist {
 	 *  rangeDown(M, N, S) is auxiliary function for range
 	 */
 
-	static Polylist rangeDown(long M, long N, long S) {
+	static IList rangeDown(long M, long N, long S) {
 		if (M < N)
 			return nil;
 		else
@@ -499,40 +506,40 @@ public class Polylist {
 		return rest().rest().rest().rest().rest().first();
 	}
 
-	/**
-	 *  nth selects Polylist item by index (0, 1, 2, ...).
-	 * @exception NullPointerException Can't select from an empty Polylist.
+	/* (non-Javadoc)
+	 * @see org.integratedmodelling.list.IList#nth(long)
 	 */
 
+	@Override
 	public Object nth(long n) {
-		Polylist L = this;
+		IList L = this;
 		while (n-- > 0)
 			L = L.rest();
 		return L.first();
 	}
 
-	/**
-	 *   prefix creates the length-n prefix of a Polylist.
-	 */
-
-	public Polylist prefix(long n) {
-		if (n <= 0 || isEmpty())
-			return nil;
-		else
-			return cons(first(), rest().prefix(n - 1));
-	}
-
-	/**
-	 *   coprefix creates the Polylist with all but the length-n prefix of 
-	 *   a Polylist
-	 */
-
-	public Polylist coprefix(long n) {
-		if (n <= 0 || isEmpty())
-			return this;
-		else
-			return rest().coprefix(n - 1);
-	}
+//	/**
+//	 *   prefix creates the length-n prefix of a Polylist.
+//	 */
+//
+//	public IList prefix(long n) {
+//		if (n <= 0 || isEmpty())
+//			return nil;
+//		else
+//			return cons(first(), rest().prefix(n - 1));
+//	}
+//
+//	/**
+//	 *   coprefix creates the Polylist with all but the length-n prefix of 
+//	 *   a Polylist
+//	 */
+//
+//	public IList coprefix(long n) {
+//		if (n <= 0 || isEmpty())
+//			return this;
+//		else
+//			return rest().coprefix(n - 1);
+//	}
 
 	/**
 	 *  equals(L, M) tells whether Polylists L and M are equal
@@ -569,7 +576,7 @@ public class Polylist {
 	 * @throws MalformedListException 
 	 * @throws IOException 
 	 */
-	public static Polylist read(InputStream input) throws ThinklabException {
+	public static IList read(InputStream input) throws ThinklabException {
 		
 		String s = "";
 		
@@ -618,7 +625,7 @@ public class Polylist {
 	 * @return
 	 * @throws MalformedListException
 	 */
-	public static Polylist parse(String s) throws ThinklabException {
+	public static IList parse(String s) throws ThinklabException {
 
 		final class DummyFunctor implements TokenTransformer {
 
@@ -647,7 +654,7 @@ public class Polylist {
 	 * @param vmap
 	 * @return
 	 */
-	public static Polylist parseWithTemplate(String s, Hashtable<String, Object> vmap) throws ThinklabException {
+	public static IList parseWithTemplate(String s, Hashtable<String, Object> vmap) throws ThinklabException {
 
 		final class SubstitutionFunctor implements TokenTransformer {
 
@@ -702,7 +709,7 @@ public class Polylist {
 	 * @param functor a functor that handles the transformation between token and stored object.
 	 * @return the generated list.
 	 */
-	public static Polylist parseWithFunctor(String s, TokenTransformer functor) throws ThinklabException {
+	public static IList parseWithFunctor(String s, TokenTransformer functor) throws ThinklabException {
 
 		StreamTokenizer scanner = new StreamTokenizer(new StringReader(s));
 
@@ -732,7 +739,7 @@ public class Polylist {
 		return parseStringWithFunctor(scanner, functor);
 	}
 
-	static Polylist parseStringWithFunctor(StreamTokenizer scanner, TokenTransformer functor)
+	static IList parseStringWithFunctor(StreamTokenizer scanner, TokenTransformer functor)
 	throws ThinklabValidationException {
 
 		Polylist ret = new Polylist();
@@ -766,11 +773,11 @@ public class Polylist {
 
 			if (token == '(')
 				// economical, it's not
-				ret = ret.append(list(parseStringWithFunctor(scanner, functor)));
+				ret = (Polylist)ret.append(list(parseStringWithFunctor(scanner, functor)));
 			else if (token == ')')
 				break;
 			else {
-				ret = ret.append(list(functor.transformString(tok == null ? ("" + (char)token) : tok.toString())));
+				ret = (Polylist)ret.append(list(functor.transformString(tok == null ? ("" + (char)token) : tok.toString())));
 			}
 		}
 
@@ -839,10 +846,11 @@ public class Polylist {
 		return buff.toString();
 	}
 
-	/**
-	 * array() returns an array of elements in list
+	/* (non-Javadoc)
+	 * @see org.integratedmodelling.list.IList#array()
 	 */
 
+	@Override
 	public Object[] array() {
 		Object[] result = new Object[length()];
 		int i = 0;
@@ -856,8 +864,8 @@ public class Polylist {
 	 * PolylistFromArray makes a list out of an array of objects. If an object
 	 * is a collection, all of its objects are added one by one.
 	 */
-	public static Polylist PolylistFromArray(Object array[]) {
-		Polylist result = nil;
+	public static IList PolylistFromArray(Object array[]) {
+		IList result = nil;
 		for (int i = array.length - 1; i >= 0; i--) {
 			result = cons(array[i], result);
 		}
@@ -868,8 +876,8 @@ public class Polylist {
 	 * PolylistFromArrayNotNull makes a list out of an array of objects where
 	 * any nulls are not included in the list
 	 */
-	public static Polylist PolylistFromArrayNotNull(Object array[]) {
-		Polylist result = nil;
+	public static IList PolylistFromArrayNotNull(Object array[]) {
+		IList result = nil;
 		for (int i = array.length - 1; i >= 0; i--)
 			if (array[i] != null)
 				result = cons(array[i], result);
@@ -880,8 +888,8 @@ public class Polylist {
 	/**
 	 * PolylistFromArray makes a list out of an array of objects
 	 */
-	public static Polylist PolylistFromArrayList(ArrayList<Object> array) {
-		Polylist result = nil;
+	public static IList PolylistFromArrayList(ArrayList<Object> array) {
+		IList result = nil;
 		for (int i = array.size() - 1; i >= 0; i--)
 			result = cons(array.get(i), result);
 		return result;
@@ -891,17 +899,18 @@ public class Polylist {
 	 * explode(String S) converts a string into a Polylist of Character
 	 */
 
-	public static Polylist explode(String S) {
-		Polylist result = nil;
+	public static IList explode(String S) {
+		IList result = nil;
 		for (int i = S.length() - 1; i >= 0; i--)
 			result = cons(new Character(S.charAt(i)), result);
 		return result;
 	}
 
-	/**
-	 * implode() creates a String from a Polylist of items
+	/* (non-Javadoc)
+	 * @see org.integratedmodelling.list.IList#implode()
 	 */
 
+	@Override
 	public String implode() {
 		StringBuffer buff = new StringBuffer();
 		for (Enumeration<?> e = elements(); e.hasMoreElements();) {
@@ -922,6 +931,10 @@ public class Polylist {
 		return ret;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.integratedmodelling.list.IList#toArrayList()
+	 */
+	@Override
 	public ArrayList<Object> toArrayList() {
 		
 		ArrayList<Object> ret = new ArrayList<Object>();
@@ -938,7 +951,7 @@ public class Polylist {
 	 * @param o
 	 * @return
 	 */
-	public Polylist appendElement(Object o) {
+	public IList append(Object o) {
 		ArrayList<Object> ls = toArrayList();
 		ls.add(o);
 		return Polylist.PolylistFromArrayList(ls);

@@ -38,7 +38,7 @@ import java.util.Collection;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.exceptions.ThinklabValidationException;
-import org.integratedmodelling.list.Polylist;
+import org.integratedmodelling.list.IList;
 import org.integratedmodelling.thinklab.api.knowledge.query.IConformance;
 import org.integratedmodelling.thinklab.api.runtime.ISession;
 
@@ -117,7 +117,7 @@ public interface IInstance extends IKnowledge {
 	 *            instance local name is used. If you want no ID, pass an empty string.
 	 * @throws ThinklabException
 	 */
-	public abstract Polylist asList(String oref) throws ThinklabException;
+	public abstract IList asList(String oref) throws ThinklabException;
 
 
 	/**

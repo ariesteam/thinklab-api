@@ -72,7 +72,6 @@ public class PolylistEnum implements java.util.Enumeration<Object>
   /**
     *  nextElement returns the next element in the enumeration.
    **/
-
   public Object nextElement() 
     {
     if( L.isEmpty() )
@@ -80,7 +79,7 @@ public class PolylistEnum implements java.util.Enumeration<Object>
         java.util.NoSuchElementException("No next element in Polylist");
 
     Object result = L.first();
-    L = L.rest();
+    L = (Polylist) L.rest();
     return result;
     }
   }

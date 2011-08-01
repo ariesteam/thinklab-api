@@ -1,4 +1,4 @@
-package org.integratedmodelling.lang;
+package org.integratedmodelling.thinklab.api.lang;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 

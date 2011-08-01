@@ -39,7 +39,7 @@ import java.util.Properties;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.lang.Quantifier;
-import org.integratedmodelling.list.Polylist;
+import org.integratedmodelling.list.IList;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.IInstance;
 import org.integratedmodelling.thinklab.api.knowledge.IValue;
@@ -118,7 +118,7 @@ public abstract interface IKBox extends IQueriable {
 		 * @param schema
 		 * @return
 		 */
-		public abstract boolean supportsSchema(Polylist schema);
+		public abstract boolean supportsSchema(IList schema);
 		
 		/**
 		 * True if the given operator (possibly with a given operand) will be understood when applied
@@ -205,7 +205,7 @@ public abstract interface IKBox extends IQueriable {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public abstract Polylist getObjectAsListFromID(String id, HashMap<String, String> refTable) throws ThinklabException;
+	public abstract IList getObjectAsListFromID(String id, HashMap<String, String> refTable) throws ThinklabException;
 
 	/**
 	 * A Kbox should be capable of storing an object from its list description. If necessary, the
@@ -222,7 +222,7 @@ public abstract interface IKBox extends IQueriable {
 
 	 * @throws ThinklabException
 	 */
-	public abstract String storeObject(Polylist list, String id, Map<String, IValue> metadata, ISession session) throws ThinklabException;
+	public abstract String storeObject(IList list, String id, Map<String, IValue> metadata, ISession session) throws ThinklabException;
 	
 	/**
 	 * A Kbox should be capable of storing an object from its list description. If necessary, the
@@ -242,7 +242,7 @@ public abstract interface IKBox extends IQueriable {
 
 	 * @throws ThinklabException
 	 */
-	public abstract String storeObject(Polylist list, String id, Map<String, IValue> metadata, ISession session, HashMap<String, String> refTable) throws ThinklabException;
+	public abstract String storeObject(IList list, String id, Map<String, IValue> metadata, ISession session, HashMap<String, String> refTable) throws ThinklabException;
 	
 	/**
 	 * Store an object in the KBox. Return its ID in it, which may or may not be the same ID as the

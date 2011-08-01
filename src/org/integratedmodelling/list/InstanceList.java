@@ -56,7 +56,7 @@ public class InstanceList {
 	Object[] array = null;
 	IKnowledgeManager _km = null;
 	
-	public InstanceList(Polylist list, IKnowledgeManager km) {
+	public InstanceList(IList list, IKnowledgeManager km) {
 		array = list.array();
 		_km = km;
 	}
@@ -69,7 +69,7 @@ public class InstanceList {
 		return ss.length == 2 ? ss[1] : "";
 	}
 
-	public Polylist asList() {
+	public IList asList() {
 		return Polylist.PolylistFromArray(array);
 	}
 	
@@ -91,8 +91,8 @@ public class InstanceList {
 		String ret = null;
 		
 		for (int i = 1; i < array.length; i++) {
-			if (array[i] instanceof Polylist && 
-					((Polylist)array[i]).first().toString().equals("rdfs:label") ) {
+			if (array[i] instanceof IList && 
+					((IList)array[i]).first().toString().equals("rdfs:label") ) {
 				ret = ((Polylist)array[i]).second().toString();
 				break;
 			}	
@@ -105,8 +105,8 @@ public class InstanceList {
 		IInstanceImplementation ret = null;
 		
 		for (int i = 1; i < array.length; i++) {
-			if (array[i] instanceof Polylist && 
-					((Polylist)array[i]).first().toString().equals("#") ) {
+			if (array[i] instanceof IList && 
+					((IList)array[i]).first().toString().equals("#") ) {
 				ret = (IInstanceImplementation) ((Polylist)array[i]).second();
 				break;
 			}	
@@ -119,8 +119,8 @@ public class InstanceList {
 		String ret = null;
 		
 		for (int i = 1; i < array.length; i++) {
-			if (array[i] instanceof Polylist && 
-					((Polylist)array[i]).first().toString().equals("rdfs:comment") ) {
+			if (array[i] instanceof IList && 
+					((IList)array[i]).first().toString().equals("rdfs:comment") ) {
 				ret = ((Polylist)array[i]).second().toString();
 				break;
 			}	
@@ -133,8 +133,8 @@ public class InstanceList {
 		ArrayList<RelationshipList> ret = new ArrayList<RelationshipList>();
 		
 		for (int i = 1; i < array.length; i++) {
-			if (array[i] instanceof Polylist) {
-				String s = ((Polylist)array[i]).first().toString();
+			if (array[i] instanceof IList) {
+				String s = ((IList)array[i]).first().toString();
 				
 				if (!(s.equals("rdsf:label") || 
 					  s.equals("rdfs.comment"))) {
@@ -149,7 +149,7 @@ public class InstanceList {
 	public boolean hasLiteralContent() {
 
 		for (int i = 1; i < array.length; i++)
-			if (!(array[i] instanceof Polylist))
+			if (!(array[i] instanceof IList))
 				return true;
 		return false;
 	}
@@ -157,7 +157,7 @@ public class InstanceList {
 	public Object getLiteralContent() {
 
 		for (int i = 1; i < array.length; i++)
-			if (!(array[i] instanceof Polylist))
+			if (!(array[i] instanceof IList))
 				return array[i];
 		return null;
 
@@ -175,8 +175,8 @@ public class InstanceList {
 		IConcept ret = null;
 		
 		for (int i = 1; i < array.length; i++) {
-			if (array[i] instanceof Polylist) {
-				String s = ((Polylist)array[i]).first().toString();
+			if (array[i] instanceof IList) {
+				String s = ((IList)array[i]).first().toString();
 				
 				if (s.equals(relationship)) {
 					
@@ -184,9 +184,9 @@ public class InstanceList {
 					
 					if (o instanceof IValue) {
 						ret = ((IValue)o).getConcept();
-					} else if (o instanceof Polylist) {
+					} else if (o instanceof IList) {
 						/* instance specification */
-						ret = resolveToConcept(((Polylist)o).first());
+						ret = resolveToConcept(((IList)o).first());
 					} else {
 						ret = resolveToConcept(o);
 					}

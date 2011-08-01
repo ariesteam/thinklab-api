@@ -44,10 +44,10 @@ public class Incremental extends Polylist
   public Object first()
     {
     ensureGrown();
-    return ((Polylist)value).first();
+    return ((IList)value).first();
     }
 
-  public Polylist rest()
+  public IList rest()
     {
     ensureGrown();
     return ((Polylist)value).rest();
@@ -56,7 +56,7 @@ public class Incremental extends Polylist
   public boolean isEmpty()
     {
     ensureGrown();
-    return ((Polylist)value).isEmpty();
+    return ((IList)value).isEmpty();
     }
 
   public boolean nonEmpty()
@@ -70,7 +70,7 @@ public class Incremental extends Polylist
     if( value instanceof Growable )
       return "...";
     else
-      return ((Polylist)value).toString();
+      return ((IList)value).toString();
     }
 
   public Incremental(Growable growable)
@@ -93,9 +93,9 @@ public class Incremental extends Polylist
     return !(value instanceof Growable);
     }
 
-  public Polylist getList()
+  public IList getList()
     {
     ensureGrown();
-    return (Polylist)value;
+    return (IList)value;
     }
   }

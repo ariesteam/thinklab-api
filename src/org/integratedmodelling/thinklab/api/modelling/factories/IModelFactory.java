@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.integratedmodelling.exceptions.ThinklabValidationException;
 import org.integratedmodelling.lang.SemanticType;
-import org.integratedmodelling.list.Polylist;
+import org.integratedmodelling.list.IList;
 import org.integratedmodelling.thinklab.api.modelling.IModel;
 import org.integratedmodelling.thinklab.api.modelling.IModelObject;
 import org.integratedmodelling.thinklab.api.modelling.INamespace;
@@ -66,7 +66,7 @@ public interface IModelFactory {
 
 	
 	public abstract INamespace createNamespace(String namespace,
-			String ontologyId, Polylist ontology);
+			String ontologyId, IList ontology);
 
 	/**
 	 * This one creates a model of the passed semantic type as defined in the

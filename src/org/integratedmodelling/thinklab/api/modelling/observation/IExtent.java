@@ -36,10 +36,10 @@ import java.util.Collection;
 
 import org.integratedmodelling.collections.Pair;
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.lang.IOperator;
 import org.integratedmodelling.lang.PhysicalNature;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.query.IQuery;
+import org.integratedmodelling.thinklab.api.lang.IOperator;
 
 /**
  * An Extent describes the topology of the observable

@@ -42,7 +42,7 @@ import java.util.Properties;
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.exceptions.ThinklabResourceNotFoundException;
 import org.integratedmodelling.exceptions.ThinklabValidationException;
-import org.integratedmodelling.list.Polylist;
+import org.integratedmodelling.list.IList;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.IInstance;
 import org.integratedmodelling.thinklab.api.knowledge.storage.IKBox;
@@ -108,7 +108,7 @@ public interface ISession {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public abstract IConcept createConcept(Polylist list) throws ThinklabException;
+	public abstract IConcept createConcept(IList list) throws ThinklabException;
 
 
 	/**
@@ -146,7 +146,7 @@ public interface ISession {
 	 * 
 	 *  FIXME must return a garbage collected instance, if we ever manage to implement it.
 	 */
-	public abstract IInstance createObject(String name, Polylist definition) throws ThinklabException;
+	public abstract IInstance createObject(String name, IList definition) throws ThinklabException;
 	
 	/**
 	 * Create instance, using made up name. Identical to createObject(String, Polylist) otherwise.
@@ -157,7 +157,7 @@ public interface ISession {
 	 * 
 	 *  FIXME must return a garbage collected instance, if we ever manage to implement it.
 	 */
-	public abstract IInstance createObject(Polylist polylist) throws ThinklabException;
+	public abstract IInstance createObject(IList polylist) throws ThinklabException;
 	
 	/**
 	 * Read in objects from the given URL. What can be read depends on the implementation, but it should

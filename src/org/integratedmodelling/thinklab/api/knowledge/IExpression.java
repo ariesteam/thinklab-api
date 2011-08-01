@@ -2,7 +2,7 @@ package org.integratedmodelling.thinklab.api.knowledge;
 
 import java.util.Map;
 
-import org.integratedmodelling.lang.IParseable;
+import org.integratedmodelling.thinklab.api.lang.IParseable;
 
 public interface IExpression extends IValue, IParseable {
 

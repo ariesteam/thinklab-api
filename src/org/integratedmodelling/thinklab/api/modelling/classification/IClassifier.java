@@ -1,6 +1,6 @@
 package org.integratedmodelling.thinklab.api.modelling.classification;
 
-import org.integratedmodelling.lang.IParseable;
+import org.integratedmodelling.thinklab.api.lang.IParseable;
 
 public interface IClassifier extends IParseable {
 

@@ -40,7 +40,7 @@ import java.util.Collection;
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.exceptions.ThinklabIOException;
 import org.integratedmodelling.exceptions.ThinklabValidationException;
-import org.integratedmodelling.list.Polylist;
+import org.integratedmodelling.list.IList;
 
 /**
  * <p>The generalized ontology interface. Ontology objects are usually not accessed by the typical API user, who deals with concepts and with the knowledge manager directly. Yet, we need an ontology generalization layer to provide a smooth interface to most operations.</p>
@@ -103,7 +103,7 @@ public interface IOntology  extends IResource {
      * @return
      * @throws ThinklabException
      */
-	public abstract IInstance createInstance(String ID, Polylist list) throws ThinklabException;
+	public abstract IInstance createInstance(String ID, IList list) throws ThinklabException;
 
     /**
      * Create an instance from a list.
@@ -112,7 +112,7 @@ public interface IOntology  extends IResource {
      * @return
      * @throws ThinklabException
      */
-    public abstract IInstance createInstance(Polylist list) throws ThinklabException;
+    public abstract IInstance createInstance(IList list) throws ThinklabException;
 
 
 	/**
@@ -209,7 +209,7 @@ public interface IOntology  extends IResource {
 	 * @param list
 	 * @return
 	 */
-	public IConcept createConcept(Polylist list) throws ThinklabException;
+	public IConcept createConcept(IList list) throws ThinklabException;
 
 	/**
 	 * Create the passed concept, using the passed parents as its superclasses, and

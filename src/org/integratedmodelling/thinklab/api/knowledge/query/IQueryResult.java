@@ -36,7 +36,7 @@ package org.integratedmodelling.thinklab.api.knowledge.query;
 import java.util.HashMap;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.list.Polylist;
+import org.integratedmodelling.list.IList;
 import org.integratedmodelling.thinklab.api.knowledge.IValue;
 import org.integratedmodelling.thinklab.api.runtime.ISession;
 
@@ -142,7 +142,7 @@ public interface IQueryResult {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public Polylist getResultAsList(int n, HashMap<String, String> references)
+	public IList getResultAsList(int n, HashMap<String, String> references)
 			throws ThinklabException;
 
 	/**

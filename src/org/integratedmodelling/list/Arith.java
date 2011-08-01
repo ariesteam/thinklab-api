@@ -88,14 +88,14 @@ public class Arith {
 		if (v1.equals(v2))
 			return true;
 
-		if (v1 instanceof Polylist) {
-			if (v2 instanceof Polylist)
+		if (v1 instanceof IList) {
+			if (v2 instanceof IList)
 				return Polylist.equals((Polylist) v1, (Polylist) v2);
 			else
 				return false;
 		}
 
-		if (v2 instanceof Polylist) {
+		if (v2 instanceof IList) {
 			return false;
 		}
 
