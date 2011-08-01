@@ -40,14 +40,17 @@ import java.io.InputStream;
 import java.io.StreamTokenizer;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.exceptions.ThinklabIOException;
 import org.integratedmodelling.exceptions.ThinklabValidationException;
+import org.integratedmodelling.thinklab.api.lang.IList;
 
 /**   
  <pre>
@@ -62,11 +65,11 @@ import org.integratedmodelling.exceptions.ThinklabValidationException;
  rest(). 
  </pre>
  */
-public class Polylist implements IList {
+public class PolyList implements IList {
 	/**
 	 *  nil is the empty-list constant
 	 */
-	public static final Polylist nil = new Polylist();
+	public static final PolyList nil = new PolyList();
 
 	private ConsCell ptr;
 
@@ -82,21 +85,21 @@ public class Polylist implements IList {
 	/**
 	 *  construct empty Polylist
 	 */
-	public Polylist() {
+	public PolyList() {
 		ptr = null;
 	}
 
 	/**
 	 *  construct non-empty Polylist from a First and Rest
 	 */
-	Polylist(Object First, IList Rest) {
+	PolyList(Object First, IList Rest) {
 		ptr = new ConsCell(First, Rest);
 	}
 
 	/**
 	 *  construct non-empty Polylist from a First and a Seed for the Rest
 	 */
-	Polylist(Object First, Seed Rest) {
+	PolyList(Object First, Seed Rest) {
 		ptr = new ConsCell(First, Rest);
 	}
 
@@ -192,7 +195,7 @@ public class Polylist implements IList {
 		int i = 0;
 		for (Object o : list.array()) {
 			
-			if (o instanceof Polylist) {
+			if (o instanceof IList) {
 				ret += "\n" + prettyPrintInternal((IList)o, indentLevel+1, indentAmount);
 			} else {
 				String sep = " ";
@@ -231,10 +234,10 @@ public class Polylist implements IList {
 
 		Object ret = null;
 
-		if (o.getClass() == Polylist.class && ((Polylist) o).nonEmpty()
+		if (o.getClass() == PolyList.class && ((PolyList) o).nonEmpty()
 				&& ((IList) o).first().getClass() == String.class
 				&& ((IList) o).first().toString().equals(what)) {
-			ret = ((Polylist) o).second();
+			ret = ((PolyList) o).second();
 		}
 
 		return ret;
@@ -294,7 +297,7 @@ public class Polylist implements IList {
 
 	@Override
 	public IList cons(Object First) {
-		return new Polylist(First, this);
+		return new PolyList(First, this);
 	}
 
 	/**
@@ -302,7 +305,7 @@ public class Polylist implements IList {
 	 */
 
 	public static IList cons(Object First, IList Rest) {
-		return ((Polylist)Rest).cons(First);
+		return ((IList)Rest).cons(First);
 	}
 
 	/**
@@ -311,7 +314,7 @@ public class Polylist implements IList {
 	 */
 
 	public static IList cons(Object First, Seed Rest) {
-		return new Polylist(First, Rest);
+		return new PolyList(First, Rest);
 	}
 
 	/**
@@ -334,11 +337,11 @@ public class Polylist implements IList {
 	}
 
 	public static IList list(Object ... objs) {
-		return PolylistFromArray(objs);
+		return fromArray(objs);
 	}
 
 	public static IList listNotNull(Object ... objs) {
-		return PolylistFromArrayNotNull(objs);
+		return fromArrayNotNull(objs);
 	}
 
 	/* (non-Javadoc)
@@ -545,7 +548,7 @@ public class Polylist implements IList {
 	 *  equals(L, M) tells whether Polylists L and M are equal
 	 */
 
-	public static boolean equals(Polylist L, Polylist M) {
+	public static boolean equals(PolyList L, PolyList M) {
 		Enumeration<?> e = L.elements();
 		Enumeration<?> f = M.elements();
 
@@ -561,8 +564,8 @@ public class Polylist implements IList {
 	 */
 
 	public boolean equals(Object M) {
-		if (M instanceof Polylist)
-			return equals(this, (Polylist) M);
+		if (M instanceof IList)
+			return equals(this, (PolyList) M);
 		else
 			return false;
 	}
@@ -612,7 +615,7 @@ public class Polylist implements IList {
 		}
 		
 		if (s.trim().startsWith("("))
-			return Polylist.parse(s);
+			return PolyList.parse(s);
 		
 		return null;
 	}
@@ -742,7 +745,7 @@ public class Polylist implements IList {
 	static IList parseStringWithFunctor(StreamTokenizer scanner, TokenTransformer functor)
 	throws ThinklabValidationException {
 
-		Polylist ret = new Polylist();
+		IList ret = new PolyList();
 
 		int token = StreamTokenizer.TT_EOF;
 		Object tok = "";
@@ -773,11 +776,11 @@ public class Polylist implements IList {
 
 			if (token == '(')
 				// economical, it's not
-				ret = (Polylist)ret.append(list(parseStringWithFunctor(scanner, functor)));
+				ret = (IList)ret.append(list(parseStringWithFunctor(scanner, functor)));
 			else if (token == ')')
 				break;
 			else {
-				ret = (Polylist)ret.append(list(functor.transformString(tok == null ? ("" + (char)token) : tok.toString())));
+				ret = (IList)ret.append(list(functor.transformString(tok == null ? ("" + (char)token) : tok.toString())));
 			}
 		}
 
@@ -826,8 +829,8 @@ public class Polylist implements IList {
 	 */
 
 	static String analysis(Object Ob, int N) {
-		if (Ob instanceof Polylist)
-			return ((Polylist) Ob).analysis(N);
+		if (Ob instanceof IList)
+			return ((PolyList) Ob).analysis(N);
 		else
 			return spaces(N) + Ob.toString() + " (class "
 					+ Ob.getClass().getName() + ")\n";
@@ -864,7 +867,7 @@ public class Polylist implements IList {
 	 * PolylistFromArray makes a list out of an array of objects. If an object
 	 * is a collection, all of its objects are added one by one.
 	 */
-	public static IList PolylistFromArray(Object array[]) {
+	public static IList fromArray(Object array[]) {
 		IList result = nil;
 		for (int i = array.length - 1; i >= 0; i--) {
 			result = cons(array[i], result);
@@ -876,7 +879,7 @@ public class Polylist implements IList {
 	 * PolylistFromArrayNotNull makes a list out of an array of objects where
 	 * any nulls are not included in the list
 	 */
-	public static IList PolylistFromArrayNotNull(Object array[]) {
+	public static IList fromArrayNotNull(Object array[]) {
 		IList result = nil;
 		for (int i = array.length - 1; i >= 0; i--)
 			if (array[i] != null)
@@ -888,8 +891,16 @@ public class Polylist implements IList {
 	/**
 	 * PolylistFromArray makes a list out of an array of objects
 	 */
-	public static IList PolylistFromArrayList(ArrayList<Object> array) {
+	public static IList fromCollection(Collection<Object> collection) {
 		IList result = nil;
+		List<Object> array = null;
+		if (collection instanceof List) {
+			array = (List<Object>)collection;
+		} else {
+			array = new ArrayList<Object>();
+			for (Object o : collection)
+				array.add(o);
+		}
 		for (int i = array.size() - 1; i >= 0; i--)
 			result = cons(array.get(i), result);
 		return result;
@@ -935,7 +946,7 @@ public class Polylist implements IList {
 	 * @see org.integratedmodelling.list.IList#toArrayList()
 	 */
 	@Override
-	public ArrayList<Object> toArrayList() {
+	public List<Object> toCollection() {
 		
 		ArrayList<Object> ret = new ArrayList<Object>();
 
@@ -952,9 +963,9 @@ public class Polylist implements IList {
 	 * @return
 	 */
 	public IList append(Object o) {
-		ArrayList<Object> ls = toArrayList();
+		List<Object> ls = toCollection();
 		ls.add(o);
-		return Polylist.PolylistFromArrayList(ls);
+		return PolyList.fromCollection(ls);
 	}
 	
 //	public XML.XmlNode createXmlNode() {

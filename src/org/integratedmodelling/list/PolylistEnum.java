@@ -46,13 +46,13 @@ package org.integratedmodelling.list;
 
 public class PolylistEnum implements java.util.Enumeration<Object>
   {
-  Polylist L;			// current list
+  PolyList L;			// current list
  
   /**
     *  PolylistEnum constructs a PolylistEnum from a Polylist.
    **/
 
-  public PolylistEnum(Polylist L)	// constructor
+  public PolylistEnum(PolyList L)	// constructor
     {
     this.L = L;
     }
@@ -79,7 +79,7 @@ public class PolylistEnum implements java.util.Enumeration<Object>
         java.util.NoSuchElementException("No next element in Polylist");
 
     Object result = L.first();
-    L = (Polylist) L.rest();
+    L = (PolyList) L.rest();
     return result;
     }
   }

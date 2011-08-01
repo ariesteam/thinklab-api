@@ -34,7 +34,7 @@
 package org.integratedmodelling.thinklab.api.knowledge;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.list.IList;
+import org.integratedmodelling.thinklab.api.lang.IList;
 
 
 /**

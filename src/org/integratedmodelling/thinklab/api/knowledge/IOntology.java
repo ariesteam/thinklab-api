@@ -40,7 +40,7 @@ import java.util.Collection;
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.exceptions.ThinklabIOException;
 import org.integratedmodelling.exceptions.ThinklabValidationException;
-import org.integratedmodelling.list.IList;
+import org.integratedmodelling.thinklab.api.lang.IList;
 
 /**
  * <p>The generalized ontology interface. Ontology objects are usually not accessed by the typical API user, who deals with concepts and with the knowledge manager directly. Yet, we need an ontology generalization layer to provide a smooth interface to most operations.</p>

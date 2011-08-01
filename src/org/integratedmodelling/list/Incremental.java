@@ -37,7 +37,9 @@
 
 package org.integratedmodelling.list;
 
-public class Incremental extends Polylist
+import org.integratedmodelling.thinklab.api.lang.IList;
+
+public class Incremental extends PolyList
   {
   Object value;
 
@@ -50,7 +52,7 @@ public class Incremental extends Polylist
   public IList rest()
     {
     ensureGrown();
-    return ((Polylist)value).rest();
+    return ((IList)value).rest();
     }
 
   public boolean isEmpty()
@@ -62,7 +64,7 @@ public class Incremental extends Polylist
   public boolean nonEmpty()
     {
     ensureGrown();
-    return ((Polylist)value).nonEmpty();
+    return ((PolyList)value).nonEmpty();
     }
 
   public String toString()

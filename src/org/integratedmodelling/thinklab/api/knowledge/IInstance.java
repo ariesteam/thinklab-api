@@ -38,8 +38,8 @@ import java.util.Collection;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.exceptions.ThinklabValidationException;
-import org.integratedmodelling.list.IList;
 import org.integratedmodelling.thinklab.api.knowledge.query.IConformance;
+import org.integratedmodelling.thinklab.api.lang.IList;
 import org.integratedmodelling.thinklab.api.runtime.ISession;
 
 /**

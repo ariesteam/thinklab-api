@@ -44,7 +44,7 @@ public class RelationshipList {
 	ValueList value;
 	IKnowledgeManager _km;
 	
-	public RelationshipList(Polylist polylist, IKnowledgeManager km)  {
+	public RelationshipList(PolyList polylist, IKnowledgeManager km)  {
 		
 		_km = km;
 		Object o = polylist.first();

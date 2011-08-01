@@ -42,10 +42,10 @@ import java.util.Properties;
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.exceptions.ThinklabResourceNotFoundException;
 import org.integratedmodelling.exceptions.ThinklabValidationException;
-import org.integratedmodelling.list.IList;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.IInstance;
 import org.integratedmodelling.thinklab.api.knowledge.storage.IKBox;
+import org.integratedmodelling.thinklab.api.lang.IList;
 import org.integratedmodelling.thinklab.api.listeners.IThinklabSessionListener;
 
 

@@ -5,6 +5,7 @@ import org.integratedmodelling.exceptions.ThinklabValidationException;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.IProperty;
 import org.integratedmodelling.thinklab.api.knowledge.IValue;
+import org.integratedmodelling.thinklab.api.knowledge.storage.IKBox;
 
 public interface IKnowledgeManager {
 	
@@ -58,4 +59,12 @@ public interface IKnowledgeManager {
 	 * @throws ThinklabException 
 	 */
 	public abstract IValue validateLiteral(IConcept c, String literal) throws ThinklabException;
+	
+	/**
+	 * The default kbox should never be null; it should merge all the kboxes configured to 
+	 * load at startup.
+	 * 
+	 * @return
+	 */
+	public abstract IKBox getDefaultKbox();
 }

@@ -1,6 +1,6 @@
-package org.integratedmodelling.list;
+package org.integratedmodelling.thinklab.api.lang;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface IList {
 
@@ -70,6 +70,6 @@ public interface IList {
 
 	public abstract String implode();
 
-	public abstract ArrayList<Object> toArrayList();
+	public abstract List<Object> toCollection();
 
 }

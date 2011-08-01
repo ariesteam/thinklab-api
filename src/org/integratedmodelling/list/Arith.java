@@ -37,6 +37,8 @@
 
 package org.integratedmodelling.list;
 
+import org.integratedmodelling.thinklab.api.lang.IList;
+
 public class Arith {
 	static public boolean greaterThan(Object v1, Object v2) {
 		if (!(v1 instanceof Number))
@@ -90,7 +92,7 @@ public class Arith {
 
 		if (v1 instanceof IList) {
 			if (v2 instanceof IList)
-				return Polylist.equals((Polylist) v1, (Polylist) v2);
+				return PolyList.equals((PolyList) v1, (PolyList) v2);
 			else
 				return false;
 		}

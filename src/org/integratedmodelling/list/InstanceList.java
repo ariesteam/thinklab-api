@@ -41,6 +41,7 @@ import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.IInstanceImplementation;
 import org.integratedmodelling.thinklab.api.knowledge.IValue;
 import org.integratedmodelling.thinklab.api.knowledge.factories.IKnowledgeManager;
+import org.integratedmodelling.thinklab.api.lang.IList;
 
 /**
  * An object that wraps an instance definition list and provides access methods and 
@@ -70,7 +71,7 @@ public class InstanceList {
 	}
 
 	public IList asList() {
-		return Polylist.PolylistFromArray(array);
+		return PolyList.fromArray(array);
 	}
 	
 	public IConcept getDirectType() {
@@ -93,7 +94,7 @@ public class InstanceList {
 		for (int i = 1; i < array.length; i++) {
 			if (array[i] instanceof IList && 
 					((IList)array[i]).first().toString().equals("rdfs:label") ) {
-				ret = ((Polylist)array[i]).second().toString();
+				ret = ((PolyList)array[i]).second().toString();
 				break;
 			}	
 		}
@@ -107,7 +108,7 @@ public class InstanceList {
 		for (int i = 1; i < array.length; i++) {
 			if (array[i] instanceof IList && 
 					((IList)array[i]).first().toString().equals("#") ) {
-				ret = (IInstanceImplementation) ((Polylist)array[i]).second();
+				ret = (IInstanceImplementation) ((PolyList)array[i]).second();
 				break;
 			}	
 		}
@@ -121,7 +122,7 @@ public class InstanceList {
 		for (int i = 1; i < array.length; i++) {
 			if (array[i] instanceof IList && 
 					((IList)array[i]).first().toString().equals("rdfs:comment") ) {
-				ret = ((Polylist)array[i]).second().toString();
+				ret = ((PolyList)array[i]).second().toString();
 				break;
 			}	
 		}
@@ -138,7 +139,7 @@ public class InstanceList {
 				
 				if (!(s.equals("rdsf:label") || 
 					  s.equals("rdfs.comment"))) {
-					ret.add(new RelationshipList((Polylist)array[i], _km));
+					ret.add(new RelationshipList((PolyList)array[i], _km));
 				}
 				
 			}
@@ -180,7 +181,7 @@ public class InstanceList {
 				
 				if (s.equals(relationship)) {
 					
-					Object o = ((Polylist)array[i]).second();
+					Object o = ((PolyList)array[i]).second();
 					
 					if (o instanceof IValue) {
 						ret = ((IValue)o).getConcept();

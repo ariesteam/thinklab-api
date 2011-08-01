@@ -37,6 +37,8 @@
 
 package org.integratedmodelling.list;
 
+import org.integratedmodelling.thinklab.api.lang.IList;
+
 	
 /**
   *  NonEmptyList is the sub-class of List consisting of non-empty 
@@ -62,13 +64,13 @@ class ConsCell
     *  rest() returns the rest of a NonEmptyList.
    **/ 
 
-  Polylist rest()
+  IList rest()
     {
     if( Rest instanceof Seed ) 
       {
       Rest = ((Seed)Rest).grow();
       }
-    return (Polylist)Rest;
+    return (IList)Rest;
     }
 
 

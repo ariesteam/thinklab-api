@@ -37,6 +37,7 @@ import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.lang.SemanticType;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.factories.IKnowledgeManager;
+import org.integratedmodelling.thinklab.api.lang.IList;
 
 public class ValueList {
 
