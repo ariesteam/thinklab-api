@@ -2,6 +2,7 @@ package org.integratedmodelling.thinklab.api.modelling.factories;
 
 import java.util.Map;
 
+import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.exceptions.ThinklabValidationException;
 import org.integratedmodelling.lang.SemanticType;
 import org.integratedmodelling.thinklab.api.lang.IList;
@@ -16,24 +17,6 @@ import org.integratedmodelling.thinklab.api.modelling.observation.IUnit;
  * @author Ferd
  */
 public interface IModelFactory {
-
-	// Concepts for model types
-	public final SemanticType C_MODEL = new SemanticType("modelling:Model");
-	public final SemanticType C_MEASUREMENT = new SemanticType(
-			"modelling:Measurement");
-	public final SemanticType C_CLASSIFICATION = new SemanticType(
-			"modelling:Classification");
-	public final SemanticType C_RANKING = new SemanticType("modelling:Ranking");
-	public final SemanticType C_BOOLEANRANKING = new SemanticType(
-			"modelling:BooleanRanking");
-	public final SemanticType C_NUMERICCODING = new SemanticType(
-			"modelling:NumericCoding");
-	public final SemanticType C_PROBABILISTICMEASUREMENT = new SemanticType(
-			"modelling:ProbabilisticMeasurement");
-	public final SemanticType C_PROBABILISTICRANKING = new SemanticType(
-			"modelling:ProbabilisticRanking");
-	public final SemanticType C_PROBABILISTICCLASSIFICATION = new SemanticType(
-			"modelling:ProbabilisticClassification");
 
 	// keys for model generator map. Can also be others for different models.
 	public final static String K_REQUIRED = "required";
@@ -55,6 +38,7 @@ public interface IModelFactory {
 	// the next two are in sync
 	public final static String K_DEPENDENCIES = "dependencies"; // List<IModel>
 	public final static String K_DEPENDENCYNAMES = "depnames"; // List<String>
+	public final static String K_MANDATORYDEPENDENCY = "mandatory"; // List<Boolean>
 
 	// the next two are in sync
 	public final static String K_CONDITIONALS = "conditionals"; // List<IExpression>
@@ -78,7 +62,7 @@ public interface IModelFactory {
 	 * @return
 	 */
 	public abstract IModel createModel(INamespace namespace,
-			SemanticType modelType, Map<String, Object> definition);
+			SemanticType modelType, Map<String, Object> definition) throws ThinklabException;
 
 	/**
 	 * A default namespace is used when no namespace is specified. While it

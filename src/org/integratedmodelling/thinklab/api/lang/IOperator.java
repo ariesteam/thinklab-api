@@ -1,17 +1,14 @@
 package org.integratedmodelling.thinklab.api.lang;
 
+import java.util.Collection;
+
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.IValue;
 
 /**
- * An IOperator is a specialized instance implementation capable of returning a value given a set
- * of IValue arguments. Should be also capable of validating the arguments, although this is not 
- * enforced currently.
- * 
- * Operators are declared in ontologies and the correspondent instance objects can be used in 
- * constraints.
- * 
- * FIXME this whole thing is unnecessarily complicated and should be simplified.
+ * Used in restrictions and capable of being rewritten in queries. A suitable
+ * operator factory should be provided 
+ * Largely TODO.
  * 
  * @author Ferdinando
  *
@@ -29,8 +26,19 @@ public interface IOperator  {
 	public static final String STD = "std";
 	public static final String CV  = "cv";
 	public static final String VAR = "var";
+	
+	public static final String INTERSECT = "intersect";
+	public static final String UNION = "union";
 
+	public static final String AND = "and";
+	public static final String OR = "or";
+	public static final String NOT = "not";
+	public static final String XOR = "xor";
+	
 	public abstract IValue eval(Object ... arg) throws ThinklabException;
-	public abstract String getOperatorId();
 
+	public abstract String getName();
+	
+	public abstract String getName(String language);
+	
 }

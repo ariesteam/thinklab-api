@@ -17,6 +17,14 @@ public interface IParseable {
 	 * @param string the string
 	 * @throws ThinklabException the thinklab exception
 	 */
-	public void parse(String string) throws ThinklabException;
+	public abstract void parse(String string) throws ThinklabException;
+	
+	/**
+	 * Unlike toString(), the return value of asText() must be parseable
+	 * back to an identical object.
+	 * 
+	 * @return
+	 */
+	public abstract String asText();
 
 }

@@ -49,7 +49,7 @@ import org.integratedmodelling.thinklab.api.runtime.ISession;
  * @author Ferdinando Villa
  *
  */
-public interface IThinklabSessionListener {
+public interface IThinklabSessionListener extends IListener {
 
 	/**
 	 * Notifier for the creation of a session, called by the KM immediately after the interface has created

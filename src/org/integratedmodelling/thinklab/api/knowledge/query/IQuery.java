@@ -34,27 +34,19 @@
 package org.integratedmodelling.thinklab.api.knowledge.query;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.exceptions.ThinklabValidationException;
 import org.integratedmodelling.lang.LogicalConnector;
+import org.integratedmodelling.thinklab.api.knowledge.IInstance;
+import org.integratedmodelling.thinklab.api.knowledge.IValue;
+import org.integratedmodelling.thinklab.api.lang.IList;
+import org.integratedmodelling.thinklab.api.lang.IParseable;
 
 /**
- * A query class whose purpose is to generalize the querying
- * of "objects" and the retrieval of their results. Apart from existing (so it could be passed to
- * IQueriable) it mandates the ability to serialize a query to/from a string and to check for
- * "empty" (general) queries.
- * 
+ * A query's purpose is to generalize the semantic querying of instances. 
+ *  
  * @author Ferdinando Villa
  *
  */
-public interface IQuery {
-
-	/**
-	 * Queries should be definable by creating one with the empty constructor and 
-	 * passing some sort of textual specification to parse().
-	 * @param query
-	 * @throws ThinklabValidationException
-	 */
-	public abstract void parse(String query) throws ThinklabValidationException;
+public interface IQuery extends IParseable {
 	
 	/**
 	 * Queries should always be capable of returning a textual specification that can later
@@ -80,4 +72,81 @@ public interface IQuery {
 	 */
 	public abstract IQuery merge(IQuery constraint, LogicalConnector intersection) throws ThinklabException ;
 	
+	/**
+	 * Return a list representation of this query that can produce an identical one.
+	 * 
+	 * @return
+	 */
+	public abstract IList asList();
+
+	/**
+	 * Restrict the current constraint by properly merging in the passed connections using the passed
+	 * mode. Don't even think about passing anything but AND and OR, although no check is made.
+	 * @param connector LogicalConnector.INTERSECTION or UNION. Nothing else please.
+	 * @param restrictions as many new restrictions as you want. NULLs are accepted and will be ignored for
+	 *        convenience.
+	 * @returns this, not a new constraint; it's done only to enable shorter idioms when creating
+	 *    a constraint like new Constraint(..).restrict(...);
+	 */
+	public abstract IQuery restrict(LogicalConnector connector, IRestriction... restrictions);
+
+
+	/**
+	 * Add a restriction as a constraint on a linked object. If any other restriction exist, AND them. If
+	 * another connector is wanted, use the restriction class directly or the list format.
+	 * 
+	 * @param propertyType
+	 * @param objectConstraint
+	 * @throws ThinklabException 
+	 * @throws ThinklabIncompatibleConstraintException 
+	 * @category Creation API
+	 */
+	public abstract void addObjectRestriction(String propertyType, IQuery objectQuery) throws ThinklabException;
+
+	/**
+	 * Add a restriction as a constraining class on a classification property. If any other restriction exist, AND them. If
+	 * another connector is wanted, use the restriction class directly or the list format.
+	 * 
+	 * @param propertyType
+	 * @param classID
+	 * @category Creation API
+	 */
+	public abstract void addClassificationRestriction(String propertyType, String classID) throws ThinklabException;
+
+	/**
+	 * Add a restriction as the result of an operator on a linked literal. If any other restriction exist, AND them. If
+	 * another connector is wanted, use the restriction class directly or the list format.
+	 * 
+	 * @param propertyType
+	 * @param operator
+	 * @param value
+	 * @category Creation API
+	 */
+	public abstract void addLiteralRestriction(String propertyType, String operator, String value) throws ThinklabException;
+
+	/**
+	 * Add a restriction as the result of an operator on a linked literal. If any other restriction exist, AND them. If
+	 * another connector is wanted, use the restriction class directly or the list format.
+	 * 
+	 * @param propertyType
+	 * @param operator
+	 * @param value
+	 * @category Creation API
+	 */
+	public abstract void addLiteralRestriction(String propertyType, String operator, IValue value) throws ThinklabException;
+
+	/**
+	 * Return the restriction objects as a single restriction
+	 * @return
+	 */
+	public abstract IRestriction getRestrictions();
+
+	/**
+	 * Validate passed object for conditions expressed in constraint. 
+	 * @param i a concept or instance to validate.
+	 * @return true if match is positive.
+	 * @throws ThinklabException 
+	 */
+	public abstract boolean match(IInstance i) throws ThinklabException;
+
 }

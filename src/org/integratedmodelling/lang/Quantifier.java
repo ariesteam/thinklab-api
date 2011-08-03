@@ -175,4 +175,9 @@ public class Quantifier implements IParseable {
         }
 	}
 
+	@Override
+	public String asText() {
+		return toString();
+	}
+
 }

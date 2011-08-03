@@ -3,7 +3,7 @@ package org.integratedmodelling.thinklab.api.modelling;
 import java.util.Collection;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.thinklab.api.knowledge.IConcept;
+import org.integratedmodelling.thinklab.api.knowledge.IInstance;
 import org.integratedmodelling.thinklab.api.knowledge.storage.IKBox;
 import org.integratedmodelling.thinklab.api.modelling.observation.IContext;
 import org.integratedmodelling.thinklab.api.modelling.observation.IObservationList;
@@ -15,12 +15,10 @@ import org.integratedmodelling.thinklab.api.runtime.ISession;
 public interface IModel extends IModelObject {
 	
 	/**
-	 * Return the base observable concept
+	 * Return the observable
 	 * @return
-	 * @uml.property  name="observableClass"
-	 * @uml.associationEnd  
 	 */
-	public abstract IConcept getObservableClass();
+	public abstract IInstance getObservable();
 
 	/**
 	 * 

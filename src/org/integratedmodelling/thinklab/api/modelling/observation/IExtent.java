@@ -38,7 +38,7 @@ import org.integratedmodelling.collections.Pair;
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.lang.PhysicalNature;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
-import org.integratedmodelling.thinklab.api.knowledge.query.IQuery;
+import org.integratedmodelling.thinklab.api.knowledge.query.IRestriction;
 import org.integratedmodelling.thinklab.api.lang.IOperator;
 
 /**
@@ -123,7 +123,7 @@ public abstract interface IExtent extends IState, ITopologicallyComparable {
 	 * Return a semantic query that will match observations that are in the passed
 	 * relationship with this extent. 
 	 */
-	public abstract IQuery getConstraint(IOperator operator) throws ThinklabException;
+	public abstract IRestriction getConstraint(IOperator operator) throws ThinklabException;
 
 	/**
 	 * Return the transformation, if any, that will be necessary to operate on a 

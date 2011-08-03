@@ -200,6 +200,16 @@ public final class SemanticType implements Serializable {
 	}
 	
 	public IConcept getConcept(IKnowledgeManager km) {
-		return km.getConcept(this.toString());
+		IConcept ret = km.getConcept(this.toString());
+		if (ret == null)
+			throw new ThinklabRuntimeException("concept " + this.toString() + " not found");
+		return ret;
+	}
+	
+	public IProperty getProperty(IKnowledgeManager km) {
+		IProperty ret = km.getProperty(this.toString());
+		if (ret == null)
+			throw new ThinklabRuntimeException("property " + this.toString() + " not found");
+		return ret;
 	}
 }

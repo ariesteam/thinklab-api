@@ -46,20 +46,19 @@ import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.IInstance;
 import org.integratedmodelling.thinklab.api.knowledge.storage.IKBox;
 import org.integratedmodelling.thinklab.api.lang.IList;
-import org.integratedmodelling.thinklab.api.listeners.IThinklabSessionListener;
+import org.integratedmodelling.thinklab.api.listeners.IListenable;
 
 
 /**
  * A Session is a temporary concept space that contains all instances that are created during a user session. A session should be an ontology or contain one, but its identity as a IOntology is not mandated. Sessions are normally memory-based but should be able to persist themselves. All operations on the same session are synchronous so there's no need to worry about concurrency.
  * @author  Ferdinando Villa
  */
-public interface ISession {
+public interface ISession extends IListenable {
 	
 	// standard variable names for notification levels
 	public static final String DEBUG = "session.debug";
 	public static final String INFO = "session.info";
 	public static final String COMMAND = "session.command";
-	
 	
 	/**
 	 * Each session has a unique ID assigned by the Knowledge manager. 
@@ -74,21 +73,7 @@ public interface ISession {
 	 * @uml.property  name="sessionProperties"
 	 */
 	public abstract Properties getSessionProperties();
-	
-	/**
-	 * The knowledge manager may pass one or more session listeners to a newly created session using
-	 * this function. The function has the option of throwing an exception if it does not want to deal
-	 * with listeners, but should not accept them and then ignore them. If listeners are accepted,
-	 * the session commits to calling the objectCreated() and objectDeleted() on FIRST-CLASS OBJECTS ONLY (those
-	 * that are not secondary to other objects when loaded from sources or created by the API) appropriately. 
-	 * The sessionCreated and sessionDeleted methods are called by the knowledge manager, so the session
-	 * doesn't need to worry about them.
-	 * 
-	 * @param listener
-	 * @throws ThinklabException
-	 */
-	public abstract void addListener(IThinklabSessionListener listener) throws ThinklabException;
-	
+
     /**
      * <p>Write all current contents of ontology on passed ontology file.</p>
      * <p><b>NOTE:</b> this will remove all non-validated instances, rendering all relative objects meaningless and their use
@@ -204,14 +189,6 @@ public interface ISession {
      */
     public abstract IInstance createObject(IInstance ii) throws ThinklabException;
 
-
-	/**
-	 * Return all the listeners registered with the session. Can return null if no listeners are registered or
-	 * allowed.
-	 * 
-	 * @return a collection of all listeners added to the session using addListener(), or null.
-	 */
-	public abstract Collection<IThinklabSessionListener> getListeners();
 
 	/**
 	 * KBox retrieval is moved to the session level because kboxes may be local to sessions.

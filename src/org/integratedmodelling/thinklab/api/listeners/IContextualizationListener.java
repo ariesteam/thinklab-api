@@ -15,7 +15,7 @@ import org.integratedmodelling.thinklab.api.modelling.observation.IObservation;
  * @author Ferdinando
  * @date Aug 26, 2009
  */
-public interface IContextualizationListener {
+public interface IContextualizationListener extends IListener {
 
 	/**
 	 * Called after an observation has been contextualized. The contextualized obs
