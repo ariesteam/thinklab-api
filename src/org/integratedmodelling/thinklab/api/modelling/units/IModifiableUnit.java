@@ -1,4 +1,4 @@
-package org.integratedmodelling.thinklab.api.modelling.observation;
+package org.integratedmodelling.thinklab.api.modelling.units;
 
 import org.integratedmodelling.exceptions.ThinklabValidationException;
 

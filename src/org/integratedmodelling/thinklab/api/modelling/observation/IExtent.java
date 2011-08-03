@@ -40,6 +40,7 @@ import org.integratedmodelling.lang.PhysicalNature;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.query.IRestriction;
 import org.integratedmodelling.thinklab.api.lang.IOperator;
+import org.integratedmodelling.thinklab.api.modelling.units.IUnit;
 
 /**
  * An Extent describes the topology of the observable
@@ -53,7 +54,7 @@ import org.integratedmodelling.thinklab.api.lang.IOperator;
  * @author Ferdinando Villa
  *
  */
-public abstract interface IExtent extends IState, ITopologicallyComparable {
+public abstract interface IExtent extends IState, ITopologicallyComparable<IExtent> {
 
 	/**
 	 * One of these is set into AggregationParameters to properly return the

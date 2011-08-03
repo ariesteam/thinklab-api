@@ -11,7 +11,7 @@ import org.integratedmodelling.exceptions.ThinklabException;
  * @author Ferdinando Villa
  *
  */
-public interface ITopologicallyComparable {
+public interface ITopologicallyComparable<T> {
 	
 	/**
 	 * 
@@ -19,7 +19,7 @@ public interface ITopologicallyComparable {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public abstract boolean contains(ITopologicallyComparable o) throws ThinklabException;
+	public abstract boolean contains(T o) throws ThinklabException;
 	
 	/**
 	 * 
@@ -27,7 +27,7 @@ public interface ITopologicallyComparable {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public abstract boolean overlaps(ITopologicallyComparable o) throws ThinklabException;
+	public abstract boolean overlaps(T o) throws ThinklabException;
 	
 	/**
 	 * 
@@ -35,6 +35,6 @@ public interface ITopologicallyComparable {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public abstract boolean intersects(ITopologicallyComparable o) throws ThinklabException;
+	public abstract boolean intersects(T o) throws ThinklabException;
 
 }

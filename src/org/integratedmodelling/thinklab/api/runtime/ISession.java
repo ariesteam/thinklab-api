@@ -44,6 +44,7 @@ import org.integratedmodelling.exceptions.ThinklabResourceNotFoundException;
 import org.integratedmodelling.exceptions.ThinklabValidationException;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.IInstance;
+import org.integratedmodelling.thinklab.api.knowledge.query.IConformance;
 import org.integratedmodelling.thinklab.api.knowledge.storage.IKBox;
 import org.integratedmodelling.thinklab.api.lang.IList;
 import org.integratedmodelling.thinklab.api.listeners.IListenable;
@@ -276,5 +277,14 @@ public interface ISession extends IListenable {
 	 * @uml.property  name="sessionWorkspace"
 	 */
 	public abstract String getSessionWorkspace();
+	
+	/**
+	 * Based on the user preferences or rights, a conformance policy for object matching in
+	 * queries, models and observations may be specified. If not,
+	 * return a default conformance policy. Must never return null.
+	 * 
+	 * @return
+	 */
+	public abstract IConformance getConformancePolicy();
 
 }

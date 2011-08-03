@@ -9,7 +9,7 @@ import org.integratedmodelling.thinklab.api.lang.IList;
 import org.integratedmodelling.thinklab.api.modelling.IModel;
 import org.integratedmodelling.thinklab.api.modelling.IModelObject;
 import org.integratedmodelling.thinklab.api.modelling.INamespace;
-import org.integratedmodelling.thinklab.api.modelling.observation.IUnit;
+import org.integratedmodelling.thinklab.api.modelling.units.IUnit;
 
 /**
  * Internal interface used by interpreters to create model objects.
