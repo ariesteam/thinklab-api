@@ -45,7 +45,7 @@ public interface IQueriable {
 	
 	/**
 	 * Return an IQuery that this kbox will like by parsing the given string. Most
-	 * queriables have a preferred query type so it should be easy.
+	 * queriables have a preferred query type.
 	 * 
 	 * @param toEval
 	 * @return

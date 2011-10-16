@@ -1,7 +1,5 @@
 package org.integratedmodelling.thinklab.api.lang;
 
-import java.util.Collection;
-
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.IValue;
 

@@ -36,10 +36,14 @@ package org.integratedmodelling.thinklab.api.knowledge;
 
 
 /**
- * <p>We use relationships to simplify the frame-based Concept interface. All the relationships that a class or instance entertains with anything are returned as IRelationship objects. These can be queried to check if the relationship is actually just the assertion of a property (like in most Concepts) or actually has a value, which can be a literal (of any kind supported by the IMA), an object (instance), or a class (no matter whether we're using OWL-DL or not).</p> 
- * @author  Ferdinando Villa, Ecoinformatics Collaboratory, UVM
- * @see IConcept#getRelated()
- * @see  IInstance#getRelated()
+ * <p>We use relationships to simplify the frame-based Concept interface. Relationships are instances of Properties. 
+ * All the relationships that a class or instance entertains with anything are returned as IRelationship objects. 
+ * These can be queried to check if the relationship is actually just the assertion of a property 
+ * (like in most Concepts) or actually has a value, which can be a literal (of any kind supported, here always 
+ * conceptualized in a IValue), an object (instance), or a class (no matter whether we're using OWL-DL or not).
+ * </p> 
+ * 
+ * @author  Ferdinando Villa
  */
 public interface IRelationship {
 

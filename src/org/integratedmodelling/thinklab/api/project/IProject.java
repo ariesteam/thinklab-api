@@ -1,5 +1,6 @@
 package org.integratedmodelling.thinklab.api.project;
 
+import java.io.File;
 import java.util.Properties;
 
 /**
@@ -8,14 +9,22 @@ import java.util.Properties;
  */
 public interface IProject {
 	
-	/**
-	 * @uml.property  name="id"
-	 */
 	public String getId();
 
-	/**
-	 * @uml.property  name="properties"
-	 */
 	public Properties getProperties();
+	
+	/**
+	 * Source folder is the root of the Thinklab package tree.
+	 * 
+	 * @return
+	 */
+	public File getSourceFolder();
+	
+	/**
+	 * Return all the namespaces defined in the project.
+	 * 
+	 * @return
+	 */
+	public String[] getNamespaces();
 
 }

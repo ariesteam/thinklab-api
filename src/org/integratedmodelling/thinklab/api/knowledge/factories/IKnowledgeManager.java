@@ -9,7 +9,6 @@ import org.integratedmodelling.thinklab.api.knowledge.storage.IKBox;
 
 public interface IKnowledgeManager {
 	
-	
 	/**
 	 * 
 	 * @param prop

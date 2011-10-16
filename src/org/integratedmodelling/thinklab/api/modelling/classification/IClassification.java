@@ -1,6 +1,5 @@
 package org.integratedmodelling.thinklab.api.modelling.classification;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.integratedmodelling.exceptions.ThinklabValidationException;
