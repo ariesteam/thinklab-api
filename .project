@@ -36,5 +36,6 @@
 		<nature>com.soyatec.additional.Nature</nature>
 		<nature>ccw.nature</nature>
 		<nature>org.eclipse.pde.PluginNature</nature>
+		<nature>com.nwire.studio.tools.nwireNature</nature>
 	</natures>
 </projectDescription>

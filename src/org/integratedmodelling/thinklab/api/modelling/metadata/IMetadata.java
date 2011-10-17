@@ -187,6 +187,14 @@ public interface IMetadata extends IConceptualizable {
 	 */
 	public static String DC_LANGUAGE = "dc:coverage";
 
+	/**
+	 * The object returned will be a String, IMetadata, Number or IList for textually defined
+	 * metadata. May be anything else if defined through the API.
+	 *
+	 * TODO: only String or also IConcept as a key?
+	 * @param string
+	 * @return
+	 */
 	public Object get(String string);
 
 }

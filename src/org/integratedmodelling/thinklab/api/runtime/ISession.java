@@ -45,7 +45,6 @@ import org.integratedmodelling.exceptions.ThinklabValidationException;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.IInstance;
 import org.integratedmodelling.thinklab.api.knowledge.query.IConformance;
-import org.integratedmodelling.thinklab.api.knowledge.storage.IKBox;
 import org.integratedmodelling.thinklab.api.lang.IList;
 import org.integratedmodelling.thinklab.api.listeners.IListenable;
 
@@ -104,8 +103,6 @@ public interface ISession extends IListenable {
 	 * @param parent the instance parent concept.
 	 * @return a new unvalidated IInstance. 
 	 * @throws ThinklabException  if anything wrong.
-	 * 
-	 * FIXME must return a garbage collected instance, if we ever manage to implement it.
 	 * 	 */
 	public abstract IInstance createObject(String name, IConcept parent) throws ThinklabException;
 	
@@ -190,35 +187,6 @@ public interface ISession extends IListenable {
      */
     public abstract IInstance createObject(IInstance ii) throws ThinklabException;
 
-
-	/**
-	 * KBox retrieval is moved to the session level because kboxes may be local to sessions.
-	 * 
-	 * @param string
-	 * @return
-	 * @throws ThinklabException 
-	 * 
-	 * FIXME check rationale 
-	 */
-	public abstract IKBox retrieveKBox(String string) throws ThinklabException;
-
-	/**
-	 * 
-	 * @param string
-	 * @return
-	 * @throws ThinklabResourceNotFoundException
-	 * 
-	 * FIXME check rationale
-	 */
-	public abstract IKBox requireKBox(String string) throws ThinklabException;
-
-	/**
-	 * 
-	 * @return
-	 * 
-	 * FIXME check rationale
-	 */
-	public abstract Collection<String> getLocalKBoxes();
 	
 	/**
 	 * Return the user model for the session. If the session is not interactive, the user model may be null.
