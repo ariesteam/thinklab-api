@@ -1,5 +1,6 @@
 package org.integratedmodelling.thinklab.api.modelling.factories;
 
+import java.io.File;
 import java.util.Collection;
 
 import org.integratedmodelling.exceptions.ThinklabException;
@@ -91,6 +92,17 @@ public interface IModelManager {
 	 * @throws ThinklabIOException 
 	 */
 	public abstract INamespace loadFile(final String resourceId)
+			throws ThinklabException;
+	
+	/**
+	 * Load all model objects defined in the given source directory, 
+	 * adding each found resource to the model map.
+	 *  
+	 * @param resourceId
+	 * @return the namespaces defined
+	 * @throws ThinklabIOException 
+	 */
+	public abstract Collection<INamespace> load(final File sourceDirectory)
 			throws ThinklabException;
 
 }
