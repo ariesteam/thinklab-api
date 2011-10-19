@@ -1,8 +1,9 @@
 package org.integratedmodelling.thinklab.api.modelling.metadata;
 
 import org.integratedmodelling.thinklab.api.knowledge.IConceptualizable;
+import org.integratedmodelling.thinklab.api.lang.IParseable;
 
-public interface IMetadata extends IConceptualizable {
+public interface IMetadata extends IConceptualizable, IParseable {
 
 	public static String DC_NAME = "dc:name";
 	public static String DC_LABEL = "dc:name";
