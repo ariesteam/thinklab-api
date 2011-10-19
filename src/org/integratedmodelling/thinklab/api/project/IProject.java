@@ -9,6 +9,9 @@ import java.util.Properties;
  */
 public interface IProject {
 	
+	// properties for THINKLAB-INF/properties file
+	public static final String SOURCE_FOLDER_PROPERTY = "thinklab.source.folder";
+	
 	public String getId();
 
 	public Properties getProperties();
