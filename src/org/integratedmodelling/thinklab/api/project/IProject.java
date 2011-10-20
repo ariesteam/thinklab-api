@@ -1,7 +1,10 @@
 package org.integratedmodelling.thinklab.api.project;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.Properties;
+
+import org.integratedmodelling.thinklab.api.modelling.INamespace;
 
 /**
  * Thinklab projects are plug-in packages that provide Thinklab resources such as models, annotations etc. This interface is shared by the client and server side. Projects at the server side will need more methods to manage their lifetime in Thinklab.
@@ -28,6 +31,6 @@ public interface IProject {
 	 * 
 	 * @return
 	 */
-	public String[] getNamespaces();
+	public Collection<INamespace> getNamespaces();
 
 }
