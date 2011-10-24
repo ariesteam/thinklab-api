@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="WINDOWS-1252" standalone="no"?>
+<jardesc>
+    <jar path="thinklab-client/lib/thinklab-api.jar"/>
+    <options buildIfNeeded="true" compress="false" descriptionLocation="/thinklab-api/export-to-thinklab.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+        <file path="/thinklab-api/README"/>
+        <javaElement handleIdentifier="=thinklab-api/src"/>
+        <file path="/thinklab-api/javadoc.xml"/>
+        <file path="/thinklab-api/.project"/>
+        <file path="/thinklab-api/.classpath"/>
+        <folder path="/thinklab-api/doc"/>
+    </selectedElements>
+</jardesc>
