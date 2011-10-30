@@ -90,6 +90,23 @@ public interface IModelFactory {
 
 	
 	/**
+	 * Copy the model object passed into another one. Used to convert independent
+	 * implementations into one another. Typical use is to take the syntactic
+	 * constructs built by the language parser and convert them into models for
+	 * the target implementation. This gives the language parser a way to build
+	 * conformant objects that can be reused for actual work without devising
+	 * extremely complex constructors.
+	 * 
+	 * Must perform a deep copy and return completely functional objects.
+	 * 
+	 * @param o the object to copy
+	 * @param namespace if not null, use this namespace for the resulting objects instead
+	 * 	      of the original one.
+	 * @return a new object in the target implementation for this factory.
+	 */
+	public abstract IModelObject clone(IModelObject o, INamespace namespace);
+	
+	/**
 	 * Gateway to whatever unit parser we use. 
 	 * 
 	 * @param unit
