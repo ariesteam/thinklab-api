@@ -6,6 +6,7 @@ import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.IProperty;
 import org.integratedmodelling.thinklab.api.knowledge.IValue;
 import org.integratedmodelling.thinklab.api.knowledge.storage.IKBox;
+import org.integratedmodelling.thinklab.api.lang.IList;
 
 public interface IKnowledgeManager {
 	
@@ -66,4 +67,12 @@ public interface IKnowledgeManager {
 	 * @return
 	 */
 	public abstract IKBox getDefaultKbox();
+	
+	/**
+	 * Load knowledge from online lists. Ontologies and many other resources can be serialized
+	 * to lists.
+	 * 
+	 * @param list
+	 */
+	public abstract void loadKnowledge(IList list);
 }

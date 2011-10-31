@@ -12,13 +12,16 @@ public interface IDataSource {
 	 * Tag interface to construct transformation objects that produce a datasource from
 	 * another during context mediation. Such transformation may change the underlying
 	 * representation of the data or subset/resample it to adapt to a different, compatible
-	 * context.
+	 * context. It may also turn an import specification into an actual DS.
 	 * 
 	 * @author Ferdinando Villa
 	 *
 	 */
 	public static interface Transformation {
 		
+		public void initialize(IContext ctx);
+		
+		public IDataSource execute();
 	}
 	
 	/**

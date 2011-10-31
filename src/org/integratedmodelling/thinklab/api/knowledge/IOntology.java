@@ -222,4 +222,13 @@ public interface IOntology  extends IResource {
 	 * @throws ThinklabValidationException 
 	 */
 	public IConcept createConcept(String localName, IConcept[] parents) throws ThinklabException;
+	
+	
+	/**
+	 * The whole ontology should be serializable as a list. The KnowledgeManager is capable of digesting
+	 * knowledge in form of a list.
+	 * 
+	 * @return
+	 */
+	public IList asList();
 }
