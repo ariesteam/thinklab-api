@@ -10,9 +10,9 @@ import org.integratedmodelling.thinklab.api.modelling.observation.IObservationLi
 import org.integratedmodelling.thinklab.api.runtime.ISession;
 
 /**
- * A Model
+ * A model producing observations of a given type (through its subclasses). 
  */
-public interface IObserver extends IModelObject {
+public abstract interface IObserver extends IModelObject {
 	
 	/**
 	 * Return the observable
