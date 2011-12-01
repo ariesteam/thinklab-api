@@ -66,5 +66,5 @@ public abstract interface IObserver extends IModelObject {
 	 * 
 	 * @return
 	 */
-	public abstract Collection<IObserver> getDependencies();
+	public abstract Collection<IModel> getDependencies();
 }

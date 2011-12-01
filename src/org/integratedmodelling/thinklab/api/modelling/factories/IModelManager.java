@@ -1,6 +1,5 @@
 package org.integratedmodelling.thinklab.api.modelling.factories;
 
-import java.io.File;
 import java.util.Collection;
 
 import org.integratedmodelling.exceptions.ThinklabException;
@@ -13,6 +12,7 @@ import org.integratedmodelling.thinklab.api.modelling.IModelObject;
 import org.integratedmodelling.thinklab.api.modelling.INamespace;
 import org.integratedmodelling.thinklab.api.modelling.IScenario;
 import org.integratedmodelling.thinklab.api.modelling.observation.IContext;
+import org.integratedmodelling.thinklab.api.project.IProject;
 import org.integratedmodelling.thinklab.api.runtime.ISession;
 
 /**
@@ -95,14 +95,14 @@ public interface IModelManager {
 			throws ThinklabException;
 	
 	/**
-	 * Load all model objects defined in the given source directory, 
+	 * Load all model objects defined in the project's source directories, 
 	 * adding each found resource to the model map.
 	 *  
 	 * @param resourceId
 	 * @return the namespaces defined
 	 * @throws ThinklabIOException 
 	 */
-	public abstract Collection<INamespace> load(final File sourceDirectory)
+	public abstract Collection<INamespace> load(final IProject project)
 			throws ThinklabException;
 
 }
