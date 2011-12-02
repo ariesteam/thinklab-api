@@ -59,3 +59,4 @@ Export-Package: org.integratedmodelling.collections,
    org.integratedmodelling.thinklab.api.listeners,
    org.integratedmodelling.thinklab.api.knowledge"
 Bundle-Vendor: org.integratedmodelling
+Bundle-ClassPath: .
