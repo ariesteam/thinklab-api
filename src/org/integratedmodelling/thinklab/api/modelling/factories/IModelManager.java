@@ -6,7 +6,6 @@ import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.exceptions.ThinklabIOException;
 import org.integratedmodelling.thinklab.api.knowledge.storage.IKBox;
 import org.integratedmodelling.thinklab.api.modelling.IAgentModel;
-import org.integratedmodelling.thinklab.api.modelling.IAnnotation;
 import org.integratedmodelling.thinklab.api.modelling.IModel;
 import org.integratedmodelling.thinklab.api.modelling.IModelObject;
 import org.integratedmodelling.thinklab.api.modelling.INamespace;
@@ -26,8 +25,6 @@ import org.integratedmodelling.thinklab.api.runtime.ISession;
  *
  */
 public interface IModelManager {
-
-	public abstract IAnnotation getAnnotation(String s);
 
 	public abstract IModel getModel(String s);
 	
