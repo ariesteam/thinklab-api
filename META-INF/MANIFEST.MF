@@ -6,6 +6,7 @@ Bundle-Version: 1.0.0.qualifier
 Export-Package: org.integratedmodelling.collections,
  org.integratedmodelling.exceptions,
  org.integratedmodelling.lang;uses:="org.integratedmodelling.thinklab.api.knowledge.factories,org.integratedmodelling.thinklab.api.lang,org.integratedmodelling.thinklab.api.knowledge",
+ org.integratedmodelling.lang.model,
  org.integratedmodelling.list;uses:="org.integratedmodelling.thinklab.api.knowledge.factories,org.integratedmodelling.thinklab.api.lang,org.integratedmodelling.thinklab.api.knowledge",
  org.integratedmodelling.thinklab.api;uses:="org.integratedmodelling.thinklab.api.modelling.metadata",
  org.integratedmodelling.thinklab.api.knowledge;uses:="org.integratedmodelling.thinklab.api.knowledge.query,org.integratedmodelling.thinklab.api.lang",

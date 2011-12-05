@@ -11,8 +11,10 @@ import org.integratedmodelling.thinklab.api.lang.IList;
  */
 public class Namespace extends LanguageElement {
 
-	class Ontology {
+	public static class Ontology {
+		
 		String id;
+		String conceptSpace;
 		IList definition;
 
 		public void setId(String id) {
@@ -24,9 +26,18 @@ public class Namespace extends LanguageElement {
 		public void setDefinition(IList definition) {
 			this.definition = definition;
 		}
+		public String getConceptSpace() {
+			return conceptSpace;
+		}
+		public void setConceptSpace(String conceptSpace) {
+			this.conceptSpace = conceptSpace;
+		}
+		public String getId() {
+			return id;
+		}
 	}
 	
-	class ImportedNamespace {
+	public static class ImportedNamespace {
 		String id;
 		IList imported;
 		
