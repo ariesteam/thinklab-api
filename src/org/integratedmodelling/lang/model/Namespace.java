@@ -11,32 +11,6 @@ import org.integratedmodelling.thinklab.api.lang.IList;
  */
 public class Namespace extends LanguageElement {
 
-	public static class Ontology {
-		
-		String id;
-		String conceptSpace;
-		IList definition;
-
-		public void setId(String id) {
-			this.id = id;
-		}
-		public IList getDefinition() {
-			return definition;
-		}
-		public void setDefinition(IList definition) {
-			this.definition = definition;
-		}
-		public String getConceptSpace() {
-			return conceptSpace;
-		}
-		public void setConceptSpace(String conceptSpace) {
-			this.conceptSpace = conceptSpace;
-		}
-		public String getId() {
-			return id;
-		}
-	}
-	
 	public static class ImportedNamespace {
 		String id;
 		IList imported;
@@ -55,15 +29,15 @@ public class Namespace extends LanguageElement {
 		}
 	}
 	
-	Ontology ontology;
 	ImportedNamespace[] importedNamespaces;
 	ModelObject[] modelObjects;
+	long timeStamp;
 	
-	public Ontology getOntology() {
-		return ontology;
+	public long getTimeStamp() {
+		return timeStamp;
 	}
-	public void setOntology(Ontology ontology) {
-		this.ontology = ontology;
+	public void setTimeStamp(long timeStamp) {
+		this.timeStamp = timeStamp;
 	}
 	public ImportedNamespace[] getImportedNamespaces() {
 		return importedNamespaces;
