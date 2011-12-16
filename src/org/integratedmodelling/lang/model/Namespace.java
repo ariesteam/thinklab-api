@@ -1,6 +1,8 @@
 package org.integratedmodelling.lang.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 
 import org.integratedmodelling.thinklab.api.knowledge.IAxiom;
 import org.integratedmodelling.thinklab.api.lang.IList;
@@ -15,6 +17,7 @@ import org.integratedmodelling.thinklab.api.lang.IList;
 public class Namespace extends LanguageElement {
 
 	public ArrayList<IAxiom> axioms = new ArrayList<IAxiom>();
+	public HashSet<IAxiom> axiomCatalog = new HashSet<IAxiom>();
 	
 	public static class ImportedNamespace {
 		String id;
@@ -55,6 +58,21 @@ public class Namespace extends LanguageElement {
 	}
 	public void setModelObjects(ModelObject[] modelObjects) {
 		this.modelObjects = modelObjects;
+	}
+	
+	public Collection<IAxiom> getAxioms() {
+		return axioms;
+	}
+	
+	/**
+	 * Add an axiom. Tolerant to duplicated axioms.
+	 * @param axiom
+	 */
+	public void addAxiom(IAxiom axiom) {
+		if (!axiomCatalog.contains(axiom)) {
+			axiomCatalog.add(axiom);
+			axioms.add(axiom);
+		}
 	}
 	
 	
