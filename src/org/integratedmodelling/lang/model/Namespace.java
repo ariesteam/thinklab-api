@@ -1,5 +1,8 @@
 package org.integratedmodelling.lang.model;
 
+import java.util.ArrayList;
+
+import org.integratedmodelling.thinklab.api.knowledge.IAxiom;
 import org.integratedmodelling.thinklab.api.lang.IList;
 
 /**
@@ -11,6 +14,8 @@ import org.integratedmodelling.thinklab.api.lang.IList;
  */
 public class Namespace extends LanguageElement {
 
+	public ArrayList<IAxiom> axioms = new ArrayList<IAxiom>();
+	
 	public static class ImportedNamespace {
 		String id;
 		IList imported;
