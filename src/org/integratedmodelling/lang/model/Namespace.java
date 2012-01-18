@@ -1,5 +1,6 @@
 package org.integratedmodelling.lang.model;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -73,6 +74,31 @@ public class Namespace extends LanguageElement {
 			axiomCatalog.add(axiom);
 			axioms.add(axiom);
 		}
+	}
+	@Override
+	public void dump(PrintWriter out) {
+		
+		// TODO dump all axioms
+		for (IAxiom a : axioms) {
+			out.println(a);
+		}
+		
+		// TODO dump all model objects
+		for (ModelObject m : modelObjects) {
+			m.dump(out);
+		}
+	}
+	
+	/**
+	 * This one is called for any concept that is named with the namespace where
+	 * allowed. Concept is taken as is but validations should be made wherever
+	 * possible.
+	 * 
+	 * @param id
+	 */
+	public void addExternalRequiredConcept(String id) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

@@ -1,6 +1,8 @@
 package org.integratedmodelling.lang.model;
 
-public class LanguageElement {
+import java.io.PrintWriter;
+
+public abstract class LanguageElement {
 
 	String id;
 	int    lastLineNumber;
@@ -24,4 +26,6 @@ public class LanguageElement {
 	public void setFirstLineNumber(int firstLineNumber) {
 		this.firstLineNumber = firstLineNumber;
 	}
+	
+	public abstract void dump(PrintWriter out);
 }

@@ -1,5 +1,5 @@
 package org.integratedmodelling.lang.model;
 
-public class Observer extends ModelObject {
+public class Observer extends ObservingObject {
 
 }
