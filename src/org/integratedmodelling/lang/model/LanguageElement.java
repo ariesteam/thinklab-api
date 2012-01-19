@@ -1,6 +1,6 @@
 package org.integratedmodelling.lang.model;
 
-import java.io.PrintWriter;
+import java.io.PrintStream;
 
 public abstract class LanguageElement {
 
@@ -27,5 +27,5 @@ public abstract class LanguageElement {
 		this.firstLineNumber = firstLineNumber;
 	}
 	
-	public abstract void dump(PrintWriter out);
+	public abstract void dump(PrintStream out);
 }

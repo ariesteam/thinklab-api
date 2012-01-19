@@ -1,6 +1,6 @@
 package org.integratedmodelling.lang.model;
 
-import java.io.PrintWriter;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -76,7 +76,7 @@ public class Namespace extends LanguageElement {
 		}
 	}
 	@Override
-	public void dump(PrintWriter out) {
+	public void dump(PrintStream out) {
 		
 		// TODO dump all axioms
 		for (IAxiom a : axioms) {

@@ -21,10 +21,18 @@ public class Axiom implements IAxiom {
 		return new Axiom(CLASS_ASSERTION, conceptId);
 	}
 	
+	static public Axiom AnnotationAssertion(String targetConcept, String annotationProperty, String value) {
+		return new Axiom(ANNOTATION_ASSERTION, targetConcept, annotationProperty, value);
+	}
+	
 	static public Axiom SubClass(String concept, String ancestor) {
 		return new Axiom(SUBCLASS_OF, concept, ancestor);
 	}
 	
+	public static Axiom DisjointClasses(String[] concepts) {
+		return new Axiom(DISJOINT_CLASSES, (Object[])concepts);
+	}
+
 	public Axiom(String type, Object ... args) {
 		_type = type;
 		_args = args;
@@ -51,6 +59,7 @@ public class Axiom implements IAxiom {
 		}
 		return ret + ">";
 	}
+
 	
 	
 	
