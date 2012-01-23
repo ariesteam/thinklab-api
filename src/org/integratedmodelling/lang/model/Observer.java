@@ -15,5 +15,14 @@ public class Observer extends ObservingObject {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	/**
+	 * The dependencies of an Observer. This one just publishes super.addDependency. 
+	 * 
+	 * @param cmodel
+	 * @param formalName the 'named or :as' specification, null if not given.
+	 */
+	public void addDependency(Model cmodel, String formalName, boolean required) {
+		super.addDependency(cmodel, formalName, required);
+	}
 }
