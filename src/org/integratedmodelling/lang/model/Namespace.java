@@ -101,5 +101,24 @@ public class Namespace extends LanguageElement {
 		
 	}
 	
+	public void addImported(Namespace namespace) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	/**
+	 * Linear search should be OK, but we can certainly add a hashtable at some point.
+	 * 
+	 * @param object
+	 * @return
+	 */
+	public ModelObject getModelObject(String object) {
+		for (ModelObject mo : modelObjects) {
+			if (mo.getId().equals(object))
+				return mo;
+		}
+		return null;
+	}
+	
 	
 }

@@ -21,5 +21,4 @@ public class ModelObject extends LanguageElement {
 	}
 	
 	
-	
 }

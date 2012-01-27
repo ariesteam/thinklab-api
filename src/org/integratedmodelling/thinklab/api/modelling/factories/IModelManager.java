@@ -85,10 +85,11 @@ public interface IModelManager {
 	 * Load all model objects defined in the given file, adding them to the model map.
 	 *  
 	 * @param resourceId
+	 * @param the project to look up resource and imports (may be null)
 	 * @return the namespace defined
 	 * @throws ThinklabIOException 
 	 */
-	public abstract INamespace loadFile(final String resourceId)
+	public abstract INamespace loadFile(final String resourceId, IProject project)
 			throws ThinklabException;
 	
 	/**

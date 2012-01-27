@@ -63,5 +63,16 @@ public interface IResolver {
 	 * @param namespace
 	 */
 	public abstract void onNamespaceDefined(Namespace namespace);
+
+	/**
+	 * Ensure that the namespace declaration conforms with the resource it comes from. Only called when the 
+	 * resource is an actual model file.
+	 * 
+	 * @param resource
+	 * @param namespace
+	 * @throws ThinklabException 
+	 */
+	public abstract void validateNamespaceForResource(String resource,
+			String namespace) throws ThinklabException;
 	
 }

@@ -7,6 +7,7 @@ public abstract class LanguageElement {
 	String id;
 	int    lastLineNumber;
 	int    firstLineNumber;
+	Namespace namespace;
 	
 	public String getId() {
 		return id;
@@ -26,6 +27,15 @@ public abstract class LanguageElement {
 	public void setFirstLineNumber(int firstLineNumber) {
 		this.firstLineNumber = firstLineNumber;
 	}
+	
+	public void setNamespace(Namespace ns) {
+		this.namespace = ns;
+	}
+	
+	public Namespace getNamespace() {
+		return namespace;
+	}
+	
 	
 	public abstract void dump(PrintStream out);
 }

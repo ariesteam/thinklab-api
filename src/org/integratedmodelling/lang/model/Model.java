@@ -12,6 +12,8 @@ public class Model extends ObservingObject {
 	
 	ArrayList<Model> contextModels = new ArrayList<Model>();
 
+	String observableConcept;
+	
 	/**
 	 * Add one observer with an optional conditional expression to contextualize the model to use.
 	 * 
@@ -23,13 +25,21 @@ public class Model extends ObservingObject {
 	}
 
 	public void addObservable(ConceptObject concept) {
-		// TODO Auto-generated method stub
+
+		/*
+		 * TODO set the observable properly.
+		 */
 		
+		observableConcept = concept.getNamespace() + ":" + concept.getId();
 	}
 
 	public void addObservable(IList instance) {
-		// TODO Auto-generated method stub
 		
+		/*
+		 * TODO set the observable properly
+		 */
+		
+		observableConcept = instance.first().toString();
 	}
 
 	/**
@@ -41,6 +51,10 @@ public class Model extends ObservingObject {
 	 */
 	public void addContextModel(Model cmodel, String formalName, boolean required) {
 		addDependency(cmodel, formalName, required);
+	}
+
+	public String getObservableConcept() {
+		return observableConcept;
 	}
 
 }
