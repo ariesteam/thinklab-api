@@ -25,7 +25,7 @@ public interface IModelParser {
 	 * @param namespace a namespace ID that may identify a known namespace or not.
 	 * @return a namespace containing whatever NEW model objects and axioms have been parsed from the input.
 	 */
-	public abstract Namespace parseInNamespace(InputStream input, String namespace) throws ThinklabException;
+	public abstract Namespace parseInNamespace(InputStream input, String namespace, IResolver resolver) throws ThinklabException;
 	
 
 	/**
@@ -38,7 +38,7 @@ public interface IModelParser {
 	 * @return a finished namespace bean to be turned into usable model objects by the implementation.
 	 * @throws ThinklabException
 	 */
-	public abstract Namespace parse(String resource, IResolver context) throws ThinklabException;
+	public abstract Namespace parse(String resource, IResolver resolver) throws ThinklabException;
 	
 
 }

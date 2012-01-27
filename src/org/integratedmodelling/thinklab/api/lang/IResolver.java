@@ -6,16 +6,6 @@ import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.lang.model.Namespace;
 
 public interface IResolver {
-
-	
-	/**
-	 * Return the "default" namespace to be used when code is parsed from user input or other
-	 * non-namespace setting sources. This may be something simple like "user" or be linked to
-	 * a session ID or whatever else.
-	 * 
-	 * @return
-	 */
-	public abstract String getDefaultNamespaceId();
 	
 	/**
 	 * Override to fine-tune error management. If this throws an exception, the parser also will. If not, 
