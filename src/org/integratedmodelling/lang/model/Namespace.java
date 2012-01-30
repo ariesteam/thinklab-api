@@ -7,6 +7,7 @@ import java.util.HashSet;
 
 import org.integratedmodelling.thinklab.api.knowledge.IAxiom;
 import org.integratedmodelling.thinklab.api.lang.IList;
+import org.integratedmodelling.thinklab.api.project.IProject;
 
 /**
  * Beans to incarnate the model expressed in any of the Thinklab modeling languages. All languages should just
@@ -22,6 +23,7 @@ public class Namespace extends LanguageElement {
 	ArrayList<ImportedNamespace> importedNamespaces = new ArrayList<Namespace.ImportedNamespace>();
 	ArrayList<ModelObject> modelObjects = new ArrayList<ModelObject>();
 	long timeStamp;
+	IProject project;
 	
 	public static class ImportedNamespace {
 		String id;
@@ -120,5 +122,13 @@ public class Namespace extends LanguageElement {
 		return null;
 	}
 	
+	
+	public IProject getProject() {
+		return project;
+	}
+
+	public void setProject(IProject project) {
+		this.project = project;
+	}
 	
 }

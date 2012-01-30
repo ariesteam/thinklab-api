@@ -75,4 +75,5 @@ public interface IResolver {
 	public abstract void validateNamespaceForResource(String resource,
 			String namespace) throws ThinklabException;
 	
+	
 }
