@@ -17,7 +17,7 @@ public interface IProjectFactory {
 
 	public void deleteProject(String id) throws ThinklabException;
 
-	public IProject getProject(String id);
+	public IProject getProject(String id, boolean attemptLoading);
 	
 	public Collection<IProject> getProjects();
 	

@@ -3,6 +3,7 @@ package org.integratedmodelling.lang.model;
 import java.util.ArrayList;
 
 import org.integratedmodelling.collections.Triple;
+import org.integratedmodelling.thinklab.api.lang.IList;
 
 /**
  * Models and Observers. They both have observables, which are complicated enough to handle
@@ -15,6 +16,16 @@ public abstract class ObservingObject extends ModelObject {
 	
 	ArrayList<Triple<Model, String, Boolean>> _dependencies = 
 			new ArrayList<Triple<Model,String, Boolean>>();
+
+	ArrayList<IList> observables = new ArrayList<IList>();
+
+	public void addObservable(IList instance) {
+		observables.add(instance);
+	}
+
+	public String getObservableConcept() {
+		return observables.get(0).first().toString();
+	}
 
 	/**
 	 * The dependencies of a Model - used to select the contingencies if "when" statements

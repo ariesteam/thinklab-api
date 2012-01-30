@@ -19,6 +19,9 @@ public class Namespace extends LanguageElement {
 
 	public ArrayList<IAxiom> axioms = new ArrayList<IAxiom>();
 	public HashSet<IAxiom> axiomCatalog = new HashSet<IAxiom>();
+	ArrayList<ImportedNamespace> importedNamespaces = new ArrayList<Namespace.ImportedNamespace>();
+	ArrayList<ModelObject> modelObjects = new ArrayList<ModelObject>();
+	long timeStamp;
 	
 	public static class ImportedNamespace {
 		String id;
@@ -38,9 +41,6 @@ public class Namespace extends LanguageElement {
 		}
 	}
 	
-	ImportedNamespace[] importedNamespaces;
-	ModelObject[] modelObjects;
-	long timeStamp;
 	
 	public long getTimeStamp() {
 		return timeStamp;
@@ -48,17 +48,12 @@ public class Namespace extends LanguageElement {
 	public void setTimeStamp(long timeStamp) {
 		this.timeStamp = timeStamp;
 	}
-	public ImportedNamespace[] getImportedNamespaces() {
+	public Collection<ImportedNamespace> getImportedNamespaces() {
 		return importedNamespaces;
 	}
-	public void setImportedNamespaces(ImportedNamespace[] importedNamespaces) {
-		this.importedNamespaces = importedNamespaces;
-	}
-	public ModelObject[] getModelObjects() {
+
+	public Collection<ModelObject> getModelObjects() {
 		return modelObjects;
-	}
-	public void setModelObjects(ModelObject[] modelObjects) {
-		this.modelObjects = modelObjects;
 	}
 	
 	public Collection<IAxiom> getAxioms() {
@@ -75,6 +70,11 @@ public class Namespace extends LanguageElement {
 			axioms.add(axiom);
 		}
 	}
+	
+	public void addModelObject(ModelObject mo) {
+		modelObjects.add(mo);
+	}
+	
 	@Override
 	public void dump(PrintStream out) {
 		
