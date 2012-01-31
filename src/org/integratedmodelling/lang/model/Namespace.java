@@ -1,5 +1,6 @@
 package org.integratedmodelling.lang.model;
 
+import java.io.File;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,6 +25,7 @@ public class Namespace extends LanguageElement {
 	ArrayList<ModelObject> modelObjects = new ArrayList<ModelObject>();
 	long timeStamp;
 	IProject project;
+	private File sourceFile;
 	
 	public static class ImportedNamespace {
 		String id;
@@ -129,6 +131,14 @@ public class Namespace extends LanguageElement {
 
 	public void setProject(IProject project) {
 		this.project = project;
+	}
+
+	public File getSourceFile() {
+		return this.sourceFile;
+	}
+	
+	public void setSourceFile(File file) {
+		this.sourceFile = file;
 	}
 	
 }
