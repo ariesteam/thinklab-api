@@ -70,5 +70,15 @@ public interface IAxiom {
     public static final String ANNOTATION_PROPERTY_RANGE = "AnnotationPropertyRangeOf";
     public static final String ANNOTATION_PROPERTY_DOMAIN = "AnnotationPropertyDomain";
     public static final String DATATYPE_DEFINITION = "DatatypeDefinition";
+    
+    /*
+     * just check if we're this type
+     */
+    public abstract boolean is(String classAssertion);
+    
+    /*
+     * get the n-th argument
+     */
+    public abstract Object getArgument(int index);
 	
 }

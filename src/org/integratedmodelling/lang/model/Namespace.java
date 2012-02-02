@@ -23,6 +23,9 @@ public class Namespace extends LanguageElement {
 	public HashSet<IAxiom> axiomCatalog = new HashSet<IAxiom>();
 	ArrayList<ImportedNamespace> importedNamespaces = new ArrayList<Namespace.ImportedNamespace>();
 	ArrayList<ModelObject> modelObjects = new ArrayList<ModelObject>();
+	ArrayList<ModelObject> _knowledge = new ArrayList<ModelObject>();
+	public HashSet<String> _names = new HashSet<String>();
+	
 	long timeStamp;
 	IProject project;
 	private File sourceFile;
@@ -64,6 +67,10 @@ public class Namespace extends LanguageElement {
 		return axioms;
 	}
 	
+	public Collection<ModelObject> getKnowledge() {
+		return _knowledge;
+	}
+	
 	/**
 	 * Add an axiom. Tolerant to duplicated axioms.
 	 * @param axiom
@@ -75,8 +82,24 @@ public class Namespace extends LanguageElement {
 		}
 	}
 	
+	/**
+	 * Model objects get in the model object array unless they're concepts or properties defined
+	 * by inference. In that case they end up in the knowledge array.
+	 * 
+	 * @param mo
+	 */
 	public void addModelObject(ModelObject mo) {
-		modelObjects.add(mo);
+		
+		if (mo.getId() != null) {
+			_names.add(mo.getId());
+		}
+		
+		if ((mo instanceof ConceptObject || mo instanceof PropertyObject) && 
+				mo.firstLineNumber == 0 && mo.lastLineNumber == 0) {
+			_knowledge.add(mo);
+		} else {
+			modelObjects.add(mo);			
+		}
 	}
 	
 	@Override
@@ -117,6 +140,10 @@ public class Namespace extends LanguageElement {
 	 * @return
 	 */
 	public ModelObject getModelObject(String object) {
+		
+		if (!_names.contains(object))
+			return null;
+		
 		for (ModelObject mo : modelObjects) {
 			if (mo.getId().equals(object))
 				return mo;
@@ -139,6 +166,29 @@ public class Namespace extends LanguageElement {
 	
 	public void setSourceFile(File file) {
 		this.sourceFile = file;
+	}
+	
+	/**
+	 * Synchronize axioms with ConceptObjects and PropertyObjects. Only
+	 * parses axioms -> object and not the other way around as we assume
+	 * that parsers will generate axioms from model objects.
+	 * 
+	 * TODO very incomplete!
+	 * 
+	 */
+	public void synchronizeKnowledge() {
+
+		for (IAxiom axiom : axioms) {
+			
+			if (axiom.is(IAxiom.CLASS_ASSERTION)) {
+				if (!_names.contains(axiom.getArgument(0))) {
+					ConceptObject co = new ConceptObject();
+					co.setId(axiom.getArgument(0).toString());
+					co.setNamespace(this);
+					addModelObject(co);
+				}
+			}
+		}
 	}
 	
 }

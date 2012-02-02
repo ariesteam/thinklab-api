@@ -60,6 +60,16 @@ public class Axiom implements IAxiom {
 		return ret + ">";
 	}
 
+	@Override
+	public boolean is(String classAssertion) {
+		return _type.equals(classAssertion);
+	}
+
+	@Override
+	public Object getArgument(int index) {
+		return _args[index];
+	}
+
 	
 	
 	

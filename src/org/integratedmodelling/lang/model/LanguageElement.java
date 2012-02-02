@@ -5,8 +5,8 @@ import java.io.PrintStream;
 public abstract class LanguageElement {
 
 	String id;
-	int    lastLineNumber;
-	int    firstLineNumber;
+	int    lastLineNumber = 0;
+	int    firstLineNumber = 0;
 	Namespace namespace;
 	
 	public String getId() {
