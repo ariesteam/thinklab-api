@@ -29,6 +29,14 @@ public class Axiom implements IAxiom {
 		return new Axiom(SUBCLASS_OF, concept, ancestor);
 	}
 	
+	public static Axiom ObjectPropertyAssertion(String string) {
+		return new Axiom(OBJECT_PROPERTY_ASSERTION, string);
+	}
+
+	public static Axiom DataPropertyAssertion(String string) {
+		return new Axiom(DATA_PROPERTY_ASSERTION, string);
+	}
+	
 	public static Axiom DisjointClasses(String[] concepts) {
 		return new Axiom(DISJOINT_CLASSES, (Object[])concepts);
 	}
@@ -69,6 +77,7 @@ public class Axiom implements IAxiom {
 	public Object getArgument(int index) {
 		return _args[index];
 	}
+
 
 	
 	

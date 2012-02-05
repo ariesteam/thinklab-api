@@ -3,7 +3,9 @@ package org.integratedmodelling.thinklab.api.lang;
 import java.io.InputStream;
 
 import org.integratedmodelling.exceptions.ThinklabException;
+import org.integratedmodelling.lang.model.ConceptObject;
 import org.integratedmodelling.lang.model.Namespace;
+import org.integratedmodelling.lang.model.PropertyObject;
 
 public interface IResolver {
 	
@@ -74,6 +76,30 @@ public interface IResolver {
 	 */
 	public abstract void validateNamespaceForResource(String resource,
 			String namespace) throws ThinklabException;
+
+	/**
+	 * Called when an external concept (with the :) is identified in a legal place in a model object. Should
+	 * return a ConceptObject pointing to whatever definition of the import we need, which will be set in the
+	 * model tree.
+	 *  
+	 * @param id
+	 * @param namespace
+	 * @param line 
+	 * @return
+	 */
+	public abstract ConceptObject resolveExternalConcept(String id,
+			org.integratedmodelling.lang.model.Namespace namespace, int line) throws ThinklabException;
 	
-	
+	/**
+	 * Called when an external property (with the :) is identified in a legal place in a model object. Should
+	 * return a ConceptObject pointing to whatever definition of the import we need, which will be set in the
+	 * model tree.
+	 *  
+	 * @param id
+	 * @param namespace
+	 * @param line 
+	 * @return
+	 */
+	public abstract PropertyObject resolveExternalProperty(String id,
+			org.integratedmodelling.lang.model.Namespace namespace, int line) throws ThinklabException;
 }
