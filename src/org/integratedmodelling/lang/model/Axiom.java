@@ -37,6 +37,13 @@ public class Axiom implements IAxiom {
 		return new Axiom(DATA_PROPERTY_ASSERTION, string);
 	}
 	
+	public static IAxiom AnnotationPropertyAssertion(String id) {
+		/*
+		 * TODO check: is this what we need to say?
+		 */
+		return new Axiom(DATA_PROPERTY_ASSERTION, id);
+	}
+	
 	public static Axiom DisjointClasses(String[] concepts) {
 		return new Axiom(DISJOINT_CLASSES, (Object[])concepts);
 	}
@@ -77,6 +84,7 @@ public class Axiom implements IAxiom {
 	public Object getArgument(int index) {
 		return _args[index];
 	}
+
 
 
 	
