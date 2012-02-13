@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.integratedmodelling.collections.Pair;
+import org.integratedmodelling.thinklab.api.knowledge.IExpression;
 
 public class Observer extends ObservingObject {
 
-	ArrayList<Pair<Observer, Expression>> _mediated = 
-			new ArrayList<Pair<Observer,Expression>>();
+	ArrayList<Pair<Observer, IExpression>> _mediated = 
+			new ArrayList<Pair<Observer,IExpression>>();
 	
 	/**
 	 * Add one mediated observer with an optional conditional expression to contextualize the choice of
@@ -17,8 +18,8 @@ public class Observer extends ObservingObject {
 	 * @param observer
 	 * @param expression
 	 */
-	public void addMediated(Observer observer, Expression expression) {
-		_mediated.add(new Pair<Observer, Expression>(observer, expression));
+	public void addMediated(Observer observer, IExpression expression) {
+		_mediated.add(new Pair<Observer, IExpression>(observer, expression));
 	}
 
 

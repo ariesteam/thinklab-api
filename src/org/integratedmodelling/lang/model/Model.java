@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.integratedmodelling.collections.Pair;
+import org.integratedmodelling.thinklab.api.knowledge.IExpression;
 
 public class Model extends ObservingObject {
 	
-	ArrayList<Pair<Observer, Expression>> _observers = 
-			new ArrayList<Pair<Observer,Expression>>();
+	ArrayList<Pair<Observer, IExpression>> _observers = 
+			new ArrayList<Pair<Observer,IExpression>>();
 	
 	ArrayList<Model> contextModels = new ArrayList<Model>();
 	
@@ -18,8 +19,8 @@ public class Model extends ObservingObject {
 	 * @param observer
 	 * @param expression
 	 */
-	public void addConditional(Observer observer, Expression expression) {
-		_observers.add(new Pair<Observer, Expression>(observer, expression));
+	public void addConditional(Observer observer, IExpression expression) {
+		_observers.add(new Pair<Observer, IExpression>(observer, expression));
 	}
 
 	/**
@@ -38,7 +39,7 @@ public class Model extends ObservingObject {
 	 * 
 	 * @return
 	 */
-	public List<Pair<Observer, Expression>> getObservers() {
+	public List<Pair<Observer, IExpression>> getObservers() {
 		return _observers;
 	}
 

@@ -4,11 +4,10 @@ import java.util.Map;
 
 import org.integratedmodelling.thinklab.api.lang.IParseable;
 
-public interface IExpression extends IValue, IParseable {
+public interface IExpression extends IParseable {
 
     public abstract Object eval(Map<String,Object> parameters);
     
-	
 }
 
 

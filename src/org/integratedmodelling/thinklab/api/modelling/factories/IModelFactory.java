@@ -1,9 +1,7 @@
 package org.integratedmodelling.thinklab.api.modelling.factories;
 
 import org.integratedmodelling.exceptions.ThinklabValidationException;
-import org.integratedmodelling.lang.model.Expression;
 import org.integratedmodelling.lang.model.Namespace;
-import org.integratedmodelling.thinklab.api.knowledge.IExpression;
 import org.integratedmodelling.thinklab.api.modelling.IModelObject;
 import org.integratedmodelling.thinklab.api.modelling.INamespace;
 import org.integratedmodelling.thinklab.api.modelling.units.IUnit;
@@ -55,14 +53,4 @@ public interface IModelFactory {
 	 * @throws ThinklabValidationException
 	 */
 	public abstract IUnit parseUnit(String unit) throws ThinklabValidationException;
-
-	/**
-	 * Parse an expression from an API bean and return a usable IExpression for the purposes of the
-	 * implementation.
-	 * 
-	 * @param expression
-	 * @return
-	 * @throws ThinklabValidationException
-	 */
-	public abstract IExpression parseExpression(Expression expression) throws ThinklabValidationException;
 }
