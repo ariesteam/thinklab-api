@@ -102,4 +102,5 @@ public interface IResolver {
 	 */
 	public abstract PropertyObject resolveExternalProperty(String id,
 			org.integratedmodelling.lang.model.Namespace namespace, int line) throws ThinklabException;
+	
 }

@@ -18,5 +18,10 @@ public class Metadata extends ModelObject {
 	public Object getValue(String key) {
 		return data.get(key);
 	}
+
+	@Override
+	public String getQualifiedName() {
+		return "";
+	}
 	
 }

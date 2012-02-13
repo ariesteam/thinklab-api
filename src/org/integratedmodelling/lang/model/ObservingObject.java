@@ -16,7 +16,7 @@ public abstract class ObservingObject extends ModelObject {
 	
 	ArrayList<Triple<Model, String, Boolean>> _dependencies = 
 			new ArrayList<Triple<Model,String, Boolean>>();
-
+	
 	ArrayList<IList> observables = new ArrayList<IList>();
 
 	public void addObservable(IList instance) {
@@ -37,4 +37,11 @@ public abstract class ObservingObject extends ModelObject {
 	protected void addDependency(Model cmodel, String formalName, boolean required) {
 		_dependencies.add(new Triple<Model, String, Boolean>(cmodel, formalName, required));
 	}
+	
+
+	@Override
+	public String getQualifiedName() {
+		return getNamespace().getId() + "/" + getId();
+	}
+
 }

@@ -1,6 +1,7 @@
 package org.integratedmodelling.lang.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.integratedmodelling.collections.Pair;
 
@@ -30,6 +31,15 @@ public class Model extends ObservingObject {
 	 */
 	public void addContextModel(Model cmodel, String formalName, boolean required) {
 		addDependency(cmodel, formalName, required);
+	}
+
+	/**
+	 * Return all observers with their conditionals
+	 * 
+	 * @return
+	 */
+	public List<Pair<Observer, Expression>> getObservers() {
+		return _observers;
 	}
 
 

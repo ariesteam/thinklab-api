@@ -1,9 +1,28 @@
 package org.integratedmodelling.lang.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+
+import org.integratedmodelling.collections.Pair;
 
 public class Observer extends ObservingObject {
 
+	ArrayList<Pair<Observer, Expression>> _mediated = 
+			new ArrayList<Pair<Observer,Expression>>();
+	
+	/**
+	 * Add one mediated observer with an optional conditional expression to contextualize the choice of
+	 * mediated to the dependencies.
+	 * 
+	 * @param observer
+	 * @param expression
+	 */
+	public void addMediated(Observer observer, Expression expression) {
+		_mediated.add(new Pair<Observer, Expression>(observer, expression));
+	}
+
+
+	
 	/**
 	 * Set the intended accessor (optional) with any parameters needed. If no parameters were
 	 * passed, parms will be null.

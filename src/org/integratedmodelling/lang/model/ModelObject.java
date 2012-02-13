@@ -2,7 +2,7 @@ package org.integratedmodelling.lang.model;
 
 import java.io.PrintStream;
 
-public class ModelObject extends LanguageElement {
+public abstract class ModelObject extends LanguageElement {
 	
 	Metadata metadata;
 
@@ -19,6 +19,8 @@ public class ModelObject extends LanguageElement {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public abstract String getQualifiedName();
 	
 	
 }

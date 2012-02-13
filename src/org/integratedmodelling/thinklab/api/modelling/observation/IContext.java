@@ -53,8 +53,8 @@ public interface IContext extends ITopology<IContext>, IModelObject, IListenable
 
 	/**
 	 * True if all the extent states correspondent to the passed index are
-	 * defined in all dimensions (meaning there is a correspondend topology
-	 * granule). If this is false for any extent, states using this context will
+	 * defined in all dimensions (meaning there is a correspondent topology
+	 * subdivision). If this is false for any extent, states using this context will
 	 * have a no-data value at that index.
 	 * 
 	 * @param index
@@ -71,7 +71,22 @@ public interface IContext extends ITopology<IContext>, IModelObject, IListenable
 	 */
 	public abstract IState getState(IConcept observable);
 
+	/**
+	 * Merge in an observation: if there is already one for that observable, mediate it through
+	 * the extents we have; otherwise add it in.
+	 * 
+	 * @param observation
+	 */
+	public abstract void merge(IObservation observation) throws ThinklabException;
 
+	/**
+	 * Merge all the observations in the passed context
+	 * 
+	 * @param observation
+	 */
+	public abstract void merge(IContext context) throws ThinklabException;
+
+	
 	/**
 	 * @return
 	 * @uml.property name="time"
