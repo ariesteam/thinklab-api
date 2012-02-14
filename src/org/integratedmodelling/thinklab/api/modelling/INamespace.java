@@ -2,6 +2,7 @@ package org.integratedmodelling.thinklab.api.modelling;
 
 import java.util.Collection;
 
+import org.integratedmodelling.thinklab.api.ILanguageObject;
 import org.integratedmodelling.thinklab.api.knowledge.IOntology;
 
 /**
@@ -12,7 +13,7 @@ import org.integratedmodelling.thinklab.api.knowledge.IOntology;
  * 
  * @author  Ferd
  */
-public interface INamespace {
+public interface INamespace extends ILanguageObject {
 
 	public abstract String getNamespace();
 	

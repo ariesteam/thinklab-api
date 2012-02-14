@@ -2,6 +2,7 @@ package org.integratedmodelling.thinklab.api.modelling;
 
 import java.util.Set;
 
+import org.integratedmodelling.thinklab.api.ILanguageObject;
 import org.integratedmodelling.thinklab.api.IMetadataHolder;
 import org.integratedmodelling.thinklab.api.INamespaceQualified;
 import org.integratedmodelling.thinklab.api.knowledge.IInstance;
@@ -14,7 +15,7 @@ import org.integratedmodelling.thinklab.api.knowledge.IInstance;
  * @author Ferdinando
  *
  */
-public interface IModelObject extends INamespaceQualified, IMetadataHolder {
+public interface IModelObject extends ILanguageObject, INamespaceQualified, IMetadataHolder {
 
 	/**
 	 * Return the set of all concepts observed in this model object

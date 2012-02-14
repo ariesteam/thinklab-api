@@ -190,5 +190,5 @@ public class Namespace extends LanguageElement {
 			}
 		}
 	}
-	
+		
 }

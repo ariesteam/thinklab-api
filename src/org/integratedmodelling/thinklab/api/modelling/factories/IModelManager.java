@@ -89,8 +89,9 @@ public interface IModelManager {
 	 * @return the namespace defined
 	 * @throws ThinklabIOException 
 	 */
-	public abstract INamespace loadFile(final String resourceId, IProject project)
+	public abstract INamespace loadFile(final String resourceId, final IProject project)
 			throws ThinklabException;
+
 	
 	/**
 	 * Load all model objects defined in the project's source directories, 
