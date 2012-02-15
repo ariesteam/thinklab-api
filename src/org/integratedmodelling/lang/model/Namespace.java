@@ -84,7 +84,8 @@ public class Namespace extends LanguageElement {
 	
 	/**
 	 * Model objects get in the model object array unless they're concepts or properties defined
-	 * by inference. In that case they end up in the knowledge array.
+	 * by inference. In that case they end up in the knowledge array  but only when the namespace
+	 * comes from a model resource.
 	 * 
 	 * @param mo
 	 */
@@ -94,7 +95,9 @@ public class Namespace extends LanguageElement {
 			_names.add(mo.getId());
 		}
 		
-		if ((mo instanceof ConceptObject || mo instanceof PropertyObject) && 
+		if ( (sourceFile != null && 
+				(sourceFile.toString().endsWith(".tql") || sourceFile.toString().endsWith(".clj") )) &&				
+				(mo instanceof ConceptObject || mo instanceof PropertyObject) && 
 				mo.firstLineNumber == 0 && mo.lastLineNumber == 0) {
 			_knowledge.add(mo);
 		} else {
