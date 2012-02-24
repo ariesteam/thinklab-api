@@ -63,8 +63,9 @@ public interface IResolver {
 	 * model objects declared in it and the axioms collected from them. 
 	 * 
 	 * @param namespace
+	 * @throws ThinklabException 
 	 */
-	public abstract void onNamespaceDefined(Namespace namespace);
+	public abstract void onNamespaceDefined(Namespace namespace) throws ThinklabException;
 
 	/**
 	 * Ensure that the namespace declaration conforms with the resource it comes from. Only called when the 

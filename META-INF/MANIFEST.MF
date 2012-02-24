@@ -32,7 +32,6 @@ Export-Package: org.integratedmodelling.collections,
    org.integratedmodelling.thinklab.api.knowledge,
    org.integratedmodelling.thinklab.api",
  org.integratedmodelling.thinklab.api.modelling.classification;uses:="org.integratedmodelling.thinklab.api.lang,org.integratedmodelling.thinklab.api.knowledge",
- org.integratedmodelling.thinklab.api.modelling.compiler;uses:="org.integratedmodelling.thinklab.api.modelling.observation",
  org.integratedmodelling.thinklab.api.modelling.factories;
   uses:="org.integratedmodelling.thinklab.api.knowledge.storage,
    org.integratedmodelling.thinklab.api.modelling.units,
