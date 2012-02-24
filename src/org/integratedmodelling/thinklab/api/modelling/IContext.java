@@ -1,11 +1,10 @@
-package org.integratedmodelling.thinklab.api.modelling.observation;
+package org.integratedmodelling.thinklab.api.modelling;
 
 import java.util.Collection;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.listeners.IListenable;
-import org.integratedmodelling.thinklab.api.modelling.IModelObject;
 
 /**
  * A Context represents the observed world during a modelling session. It

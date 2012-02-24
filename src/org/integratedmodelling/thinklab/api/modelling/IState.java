@@ -1,12 +1,13 @@
-package org.integratedmodelling.thinklab.api.modelling.observation;
+package org.integratedmodelling.thinklab.api.modelling;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.exceptions.ThinklabValidationException;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
-import org.integratedmodelling.thinklab.api.modelling.IObserver;
 
 /**
- * A State is an observation resulting from the contextualization of a stateful observation.  It can conceptualize back to the semantic annotation for the observation it represents.  States are the only type of observation that is stored in KBoxes, and have either an external datasource or an inline state. States must always have explicit extents; if a state has no extents, it must be a constant.
+ * A State is a stateful observation that represents its observable in its context using indirect 
+ * information, i.e. "data". 
+ * 
  * @author  Ferdinando
  */
 public interface IState extends IObservation {

@@ -16,5 +16,4 @@ public interface IScenario extends IModelObject {
 
 	public void merge(IScenario scenario);
 	
-
 }

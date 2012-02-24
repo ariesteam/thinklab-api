@@ -1,8 +1,8 @@
-package org.integratedmodelling.thinklab.api.modelling.observation;
+package org.integratedmodelling.thinklab.api.modelling;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 
-public interface IContextTransformingObservation extends ITransformingObservation {
+public interface IContextTransformingAccessor extends ITransformingAccessor {
 
 	/**
 	 * Return the context that this observation will have once transformed in the 

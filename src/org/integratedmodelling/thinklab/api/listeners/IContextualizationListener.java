@@ -1,7 +1,7 @@
 package org.integratedmodelling.thinklab.api.listeners;
 
-import org.integratedmodelling.thinklab.api.modelling.observation.IContext;
-import org.integratedmodelling.thinklab.api.modelling.observation.IObservation;
+import org.integratedmodelling.thinklab.api.modelling.IContext;
+import org.integratedmodelling.thinklab.api.modelling.IObservation;
 
 /**
  * An array of contextualization listeners can be passed to Compiler.contextualize() to be notified

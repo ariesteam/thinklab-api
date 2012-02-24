@@ -1,6 +1,6 @@
 package org.integratedmodelling.thinklab.api.modelling.compiler;
 
-import org.integratedmodelling.thinklab.api.modelling.observation.IContext;
+import org.integratedmodelling.thinklab.api.modelling.IContext;
 
 /**
  * This should be created with an observation chosen between the 

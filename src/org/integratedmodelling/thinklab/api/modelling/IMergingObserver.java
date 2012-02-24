@@ -1,6 +1,5 @@
-package org.integratedmodelling.thinklab.api.modelling.observation;
+package org.integratedmodelling.thinklab.api.modelling;
 
-import org.integratedmodelling.thinklab.api.modelling.IObserver;
 
 /**
  * Indirect observation that is capable of merging the

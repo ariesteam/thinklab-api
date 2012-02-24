@@ -1,5 +1,5 @@
 package org.integratedmodelling.thinklab.api.modelling;
 
-public interface IClassObserver extends IObserver {
+public interface IRankingObserver extends IObserver {
 
 }

@@ -1,5 +1,5 @@
 package org.integratedmodelling.thinklab.api.modelling;
 
-public interface ICategoryObserver extends IObserver {
+public interface IMeasuringObserver extends IObserver {
 
 }

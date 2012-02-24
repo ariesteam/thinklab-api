@@ -30,7 +30,7 @@
  * @license   http://www.gnu.org/licenses/gpl.txt GNU General Public License v3
  * @link      http://www.integratedmodelling.org
  **/
-package org.integratedmodelling.thinklab.api.modelling.observation;
+package org.integratedmodelling.thinklab.api.modelling;
 
 import java.util.Collection;
 
@@ -54,7 +54,7 @@ import org.integratedmodelling.thinklab.api.modelling.units.IUnit;
  * @author Ferdinando Villa
  *
  */
-public abstract interface IExtent extends IState, ITopologicallyComparable<IExtent> {
+public abstract interface IExtent extends IState, ITopology<IExtent> {
 
 	/**
 	 * One of these is set into AggregationParameters to properly return the
@@ -108,21 +108,21 @@ public abstract interface IExtent extends IState, ITopologicallyComparable<IExte
 	 * @param granule 
 	 * @return a new extent with getValueCount() == 1.
 	 */
-	public IExtent getExtent(int granule);
+	public IExtent getExtent(int stateIndex);
 	
 	/**
-	 * True if the i-th granule correspond to a concrete subdivision where
-	 * things can be observed. Determines the status of data or no-data
-	 * for any state defined over this extent.
+	 * True if the i-th state of the topology correspond to a concrete subdivision where
+	 * observations can be made. Determines the status of "data" vs. "no-data"
+	 * for the state of an observation defined over this extent.
 	 * 
 	 * @param granule
 	 * @return whether there is an observable world at the given location.
 	 */
-	public abstract boolean isCovered(int granule);
+	public abstract boolean isCovered(int stateIndex);
 
 	/**
-	 * Return a semantic query that will match observations that are in the passed
-	 * relationship with this extent. 
+	 * Return a semantic query that will match observations that are in the
+	 * relationship with this extent expressed by the passed operator. 
 	 */
 	public abstract IRestriction getConstraint(IOperator operator) throws ThinklabException;
 
@@ -169,27 +169,6 @@ public abstract interface IExtent extends IState, ITopologicallyComparable<IExte
 	 * @return
 	 */
 	public boolean isDiscontinuous() throws ThinklabException;
-
-
-	/**
-	 * Return an extent which represents the intersection of this with the passed
-	 * one. NOTE: it is expected that the intersected extent can be index-remapped to
-	 * a sub-extent of this. Meaning that subdivisions etc. need to be in sync.
-	 * 
-	 * @param myExtent
-	 * @return
-	 */
-	public IExtent intersection(IExtent extent) throws ThinklabException;
-
-	/**
-	 * Return an extent which represents the union of this with the passed
-	 * one. Same note as intersect(): the union extent must be usable together with
-	 * this through an index remap operation.
-	 * 
-	 * @param myExtent
-	 * @return
-	 */
-	public IExtent union(IExtent extent) throws ThinklabException;
 
 	/**
 	 * Return an extent that is capable of representing the passed one 

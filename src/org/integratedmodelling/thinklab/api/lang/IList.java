@@ -2,6 +2,11 @@ package org.integratedmodelling.thinklab.api.lang;
 
 import java.util.List;
 
+/**
+ * 
+ * @author Ferd
+ *
+ */
 public interface IList {
 
 	/**

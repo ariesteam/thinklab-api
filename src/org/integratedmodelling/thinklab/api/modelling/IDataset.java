@@ -1,16 +1,17 @@
 package org.integratedmodelling.thinklab.api.modelling;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.thinklab.api.modelling.observation.IContext;
 
 /**
  * A dataset is a persistent IContext. Should be capable of reconstructing the context it came from.
- * @author   Ferdinando Villa
+ * @author Ferdinando Villa
  */
 public interface IDataset {
 
 	/**
-	 * Set the context for the dataset. If there is one, ensure compatibility of extents and merge states from it.
+	 * Set the context for the dataset. This is assumed to be an initialization operation, done once and
+	 * with destructive effects if done more than once.
+	 * 
 	 * @param context
 	 * @throws ThinklabException
 	 * @uml.property  name="context"
@@ -29,11 +30,12 @@ public interface IDataset {
 
 	/**
 	 * Ensure we can get GC's without losing data. We should know where. Return a 
-	 * location we can be restored from.
+	 * location URI it can be restored from. Should be capable of taking null for a
+	 * location, creating its own storage in a default area.
 	 * 
 	 * @throws ThinklabException
 	 */
-	public abstract String persist() throws ThinklabException;
+	public abstract String persist(String location) throws ThinklabException;
 	
 	/**
 	 * Read the dataset from assigned storage.
