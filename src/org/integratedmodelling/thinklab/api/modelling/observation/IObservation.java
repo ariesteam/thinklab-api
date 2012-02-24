@@ -2,11 +2,14 @@ package org.integratedmodelling.thinklab.api.modelling.observation;
 
 import java.util.Collection;
 
+import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.IMetadataHolder;
-import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.IInstance;
 
 /**
+ * By itself this represents a direct observation (identification), which doesn't use a state to represent its
+ * observable. As such, it does not need an observer either. Observations that have a datasource are instances of IState.
+ * 
  * @author  Ferd
  */
 public interface IObservation extends IMetadataHolder {
@@ -20,15 +23,6 @@ public interface IObservation extends IMetadataHolder {
 	public abstract IInstance getObservable();
 
 	/**
-	 * Get the class of the main observable. If this observation is a mediator and doesn't have an observable, scan the mediation chain until one is found.
-	 * @return
-	 * @model
-	 * @uml.property  name="observableClass"
-	 * @uml.associationEnd  
-	 */
-	public abstract IConcept getObservableClass();
-
-	/**
 	 * Return a collection of all observations on which this one depends except
 	 * the extents.
 	 * 
@@ -36,12 +30,19 @@ public interface IObservation extends IMetadataHolder {
 	 */
 	public abstract Collection<IObservation> getDependencies();
 
+	/**
+	 * Return another observation contextualized to the passed context, or throw an
+	 * exception if that's not possible. Recontextualization is the
+	 * core of thinklab and is done based on extent-specific algorithms.
+	 * 
+	 * @param context
+	 * @return
+	 * @throws ThinklabException
+	 */
+	public abstract IObservation contextualize(IContext context) throws ThinklabException;
 
 	/**
-	 * Return a collection of all extent observation that this one depends on.
-	 * 
-	 * @return
+	 * Observations are always part of a context, and must be able to return the context they are part of.
 	 */
-	public abstract Collection<IExtent> getExtents();
-
+	public abstract IContext getContext();
 }

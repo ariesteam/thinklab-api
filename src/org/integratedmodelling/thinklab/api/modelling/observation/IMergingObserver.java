@@ -1,5 +1,7 @@
 package org.integratedmodelling.thinklab.api.modelling.observation;
 
+import org.integratedmodelling.thinklab.api.modelling.IObserver;
+
 /**
  * Indirect observation that is capable of merging the
  * states of multiple contingent observation. 
@@ -7,7 +9,7 @@ package org.integratedmodelling.thinklab.api.modelling.observation;
  * @author ferdinando.villa
  *
  */
-public interface IMergingObservation extends IIndirectObservation {
+public interface IMergingObserver extends IObserver {
 
 	/**
 	 * Return a collection of all observations that may contribute to define the 

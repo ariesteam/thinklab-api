@@ -3,15 +3,21 @@ package org.integratedmodelling.thinklab.api.modelling.observation;
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.exceptions.ThinklabValidationException;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
-import org.integratedmodelling.thinklab.api.knowledge.IConceptualizable;
-import org.integratedmodelling.thinklab.api.knowledge.IInstanceImplementation;
+import org.integratedmodelling.thinklab.api.modelling.IObserver;
 
 /**
  * A State is an observation resulting from the contextualization of a stateful observation.  It can conceptualize back to the semantic annotation for the observation it represents.  States are the only type of observation that is stored in KBoxes, and have either an external datasource or an inline state. States must always have explicit extents; if a state has no extents, it must be a constant.
  * @author  Ferdinando
  */
-public interface IState extends IIndirectObservation, IConceptualizable, IInstanceImplementation {
+public interface IState extends IObservation {
 
+	/**
+	 * Observations that have a datasource need to be able to produce the observer that created it.
+	 * 
+	 * @return
+	 */
+	public IObserver getObserver();
+	
 	/**
 	 * Return the unmodified object at given offset. Most times it will be a duplicate of
 	 * super.getValue(offset, parameters) but should not make any modification. If data are 
@@ -57,12 +63,6 @@ public interface IState extends IIndirectObservation, IConceptualizable, IInstan
 	 */
 	public IConcept getObservableClass();
 
-	/**
-	 * States exist within a context, and must be able to return the context they are part of.
-	 * @uml.property  name="observationContext"
-	 * @uml.associationEnd  
-	 */
-	public abstract IContext getObservationContext();
 
 	/**
 	 * Return a state with the given context dimension collapsed to one, and

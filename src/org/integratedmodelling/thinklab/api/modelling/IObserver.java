@@ -5,6 +5,7 @@ import java.util.Collection;
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.IInstance;
 import org.integratedmodelling.thinklab.api.knowledge.storage.IKBox;
+import org.integratedmodelling.thinklab.api.modelling.observation.IAccessor;
 import org.integratedmodelling.thinklab.api.modelling.observation.IContext;
 import org.integratedmodelling.thinklab.api.modelling.observation.IObservationList;
 import org.integratedmodelling.thinklab.api.runtime.ISession;
@@ -13,6 +14,12 @@ import org.integratedmodelling.thinklab.api.runtime.ISession;
  * A model producing observations of a given type (through its subclasses). 
  */
 public abstract interface IObserver extends IModelObject {
+	
+	/**
+	 * Return an appropriate accessor to use during contextualization to obtain data in this context.
+	 * @return
+	 */
+	public abstract IAccessor getAccessor(IContext context);
 	
 	/**
 	 * Return the observable

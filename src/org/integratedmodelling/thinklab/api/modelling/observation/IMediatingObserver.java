@@ -1,11 +1,12 @@
 package org.integratedmodelling.thinklab.api.modelling.observation;
 
 import org.integratedmodelling.exceptions.ThinklabException;
+import org.integratedmodelling.thinklab.api.modelling.IObserver;
 
 /**
  * @author  Ferd
  */
-public interface IMediatingObservation extends IIndirectObservation {
+public interface IMediatingObserver extends IObserver {
 
 	/**
 	 * If this observation is acting as a mediator for another, return it. If it's a mediator, the datasource should be ignored and the observable may be null.
@@ -22,7 +23,7 @@ public interface IMediatingObservation extends IIndirectObservation {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public abstract IAccessor getMediator(IIndirectObservation observation, IContext context)
+	public abstract IAccessor getMediator(IObserver observer, IContext context)
 		throws ThinklabException;
 	
 }
