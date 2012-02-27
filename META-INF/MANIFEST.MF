@@ -11,6 +11,7 @@ Export-Package: org.integratedmodelling.collections,
  org.integratedmodelling.thinklab.api;uses:="org.integratedmodelling.thinklab.api.modelling.metadata",
  org.integratedmodelling.thinklab.api.knowledge;uses:="org.integratedmodelling.thinklab.api.knowledge.query,org.integratedmodelling.thinklab.api.lang",
  org.integratedmodelling.thinklab.api.knowledge.factories;uses:="org.integratedmodelling.thinklab.api.knowledge.storage,org.integratedmodelling.thinklab.api.knowledge",
+ org.integratedmodelling.thinklab.api.knowledge.kbox,
  org.integratedmodelling.thinklab.api.knowledge.query;
   uses:="org.integratedmodelling.thinklab.api.lang,
    org.integratedmodelling.lang,

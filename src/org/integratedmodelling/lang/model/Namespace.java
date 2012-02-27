@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
+import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.IAxiom;
+import org.integratedmodelling.thinklab.api.knowledge.IConceptualizable;
 import org.integratedmodelling.thinklab.api.lang.IList;
 import org.integratedmodelling.thinklab.api.project.IProject;
 
@@ -17,7 +19,7 @@ import org.integratedmodelling.thinklab.api.project.IProject;
  * @author Ferd
  *
  */
-public class Namespace extends LanguageElement {
+public class Namespace extends LanguageElement implements IConceptualizable {
 
 	public ArrayList<IAxiom> axioms = new ArrayList<IAxiom>();
 	public HashSet<IAxiom> axiomCatalog = new HashSet<IAxiom>();
@@ -192,6 +194,18 @@ public class Namespace extends LanguageElement {
 				}
 			}
 		}
+	}
+	
+	
+	@Override
+	public IList conceptualize() throws ThinklabException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void define(IList conceptualization) throws ThinklabException {
+		// TODO Auto-generated method stub
+		
 	}
 		
 }

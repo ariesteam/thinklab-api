@@ -56,4 +56,13 @@ public interface IConceptualizable {
 	 * @throws ThinklabException
 	 */
 	IList conceptualize() throws ThinklabException;
+	
+	/**
+	 * A IConceptualizable must have an empty constructor and be capable of fully
+	 * defining itself through a concept list of the kind returned by conceptualize().
+	 * 
+	 * @param conceptualization
+	 * @throws ThinklabException
+	 */
+	void define(IList conceptualization) throws ThinklabException;
 }

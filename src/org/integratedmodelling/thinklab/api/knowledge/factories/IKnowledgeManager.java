@@ -5,10 +5,36 @@ import org.integratedmodelling.exceptions.ThinklabValidationException;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.IProperty;
 import org.integratedmodelling.thinklab.api.knowledge.IValue;
-import org.integratedmodelling.thinklab.api.knowledge.storage.IKBox;
-import org.integratedmodelling.thinklab.api.lang.IList;
+import org.integratedmodelling.thinklab.api.knowledge.kbox.IKbox;
 
 public interface IKnowledgeManager {
+	
+	/**
+	 * Create a kbox with the named uri, using the implementation assigned to the
+	 * URI protocol.
+	 * 
+	 * @param uri
+	 * @return
+	 * @throws ThinklabException
+	 */
+	public abstract IKbox createKbox(String uri) throws ThinklabException;
+	
+	/**
+	 * Drop the kbox indicated by the uri.
+	 * 
+	 * @param uri
+	 * @throws ThinklabException
+	 */
+	public abstract void dropKbox(String uri) throws ThinklabException;
+	
+	/**
+	 * Get the kbox with the named URI, creating it if it does not exist.
+	 * @param uri
+	 * @return
+	 * @throws ThinklabException
+	 */
+	public abstract IKbox requireKbox(String uri) throws ThinklabException;
+	
 	
 	/**
 	 * 
@@ -60,19 +86,4 @@ public interface IKnowledgeManager {
 	 */
 	public abstract IValue validateLiteral(IConcept c, String literal) throws ThinklabException;
 	
-	/**
-	 * The default kbox should never be null; it should merge all the kboxes configured to 
-	 * load at startup.
-	 * 
-	 * @return
-	 */
-	public abstract IKBox getDefaultKbox();
-	
-	/**
-	 * Load knowledge from online lists. Ontologies and many other resources can be serialized
-	 * to lists.
-	 * 
-	 * @param list
-	 */
-	public abstract void loadKnowledge(IList list);
 }
