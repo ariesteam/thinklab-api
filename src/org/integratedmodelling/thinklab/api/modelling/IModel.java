@@ -2,6 +2,7 @@ package org.integratedmodelling.thinklab.api.modelling;
 
 import org.integratedmodelling.collections.Pair;
 import org.integratedmodelling.thinklab.api.knowledge.IExpression;
+import org.integratedmodelling.thinklab.api.knowledge.IInstance;
 
 
 /**
@@ -9,6 +10,12 @@ import org.integratedmodelling.thinklab.api.knowledge.IExpression;
  */
 public interface IModel extends IObserver {
 	
-	public Pair<IObserver, IExpression> getObservers();
+	/**
+	 * Return the observable. Never null. 
+	 * @return
+	 */
+	public abstract IInstance getObservable();
+	
+
 
 }

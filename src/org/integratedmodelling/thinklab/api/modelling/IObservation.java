@@ -2,8 +2,10 @@ package org.integratedmodelling.thinklab.api.modelling;
 
 import java.util.Collection;
 
+import org.integratedmodelling.collections.Pair;
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.IMetadataHolder;
+import org.integratedmodelling.thinklab.api.knowledge.IExpression;
 import org.integratedmodelling.thinklab.api.knowledge.IInstance;
 
 /**
@@ -23,17 +25,22 @@ import org.integratedmodelling.thinklab.api.knowledge.IInstance;
 public interface IObservation extends IMetadataHolder {
 
 	/**
-	 * Return the observable instance. Can't be null.
-	 * 
-	 * @return   the observable for this observation
-	 * @uml.property  name="observable"
-	 * @uml.associationEnd  
+	 * Return the observable. Never null. 
+	 * @return
 	 */
 	public abstract IInstance getObservable();
+	
+	/**
+	 * Return the observer(s) that made this observation and provides the
+	 * full observation semantics for it.
+	 * @return
+	 */
+	public Pair<IObserver, IExpression> getObservers();
 
 	/**
 	 * Return a collection of all observations on which this one depends except
-	 * the extents.
+	 * the extents. These will be a subset of those in the context and this method
+	 * is just convenience to quickly extract the direct dependencies from it.
 	 * 
 	 * @return
 	 */

@@ -33,6 +33,8 @@
  **/
 package org.integratedmodelling.thinklab.api.knowledge.query;
 
+import java.util.List;
+
 import org.integratedmodelling.exceptions.ThinklabException;
 
 
@@ -44,42 +46,9 @@ import org.integratedmodelling.exceptions.ThinklabException;
 public interface IQueriable {
 	
 	/**
-	 * Return an IQuery that this kbox will like by parsing the given string. Most
-	 * queriables have a preferred query type.
-	 * 
-	 * @param toEval
-	 * @return
-	 */
-	public abstract IQuery parseQuery(String toEval) throws ThinklabException;
-	
-	/**
 	 * The simplest query operation just returns all results that match the query, with no
 	 * metadata schema (meaning all metadata are retrieved) and no query boundaries.
 	 */
-	public abstract IQueryResult query(IQuery q) throws ThinklabException;
+	public abstract List<Object> query(IQuery q) throws ThinklabException;
 	
-	/**
-	 * Submit the query and return results with specified offsets and max number of results. All
-	 * metadata will be included in the results.
-	 * 
-	 * @param q
-	 * @param offset
-	 * @param maxResults
-	 * @return
-	 * @throws ThinklabException
-	 */
-	public abstract IQueryResult query(IQuery q, int offset, int maxResults) throws ThinklabException;
-
-	/**
-	 * Submit the query with specified metadata and return results.
-	 * 
-	 * @param q
-	 * @param metadata
-	 * @param offset
-	 * @param maxResults
-	 * @return
-	 * @throws ThinklabException
-	 */
-	public abstract IQueryResult query(IQuery q, String[] metadata, int offset, int maxResults) throws ThinklabException;
-
 }

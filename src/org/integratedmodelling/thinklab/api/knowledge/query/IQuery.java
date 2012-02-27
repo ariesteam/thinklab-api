@@ -49,14 +49,6 @@ import org.integratedmodelling.thinklab.api.lang.IParseable;
 public interface IQuery extends IParseable {
 	
 	/**
-	 * Queries should always be capable of returning a textual specification that can later
-	 * be parsed back into a query of the same type.
-	 * 
-	 * @return
-	 */
-	public abstract String asText();
-	
-	/**
 	 * Return true if the query is empty, meaning that it will select everything that's queriable. 
 	 * 
 	 * @return

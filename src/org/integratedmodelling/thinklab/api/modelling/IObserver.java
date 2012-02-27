@@ -3,7 +3,6 @@ package org.integratedmodelling.thinklab.api.modelling;
 import java.util.Collection;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.thinklab.api.knowledge.IInstance;
 import org.integratedmodelling.thinklab.api.knowledge.storage.IKBox;
 import org.integratedmodelling.thinklab.api.runtime.ISession;
 
@@ -13,16 +12,13 @@ import org.integratedmodelling.thinklab.api.runtime.ISession;
 public abstract interface IObserver extends IModelObject {
 	
 	/**
-	 * Return an appropriate accessor to use during contextualization to obtain data in this context.
+	 * Return an appropriate accessor chain to use during contextualization to obtain data in this context. Each
+	 * accessor will use whatever is left on the stack by the previous one.
+	 * 
 	 * @return
 	 */
-	public abstract IAccessor getAccessor(IContext context);
-	
-	/**
-	 * Return the observable. Never null. 
-	 * @return
-	 */
-	public abstract IInstance getObservable();
+	public abstract Collection<IAccessor> getAccessors(IContext context);
+
 
 	/**
 	 * The observe() operation is essentially a semantic query for an observation of an observable in a 

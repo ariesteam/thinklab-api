@@ -39,7 +39,6 @@ import java.util.Collection;
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.exceptions.ThinklabValidationException;
 import org.integratedmodelling.thinklab.api.knowledge.query.IConformance;
-import org.integratedmodelling.thinklab.api.lang.IList;
 import org.integratedmodelling.thinklab.api.runtime.ISession;
 
 /**
@@ -48,7 +47,7 @@ import org.integratedmodelling.thinklab.api.runtime.ISession;
  * @author  Ioannis N. Athanasiadis
  * @see  ISession
  */
-public interface IInstance extends IKnowledge {
+public interface IInstance extends IKnowledge, IConceptualizable {
 	
 	/**
 	 * The basic function to extract the value of a property. Could have a better name but
@@ -105,19 +104,6 @@ public interface IInstance extends IKnowledge {
 	 */
 	public abstract IInstanceImplementation getImplementation()
 			throws ThinklabException;
-
-	/**
-	 * return the serialization of all relationships and concepts as a list,
-	 * which can be validated back into a concept. Related instances are also
-	 * serialized. Multiple occurrences of the same related instance are handled
-	 * through the reference mechanism discussed in TODO.
-	 * 
-	 * @param oref
-	 *            a string to use as the instance's ID. If null is passed, the
-	 *            instance local name is used. If you want no ID, pass an empty string.
-	 * @throws ThinklabException
-	 */
-	public abstract IList asList(String oref) throws ThinklabException;
 
 
 	/**
