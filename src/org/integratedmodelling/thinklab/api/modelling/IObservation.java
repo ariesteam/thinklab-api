@@ -61,8 +61,11 @@ public interface IObservation extends IMetadataHolder {
 	public abstract IObservation contextualize(IContext context) throws ThinklabException;
 
 	/**
-	 * Observations are always part of a context, and must be able to return the context they are part of. If the
-	 * observation is "absolute", e.g. pi or some other constant, and has no dependencies or extents, this 
+	 * Observations are always part of a context, and must be able to return the context they are part of. The
+	 * context will contain states for all observations in the structure that this represents.
+	 * 
+	 * If the observation is a rare case of an "absolute" observation that doesn't depend on anything, e.g. 
+	 * pi or some other constant, and has no dependencies or extents, this 
 	 * function should return an empty context and not null.
 	 */
 	public abstract IContext getContext();

@@ -11,7 +11,7 @@ import org.integratedmodelling.thinklab.api.knowledge.IConceptualizable;
  * @author Ferd
  *
  */
-public interface IClassification extends IConceptualizable {
+public interface IClassification  {
 
 	/**
 	 * @author   Ferd
