@@ -64,7 +64,6 @@ public interface IState extends IObservation {
 	 */
 	public IConcept getObservableClass();
 
-
 	/**
 	 * Return a state with the given context dimension collapsed to one, and
 	 * the data appropriately aggregated. Return self if the dimension is not

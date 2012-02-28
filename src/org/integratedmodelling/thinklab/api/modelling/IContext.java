@@ -88,15 +88,11 @@ public interface IContext extends ITopology<IContext>, IModelObject, IListenable
 	
 	/**
 	 * @return
-	 * @uml.property name="time"
-	 * @uml.associationEnd
 	 */
 	public IExtent getTime();
 
 	/**
 	 * @return
-	 * @uml.property name="space"
-	 * @uml.associationEnd
 	 */
 	public IExtent getSpace();
 
