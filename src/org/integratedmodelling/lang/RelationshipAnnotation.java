@@ -31,20 +31,23 @@
  * @license   http://www.gnu.org/licenses/gpl.txt GNU General Public License v3
  * @link      http://www.integratedmodelling.org
  **/
-package org.integratedmodelling.list;
+package org.integratedmodelling.lang;
 
+import org.integratedmodelling.exceptions.ThinklabException;
+import org.integratedmodelling.exceptions.ThinklabRuntimeException;
+import org.integratedmodelling.list.PolyList;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
-import org.integratedmodelling.thinklab.api.knowledge.IKnowledge;
 import org.integratedmodelling.thinklab.api.knowledge.IProperty;
+import org.integratedmodelling.thinklab.api.knowledge.ISemanticLiteral;
 import org.integratedmodelling.thinklab.api.knowledge.factories.IKnowledgeManager;
 
-public class RelationshipList {
+public class RelationshipAnnotation {
 
 	IProperty property;
-	ValueList value;
+	ISemanticLiteral value;
 	IKnowledgeManager _km;
 	
-	public RelationshipList(PolyList polylist, IKnowledgeManager km)  {
+	public RelationshipAnnotation(PolyList polylist, IKnowledgeManager km)  {
 		
 		_km = km;
 		Object o = polylist.first();
@@ -53,18 +56,21 @@ public class RelationshipList {
 		else
 			property = _km.getProperty(o.toString());
 		
-		value = new ValueList(polylist.second(), _km);
+		try {
+			value = _km.annotateLiteral(polylist.second());
+		} catch (ThinklabException e) {
+			throw new ThinklabRuntimeException(e);
+		}
 		
 	}
 
-	public IKnowledge getProperty() {
+	public IProperty getProperty() {
 		return property;
 	}
 
 	public boolean isObject() {
 		return value.isObject();
 	}
-	
 
 	public boolean isLiteral() {
 		/*
@@ -73,12 +79,12 @@ public class RelationshipList {
 		return !(value.isObject());
 	}
 
-	public ValueList getValue() {
+	public ISemanticLiteral getValue() {
 		return value;
 	}
 
 	public boolean isClassification() {
-		return value.isConcept();
+		return value.isClass();
 	}
 	
 	public IConcept getConcept() {

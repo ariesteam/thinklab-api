@@ -1,7 +1,7 @@
 package org.integratedmodelling.thinklab.api.lang;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.thinklab.api.knowledge.IValue;
+import org.integratedmodelling.thinklab.api.knowledge.ISemanticLiteral;
 
 /**
  * Used in restrictions and capable of being rewritten in queries. A suitable
@@ -33,7 +33,7 @@ public interface IOperator  {
 	public static final String NOT = "not";
 	public static final String XOR = "xor";
 	
-	public abstract IValue eval(Object ... arg) throws ThinklabException;
+	public abstract ISemanticLiteral eval(Object ... arg) throws ThinklabException;
 
 	public abstract String getName();
 	

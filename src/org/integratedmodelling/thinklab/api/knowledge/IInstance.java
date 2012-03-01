@@ -59,7 +59,7 @@ public interface IInstance extends IKnowledge, IConceptualizable {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public abstract IValue get(String property) throws ThinklabException;
+	public abstract ISemanticLiteral get(String property) throws ThinklabException;
 
 	/**
 	 * Return a collection of all relationships of this to classes, objects, or literals.

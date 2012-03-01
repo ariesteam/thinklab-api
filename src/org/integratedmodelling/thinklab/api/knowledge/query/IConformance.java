@@ -34,7 +34,8 @@
 package org.integratedmodelling.thinklab.api.knowledge.query;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.thinklab.api.knowledge.IInstance;
+import org.integratedmodelling.lang.SemanticAnnotation;
+import org.integratedmodelling.thinklab.api.knowledge.storage.IKBox;
 
 /**
  * Conformance objects are "policies" for comparing
@@ -64,6 +65,6 @@ public interface IConformance {
 	 * 
 	 * @return
 	 */
-	public abstract IQuery getQuery(IInstance instance) throws ThinklabException;
+	public abstract IQuery getQuery(SemanticAnnotation instance) throws ThinklabException;
 
 }

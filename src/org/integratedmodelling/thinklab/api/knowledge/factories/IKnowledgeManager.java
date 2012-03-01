@@ -2,9 +2,10 @@ package org.integratedmodelling.thinklab.api.knowledge.factories;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.exceptions.ThinklabValidationException;
+import org.integratedmodelling.lang.SemanticAnnotation;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.IProperty;
-import org.integratedmodelling.thinklab.api.knowledge.IValue;
+import org.integratedmodelling.thinklab.api.knowledge.ISemanticLiteral;
 import org.integratedmodelling.thinklab.api.knowledge.kbox.IKbox;
 
 public interface IKnowledgeManager {
@@ -84,6 +85,40 @@ public interface IKnowledgeManager {
 	 * @throws ThinklabValidationException
 	 * @throws ThinklabException 
 	 */
-	public abstract IValue validateLiteral(IConcept c, String literal) throws ThinklabException;
+	public abstract ISemanticLiteral validateLiteral(IConcept c, String literal) throws ThinklabException;
 	
+	/**
+	 * Return an annotated IValue for the passed Java object, or throw an exception if no
+	 * annotation is possible.
+	 * 
+	 * @param object
+	 * @return
+	 * @throws ThinklabException
+	 */
+	public abstract ISemanticLiteral annotateLiteral(Object object) throws ThinklabException;
+
+	/**
+	 * Create a semantic annotation for the passed object. In order for that to be
+	 * done, the object can be:
+	 * 
+	 * 1. an IInstance
+	 * 2. an InstanceList
+	 * 3. an IConceptualizable
+	 * 4. any object for which a SemanticAdapter has been registered.
+	 * @param i
+	 * @return
+	 * @throws ThinklabException
+	 */
+	public abstract SemanticAnnotation conceptualizeObject(Object i) throws ThinklabException;
+	
+	/**
+	 * Reifies an annotation by producing the object it describes, if any. In order for an
+	 * object to be created, the annotation concept should be registered in a SemanticAdapter
+	 * or an InstanceImplementation.
+	 * 
+	 * @param a
+	 * @return
+	 * @throws ThinklabException
+	 */
+	public Object reifyAnnotation(SemanticAnnotation a) throws ThinklabException;
 }

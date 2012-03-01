@@ -33,11 +33,13 @@
  **/
 package org.integratedmodelling.thinklab.api.knowledge;
 
+import org.integratedmodelling.lang.SemanticAnnotation;
+
 
 /**
  * @author  Ferd
  */
-public interface IValue {
+public interface ISemanticLiteral {
 
 	public abstract boolean isNumber();
 
@@ -59,8 +61,6 @@ public interface IValue {
 	/**
 	 * Return the concept expressed in the value.
 	 * @return
-	 * @uml.property  name="concept"
-	 * @uml.associationEnd  
 	 */
 	public abstract IConcept getConcept();
 	
@@ -70,7 +70,7 @@ public interface IValue {
 	 */
 	public abstract Object demote();
 
-	public abstract IInstance asObject();
+	public abstract SemanticAnnotation asObject();
 
 	public abstract boolean asBoolean();
 

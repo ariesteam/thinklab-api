@@ -26,7 +26,7 @@ public interface IKbox {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public abstract int store(Object o) throws ThinklabException;
+	public abstract long store(Object o) throws ThinklabException;
 	
 	/**
 	 * Remove object identified by handle
@@ -34,7 +34,7 @@ public interface IKbox {
 	 * @param handle
 	 * @throws ThinklabException
 	 */
-	public abstract void remove(int handle) throws ThinklabException;
+	public abstract void remove(long handle) throws ThinklabException;
 	
 	/**
 	 * Remove everything in kbox.
@@ -51,4 +51,11 @@ public interface IKbox {
 	 * @throws ThinklabException
 	 */
 	public List<Object> query(IQuery query) throws ThinklabException;
+
+	/**
+	 * Kboxes must be able to identify themselves.
+	 * 
+	 * @return
+	 */
+	public abstract String getUri();
 }

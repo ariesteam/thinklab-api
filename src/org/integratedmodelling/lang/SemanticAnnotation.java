@@ -31,34 +31,39 @@
  * @license   http://www.gnu.org/licenses/gpl.txt GNU General Public License v3
  * @link      http://www.integratedmodelling.org
  **/
-package org.integratedmodelling.list;
+package org.integratedmodelling.lang;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 import org.integratedmodelling.exceptions.ThinklabException;
+import org.integratedmodelling.list.PolyList;
+import org.integratedmodelling.thinklab.api.annotations.SemanticAdapter;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.IInstanceImplementation;
-import org.integratedmodelling.thinklab.api.knowledge.IValue;
+import org.integratedmodelling.thinklab.api.knowledge.ISemanticAdapter;
+import org.integratedmodelling.thinklab.api.knowledge.ISemanticLiteral;
 import org.integratedmodelling.thinklab.api.knowledge.factories.IKnowledgeManager;
 import org.integratedmodelling.thinklab.api.lang.IList;
 
 /**
  * An object that wraps an instance definition list and provides access methods and 
- * associated object that mimic the IInstance methods. Allows inspecting an instance
- * structure from its list representation without having to create the list. OPAL 
- * provides a styled translator to XML.
+ * associated object that mimic the IInstance methods. Allows working with semantics
+ * without having to create an actual IInstance. The KnowledgeManager has a method to
+ * provide semantic annotations for arbitrary objects, supported by appropriate 
+ * implementations.
  * 
  * @author Ferdinando Villa
- *
+ * @see IConceptualizable, {@link ISemanticAdapter}, {@link SemanticAdapter}
  */
-public class InstanceList {
+public class SemanticAnnotation {
 
 	Object[] array = null;
 	IKnowledgeManager _km = null;
+	int _rcount = -1;
 	
-	public InstanceList(IList list, IKnowledgeManager km) {
-		array = list.array();
+	public SemanticAnnotation(IList instanceList, IKnowledgeManager km) {
+		array = instanceList.array();
 		_km = km;
 	}
 
@@ -69,7 +74,19 @@ public class InstanceList {
 		
 		return ss.length == 2 ? ss[1] : "";
 	}
+	
+	public int getRelationshipsCount() {
+		if (_rcount < 0) {
+			_rcount = getRelationships().size();
+		}
+		return _rcount;
+	}
 
+	public int getRelationshipsCount(String property) throws ThinklabException {
+		return getRelationships(property).size();
+	}
+
+	
 	public IList asList() {
 		return PolyList.fromArray(array);
 	}
@@ -129,9 +146,9 @@ public class InstanceList {
 		return ret;
 	}
 
-	public Collection<RelationshipList> getRelationships() {
+	public Collection<RelationshipAnnotation> getRelationships() {
 		
-		ArrayList<RelationshipList> ret = new ArrayList<RelationshipList>();
+		ArrayList<RelationshipAnnotation> ret = new ArrayList<RelationshipAnnotation>();
 		
 		for (int i = 1; i < array.length; i++) {
 			if (array[i] instanceof IList) {
@@ -139,7 +156,7 @@ public class InstanceList {
 				
 				if (!(s.equals("rdsf:label") || 
 					  s.equals("rdfs.comment"))) {
-					ret.add(new RelationshipList((PolyList)array[i], _km));
+					ret.add(new RelationshipAnnotation((PolyList)array[i], _km));
 				}
 				
 			}
@@ -183,8 +200,8 @@ public class InstanceList {
 					
 					Object o = ((PolyList)array[i]).second();
 					
-					if (o instanceof IValue) {
-						ret = ((IValue)o).getConcept();
+					if (o instanceof ISemanticLiteral) {
+						ret = ((ISemanticLiteral)o).getConcept();
 					} else if (o instanceof IList) {
 						/* instance specification */
 						ret = resolveToConcept(((IList)o).first());
@@ -210,18 +227,23 @@ public class InstanceList {
 		return ret;
 	}
 
-	public Collection<RelationshipList> getRelationships(String property) throws ThinklabException {
+	public Collection<RelationshipAnnotation> getRelationships(String property) throws ThinklabException {
 
-		ArrayList<RelationshipList> ret = new ArrayList<RelationshipList>();
+		ArrayList<RelationshipAnnotation> ret = new ArrayList<RelationshipAnnotation>();
 		
-		for (RelationshipList rel : getRelationships()) {
+		for (RelationshipAnnotation rel : getRelationships()) {
 			if (rel.property.is(property))
 				ret.add(rel);
 		}
 		return ret;
 	}
 
-	public IValue getValue(String property) {
+	public ISemanticLiteral getValue(String property) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Collection<RelationshipAnnotation> getRelationshipsTransitive(String string) {
 		// TODO Auto-generated method stub
 		return null;
 	}

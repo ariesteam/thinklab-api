@@ -11,14 +11,13 @@ import org.integratedmodelling.thinklab.api.knowledge.IConcept;
  * @author  Ferdinando
  */
 public interface IState extends IObservation {
-
+	
 	/**
-	 * Observations that have a datasource need to be able to produce the observer that created it.
-	 * 
+	 * Return the datasource that data come from.
 	 * @return
 	 */
-	public IObserver getObserver();
-	
+	public IDataSource getDatasource();
+
 	/**
 	 * Return the unmodified object at given offset. Most times it will be a duplicate of
 	 * super.getValue(offset, parameters) but should not make any modification. If data are 

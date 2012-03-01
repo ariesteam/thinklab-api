@@ -35,13 +35,12 @@ package org.integratedmodelling.thinklab.api.knowledge.query;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.lang.LogicalConnector;
-import org.integratedmodelling.thinklab.api.knowledge.IInstance;
-import org.integratedmodelling.thinklab.api.knowledge.IValue;
+import org.integratedmodelling.thinklab.api.knowledge.ISemanticLiteral;
 import org.integratedmodelling.thinklab.api.lang.IList;
 import org.integratedmodelling.thinklab.api.lang.IParseable;
 
 /**
- * A query's purpose is to generalize the semantic querying of instances. 
+ * A query's purpose is to generalize the semantic querying of objects. 
  *  
  * @author Ferdinando Villa
  *
@@ -125,7 +124,7 @@ public interface IQuery extends IParseable {
 	 * @param value
 	 * @category Creation API
 	 */
-	public abstract void addLiteralRestriction(String propertyType, String operator, IValue value) throws ThinklabException;
+	public abstract void addLiteralRestriction(String propertyType, String operator, ISemanticLiteral value) throws ThinklabException;
 
 	/**
 	 * Return the restriction objects as a single restriction
@@ -134,11 +133,14 @@ public interface IQuery extends IParseable {
 	public abstract IRestriction getRestrictions();
 
 	/**
-	 * Validate passed object for conditions expressed in constraint. 
+	 * Validate passed object for conditions expressed in constraint. Object must have a
+	 * semantic peer, i.e. be an IInstance, InstanceList, IConceptualizable or have an
+	 * associated SemanticAdapter.
+	 * 
 	 * @param i a concept or instance to validate.
 	 * @return true if match is positive.
 	 * @throws ThinklabException 
 	 */
-	public abstract boolean match(IInstance i) throws ThinklabException;
+	public abstract boolean match(Object i) throws ThinklabException;
 
 }

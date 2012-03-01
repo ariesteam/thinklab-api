@@ -12,10 +12,10 @@ import org.integratedmodelling.exceptions.ThinklabException;
 public interface IParseable {
 	
 	/**
-	 * Parses the.
+	 * Parses the object from a string.
 	 *
 	 * @param string the string
-	 * @throws ThinklabException the thinklab exception
+	 * @throws ThinklabException 
 	 */
 	public abstract void parse(String string) throws ThinklabException;
 	

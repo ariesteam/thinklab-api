@@ -34,7 +34,7 @@
 package org.integratedmodelling.thinklab.api.knowledge;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.thinklab.api.lang.IList;
+import org.integratedmodelling.lang.SemanticAnnotation;
 
 
 /**
@@ -43,6 +43,8 @@ import org.integratedmodelling.thinklab.api.lang.IList;
  * not automatically IConceptualizable, but if they are, they should be able to produce an instance that
  * will create a clone of themselves as implementation, or if the implementation wasn't created with 
  * an instance, may use themselves as implementation.
+ * 
+ * Essentially IConceptualizable is the semantic version of IParseable.
  * 
  * @author Ferdinando Villa, Ecoinformatics Collaboratory, UVM
  *
@@ -55,7 +57,7 @@ public interface IConceptualizable {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	IList conceptualize() throws ThinklabException;
+	SemanticAnnotation conceptualize() throws ThinklabException;
 	
 	/**
 	 * A IConceptualizable must have an empty constructor and be capable of fully
@@ -64,5 +66,5 @@ public interface IConceptualizable {
 	 * @param conceptualization
 	 * @throws ThinklabException
 	 */
-	void define(IList conceptualization) throws ThinklabException;
+	void define(SemanticAnnotation conceptualization) throws ThinklabException;
 }

@@ -5,8 +5,8 @@ import java.util.Collection;
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.lang.LogicalConnector;
 import org.integratedmodelling.lang.Quantifier;
+import org.integratedmodelling.lang.SemanticAnnotation;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
-import org.integratedmodelling.thinklab.api.knowledge.IInstance;
 import org.integratedmodelling.thinklab.api.knowledge.IProperty;
 import org.integratedmodelling.thinklab.api.lang.IList;
 import org.integratedmodelling.thinklab.api.lang.IOperator;
@@ -27,7 +27,7 @@ public interface IRestriction {
 
 	public abstract IList asList();
 
-	public abstract boolean match(IInstance c) throws ThinklabException;
+	public abstract boolean match(SemanticAnnotation c) throws ThinklabException;
 
 	public abstract IConcept getClassificationConcept();
 

@@ -41,7 +41,7 @@ import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.lang.Quantifier;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.IInstance;
-import org.integratedmodelling.thinklab.api.knowledge.IValue;
+import org.integratedmodelling.thinklab.api.knowledge.ISemanticLiteral;
 import org.integratedmodelling.thinklab.api.knowledge.query.IQueriable;
 import org.integratedmodelling.thinklab.api.knowledge.query.IQuery;
 import org.integratedmodelling.thinklab.api.lang.IList;
@@ -222,7 +222,7 @@ public abstract interface IKBox extends IQueriable {
 
 	 * @throws ThinklabException
 	 */
-	public abstract String storeObject(IList list, String id, Map<String, IValue> metadata, ISession session) throws ThinklabException;
+	public abstract String storeObject(IList list, String id, Map<String, ISemanticLiteral> metadata, ISession session) throws ThinklabException;
 	
 	/**
 	 * A Kbox should be capable of storing an object from its list description. If necessary, the
@@ -242,7 +242,7 @@ public abstract interface IKBox extends IQueriable {
 
 	 * @throws ThinklabException
 	 */
-	public abstract String storeObject(IList list, String id, Map<String, IValue> metadata, ISession session, HashMap<String, String> refTable) throws ThinklabException;
+	public abstract String storeObject(IList list, String id, Map<String, ISemanticLiteral> metadata, ISession session, HashMap<String, String> refTable) throws ThinklabException;
 	
 	/**
 	 * Store an object in the KBox. Return its ID in it, which may or may not be the same ID as the
@@ -256,7 +256,7 @@ public abstract interface IKBox extends IQueriable {
 	 *         instance's, but if not a different one may be returned.
 	 * @throws ThinklabException if anything goes wrong.
 	 */
-	public abstract String storeObject(IInstance object, String id, Map<String, IValue> metadata, ISession session) throws ThinklabException;
+	public abstract String storeObject(IInstance object, String id, Map<String, ISemanticLiteral> metadata, ISession session) throws ThinklabException;
 
 	/**
 	 * Store an object in the KBox. Return its ID in it, which may or may not be the same ID as the
@@ -276,7 +276,7 @@ public abstract interface IKBox extends IQueriable {
 	 * 
 	 * @throws ThinklabException if anything goes wrong.
 	 */
-	public abstract String storeObject(IInstance object, String id, Map<String, IValue> metadata, ISession session, HashMap<String, String> references) throws ThinklabException;
+	public abstract String storeObject(IInstance object, String id, Map<String, ISemanticLiteral> metadata, ISession session, HashMap<String, String> references) throws ThinklabException;
 
 	/**
 	 * Return an object that we can query to know what operators and such are supported by this kbox implementation.

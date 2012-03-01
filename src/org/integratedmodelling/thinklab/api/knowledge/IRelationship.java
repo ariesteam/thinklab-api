@@ -61,7 +61,7 @@ public interface IRelationship {
 	 * @uml.property  name="value"
 	 * @uml.associationEnd  
 	 */
-	public abstract IValue getValue();
+	public abstract ISemanticLiteral getValue();
 	
     /**
      * <p>Check if relationship is with a literal. A literal is an instance of a concept that uses no formal
