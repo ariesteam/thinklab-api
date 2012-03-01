@@ -33,7 +33,6 @@
  **/
 package org.integratedmodelling.list;
 
-import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.lang.SemanticType;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.factories.IKnowledgeManager;
@@ -84,6 +83,10 @@ public class ValueList {
 	public boolean isConcept() {
 		// TODO Auto-generated method stub
 		return cValue != null;
+	}
+	
+	public IConcept getConcept() {
+		return cValue;
 	}
 
 }

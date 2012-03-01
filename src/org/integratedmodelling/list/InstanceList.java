@@ -221,4 +221,9 @@ public class InstanceList {
 		return ret;
 	}
 
+	public IValue getValue(String property) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

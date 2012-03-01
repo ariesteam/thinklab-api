@@ -115,8 +115,6 @@ public interface IRelationship {
     /**
 	 * Return the concept of the related object. Must be non-null.
 	 * @return
-	 * @uml.property  name="concept"
-	 * @uml.associationEnd  
 	 */
 	public abstract IConcept getConcept();
 

@@ -33,7 +33,7 @@
  **/
 package org.integratedmodelling.list;
 
-import org.integratedmodelling.exceptions.ThinklabException;
+import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.IKnowledge;
 import org.integratedmodelling.thinklab.api.knowledge.IProperty;
 import org.integratedmodelling.thinklab.api.knowledge.factories.IKnowledgeManager;
@@ -64,6 +64,14 @@ public class RelationshipList {
 	public boolean isObject() {
 		return value.isObject();
 	}
+	
+
+	public boolean isLiteral() {
+		/*
+		 * FIXME check
+		 */
+		return !(value.isObject());
+	}
 
 	public ValueList getValue() {
 		return value;
@@ -72,5 +80,10 @@ public class RelationshipList {
 	public boolean isClassification() {
 		return value.isConcept();
 	}
+	
+	public IConcept getConcept() {
+		return value.getConcept();
+	}
+	
 
 }
