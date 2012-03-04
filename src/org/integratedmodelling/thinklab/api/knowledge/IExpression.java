@@ -2,9 +2,7 @@ package org.integratedmodelling.thinklab.api.knowledge;
 
 import java.util.Map;
 
-import org.integratedmodelling.thinklab.api.lang.IParseable;
-
-public interface IExpression extends IParseable {
+public interface IExpression {
 
 	/**
 	 * Expressions must be able to identify the language they're implemented in, so that they

@@ -34,7 +34,7 @@ public interface IModel extends IModelObject {
 	public abstract Collection<IObservation> getDependencies();
 
 	/**
-	 * Return another observation contextualized to the passed context, or throw an
+	 * Return an observation contextualized to the passed context, or throw an
 	 * exception if that's not possible. Recontextualization is the
 	 * core of thinklab and is done based on extent-specific algorithms.
 	 * 

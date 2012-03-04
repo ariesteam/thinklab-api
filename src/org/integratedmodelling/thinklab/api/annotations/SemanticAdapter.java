@@ -14,3 +14,5 @@ import java.lang.annotation.RetentionPolicy;
 public @interface SemanticAdapter {
 	public String classId(); 
 }
+
+

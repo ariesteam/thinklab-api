@@ -33,6 +33,8 @@ public interface IOperator  {
 	public static final String NOT = "not";
 	public static final String XOR = "xor";
 	
+	public static final String EQUALS = "==";
+	
 	public abstract ISemanticLiteral eval(Object ... arg) throws ThinklabException;
 
 	public abstract String getName();

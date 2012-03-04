@@ -83,5 +83,7 @@ public interface ISemanticLiteral {
 	public abstract boolean isLiteral();
 
 	public abstract boolean isClass();
+
+	public abstract long asLong();
 	
 }

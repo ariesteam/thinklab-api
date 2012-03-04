@@ -8,21 +8,37 @@ import org.integratedmodelling.thinklab.api.knowledge.IExpression;
 
 public class Observer extends ObservingObject {
 
-	ArrayList<Pair<Observer, IExpression>> _mediated = 
-			new ArrayList<Pair<Observer,IExpression>>();
+	Observer _mediated = null;
+	String accessorId = null;
+	HashMap<String, Object> accessorParameters = null;
 	
 	/**
-	 * Add one mediated observer with an optional conditional expression to contextualize the choice of
-	 * mediated to the dependencies.
+	 * Add one observer with an optional conditional expression to contextualize the model to use. Creation
+	 * of conditional observers if more than one observer is added or there are conditions is
+	 * handled transparently.
 	 * 
 	 * @param observer
 	 * @param expression
 	 */
 	public void addMediated(Observer observer, IExpression expression) {
-		_mediated.add(new Pair<Observer, IExpression>(observer, expression));
+		
+		if (_mediated == null && expression == null) {
+			_mediated = observer;
+		} else {
+			if (_mediated == null) {
+				_mediated = new ConditionalObserver();
+			} else if (	!(_mediated instanceof ConditionalObserver)) {
+				ConditionalObserver obs = new ConditionalObserver();
+				obs.addObserver(_mediated, null);
+				_mediated = obs;
+			}
+			((ConditionalObserver)_mediated).addObserver(observer, expression);
+		}
 	}
-
-
+	
+	public Observer getMediated() {
+		return _mediated;
+	}
 	
 	/**
 	 * Set the intended accessor (optional) with any parameters needed. If no parameters were
@@ -32,8 +48,8 @@ public class Observer extends ObservingObject {
 	 * @param parms
 	 */
 	public void setAccessor(String id, HashMap<String, Object> parms) {
-		// TODO Auto-generated method stub
-		
+		this.accessorId	 = id;
+		this.accessorParameters = parms;
 	}
 	
 	/**

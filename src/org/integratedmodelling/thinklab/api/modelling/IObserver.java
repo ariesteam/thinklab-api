@@ -1,10 +1,10 @@
 package org.integratedmodelling.thinklab.api.modelling;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.thinklab.api.knowledge.storage.IKBox;
-import org.integratedmodelling.thinklab.api.runtime.ISession;
+import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 
 /**
  * A model producing observations of a given type (through its subclasses). 
@@ -17,7 +17,15 @@ public abstract interface IObserver extends IModelObject {
 	 * 
 	 * @return
 	 */
-	public abstract Collection<IAccessor> getAccessors(IContext context);
+	public abstract List<IAccessor> getAccessors(IContext context);
+	
+	/**
+	 * Return a type corresponding to the state. The first accessor will create the state if 
+	 * necessary, but the observer should be able to know the type.
+	 *  
+	 * @return
+	 */
+	public abstract IConcept getStateType();
 
 
 	/**
@@ -32,13 +40,11 @@ public abstract interface IObserver extends IModelObject {
 	 * The context of each observation extracted will give access to all states in the observation structure
 	 * represented, and can be used to create any IDataset for communication or storage.
 	 * 
-	 * @param kbox
-	 * @param session
 	 * @param context
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public Collection<IObservation> observe(IContext context, IKBox kbox, ISession session) throws ThinklabException;
+	public List<IObservation> observe(IContext context) throws ThinklabException;
 
 	/**
 	 * Train the model to match any output state that can be
@@ -48,15 +54,13 @@ public abstract interface IObserver extends IModelObject {
 	 * 
 	 * It should never modify the observer it's called on - it would be a const if there
 	 * was such a thing in Java. 
-	 * 
-	 * @param kbox
-	 * @param session
 	 * @param params
+	 * 
 	 * @return a new trained model that has learned to reproduce the output states 
 	 * 		   observed on the passed kbox.
 	 * @throws ThinklabException
 	 */
-	public IObserver train(IContext context, IKBox kbox, ISession session) throws ThinklabException;
+	public IObserver train(IContext context) throws ThinklabException;
 
 	/**
 	 * A scenario is a model modifier, containing alternative models for given observables.

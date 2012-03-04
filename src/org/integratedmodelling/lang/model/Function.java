@@ -6,7 +6,7 @@ package org.integratedmodelling.lang.model;
  * @author Ferd
  *
  */
-public class FunctionDescriptor {
+public class Function {
 
 	String functionId;
 	String[] argumentNames;

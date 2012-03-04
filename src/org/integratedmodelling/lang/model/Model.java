@@ -1,26 +1,36 @@
 package org.integratedmodelling.lang.model;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import org.integratedmodelling.collections.Pair;
 import org.integratedmodelling.thinklab.api.knowledge.IExpression;
 
 public class Model extends ObservingObject {
 	
-	ArrayList<Pair<Observer, IExpression>> _observers = 
-			new ArrayList<Pair<Observer,IExpression>>();
-	
+	Observer _observer = null;
 	ArrayList<Model> contextModels = new ArrayList<Model>();
 	
 	/**
-	 * Add one observer with an optional conditional expression to contextualize the model to use.
+	 * Add one observer with an optional conditional expression to contextualize the model to use. Creation
+	 * of conditional observers if more than one observer is added or there are conditions is
+	 * handled transparently.
 	 * 
 	 * @param observer
 	 * @param expression
 	 */
 	public void addConditional(Observer observer, IExpression expression) {
-		_observers.add(new Pair<Observer, IExpression>(observer, expression));
+		
+		if (_observer == null && expression == null) {
+			_observer = observer;
+		} else {
+			if (_observer == null) {
+				_observer = new ConditionalObserver();
+			} else if (	!(_observer instanceof ConditionalObserver)) {
+				ConditionalObserver obs = new ConditionalObserver();
+				obs.addObserver(_observer, null);
+				_observer = obs;
+			}
+			((ConditionalObserver)_observer).addObserver(observer, expression);
+		}
 	}
 
 	/**
@@ -39,8 +49,8 @@ public class Model extends ObservingObject {
 	 * 
 	 * @return
 	 */
-	public List<Pair<Observer, IExpression>> getObservers() {
-		return _observers;
+	public Observer getObserver() {
+		return _observer;
 	}
 
 

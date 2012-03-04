@@ -21,7 +21,7 @@ package org.integratedmodelling.thinklab.api.modelling;
  * @author  Ferd
  * @see IState
  */
-public interface IObservation extends IModel {
+public interface IObservation extends IModel, IContextualizable<IObservation> {
 	
 	/**
 	 * Observations are always part of a context, and must be able to return the context they are part of. The
