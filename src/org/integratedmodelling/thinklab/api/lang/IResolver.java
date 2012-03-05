@@ -1,11 +1,14 @@
 package org.integratedmodelling.thinklab.api.lang;
 
 import java.io.InputStream;
+import java.util.Collection;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.lang.model.ConceptObject;
+import org.integratedmodelling.lang.model.ModelObject;
 import org.integratedmodelling.lang.model.Namespace;
 import org.integratedmodelling.lang.model.PropertyObject;
+import org.integratedmodelling.thinklab.api.knowledge.IExpression;
 
 public interface IResolver {
 	
@@ -68,6 +71,16 @@ public interface IResolver {
 	public abstract void onNamespaceDefined(Namespace namespace) throws ThinklabException;
 
 	/**
+	 * Callback invoked at every new model object at main level. Not all the namespace will be
+	 * defined when this is called.
+	 * 
+	 * @param namespace
+	 * @param ret
+	 */
+	public abstract void onModelObjectDefined(
+			org.integratedmodelling.lang.model.Namespace namespace, ModelObject ret);
+
+	/**
 	 * Ensure that the namespace declaration conforms with the resource it comes from. Only called when the 
 	 * resource is an actual model file.
 	 * 
@@ -78,6 +91,15 @@ public interface IResolver {
 	public abstract void validateNamespaceForResource(String resource,
 			String namespace) throws ThinklabException;
 
+	/**
+	 * Resolve a function to the corresponding expression. Just return null if not found.
+	 * 
+	 * @param resource
+	 * @param parameterNames
+	 * @return
+	 */
+	public abstract IExpression resolveFunction(String functionId, Collection<String> parameterNames);
+	
 	/**
 	 * Called when an external concept (with the :) is identified in a legal place in a model object. Should
 	 * return a ConceptObject pointing to whatever definition of the import we need, which will be set in the
@@ -103,5 +125,6 @@ public interface IResolver {
 	 */
 	public abstract PropertyObject resolveExternalProperty(String id,
 			org.integratedmodelling.lang.model.Namespace namespace, int line) throws ThinklabException;
+
 	
 }

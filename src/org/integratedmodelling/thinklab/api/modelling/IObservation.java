@@ -27,9 +27,10 @@ public interface IObservation extends IModel, IContextualizable<IObservation> {
 	 * Observations are always part of a context, and must be able to return the context they are part of. The
 	 * context will contain states for all observations in the structure that this represents.
 	 * 
-	 * If the observation is a rare case of an "absolute" observation that doesn't depend on anything, e.g. 
-	 * pi or some other constant, and has no dependencies or extents, this 
-	 * function should return an empty context and not null.
+	 * The returned context should contain this observation as well. In rare cases it will contain JUST this
+	 * observation: semantically, these are "universals" - statements of the existence of something, or 
+	 * universal constants. 
+	 * 
 	 */
 	public abstract IContext getContext();
 }

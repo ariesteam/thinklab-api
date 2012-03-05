@@ -1,9 +1,7 @@
 package org.integratedmodelling.lang.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.integratedmodelling.collections.Pair;
 import org.integratedmodelling.thinklab.api.knowledge.IExpression;
 
 public class Observer extends ObservingObject {

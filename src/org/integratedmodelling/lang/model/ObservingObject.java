@@ -27,6 +27,10 @@ public abstract class ObservingObject extends ModelObject {
 		return observables.get(0).first().toString();
 	}
 
+	public IList getObservable() {
+		return observables.get(0);
+	}
+
 	/**
 	 * The dependencies of a Model - used to select the contingencies if "when" statements
 	 * are given.

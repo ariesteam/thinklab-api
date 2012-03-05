@@ -1,5 +1,7 @@
 package org.integratedmodelling.lang.model;
 
+import org.integratedmodelling.thinklab.api.knowledge.IExpression;
+
 /**
  * Captures name and arguments of a function
  * 
@@ -11,6 +13,14 @@ public class Function {
 	String functionId;
 	String[] argumentNames;
 	Object[] argumentValues;
+	
+	/**
+	 * if this is not set, the function doesn't correspond
+	 * to a known one and warnings or errors, according to
+	 * the context, may be issued.
+	 */
+	IExpression function;
+	
 	public String getFunctionId() {
 		return functionId;
 	}
@@ -30,5 +40,11 @@ public class Function {
 		this.argumentValues = argumentValues;
 	}
 	
+	public void setFunction(IExpression e) {
+		function = e;
+	}
 	
+	public IExpression getFunction() {
+		return function;
+	}
 }
