@@ -13,12 +13,6 @@ import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 public interface IState extends IObservation {
 	
 	/**
-	 * Return the datasource that data come from.
-	 * @return
-	 */
-	public IDataSource getDatasource();
-
-	/**
 	 * Return the unmodified object at given offset. Most times it will be a duplicate of
 	 * super.getValue(offset, parameters) but should not make any modification. If data are 
 	 * unknown (nodata), return null.

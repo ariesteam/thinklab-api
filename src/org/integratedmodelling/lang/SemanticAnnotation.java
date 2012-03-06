@@ -35,12 +35,11 @@ package org.integratedmodelling.lang;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.list.PolyList;
-import org.integratedmodelling.thinklab.api.annotations.SemanticAdapter;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
-import org.integratedmodelling.thinklab.api.knowledge.IInstanceImplementation;
 import org.integratedmodelling.thinklab.api.knowledge.ISemanticAdapter;
 import org.integratedmodelling.thinklab.api.knowledge.ISemanticLiteral;
 import org.integratedmodelling.thinklab.api.knowledge.factories.IKnowledgeManager;
@@ -118,21 +117,6 @@ public class SemanticAnnotation {
 		return ret;
 	}
 
-	public IInstanceImplementation getImplementation() {
-
-		IInstanceImplementation ret = null;
-		
-		for (int i = 1; i < array.length; i++) {
-			if (array[i] instanceof IList && 
-					((IList)array[i]).first().toString().equals("#") ) {
-				ret = (IInstanceImplementation) ((PolyList)array[i]).second();
-				break;
-			}	
-		}
-		return ret;
-		
-	}
-	
 	public String getDescription() {
 		String ret = null;
 		
@@ -238,11 +222,20 @@ public class SemanticAnnotation {
 		return ret;
 	}
 
-	public ISemanticLiteral getValue(String property) {
-		// TODO Auto-generated method stub
-		return null;
+	public ISemanticLiteral getValue(String property) throws ThinklabException {
+		Collection<RelationshipAnnotation> r = getRelationships(property);
+		return r.size() > 0 ? r.iterator().next().value : null;
 	}
 
+	public Collection<ISemanticLiteral> getValues(String property) throws ThinklabException {
+		Collection<ISemanticLiteral> ret = new ArrayList<ISemanticLiteral>();
+		for (RelationshipAnnotation r :  getRelationships(property)) {
+			if (r.isLiteral() && r.getValue() != null)
+				ret.add(r.getValue());
+		}
+		return ret;
+	}
+	
 	public Collection<RelationshipAnnotation> getRelationshipsTransitive(String string) {
 		// TODO Auto-generated method stub
 		return null;

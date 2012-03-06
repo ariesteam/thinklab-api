@@ -127,19 +127,6 @@ public abstract interface IExtent extends IState, ITopology<IExtent> {
 	 */
 	public abstract IRestriction getConstraint(IOperator operator) throws ThinklabException;
 
-	/**
-	 * Return the transformation, if any, that will be necessary to operate on a 
-	 * datasource that conforms to us so that it matches the passed extent. If 
-	 * no transformation is necessary, return an identity transformation.
-	 * 
-	 * @param mainObservable the observable for the main observation that owns the extent
-	 * 		  (what the states mean)
-	 * @param extent the extent we must adapt the datasource to
-	 * @return a transformation to be passed to the datasource
-	 * @throws ThinklabException 
-	 */
-	public IDataSource.Transformation getDatasourceTransformation(
-			IConcept mainObservable, IExtent extent) throws ThinklabException;
 
 	/**
 	 * Return a list of location references to use in expressions and

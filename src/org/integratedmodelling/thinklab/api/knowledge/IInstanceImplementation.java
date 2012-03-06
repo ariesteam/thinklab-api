@@ -42,6 +42,7 @@ import org.integratedmodelling.exceptions.ThinklabValidationException;
  * 
  * @author UVM Affiliate
  * @see org.integratedmodelling.thinklab.interfaces.knowledge.OntoBean for automatically wiring properties to class fields.
+ * @deprecated use IConceptualizable and @SemanticObject
  */
 public interface IInstanceImplementation {
 
