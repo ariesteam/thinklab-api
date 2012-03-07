@@ -45,6 +45,7 @@ public class RelationshipAnnotation {
 
 	IProperty property;
 	ISemanticLiteral value;
+	SemanticAnnotation object;
 	IKnowledgeManager _km;
 	
 	public RelationshipAnnotation(PolyList polylist, IKnowledgeManager km)  {
@@ -64,19 +65,20 @@ public class RelationshipAnnotation {
 		
 	}
 
+	public SemanticAnnotation getObject() {
+		return object;
+	}
+	
 	public IProperty getProperty() {
 		return property;
 	}
 
 	public boolean isObject() {
-		return value.isObject();
+		return object != null;
 	}
 
 	public boolean isLiteral() {
-		/*
-		 * FIXME check
-		 */
-		return !(value.isObject());
+		return value != null;
 	}
 
 	public ISemanticLiteral getValue() {
@@ -84,7 +86,7 @@ public class RelationshipAnnotation {
 	}
 
 	public boolean isClassification() {
-		return value.isClass();
+		return property.isClassification();
 	}
 	
 	public IConcept getConcept() {

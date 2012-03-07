@@ -50,18 +50,21 @@ public interface IRelationship {
 	/**
 	 * Get the property that defines the relationship. 
 	 * @return   a property. Never fails.
-	 * @uml.property  name="property"
-	 * @uml.associationEnd  
 	 */
 	public abstract IProperty getProperty();
 	
 	/**
 	 * <p>Get the value that our property points to. Returns null if this is just the statement of a property.</p>
 	 * @return   a Value or null.
-	 * @uml.property  name="value"
-	 * @uml.associationEnd  
 	 */
 	public abstract ISemanticLiteral getValue();
+	
+	/**
+	 * Get the instance object targeted. Should only be called if isObject() returns true.
+	 * 
+	 * @return
+	 */
+	public abstract IInstance getObject();
 	
     /**
      * <p>Check if relationship is with a literal. A literal is an instance of a concept that uses no formal

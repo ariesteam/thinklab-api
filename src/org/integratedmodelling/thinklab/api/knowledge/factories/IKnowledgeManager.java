@@ -98,27 +98,24 @@ public interface IKnowledgeManager {
 	public abstract ISemanticLiteral annotateLiteral(Object object) throws ThinklabException;
 
 	/**
-	 * Create a semantic annotation for the passed object. In order for that to be
-	 * done, the object can be:
+	 * Create a semantic annotation from the passed object. This will succeed if the
+	 * object and its fields have semantic tags (@Concept, @Property, @Literal) and/or 
+	 * is an IConceptualizable.
 	 * 
-	 * 1. an IInstance
-	 * 2. an InstanceList
-	 * 3. an IConceptualizable
-	 * 4. any object for which a SemanticAdapter has been registered.
 	 * @param i
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public abstract SemanticAnnotation conceptualizeObject(Object i) throws ThinklabException;
+	public abstract SemanticAnnotation conceptualize(Object i) throws ThinklabException;
 	
 	/**
 	 * Reifies an annotation by producing the object it describes, if any. In order for an
-	 * object to be created, the annotation concept should be registered in a SemanticAdapter
-	 * or an InstanceImplementation.
+	 * object to be created, annotation tags must have specified the classes to associate to
+	 * concepts, properties and literals.
 	 * 
 	 * @param a
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public Object reifyAnnotation(SemanticAnnotation a) throws ThinklabException;
+	public Object instantiate(SemanticAnnotation a) throws ThinklabException;
 }

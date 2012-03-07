@@ -33,21 +33,37 @@
  **/
 package org.integratedmodelling.thinklab.api.knowledge;
 
-import org.integratedmodelling.lang.SemanticAnnotation;
 
 
 /**
+ * These should be associated to datatype URIs using the @Literal annotation.
+ * 
  * @author  Ferd
  */
 public interface ISemanticLiteral {
 
+	/**
+	 * Called just after an empty constructor by the annotation manager. Must
+	 * be able to define everything from the literal it's being passed, which
+	 * will be of the class defined in the @Literal annotation.
+	 * 
+	 * @param o
+	 */
+	public abstract void wrap(Object o);
+	
+	/**
+	 * Return the concept expressed in the value.
+	 * @return
+	 */
+	public abstract IConcept getConcept();
+	
 	public abstract boolean isNumber();
 
 	public abstract boolean isText();
 
 	public abstract boolean isBoolean();
 
-	public abstract boolean isObject();
+//	public abstract boolean isObject();
 
 	/**
 	 * Check if value can be represented by a plain old data type literal. Note
@@ -57,12 +73,6 @@ public interface ISemanticLiteral {
 	 * @return true if POD type.
 	 */
 	public abstract boolean isPODType();
-
-	/**
-	 * Return the concept expressed in the value.
-	 * @return
-	 */
-	public abstract IConcept getConcept();
 	
 	/**
 	 * Return the literal we're wrapping stripped of its semantics, with the most appropriate type.
@@ -70,7 +80,7 @@ public interface ISemanticLiteral {
 	 */
 	public abstract Object demote();
 
-	public abstract SemanticAnnotation asObject();
+//	public abstract SemanticAnnotation asObject();
 
 	public abstract boolean asBoolean();
 
@@ -80,10 +90,11 @@ public interface ISemanticLiteral {
 
 	public abstract String asText();
 
-	public abstract boolean isLiteral();
-
-	public abstract boolean isClass();
-
 	public abstract long asLong();
+
+	//	public abstract boolean isLiteral();
+
+//	public abstract boolean isClass();
+
 	
 }

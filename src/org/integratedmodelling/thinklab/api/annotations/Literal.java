@@ -7,9 +7,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Associate a class with an object that can be represented as the target of
+ * Associate a Java class with an object that can be represented as the target of
  * a data property. In translation OWL->Java, the class is used when the associated 
- * datatype is found. Implementations should provide annotations for all common
+ * datatype is found. In Java->OWL, the object itself (if built-in) or its string
+ * value (must be IParseable) are used to fill in the target property value.
+ * 
+ * Implementations should provide annotations for all common
  * XSD types as well as the desired custom ones. 
  * 
  * @author Ferd
@@ -19,5 +22,19 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface Literal {
-	public String value();
+	/**
+	 * Datatype should be a full XSD URI for built-ins, or the usual thinklab syntax (e.g. geospace:point) for
+	 * user-defined datatypes.
+	 * 
+	 * @return
+	 */
+	public String datatype();
+	
+	/**
+	 * Tells the system to use the annotated class to create ILiterals for objects of the
+	 * passed class.
+	 * 
+	 * @return
+	 */
+	public Class<?> javaClass();
 }
