@@ -7,18 +7,17 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Associate a field with the property that will be used to conceptualize that object and to 
- * translate semantic annotations into it. Collections and arrays are automatically linked to
- * multiple properties. 
+ * Associate a class with an object that can be represented as the target of
+ * a data property. In translation OWL->Java, the class is used when the associated 
+ * datatype is found. Implementations should provide annotations for all common
+ * XSD types as well as the desired custom ones. 
  * 
  * @author Ferd
  * @see org.integratedmodelling.thinklab.api.annotations.Concept
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface Property {
-	public String value(); 
+@Target(ElementType.TYPE)
+public @interface Literal {
+	public String value();
 }
-
-

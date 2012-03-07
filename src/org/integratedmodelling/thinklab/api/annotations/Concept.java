@@ -1,5 +1,6 @@
 package org.integratedmodelling.thinklab.api.annotations;
 
+import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -17,6 +18,7 @@ import java.lang.annotation.Target;
  * @author Ferd
  * @see org.integratedmodelling.thinklab.api.annotations.Property
  */
+@Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface Concept {
