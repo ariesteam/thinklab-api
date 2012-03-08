@@ -34,6 +34,7 @@
 package org.integratedmodelling.collections;
 
 import java.io.Serializable;
+
 /**
   * Stupid generic pair class.
  */

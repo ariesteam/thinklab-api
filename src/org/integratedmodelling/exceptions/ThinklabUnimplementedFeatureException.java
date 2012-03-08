@@ -33,7 +33,11 @@
  **/
 package org.integratedmodelling.exceptions;
 
-
+/**
+ * TODO rename to ThinklabUnsupportedOperation
+ * @author Ferd
+ *
+ */
 public class ThinklabUnimplementedFeatureException extends ThinklabException {
 
 	private static final long serialVersionUID = 6916503711129030499L;

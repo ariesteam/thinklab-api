@@ -37,4 +37,10 @@ public @interface Literal {
 	 * @return
 	 */
 	public Class<?> javaClass();
+	
+	/**
+	 * The core type that is implemented by this, for conceptualization.
+	 * @return
+	 */
+	public String concept();
 }

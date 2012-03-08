@@ -84,14 +84,14 @@ public interface IConcept extends IKnowledge {
 	 */
 	public abstract Collection<IConcept> getPropertyRange(IProperty property) throws ThinklabException;
 
-    /**
-	 * Return a constraint with all the restrictions defined for this type and its supertypes. The type in the constraint is the concept itself. The minimal restriction selects the concept itself, so a restriction is never null.
-	 * @return
-	 * @throws ThinklabException
-	 * @uml.property  name="restrictions"
-	 * @uml.associationEnd  
-	 */
-    public abstract IQuery getRestrictions() throws ThinklabException;
+//    /**
+//	 * Return a constraint with all the restrictions defined for this type and its supertypes. The type in the constraint is the concept itself. The minimal restriction selects the concept itself, so a restriction is never null.
+//	 * @return
+//	 * @throws ThinklabException
+//	 * @uml.property  name="restrictions"
+//	 * @uml.associationEnd  
+//	 */
+//    public abstract IQuery getRestrictions() throws ThinklabException;
 
     /**
      * The notion of an abstract concept is important where we create instances that have implementations. 

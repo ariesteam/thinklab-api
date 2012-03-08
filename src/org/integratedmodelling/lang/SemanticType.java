@@ -79,7 +79,6 @@ import org.integratedmodelling.thinklab.api.knowledge.factories.IKnowledgeManage
  * 
  * @see IConcept
  * @see IProperty
- * @see IInstance
  * @see IKnowledgeManager
  */
 public final class SemanticType implements Serializable {

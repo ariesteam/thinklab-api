@@ -2,13 +2,51 @@ package org.integratedmodelling.thinklab.api.knowledge.factories;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.exceptions.ThinklabValidationException;
-import org.integratedmodelling.lang.SemanticAnnotation;
+import org.integratedmodelling.lang.Semantics;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.IProperty;
-import org.integratedmodelling.thinklab.api.knowledge.ISemanticLiteral;
+import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
 import org.integratedmodelling.thinklab.api.knowledge.kbox.IKbox;
 
 public interface IKnowledgeManager {
+
+	/**
+	 * Find and return the named concept. If not found, return null.
+	 * @param prop
+	 * @return
+	 */
+	public abstract IConcept getConcept(String concept);
+
+	/**
+	 * Find and return the passed property. If not found, return null.
+	 * 
+	 * @param prop
+	 * @return
+	 */
+	public abstract IProperty getProperty(String concept);
+	
+	/**
+	 * Parse a literal into a semantic object of the passed concept. The concept must have 
+	 * been used to annotate a class that implements IParseable.
+	 * 
+	 * @param c A concept to validate to
+	 * @param literal a literal representing an instance of that concept
+	 * @return a Value containing the concept
+	 * @throws ThinklabValidationException
+	 * @throws ThinklabException 
+	 */
+	public abstract ISemanticObject parse(String literal, IConcept c) throws ThinklabException;
+	
+	/**
+	 * Return an annotated ISemanticObject for the passed Java object, or throw an exception if no
+	 * annotation is possible. Should normally use conceptualize() to obtain the semantics.
+	 * 
+	 * @param object
+	 * @return
+	 * @throws ThinklabException
+	 * literals to instances.
+	 */
+	public abstract ISemanticObject annotate(Object object) throws ThinklabException;
 	
 	
 	/**
@@ -36,38 +74,7 @@ public interface IKnowledgeManager {
 	 * @throws ThinklabException
 	 */
 	public abstract IKbox requireKbox(String uri) throws ThinklabException;
-	
-	
-	/**
-	 * 
-	 * @param prop
-	 * @return
-	 */
-	public abstract IProperty getProperty(String prop);
 
-	/**
-	 * 
-	 * @param prop
-	 * @return
-	 */
-	public abstract IConcept getConcept(String prop);
-	
-	/**
-	 * Return the concept associated to a class.
-	 * 
-	 * @param cls
-	 * @return
-	 */
-	public abstract IConcept getConceptForClass(Class<?> cls);
-
-	/**
-	 * Return the Java class that serves as a peer for a concept.
-	 * 
-	 * @param cls
-	 * @return
-	 */
-	public abstract Class<?> getClassForConcept(IConcept cls);
-	
 	/**
 	 * Return the least general common concept in a collection of concept, or null if there
 	 * is none.
@@ -75,30 +82,6 @@ public interface IKnowledgeManager {
 	 * @return
 	 */
 	public abstract IConcept getLeastGeneralCommonConcept(IConcept ... cc);
-
-	/**
-	 * Find the concept manager that can validate a literal of the passed concept and validate the passed
-	 * string into the proper literal.
-	 * 
-	 * @param c A concept to validate to
-	 * @param literal a literal representing an instance of that concept
-	 * @return a Value containing the concept
-	 * @throws ThinklabValidationException
-	 * @throws ThinklabException 
-	 */
-	public abstract ISemanticLiteral validateLiteral(IConcept c, String literal) throws ThinklabException;
-	
-	/**
-	 * Return an annotated IValue for the passed Java object, or throw an exception if no
-	 * annotation is possible.
-	 * 
-	 * @param object
-	 * @return
-	 * @throws ThinklabException
-	 * @deprecated there should be a ISemanticObject promote(Object) that takes care of everything from
-	 * literals to instances.
-	 */
-	public abstract ISemanticLiteral annotateLiteral(Object object) throws ThinklabException;
 
 	/**
 	 * Create a semantic annotation from the passed object. This will succeed if the
@@ -109,7 +92,7 @@ public interface IKnowledgeManager {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public abstract SemanticAnnotation conceptualize(Object i) throws ThinklabException;
+	public abstract Semantics conceptualize(Object object) throws ThinklabException;
 	
 	/**
 	 * Reifies an annotation by producing the object it describes, if any. In order for an
@@ -120,5 +103,5 @@ public interface IKnowledgeManager {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public Object instantiate(SemanticAnnotation a) throws ThinklabException;
+	public Object instantiate(Semantics a) throws ThinklabException;
 }

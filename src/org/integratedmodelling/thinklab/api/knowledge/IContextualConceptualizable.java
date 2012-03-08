@@ -1,6 +1,6 @@
 package org.integratedmodelling.thinklab.api.knowledge;
 
-import org.integratedmodelling.lang.SemanticAnnotation;
+import org.integratedmodelling.lang.Semantics;
 
 /**
  * A specialized conceptualizable that can add semantics to a target when
@@ -22,5 +22,5 @@ public interface IContextualConceptualizable extends IConceptualizable {
 	 * @param target
 	 * @return
 	 */
-	public abstract SemanticAnnotation contextualizeTarget(SemanticAnnotation target);
+	public abstract Semantics contextualizeTarget(Semantics target);
 }

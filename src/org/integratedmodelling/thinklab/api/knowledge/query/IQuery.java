@@ -35,7 +35,7 @@ package org.integratedmodelling.thinklab.api.knowledge.query;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.lang.LogicalConnector;
-import org.integratedmodelling.thinklab.api.knowledge.ISemanticLiteral;
+import org.integratedmodelling.thinklab.api.knowledge.IProperty;
 import org.integratedmodelling.thinklab.api.lang.IList;
 import org.integratedmodelling.thinklab.api.lang.IParseable;
 
@@ -70,6 +70,20 @@ public interface IQuery extends IParseable {
 	 */
 	public abstract IList asList();
 
+	
+	/**
+	 * Restrict to the queries defined by the passed semantic operators. 
+	 * 
+	 * E.g. query.restrict(hasName,    new Equals("John"))
+	 *      query.restrict(hasSibling, new Query(Person).restrict(hasName, new Equals("John"))
+	 *      query.restrict(hasParent,  new Conforms(john))
+	 *      
+	 * @param property
+	 * @param operator
+	 * @return
+	 */
+	public abstract IQuery restrict(IProperty property, IOperator ... operator);
+	
 	/**
 	 * Restrict the current constraint by properly merging in the passed connections using the passed
 	 * mode. Don't even think about passing anything but AND and OR, although no check is made.
@@ -79,58 +93,13 @@ public interface IQuery extends IParseable {
 	 * @returns this, not a new constraint; it's done only to enable shorter idioms when creating
 	 *    a constraint like new Constraint(..).restrict(...);
 	 */
-	public abstract IQuery restrict(LogicalConnector connector, IRestriction... restrictions);
+	public abstract IQuery restrict(LogicalConnector connector, IProperty property, IOperator ... restrictions);
 
-
-	/**
-	 * Add a restriction as a constraint on a linked object. If any other restriction exist, AND them. If
-	 * another connector is wanted, use the restriction class directly or the list format.
-	 * 
-	 * @param propertyType
-	 * @param objectConstraint
-	 * @throws ThinklabException 
-	 * @throws ThinklabIncompatibleConstraintException 
-	 * @category Creation API
-	 */
-	public abstract void addObjectRestriction(String propertyType, IQuery objectQuery) throws ThinklabException;
-
-	/**
-	 * Add a restriction as a constraining class on a classification property. If any other restriction exist, AND them. If
-	 * another connector is wanted, use the restriction class directly or the list format.
-	 * 
-	 * @param propertyType
-	 * @param classID
-	 * @category Creation API
-	 */
-	public abstract void addClassificationRestriction(String propertyType, String classID) throws ThinklabException;
-
-	/**
-	 * Add a restriction as the result of an operator on a linked literal. If any other restriction exist, AND them. If
-	 * another connector is wanted, use the restriction class directly or the list format.
-	 * 
-	 * @param propertyType
-	 * @param operator
-	 * @param value
-	 * @category Creation API
-	 */
-	public abstract void addLiteralRestriction(String propertyType, String operator, String value) throws ThinklabException;
-
-	/**
-	 * Add a restriction as the result of an operator on a linked literal. If any other restriction exist, AND them. If
-	 * another connector is wanted, use the restriction class directly or the list format.
-	 * 
-	 * @param propertyType
-	 * @param operator
-	 * @param value
-	 * @category Creation API
-	 */
-	public abstract void addLiteralRestriction(String propertyType, String operator, ISemanticLiteral value) throws ThinklabException;
-
-	/**
-	 * Return the restriction objects as a single restriction
-	 * @return
-	 */
-	public abstract IRestriction getRestrictions();
+//	/**
+//	 * Return the restriction objects as a single restriction
+//	 * @return
+//	 */
+//	public abstract getRestrictions();
 
 	/**
 	 * Validate passed object for conditions expressed in constraint. Object must have a

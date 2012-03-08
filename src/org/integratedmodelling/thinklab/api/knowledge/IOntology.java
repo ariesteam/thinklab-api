@@ -136,12 +136,12 @@ public interface IOntology  extends IResource {
 	 */
 	public abstract IProperty getProperty(String ID);
 
-	/**
-	 * Remove the instance identified by the passed id
-	 * @param uri
-	 * @throws ThinklabException 
-	 */
-	public void removeInstance(String id) throws ThinklabException;
+//	/**
+//	 * Remove the instance identified by the passed id
+//	 * @param uri
+//	 * @throws ThinklabException 
+//	 */
+//	public void removeInstance(String id) throws ThinklabException;
 
 	/**
 	 * The ID of the ontology concept space (its the XML namespace).

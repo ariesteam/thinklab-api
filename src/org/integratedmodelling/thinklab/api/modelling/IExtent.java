@@ -36,12 +36,6 @@ import java.util.Collection;
 
 import org.integratedmodelling.collections.Pair;
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.lang.PhysicalNature;
-import org.integratedmodelling.thinklab.api.knowledge.IConcept;
-import org.integratedmodelling.thinklab.api.knowledge.IContextualConceptualizable;
-import org.integratedmodelling.thinklab.api.knowledge.query.IRestriction;
-import org.integratedmodelling.thinklab.api.lang.IOperator;
-import org.integratedmodelling.thinklab.api.modelling.units.IUnit;
 
 /**
  * An Extent describes the topology of the observable
@@ -57,42 +51,42 @@ import org.integratedmodelling.thinklab.api.modelling.units.IUnit;
  */
 public abstract interface IExtent extends IState, ITopology<IExtent> {
 
-	/**
-	 * One of these is set into AggregationParameters to properly return the
-	 * aggregation multiplier for each topology granule.
-	 * 
-	 * @author ferdinando.villa
-	 *
-	 */
-	public static interface Aggregator {
-		public abstract double getAggregationFactor(int granule);
-	}
-	
-	/**
-	 * Returned by getAggregationParameters
-	 * @author  ferdinando.villa
-	 */
-	public static interface AggregationParameters {
-		
-		/**
-		 * @uml.property  name="aggregator" default="null"
-		 * @uml.associationEnd  
-		 */
-		public Aggregator     aggregator = null;
-		/**
-		 * @uml.property  name="aggregatedUnit" default="null"
-		 * @uml.associationEnd  
-		 */
-		public IUnit          aggregatedUnit = null;
-		/**
-		 * @uml.property  name="aggregatedNature" default="null"
-		 * @uml.associationEnd  
-		 */
-		public PhysicalNature aggregatedNature = null;
-		public String         aggregationOperator = IOperator.AVG;
-		public String         uncertaintyOperator = IOperator.CV; 
-	}
-	
+//	/**
+//	 * One of these is set into AggregationParameters to properly return the
+//	 * aggregation multiplier for each topology granule.
+//	 * 
+//	 * @author ferdinando.villa
+//	 *
+//	 */
+//	public static interface Aggregator {
+//		public abstract double getAggregationFactor(int granule);
+//	}
+//	
+//	/**
+//	 * Returned by getAggregationParameters
+//	 * @author  ferdinando.villa
+//	 */
+//	public static interface AggregationParameters {
+//		
+//		/**
+//		 * @uml.property  name="aggregator" default="null"
+//		 * @uml.associationEnd  
+//		 */
+//		public Aggregator     aggregator = null;
+//		/**
+//		 * @uml.property  name="aggregatedUnit" default="null"
+//		 * @uml.associationEnd  
+//		 */
+//		public IUnit          aggregatedUnit = null;
+//		/**
+//		 * @uml.property  name="aggregatedNature" default="null"
+//		 * @uml.associationEnd  
+//		 */
+//		public PhysicalNature aggregatedNature = null;
+//		public String         aggregationOperator = IOperator.AVG;
+//		public String         uncertaintyOperator = IOperator.CV; 
+//	}
+//	
 	/**
 	 * Collapse the multiplicity and return the extent that represents
 	 * the full extent of our topology in one single state. This extent may
@@ -121,12 +115,12 @@ public abstract interface IExtent extends IState, ITopology<IExtent> {
 	 */
 	public abstract boolean isCovered(int stateIndex);
 
-	/**
-	 * Return a semantic query that will match observations that are in the
-	 * relationship with this extent expressed by the passed operator. 
-	 */
-	public abstract IRestriction getConstraint(IOperator operator) throws ThinklabException;
-
+//	/**
+//	 * Return a semantic query that will match observations that are in the
+//	 * relationship with this extent expressed by the passed operator. 
+//   NOT NECESSARY - SHOULD BE A COVERS() conformance operator decided by model configuration.
+//	 */
+//	public abstract IRestriction getConstraint(IOperator operator) throws ThinklabException;
 
 	/**
 	 * Return a list of location references to use in expressions and
@@ -170,18 +164,18 @@ public abstract interface IExtent extends IState, ITopology<IExtent> {
 	 */
 	public IExtent force(IExtent extent) throws ThinklabException;
 
-	/**
-	 * Return a descriptor of how aggregation should be performed in this
-	 * extent for a value of the passed type. If a unit is associated, it
-	 * must be capable of creating the unit of the aggregated concept, which
-	 * will eliminate the dimension we represent if the concept is an
-	 * extensive one.
-	 * 
-	 * @param concept
-	 * @param unit
-	 * @return
-	 * @throws ThinklabException 
-	 */
-	public abstract AggregationParameters getAggregationParameters(IConcept concept, IUnit unit) throws ThinklabException;
+//	/**
+//	 * Return a descriptor of how aggregation should be performed in this
+//	 * extent for a value of the passed type. If a unit is associated, it
+//	 * must be capable of creating the unit of the aggregated concept, which
+//	 * will eliminate the dimension we represent if the concept is an
+//	 * extensive one.
+//	 * 
+//	 * @param concept
+//	 * @param unit
+//	 * @return
+//	 * @throws ThinklabException 
+//	 */
+//	public abstract AggregationParameters getAggregationParameters(IConcept concept, IUnit unit) throws ThinklabException;
 	
 }
