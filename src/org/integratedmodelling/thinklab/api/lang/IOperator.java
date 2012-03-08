@@ -2,6 +2,7 @@ package org.integratedmodelling.thinklab.api.lang;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.ISemanticLiteral;
+import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
 
 /**
  * Used in restrictions and capable of being rewritten in queries. A suitable
@@ -11,7 +12,7 @@ import org.integratedmodelling.thinklab.api.knowledge.ISemanticLiteral;
  * @author Ferdinando
  *
  */
-public interface IOperator  {
+public interface IOperator extends ISemanticObject {
 
 	public static final String NO_OP = "nop";
 	public static final String SUM = "+";

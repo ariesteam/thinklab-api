@@ -35,12 +35,10 @@ package org.integratedmodelling.lang;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.list.PolyList;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
-import org.integratedmodelling.thinklab.api.knowledge.ISemanticAdapter;
 import org.integratedmodelling.thinklab.api.knowledge.ISemanticLiteral;
 import org.integratedmodelling.thinklab.api.knowledge.factories.IKnowledgeManager;
 import org.integratedmodelling.thinklab.api.lang.IList;

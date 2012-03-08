@@ -34,7 +34,6 @@
 package org.integratedmodelling.thinklab.api.listeners;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.thinklab.api.knowledge.IInstance;
 import org.integratedmodelling.thinklab.api.runtime.ISession;
 
 /**
@@ -65,21 +64,5 @@ public interface ISessionListener extends IListener {
 	 * @throws ThinklabException 
 	 */
 	public abstract void sessionDeleted(ISession session) throws ThinklabException;
-	
-	/**
-	 * Notifier for the creation of an object. Typically only called on main objects created explicitly by
-	 * user actions or direct API calls, and not for those linked to them and created during recursive 
-	 * calls. When this is called, the object has been fully defined and validated.
-	 * @param object
-	 */
-	public abstract void objectCreated(IInstance object)  throws ThinklabException; 
-	
-	/**
-	 * Notifier for the destruction of an object. NOTE: no functions in Thinklab currently destroy objects, 
-	 * and session deletion is currently not guaranteed to destroy objects. Implementation will not be 
-	 * used at this time.
-	 * @param object
-	 */
-	public abstract void objectDeleted(IInstance object)  throws ThinklabException;
-	
+
 }

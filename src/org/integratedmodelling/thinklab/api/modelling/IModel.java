@@ -3,7 +3,7 @@ package org.integratedmodelling.thinklab.api.modelling;
 import java.util.Collection;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.thinklab.api.knowledge.IInstance;
+import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
 
 
 /**
@@ -15,7 +15,7 @@ public interface IModel extends IModelObject {
 	 * Return the observable. Never null. 
 	 * @return
 	 */
-	public abstract IInstance getObservable();
+	public abstract ISemanticObject getObservable();
 	
 	/**
 	 * Return the observer(s) that made this observation and provides the

@@ -39,6 +39,7 @@ package org.integratedmodelling.thinklab.api.knowledge;
  * These should be associated to datatype URIs using the @Literal annotation.
  * 
  * @author  Ferd
+ * @deprecated to be substituted by SemanticObject which also substitutes IInstance.
  */
 public interface ISemanticLiteral {
 

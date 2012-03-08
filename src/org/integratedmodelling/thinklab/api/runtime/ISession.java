@@ -35,15 +35,11 @@ package org.integratedmodelling.thinklab.api.runtime;
 
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.net.URL;
-import java.util.Collection;
 import java.util.Properties;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.exceptions.ThinklabResourceNotFoundException;
 import org.integratedmodelling.exceptions.ThinklabValidationException;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
-import org.integratedmodelling.thinklab.api.knowledge.IInstance;
 import org.integratedmodelling.thinklab.api.knowledge.query.IConformance;
 import org.integratedmodelling.thinklab.api.lang.IList;
 import org.integratedmodelling.thinklab.api.listeners.IListenable;
@@ -63,14 +59,12 @@ public interface ISession extends IListenable {
 	/**
 	 * Each session has a unique ID assigned by the Knowledge manager. 
 	 * @return  the session's ID.
-	 * @uml.property  name="sessionID"
 	 */
 	public abstract String getSessionID();
 	
 	/**
 	 * A session must have properties that users and plugins can set. This method must return a valid properties object.
 	 * @return  the session's properties.
-	 * @uml.property  name="sessionProperties"
 	 */
 	public abstract Properties getSessionProperties();
 
@@ -97,115 +91,26 @@ public interface ISession extends IListenable {
 
 
 	/**
-	 * Create object of passed type. Object is all yours to define. 
-	 * 
-	 * @param name A name for the new object. Must be unique or exception is thrown. 
-	 * @param parent the instance parent concept.
-	 * @return a new unvalidated IInstance. 
-	 * @throws ThinklabException  if anything wrong.
-	 * 	 */
-	public abstract IInstance createObject(String name, IConcept parent) throws ThinklabException;
-	
-	/**
-	 * Create object of passed type. Object is all yours to define. The object must be validated
-	 * using validate() before it can be used. Name of object is automatically assigned.
-	 * @param concept a string representing the semantic type of the parent concept.
-	 * @return a new unvalidated IInstance
-	 * @throws ThinklabException  if anything wrong.
-	 * 
-	 * 	 * FIXME must return a garbage collected instance, if we ever manage to implement it.
-	 */
-	public abstract IInstance createObject(String concept) throws ThinklabException;
-
-	/**
-	 * Create object from list definition. Can be used to copy instances from a session to another or from the
-	 * KB. Careful with nested instances though. Instance shoud be completely defined by list, so it is
-	 * validated before it's returned.
-	 * @param name Unique name for the new object. Use getUniqueObjectName() if no clue. The name is not
-	 * 			   a property of the object, so it can't be passed in the list (this may change).
-	 * @param definition the list defining a new instance.
-	 * @return a new <b>validated</b> Instance.
-	 * @throws ThinklabException if anything wrong.
-	 * 
-	 *  FIXME must return a garbage collected instance, if we ever manage to implement it.
-	 */
-	public abstract IInstance createObject(String name, IList definition) throws ThinklabException;
-	
-	/**
-	 * Create instance, using made up name. Identical to createObject(String, Polylist) otherwise.
-	 * @param polylist
-	 * @param properties TODO
-	 * @param properties for defaults and such, passed to implementation.initialize()
-	 * @return a new validated instance.
-	 * 
-	 *  FIXME must return a garbage collected instance, if we ever manage to implement it.
-	 */
-	public abstract IInstance createObject(IList polylist) throws ThinklabException;
-	
-	/**
-	 * Read in objects from the given URL. What can be read depends on the implementation, but it should
-	 * support OWL and OPAL at least.
-	 * @param url a URL to read from
-	 * @return a collection of the main-level IInstances (those that are defined in the 
-	 *         main level, i.e. are not "linked" to others).
-	 * @throws ThinklabException if anything goes wrong
-	 * 
-	 *  FIXME must return garbage collected instances, if we ever manage to implement it.
-	 */
-	public abstract Collection<IInstance> loadObjects(URL url) throws ThinklabException;
-
-
-	/**
 	 * Delete the named object.
 	 * @param name name of object
 	 * @throws ThinklabException 
 	 */
 	public abstract void deleteObject(String name) throws ThinklabException;
-
-	/**
-	 * Retrieve the named object or null if no such object exists in session.
-	 * @param name an object name. Note: this is just a name, not a semantic type.
-	 * @return the object or null if not found
-	 */
-	public abstract IInstance retrieveObject(String name);
-	
-	/**
-	 * Retrieve the named object, throwing an exception if not found.
-	 * @param name an object name. Note: this is just a name, not a semantic type.
-	 * @return the object
-	 * @throws ThinklabResourceNotFoundException if object isn't in session
-	 */
-	public abstract IInstance requireObject(String name) throws ThinklabResourceNotFoundException;
-	
-    /**
-     * Create object as copy of other object from any session. Object ID will usually change.
-     * @param ii an instance to copy
-     * @return the new instance.
-     * @throws ThinklabException if anything goes wrong
-     * 
-     * FIXME see if we really need this one. IInstance.clone(session) should be plenty.
-     */
-    public abstract IInstance createObject(IInstance ii) throws ThinklabException;
-
 	
 	/**
 	 * Return the user model for the session. If the session is not interactive, the user model may be null.
 	 * @return
-	 * @uml.property  name="userModel"
-	 * @uml.associationEnd  
 	 */
 	public abstract IUserModel getUserModel();
 
 	/**
 	 * Get the input stream if the user model has it, or return null.
 	 * @return
-	 * @uml.property  name="inputStream"
 	 */
 	public abstract InputStream getInputStream(); 
 	
 	/**
 	 * get the output stream if the user model defines one, otherwise return null.
-	 * @uml.property  name="outputStream"
 	 */
 	public PrintStream getOutputStream();
 	
@@ -242,7 +147,6 @@ public interface ISession extends IListenable {
 	/**
 	 * Return a unique directory name for the session's workspace, in case applications request it. The directory  should be a simple identifier.
 	 * @return
-	 * @uml.property  name="sessionWorkspace"
 	 */
 	public abstract String getSessionWorkspace();
 	

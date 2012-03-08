@@ -66,54 +66,54 @@ public interface IOntology  extends IResource {
 	 * @return an iterator over all the properties contained in the ontology. 
 	 */
 	public abstract Collection<IProperty> getProperties();
-
-	/**
-	 * Iterate over all instances
-	 * @return all the instances contained in the ontology. 
-	 * @throws ThinklabException 
-	 */
-	public abstract Collection<IInstance> getInstances() throws ThinklabException;
-	
-	/**
-	 * Create an instance of the given concept. The instance is "loose", not linked to the ontology unless
-	 * it is passed to validateInstance after being created.
-	 * @category Modifying methods
-	 * @param ID the instance id.
-	 * @return a loose instance to define and validate.
-	 * @throws ThinklabDuplicateNameException 
-	 * @throws ThinklabMalformedSemanticTypeException 
-	 * @throws ThinklabIOException 
-	 */
-	public abstract IInstance createInstance(String ID, IConcept c) throws ThinklabException;
-	
-    /**
-     * Create a copy of passed instance, which may come from a different ontology.
-	 * @category Modifying methods
-     * @param i
-     * @return
-     * @throws ThinklabException
-     */
-    public abstract IInstance createInstance(IInstance i) throws ThinklabException;
-    
-    /**
-     * Create an instance from a list, imposing the specified ID.
-	 * @category Modifying methods
-     * @param ID 
-     * @param list e.g. returned by asList() from another IInstance. 
-     * @return
-     * @throws ThinklabException
-     */
-	public abstract IInstance createInstance(String ID, IList list) throws ThinklabException;
-
-    /**
-     * Create an instance from a list.
-	 * @category Modifying methods
-     * @param list
-     * @return
-     * @throws ThinklabException
-     */
-    public abstract IInstance createInstance(IList list) throws ThinklabException;
-
+//
+//	/**
+//	 * Iterate over all instances
+//	 * @return all the instances contained in the ontology. 
+//	 * @throws ThinklabException 
+//	 */
+//	public abstract Collection<IInstance> getInstances() throws ThinklabException;
+//	
+//	/**
+//	 * Create an instance of the given concept. The instance is "loose", not linked to the ontology unless
+//	 * it is passed to validateInstance after being created.
+//	 * @category Modifying methods
+//	 * @param ID the instance id.
+//	 * @return a loose instance to define and validate.
+//	 * @throws ThinklabDuplicateNameException 
+//	 * @throws ThinklabMalformedSemanticTypeException 
+//	 * @throws ThinklabIOException 
+//	 */
+//	public abstract IInstance createInstance(String ID, IConcept c) throws ThinklabException;
+//	
+//    /**
+//     * Create a copy of passed instance, which may come from a different ontology.
+//	 * @category Modifying methods
+//     * @param i
+//     * @return
+//     * @throws ThinklabException
+//     */
+//    public abstract IInstance createInstance(IInstance i) throws ThinklabException;
+//    
+//    /**
+//     * Create an instance from a list, imposing the specified ID.
+//	 * @category Modifying methods
+//     * @param ID 
+//     * @param list e.g. returned by asList() from another IInstance. 
+//     * @return
+//     * @throws ThinklabException
+//     */
+//	public abstract IInstance createInstance(String ID, IList list) throws ThinklabException;
+//
+//    /**
+//     * Create an instance from a list.
+//	 * @category Modifying methods
+//     * @param list
+//     * @return
+//     * @throws ThinklabException
+//     */
+//    public abstract IInstance createInstance(IList list) throws ThinklabException;
+//
 
 	/**
 	 * Return a concept, or null if not found.
@@ -122,13 +122,13 @@ public interface IOntology  extends IResource {
 	 */
 	public abstract IConcept getConcept(String ID);
 	
-	/**
-	 * Return an instance, or null if not found.
-	 * @param ID the instance's ID
-	 * @return the instance or null
-	 */
-	public abstract IInstance getInstance(String ID);
-	
+//	/**
+//	 * Return an instance, or null if not found.
+//	 * @param ID the instance's ID
+//	 * @return the instance or null
+//	 */
+//	public abstract IInstance getInstance(String ID);
+//	
 	/**
 	 * Return a property, or null if not found.
 	 * @param ID the property's ID
@@ -165,12 +165,12 @@ public interface IOntology  extends IResource {
 	 */
 	public String getURI();
 
-	/**
-	 * Create an equivalence statement between the two instances passed.
-	 * @param o1
-	 * @param o2
-	 */
-	public void createEquivalence(IInstance o1, IInstance o2);
+//	/**
+//	 * Create an equivalence statement between the two instances passed.
+//	 * @param o1
+//	 * @param o2
+//	 */
+//	public void createEquivalence(IInstance o1, IInstance o2);
 
 	/**
 	 * 

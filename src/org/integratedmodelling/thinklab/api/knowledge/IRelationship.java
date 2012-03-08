@@ -45,7 +45,7 @@ package org.integratedmodelling.thinklab.api.knowledge;
  * 
  * @author  Ferdinando Villa
  */
-public interface IRelationship {
+public interface IRelationship extends ISemanticObject {
 
 	/**
 	 * Get the property that defines the relationship. 
@@ -59,12 +59,12 @@ public interface IRelationship {
 	 */
 	public abstract ISemanticLiteral getValue();
 	
-	/**
-	 * Get the instance object targeted. Should only be called if isObject() returns true.
-	 * 
-	 * @return
-	 */
-	public abstract IInstance getObject();
+//	/**
+//	 * Get the instance object targeted. Should only be called if isObject() returns true.
+//	 * 
+//	 * @return
+//	 */
+//	public abstract IInstance getObject();
 	
     /**
      * <p>Check if relationship is with a literal. A literal is an instance of a concept that uses no formal

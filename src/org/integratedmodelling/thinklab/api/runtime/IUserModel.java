@@ -5,7 +5,7 @@ import java.io.PrintStream;
 import java.util.Properties;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.thinklab.api.knowledge.IInstance;
+import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
 
 /**
  * Implements the model of the user during a Thinklab session. Only one user model should exist per session, and it can be retrieved from it; it may also be null for non-interactive sessions. Application tasks and interface components will check the lineage of the user model in order to enable or disable operations.
@@ -50,11 +50,13 @@ public interface IUserModel {
 	public abstract Properties getProperties();
 
 	/**
-	 * if a user is logged in, this method must return a valid instance that describes it. We use the instance for authentication (checking subsumption by roles).
+	 * if a user is logged in, this method must return a valid object that describes it. We use the instance 
+	 * for authentication (checking subsumption by roles).
+	 * 
 	 * @return
 	 * @throws ThinklabException
 	 * @uml.property  name="userInstance"
 	 * @uml.associationEnd  
 	 */
-	public abstract IInstance getUserInstance() throws ThinklabException;
+	public abstract ISemanticObject getUser() throws ThinklabException;
 }

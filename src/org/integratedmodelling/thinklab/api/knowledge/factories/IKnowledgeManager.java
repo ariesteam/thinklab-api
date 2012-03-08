@@ -10,6 +10,7 @@ import org.integratedmodelling.thinklab.api.knowledge.kbox.IKbox;
 
 public interface IKnowledgeManager {
 	
+	
 	/**
 	 * Create a kbox with the named uri, using the implementation assigned to the
 	 * URI protocol.
@@ -94,6 +95,8 @@ public interface IKnowledgeManager {
 	 * @param object
 	 * @return
 	 * @throws ThinklabException
+	 * @deprecated there should be a ISemanticObject promote(Object) that takes care of everything from
+	 * literals to instances.
 	 */
 	public abstract ISemanticLiteral annotateLiteral(Object object) throws ThinklabException;
 

@@ -4,7 +4,6 @@ import java.util.Collection;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.exceptions.ThinklabIOException;
-import org.integratedmodelling.thinklab.api.knowledge.storage.IKBox;
 import org.integratedmodelling.thinklab.api.modelling.IAgentModel;
 import org.integratedmodelling.thinklab.api.modelling.IContext;
 import org.integratedmodelling.thinklab.api.modelling.IModel;
@@ -12,7 +11,6 @@ import org.integratedmodelling.thinklab.api.modelling.IModelObject;
 import org.integratedmodelling.thinklab.api.modelling.INamespace;
 import org.integratedmodelling.thinklab.api.modelling.IScenario;
 import org.integratedmodelling.thinklab.api.project.IProject;
-import org.integratedmodelling.thinklab.api.runtime.ISession;
 
 /**
  * The model factory contains the register of all model objects and namespaces. It's capable of
@@ -55,7 +53,7 @@ public interface IModelManager {
 	 * @param model
 	 * @return
 	 */
-	public abstract IContext getCoverage(IModel model, IKBox kbox, ISession session);
+	public abstract IContext getCoverage(IModel model);
 
 	/**
 	 * Get all scenarios that apply to the passed model.
@@ -66,20 +64,6 @@ public interface IModelManager {
 	 */
 	public abstract Collection<IScenario> getApplicableScenarios(IModel model,
 			IContext context, boolean isPublic) throws ThinklabException;
-
-	/**
-	 * Query the model on the kbox, create the observation correspondent to the 0 match,
-	 * contextualize it and return the resulting context.
-	 * 
-	 * @param model
-	 * @param kbox
-	 * @param session
-	 * @param context
-	 * @return
-	 * @throws ThinklabException
-	 */
-	public abstract IContext run(IModel model, IKBox kbox, ISession session, IContext context)
-			throws ThinklabException;
 
 	/**
 	 * Load all model objects defined in the given file, adding them to the model map.
