@@ -70,7 +70,6 @@ public interface IQuery extends IParseable {
 	 */
 	public abstract IList asList();
 
-	
 	/**
 	 * Restrict to the queries defined by the passed semantic operators. 
 	 * 
