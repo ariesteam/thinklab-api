@@ -38,7 +38,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.list.PolyList;
+import org.integratedmodelling.exceptions.ThinklabRuntimeException;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.IKnowledge;
 import org.integratedmodelling.thinklab.api.knowledge.IProperty;
@@ -69,9 +69,15 @@ public class Semantics {
 	IKnowledge predicate;
 
 	/*
+	 * filled if the predicate is a concept and the annotation is for a literal object
+	 */
+	Object literal;
+	
+	/*
 	 * only filled if the predicate is a data property
 	 */
 	ISemanticObject target;
+	
 	/*
 	 * filled if the predicate is an object property
 	 */
@@ -107,20 +113,106 @@ public class Semantics {
 	public Semantics(IList instanceList, IKnowledgeManager km) {
 		_km = km;
 		list = instanceList;
-		/*
-		 * expects a concept. The constructor with the property is private
-		 */
+		predicate = getKnowledge(list.first());
 	}
 
-	private Semantics(IProperty property, Object object) {
-		
-	}
-
+	/*
+	 * parse the rest of the list into relationships and objects. 
+	 */
 	private void parse(IList iList) {
-		// TODO Auto-generated method stub
 		
+		relationships = new ArrayList<Semantics>();
+		Object[] oo = iList.array();
+		
+		for (int i = 1; i < oo.length; i++) {
+
+			Object o = oo[i];
+			if (predicate instanceof IConcept) {
+				/*
+				 * anything but the predicate must be a relationship, i.e. a IList
+				 */
+				if (o instanceof IList) {					
+					relationships.add(new Semantics((IList)o, _km));
+				} else {
+					literal = o;
+				}
+				
+			} else if (predicate instanceof IProperty) {
+				
+				/*
+				 * target can be a regular object, a semantic object or pure semantics
+				 */
+				if (o instanceof ISemanticObject) {
+					target = (ISemanticObject)o;
+				} else if (o instanceof Semantics) {
+					targetSemantics = (Semantics)target;
+				} else if (o instanceof IList) {
+					targetSemantics = new Semantics((IList)o, _km);
+				} else if (o instanceof String) {
+					
+					/*
+					 * use the property - if data, find the type for the datatype
+					 */
+					if (((IProperty)predicate).isObjectProperty()) {
+						IConcept range = getRange((IProperty)predicate);
+						try {
+							target = _km.parse(o.toString(), range);
+						} catch (ThinklabException e) {
+							throw new ThinklabRuntimeException(e);
+						}
+					} else {
+						
+						String datatype = getDataType((IProperty)predicate);
+						/*
+						 * TODO
+						 */
+					}
+					
+				} else {
+					/*
+					 * try to annotate it
+					 */
+					try {
+						target = _km.annotate(o);
+					} catch (ThinklabException e) {
+						throw new ThinklabRuntimeException(e);
+					}
+				}
+			} 
+		}
 	}
 
+
+	private String getDataType(IProperty predicate2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private IConcept getRange(IProperty property) {
+
+		IConcept ret = null;
+		Collection<IConcept> range = property.getRange();
+		if (range != null && range.size() > 0)
+			ret = range.iterator().next();
+		else 
+			throw new ThinklabRuntimeException("cannot establish range of property " + property +
+					" to parse literal value");
+		
+		return ret;
+	}
+
+	private IKnowledge getKnowledge(Object o) {
+
+		IKnowledge ret = null;
+		if (o instanceof IKnowledge) {
+			ret = (IKnowledge)o;
+		} else {
+			ret = _km.getConcept(o.toString());
+			if (ret == null)
+				ret = _km.getProperty(o.toString());
+		}
+		return ret;
+	}
 
 	public int getRelationshipsCount() {
 		return getRelationships().size();
@@ -147,64 +239,19 @@ public class Semantics {
 	public IProperty getProperty() {
 		return (IProperty)predicate;
 	}
+	
+	public boolean isLiteral() {
+		getRelationships();
+		return literal != null;
+	}
 
 	public Collection<Semantics> getRelationships() {
 
-		ArrayList<Semantics> ret = new ArrayList<Semantics>();
 		if (relationships == null) {
 			parse(list);
 		}
-		ret.addAll(relationships);
-
-		return ret;
+		return relationships;
 	}
-
-	// /**
-	// * Return the target of the given represented relationship assuming it's a
-	// concept or specifies one.
-	// *
-	// * @param relationship
-	// * @return
-	// * @throws ThinklabException
-	// */
-	// public IConcept getTargetConcept(String relationship) {
-	//
-	// IConcept ret = null;
-	//
-	// for (int i = 1; i < array.length; i++) {
-	// if (array[i] instanceof IList) {
-	// String s = ((IList)array[i]).first().toString();
-	//
-	// if (s.equals(relationship)) {
-	//
-	// Object o = ((PolyList)array[i]).second();
-	//
-	// if (o instanceof ISemanticLiteral) {
-	// ret = ((ISemanticLiteral)o).getConcept();
-	// } else if (o instanceof IList) {
-	// /* instance specification */
-	// ret = resolveToConcept(((IList)o).first());
-	// } else {
-	// ret = resolveToConcept(o);
-	// }
-	// }
-	// }
-	// }
-	// return ret;
-	// }
-	//
-	// private IConcept resolveToConcept(Object o) {
-	//
-	// IConcept ret = null;
-	//
-	// if (o instanceof IConcept) {
-	// ret = (IConcept)o;
-	// } else {
-	// ret = _km.getConcept(o.toString());
-	// }
-	//
-	// return ret;
-	// }
 
 	public Collection<Semantics> getRelationships(IProperty property)
 			throws ThinklabException {
@@ -222,11 +269,20 @@ public class Semantics {
 		return r.size() > 0 ? r.iterator().next().getTargetSemantics() : null;
 	}
 
-	private Semantics getTargetSemantics() {
+	public Semantics getTargetSemantics() {
 
+		getRelationships();
 		if (target != null) 
 			return target.getSemantics();
 		return targetSemantics;
+	}
+	
+	public Object getTargetLiteral() {
+		return literal;
+	}
+	
+	public ISemanticObject getTarget() {
+		return target;
 	}
 
 	public List<Semantics> getValues(IProperty property)

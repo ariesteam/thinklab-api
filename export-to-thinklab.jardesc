@@ -10,7 +10,7 @@
             <packagesToUnSeal/>
         </sealing>
     </manifest>
-    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+    <selectedElements exportClassFiles="false" exportJavaFiles="false" exportOutputFolder="true">
         <file path="/thinklab-api/README"/>
         <javaElement handleIdentifier="=thinklab-api/src"/>
         <file path="/thinklab-api/javadoc.xml"/>
