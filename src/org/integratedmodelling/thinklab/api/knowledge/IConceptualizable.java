@@ -34,7 +34,6 @@
 package org.integratedmodelling.thinklab.api.knowledge;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.lang.Semantics;
 
 
 /**
@@ -57,7 +56,7 @@ public interface IConceptualizable {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	Semantics conceptualize() throws ThinklabException;
+	ISemantics conceptualize() throws ThinklabException;
 	
 	/**
 	 * A IConceptualizable must have an empty constructor and be capable of fully
@@ -66,5 +65,5 @@ public interface IConceptualizable {
 	 * @param conceptualization
 	 * @throws ThinklabException
 	 */
-	void define(Semantics conceptualization) throws ThinklabException;
+	void define(ISemantics conceptualization) throws ThinklabException;
 }

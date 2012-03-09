@@ -3,7 +3,6 @@ package org.integratedmodelling.thinklab.api.knowledge;
 import java.util.List;
 
 import org.integratedmodelling.exceptions.ThinklabValidationException;
-import org.integratedmodelling.lang.Semantics;
 
 public interface ISemanticObject {
 
@@ -14,7 +13,7 @@ public interface ISemanticObject {
 	 * @return
 	 * @see IKnowledgeManager.instantiate()
 	 */
-	public abstract Semantics getSemantics();
+	public abstract ISemantics getSemantics();
 	
 	/**
 	 * Return the bare Java object that was annotated through this object. In most cases the
@@ -38,24 +37,19 @@ public interface ISemanticObject {
 	
 	/**
 	 * Use whatever reasoning strategy is supported in the implementation to check whether our direct type
-	 * is the passed one.
+	 * is the passed one. Any object should be admitted without error, but only sensible ones should have
+	 * a chance of being this. Normally implementations will check concepts, ISemantics, ISemanticObject
+	 * and Strings, if wanted, after converting them to concepts.
+	 * 
+	 * If the other object is a ISemanticObject, the function should checking whether the objects classify 
+	 * to the same object in the implemented ontology infrastructure. The meaning of conformance can be 
+	 * defined by using a default conformance operator. 
 	 * 
 	 * @param concept
 	 * @return
 	 */
-	public boolean is(IConcept concept);
+	public boolean is(Object other);
 	
-	/**
-	 * Shorthand for applying a default conformance operator between us and another object. It should
-	 * resolve to checking whether the objects classify to the same object in the implemented
-	 * ontology infrastructure. The meaning of conformance can be defined by using the full conformance
-	 * API. 
-	 * 
-	 * @param object
-	 * @return
-	 */
-	public boolean is(ISemanticObject object);
-
 	/**
 	 * Return the target value of the passed relationship, or null if it doesn't exist in this object.
 	 * 

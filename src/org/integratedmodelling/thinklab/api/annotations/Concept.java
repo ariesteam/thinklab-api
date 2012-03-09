@@ -23,6 +23,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface Concept {
 	public String[] value(); 
+	public boolean full() default false;
 }
 
 

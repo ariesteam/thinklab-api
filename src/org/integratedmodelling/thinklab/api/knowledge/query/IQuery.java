@@ -40,7 +40,8 @@ import org.integratedmodelling.thinklab.api.lang.IList;
 import org.integratedmodelling.thinklab.api.lang.IParseable;
 
 /**
- * A query's purpose is to generalize the semantic querying of objects. 
+ * A query's purpose is to generalize the semantic querying of objects. Queries operate on generic object,
+ * which are annotated as necessary before use. 
  *  
  * @author Ferdinando Villa
  *

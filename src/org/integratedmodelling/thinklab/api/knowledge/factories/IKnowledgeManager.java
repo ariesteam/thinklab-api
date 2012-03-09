@@ -2,10 +2,10 @@ package org.integratedmodelling.thinklab.api.knowledge.factories;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.exceptions.ThinklabValidationException;
-import org.integratedmodelling.lang.Semantics;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.IProperty;
 import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
+import org.integratedmodelling.thinklab.api.knowledge.ISemantics;
 import org.integratedmodelling.thinklab.api.knowledge.kbox.IKbox;
 
 public interface IKnowledgeManager {
@@ -92,7 +92,7 @@ public interface IKnowledgeManager {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public abstract Semantics conceptualize(Object object) throws ThinklabException;
+	public abstract ISemantics conceptualize(Object object) throws ThinklabException;
 	
 	/**
 	 * Reifies an annotation by producing the object it describes, if any. In order for an
@@ -103,5 +103,5 @@ public interface IKnowledgeManager {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public Object instantiate(Semantics a) throws ThinklabException;
+	public Object instantiate(ISemantics a) throws ThinklabException;
 }
