@@ -1,4 +1,4 @@
-package org.integratedmodelling.thinklab.api.modelling.metadata;
+package org.integratedmodelling.thinklab.api.metadata;
 
 
 public interface IMetadata {

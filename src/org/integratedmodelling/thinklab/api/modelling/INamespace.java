@@ -2,8 +2,8 @@ package org.integratedmodelling.thinklab.api.modelling;
 
 import java.util.Collection;
 
-import org.integratedmodelling.thinklab.api.ILanguageObject;
 import org.integratedmodelling.thinklab.api.knowledge.IOntology;
+import org.integratedmodelling.thinklab.api.lang.ILanguageObject;
 
 /**
  * Describes an existing model namespace. All namespaces in thinklab have an associated ontology, although they may be in a one to many relationship 

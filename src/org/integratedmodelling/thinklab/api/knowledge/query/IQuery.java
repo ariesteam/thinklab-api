@@ -34,10 +34,8 @@
 package org.integratedmodelling.thinklab.api.knowledge.query;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.lang.LogicalConnector;
 import org.integratedmodelling.thinklab.api.knowledge.IProperty;
 import org.integratedmodelling.thinklab.api.lang.IList;
-import org.integratedmodelling.thinklab.api.lang.IParseable;
 
 /**
  * A query's purpose is to generalize the semantic querying of objects. Queries operate on generic object,
@@ -46,24 +44,8 @@ import org.integratedmodelling.thinklab.api.lang.IParseable;
  * @author Ferdinando Villa
  *
  */
-public interface IQuery extends IParseable {
-	
-	/**
-	 * Return true if the query is empty, meaning that it will select everything that's queriable. 
-	 * 
-	 * @return
-	 */
-	public abstract boolean isEmpty();
-
-	/**
-	 * Return a new query which is the logical connection of self with the passed one.
-	 * 
-	 * @param constraint
-	 * @param intersection
-	 * @return
-	 */
-	public abstract IQuery merge(IQuery constraint, LogicalConnector intersection) throws ThinklabException ;
-	
+public interface IQuery {
+		
 	/**
 	 * Return a list representation of this query that can produce an identical one.
 	 * 
@@ -72,41 +54,34 @@ public interface IQuery extends IParseable {
 	public abstract IList asList();
 
 	/**
-	 * Restrict to the queries defined by the passed queries. 
+	 * Restrict to the queries defined by the passed queries. Note: can modify the query. Whether
+	 * this is implemented functionally depends on the implementation.
 	 * 
-	 * E.g. query.restrict(hasName,    new Equals("John"))
-	 *      query.restrict(hasSibling, new Query(Person).restrict(hasName, new Equals("John"))
-	 *      query.restrict(hasParent,  new Conforms(john))
-	 *      
-	 * @param property
-	 * @param operator
+	 * E.g. 
+	 *  
+	 	   // select john (it actually returns a list - just pretend)
+	       ISemanticObject john = 
+	       		kbox. query(Query.select(PERSON).restrict(hasName,    new Equality("John")));
+
+    	   // select all of john's siblings
+	       Query.select(PERSON).restrict(hasSibling, new Equality(john));
+
+	       // select anyone who has at least one parent "like" john - same number of
+	       // children and parents and whatever else the semantic of PERSON means.
+	       Query.select(PERSON).restrict(hasParent,  new Conformance(john));
+	       
+	 * @param property the property to restrict
+	 * @param query the queries to restrict it with. If no query is passed, the simple
+	 *        existence of relationships of type property should be checked.
 	 * @return
 	 */
 	public abstract IQuery restrict(IProperty property, IQuery ... query);
 	
 	/**
-	 * Restrict the current constraint by properly merging in the passed connections using the passed
-	 * mode. Don't even think about passing anything but AND and OR, although no check is made.
-	 * @param connector LogicalConnector.INTERSECTION or UNION. Nothing else please.
-	 * @param restrictions as many new restrictions as you want. NULLs are accepted and will be ignored for
-	 *        convenience.
-	 * @returns this, not a new constraint; it's done only to enable shorter idioms when creating
-	 *    a constraint like new Constraint(..).restrict(...);
-	 */
-	public abstract IQuery restrict(LogicalConnector connector, IProperty property, IQuery ... restrictions);
-
-//	/**
-//	 * Return the restriction objects as a single restriction
-//	 * @return
-//	 */
-//	public abstract getRestrictions();
-
-	/**
-	 * Validate passed object for conditions expressed in constraint. Object must have a
-	 * semantic peer, i.e. be an IInstance, InstanceList, IConceptualizable or have an
-	 * associated SemanticAdapter.
+	 * Validate passed object for conditions expressed in the query. The object
+	 * is conceptualized if necessary.
 	 * 
-	 * @param i a concept or instance to validate.
+	 * @param i a semantic object to validate.
 	 * @return true if match is positive.
 	 * @throws ThinklabException 
 	 */

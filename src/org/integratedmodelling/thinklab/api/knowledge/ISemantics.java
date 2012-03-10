@@ -51,7 +51,16 @@ public interface ISemantics {
 
 	public abstract List<ISemantics> getValues(IProperty property)
 			throws ThinklabException;
-	
+
+	/**
+	 * FIXME put this one in a separate IListSerializable or something that
+	 * classes have the freedom to implement. Then we can write adapters to
+	 * JSON, XML etc. 
+	 * 
+	 * (IListAdapter -> fromList(), toList(), print(outputstream), read(inputstream)
+	 * 
+	 * @return
+	 */
 	public abstract IList asList();
 
 }

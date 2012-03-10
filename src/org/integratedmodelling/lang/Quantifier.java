@@ -38,19 +38,53 @@ import org.integratedmodelling.thinklab.api.lang.IParseable;
 
 public class Quantifier implements IParseable {
 
-	static public final int ERROR = -1;
+	static public final int ERROR = -2;
     static public final int ANY = 0;
     static public final int ALL = 1;
     static public final int EXACT = 2;
     static public final int RANGE = 3;
     static public final int NONE = 4;
-     
+    static public final int INFINITE = -1;
+    
+    /**
+     * Create the specified quantifier.
+     * @return
+     */
+    static public Quantifier ANY() { return new Quantifier(ANY); }
+    
+    /**
+     * Create the specified quantifier.
+     * @return
+     */
+    static public Quantifier ALL() { return new Quantifier(ALL); }
+    
+    /**
+     * Create the specified quantifier.
+     * @return
+     */
+    static public Quantifier NONE() { return new Quantifier(NONE); }
+    
+    /**
+     * Create the specified quantifier.
+     * @return
+     */
+    static public Quantifier EXACTLY(int n) { 
+    	Quantifier q = new Quantifier(EXACT); q.min = q.max = n; return q; 
+    	}
+    
+    /**
+     * Create the specified quantifier.
+     * @return
+     */
+    static public Quantifier RANGE(int min, int max) {
+    	Quantifier q = new Quantifier(RANGE); q.min = min; q.max = max; return q;
+    }
+
     public int type = ERROR;
+    
+    // INFINITE == unbounded
     public int min = 0;
     public int max = 0;
-    
-    public Quantifier() {
-    }
     
     public Quantifier(int type) {
     	this.type = type;
@@ -153,13 +187,13 @@ public class Quantifier implements IParseable {
         } else if (s.startsWith(":")) {
             type = RANGE;
             max = Integer.parseInt(s.substring(1));
-            min = -1;
+            min = INFINITE;
             if (max == 0)
             	type = NONE;
         } else if (s.endsWith(":")) {
             type = RANGE;
             min = Integer.parseInt(s.substring(0, s.length()-1));
-            max = -1;
+            max = INFINITE;
         } else if (s.contains(":")) {
             type = RANGE;
             String[] ss = s.split(":");
@@ -178,6 +212,28 @@ public class Quantifier implements IParseable {
 	@Override
 	public String asText() {
 		return toString();
+	}
+
+	
+	public boolean match(int matches) {
+
+		if (type == EXACT) {
+			return matches == min;
+		} else if (type == NONE) { 
+			return matches == 0;
+		} else if (type == ANY) {
+			return matches > 0;
+		} else if (type == RANGE) {
+			
+			if (min < 0) {
+				return matches <= max;
+			} else if (max < 0) {
+				return matches >= min;
+			} else {
+				return matches <= max && matches >= min;
+			}
+		}
+		return false;
 	}
 
 }

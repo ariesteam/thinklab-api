@@ -1,4 +1,4 @@
-package org.integratedmodelling.thinklab.api.modelling.factories;
+package org.integratedmodelling.thinklab.api.factories;
 
 import java.util.Collection;
 

@@ -1,4 +1,4 @@
-package org.integratedmodelling.thinklab.api.modelling.classification;
+package org.integratedmodelling.thinklab.api.modelling;
 
 import org.integratedmodelling.thinklab.api.lang.IParseable;
 

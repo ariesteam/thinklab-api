@@ -2,10 +2,10 @@ package org.integratedmodelling.thinklab.api.modelling;
 
 import java.util.Set;
 
-import org.integratedmodelling.thinklab.api.ILanguageObject;
-import org.integratedmodelling.thinklab.api.IMetadataHolder;
-import org.integratedmodelling.thinklab.api.INamespaceQualified;
 import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
+import org.integratedmodelling.thinklab.api.lang.ILanguageObject;
+import org.integratedmodelling.thinklab.api.lang.IMetadataHolder;
+import org.integratedmodelling.thinklab.api.lang.INamespaceQualified;
 
 /**
  * Tag interface for any object that can be stored in the model map. Currently that

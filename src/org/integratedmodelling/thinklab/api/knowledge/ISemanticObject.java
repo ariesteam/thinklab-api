@@ -4,6 +4,28 @@ import java.util.List;
 
 import org.integratedmodelling.exceptions.ThinklabValidationException;
 
+/**
+ * The result of semantic annotation in Thinklab. Objects can be turned into SemanticObjects by the
+ * annotate() operation of the knowledge manager. Being a semantic object implies to have both
+ * the original Java Object nature and a semantic annotation, instance of ISemantics, that expresses
+ * the object semantics and can recreate another (semantically) identical SemanticObject.
+ * 
+ * In order for the magic of semantic annotation and instantiation to happen, there must be
+ * semantic support (ontologies) for the meaning of the object and enough annotation at the
+ * Java side to link concepts and properties to the ontologies. This can happen in a few 
+ * ways:
+ * 
+ * 1. By tagging the Java class with @Concept and optionally with @Property, and/or 
+ *    using the conventions for field naming that allow automatic linking of fields
+ *    to properties;
+ * 2. By tagging the Java class with @Concept and implementing the IConceptualizable
+ *    interface;
+ * 3. By manually registering the class to a concept in the knowledge manager, and
+ *    proceeding as in (1) or (2) to link fields to properties.
+ *    
+ * @author Ferd
+ *
+ */
 public interface ISemanticObject {
 
 	/**

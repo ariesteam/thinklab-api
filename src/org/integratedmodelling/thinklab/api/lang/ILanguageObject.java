@@ -1,4 +1,4 @@
-package org.integratedmodelling.thinklab.api;
+package org.integratedmodelling.thinklab.api.lang;
 
 import org.integratedmodelling.lang.model.LanguageElement;
 
