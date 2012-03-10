@@ -64,34 +64,6 @@ public interface ISession extends IListenable {
 	 */
 	public abstract Properties getProperties();
 
-//    /**
-//     * <p>Write all current contents of ontology on passed ontology file.</p>
-//     * <p><b>NOTE:</b> this will remove all non-validated instances, rendering all relative objects meaningless and their use
-//     * dangerous. This may change.</p>
-//     * @param file
-//     * @throws ThinklabException
-//     */
-//    public abstract void write(String file) throws ThinklabException;
-    
-//	
-//	/**
-//	 * Sessions must be capable of creating temporary concepts from a list specification. These
-//	 * concepts can only restrict "global" ones by specifying owl:hasValue restrictions. The list
-//	 * syntax is very similar to the one used for instances.
-//	 * 
-//	 * @param list 
-//	 * @return
-//	 * @throws ThinklabException
-//	 */
-//	public abstract IConcept createConcept(IList list) throws ThinklabException;
-
-//	/**
-//	 * Delete the named object.
-//	 * @param name name of object
-//	 * @throws ThinklabException 
-//	 */
-//	public abstract void deleteObject(String name) throws ThinklabException;
-	
 	/**
 	 * Return the user model for the session. If the session is not interactive, the user model may be null.
 	 * @return

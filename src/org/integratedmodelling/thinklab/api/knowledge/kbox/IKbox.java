@@ -3,49 +3,41 @@ package org.integratedmodelling.thinklab.api.knowledge.kbox;
 import java.util.List;
 
 import org.integratedmodelling.exceptions.ThinklabException;
+import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
 import org.integratedmodelling.thinklab.api.knowledge.query.IQuery;
 
 /**
- * A generalized persistent store for semantic objects. In order for the objects to be stored and retrieved, they need to be
- * conceptualizable, i.e. be able to be converted to/from a SemanticAnnotation. Queries are performed using 
- * IQuery objects. Implementations should provide a kbox type capable of handling the contexts in the core package, 
- * and have a mean of extension so that new contexts can be supported.
+ * K-box or Knowledge Box is the only place where semantic objects get stored permanently. Being an instance
+ * store, it's expected to scale to large amounts of object efficiently and to possibly give up some 
+ * non-crucial reasoning for efficiency, like most instance stores do.
  * 
- * Much simpler than old "IKBox", scheduled to substitute it. Kboxes are created and deleted by the knowledge
- * manager based on a URI that should contain all access details for the underlying implementation, possibly
- * complemented by a properties file in the local configuration.
+ * A generalized persistent store for semantic objects. In order for the objects to be stored and retrieved, they need to be
+ * conceptualizable, i.e. be able to be converted to/from a ISemanticObject. Queries are performed using 
+ * IQuery objects.
+ * 
+ * Implementations should provide at least one default kbox implementation, so that a user can just do
+ * 
+ * IKbox kbox = <KnowledgeManager>.requireKbox(anyName)
+ * 
+ * and expect it to work.
  * 
  * @author Ferd
  */
 public interface IKbox {
+	
+	/**
+	 * Query kbox. The list returned should be read-only and of course implement lazy access. This should
+	 * be an equivalent of query(query, null), provided for simplicity of use.
+	 * 
+	 * @param query
+	 * @return
+	 * @throws ThinklabException
+	 */
+	public List<ISemanticObject> query(IQuery query) throws ThinklabException;
 
 	/**
-	 * option to pass to query() as a flag (use | to combine more options)
-	 *
-	 * Do not follow object properties and only return the object with its
-	 * literal and annotation properties.
-	 */
-	public static final int KBOX_LITERALS_ONLY = 1;
-
-	/**
-	 * option to pass to query() as a flag (use | to combine more options)
-	 *
-	 * Do not attempt to create objects from their annotations and just return
-	 * SemanticAnnotation objects.
-	 */
-	public static final int KBOX_RETRIEVE_ANNOTATIONS = 2;
-	
-	/**
-	 * option to pass to query() as a flag (use | to combine more options)
-	 *
-	 * Have query() return the IDs of matching objects (as Long values) instead
-	 * of annotations or the objects themselves (default).
-	 */
-	public static final int KBOX_RETRIEVE_IDS = 4;
-	
-	
-	/**
-	 * Store object, return handle
+	 * Store object, return handle. Any object can be passed, as long as it can be
+	 * annotated.
 	 * 
 	 * @param o
 	 * @return
@@ -60,18 +52,7 @@ public interface IKbox {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public abstract Object retrieve(long id) throws ThinklabException;
-	
-	/**
-	 * Retrieve the object named by this id, or null if it's not there. Honor
-	 * flags above or others defined by kbox implementation.
-	 * 
-	 * @param o
-	 * @return
-	 * @throws ThinklabException
-	 */
-	public abstract Object retrieve(long id, int flags) throws ThinklabException;
-	
+	public abstract ISemanticObject retrieve(long id) throws ThinklabException;	
 	
 	/**
 	 * Remove object identified by handle
@@ -95,27 +76,7 @@ public interface IKbox {
 	 */
 	public abstract void clear() throws ThinklabException;
 	
-	/**
-	 * Query kbox. The list returned should be read-only and of course implement lazy access. This should
-	 * be an equivalent of query(query, null), provided for simplicity of use.
-	 * 
-	 * @param query
-	 * @return
-	 * @throws ThinklabException
-	 */
-	public List<Object> query(IQuery query) throws ThinklabException;
 
-	/**
-	 * Query kbox. The list returned should be read-only and of course implement lazy access. This one
-	 * should be the real workhorse and implement all the options defined above, plus any 
-	 * implementation-specific ones.
-	 * 
-	 * @param query
-	 * @return
-	 * @throws ThinklabException
-	 */
-	public List<Object> query(IQuery query, int flags) throws ThinklabException;
-	
 	/**
 	 * Kboxes must be able to identify themselves.
 	 * 
