@@ -44,6 +44,7 @@ public class Pair<T1,T2> implements Serializable
 	private static final long serialVersionUID = 1L;
 	protected T1 first = null;
 	protected T2 second = null;
+	
 	/**
 	 *  Pair constructor comment.
 	 */
@@ -76,7 +77,6 @@ public class Pair<T1,T2> implements Serializable
 	{
 		return second;
 	}
-
 	
 	public String toString()
 	{

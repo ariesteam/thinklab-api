@@ -72,7 +72,7 @@ public interface IQuery extends IParseable {
 	public abstract IList asList();
 
 	/**
-	 * Restrict to the queries defined by the passed semantic operators. 
+	 * Restrict to the queries defined by the passed queries. 
 	 * 
 	 * E.g. query.restrict(hasName,    new Equals("John"))
 	 *      query.restrict(hasSibling, new Query(Person).restrict(hasName, new Equals("John"))
@@ -82,7 +82,7 @@ public interface IQuery extends IParseable {
 	 * @param operator
 	 * @return
 	 */
-	public abstract IQuery restrict(IProperty property, IOperator ... operator);
+	public abstract IQuery restrict(IProperty property, IQuery ... query);
 	
 	/**
 	 * Restrict the current constraint by properly merging in the passed connections using the passed
@@ -93,7 +93,7 @@ public interface IQuery extends IParseable {
 	 * @returns this, not a new constraint; it's done only to enable shorter idioms when creating
 	 *    a constraint like new Constraint(..).restrict(...);
 	 */
-	public abstract IQuery restrict(LogicalConnector connector, IProperty property, IOperator ... restrictions);
+	public abstract IQuery restrict(LogicalConnector connector, IProperty property, IQuery ... restrictions);
 
 //	/**
 //	 * Return the restriction objects as a single restriction

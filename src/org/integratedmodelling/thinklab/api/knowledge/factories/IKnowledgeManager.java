@@ -48,6 +48,16 @@ public interface IKnowledgeManager {
 	 */
 	public abstract ISemanticObject annotate(Object object) throws ThinklabException;
 	
+	/**
+	 * Manually register an external class for semantic annotation (without a @Concept annotation).
+	 * This class will follow the annotation rules of the others - if no @Property annotations
+	 * are present, all the public fields (xxx) that resolve to a hasXxx property (isXxx for 
+	 * booleans) in the same namespace of the annotation concept will be automatically annotated.
+	 * 
+	 * @param cls
+	 * @param concept
+	 */
+	public abstract void registerAnnotatedClass(Class<?> cls, IConcept concept);
 	
 	/**
 	 * Create a kbox with the named uri, using the implementation assigned to the
