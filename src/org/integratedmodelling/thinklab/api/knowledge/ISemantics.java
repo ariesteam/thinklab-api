@@ -13,6 +13,9 @@ import org.integratedmodelling.thinklab.api.lang.IList;
  * functions in Thinklab use the semantics to do their job. A ISemanticObject contains both
  * the object and its semantics.
  * 
+ * FIXIT keeping the Object and Relationship semantics in one object is confusing. We should
+ * separate them and let implementations join them in one class if they so desire.
+ * 
  * @author Ferd
  * @see ISemanticObject
  * @see ISemanticLiteral
@@ -33,6 +36,11 @@ public interface ISemantics {
 
 	public abstract IProperty getProperty();
 
+	/**
+	 * Return whether this object represents a literal relationship, i.e. 
+	 * we can get an object using getTargetSemantics().getLiteral()
+	 * @return
+	 */
 	public abstract boolean isLiteral();
 
 	public abstract Collection<ISemantics> getRelationships();
@@ -45,7 +53,7 @@ public interface ISemantics {
 
 	public abstract ISemantics getTargetSemantics();
 
-	public abstract Object getTargetLiteral();
+	public abstract Object getLiteral();
 
 	public abstract ISemanticObject getTarget();
 

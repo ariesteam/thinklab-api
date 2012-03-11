@@ -24,10 +24,21 @@ import org.integratedmodelling.thinklab.api.knowledge.query.IQuery;
  * @author Ferd
  */
 public interface IKbox {
-	
+
 	/**
-	 * Query kbox. The list returned should be read-only and of course implement lazy access. This should
-	 * be an equivalent of query(query, null), provided for simplicity of use.
+	 * Retrieve all first-class objects in kbox (those that have been explicitly stored with a 
+	 * call to store(object)). 
+
+	 * The list returned should be read-only and implement lazy access. 
+	 * 
+	 * @param query
+	 * @return
+	 * @throws ThinklabException
+	 */
+	public List<ISemanticObject> retrieveAll() throws ThinklabException;
+
+	/**
+	 * Query kbox. The list returned should be read-only and of course implement lazy access. 
 	 * 
 	 * @param query
 	 * @return
@@ -76,7 +87,6 @@ public interface IKbox {
 	 */
 	public abstract void clear() throws ThinklabException;
 	
-
 	/**
 	 * Kboxes must be able to identify themselves.
 	 * 

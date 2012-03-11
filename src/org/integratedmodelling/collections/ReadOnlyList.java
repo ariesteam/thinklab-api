@@ -22,83 +22,81 @@ public abstract class ReadOnlyList<T> implements List<T> {
 
 	@Override
 	public boolean add(T arg0) {
-		throw new UnsupportedOperationException("unsupported on contextualization results");
+		throw new UnsupportedOperationException("cannot modify read-only list");	
 	}
 
 	@Override
 	public boolean addAll(Collection<? extends T> arg0) {
-		throw new UnsupportedOperationException("unsupported on contextualization results");
+		throw new UnsupportedOperationException("cannot modify read-only list");
 	}
 
 	@Override
 	public void clear() {
-		throw new UnsupportedOperationException("unsupported on contextualization results");
+		throw new UnsupportedOperationException("cannot modify read-only list");
 	}
-
 
 	@Override
 	public boolean containsAll(Collection<?> arg0) {
-		throw new UnsupportedOperationException("unsupported on contextualization results");
+		throw new UnsupportedOperationException("cannot modify read-only list");	
 	}
 
 	@Override
 	public boolean remove(Object arg0) {
-		throw new UnsupportedOperationException("unsupported on contextualization results");
+		throw new UnsupportedOperationException("cannot modify read-only list");	
 	}
 
 	@Override
 	public boolean removeAll(Collection<?> arg0) {
-		throw new UnsupportedOperationException("unsupported on contextualization results");
+		throw new UnsupportedOperationException("cannot modify read-only list");	
 	}
 
 	@Override
 	public boolean retainAll(Collection<?> arg0) {
-		throw new UnsupportedOperationException("unsupported on contextualization results");
+		throw new UnsupportedOperationException("cannot modify read-only list");	
 	}
 
 	@Override
 	public void add(int arg0, T arg1) {
-		throw new UnsupportedOperationException("unsupported on contextualization results");
+		throw new UnsupportedOperationException("cannot modify read-only list");	
 	}
 
 	@Override
 	public boolean addAll(int arg0, Collection<? extends T> arg1) {
-		throw new UnsupportedOperationException("unsupported on contextualization results");
+		throw new UnsupportedOperationException("cannot modify read-only list");	
 	}
-
 
 	@Override
 	public int indexOf(Object arg0) {
-		throw new UnsupportedOperationException("unsupported on contextualization results");
+		throw new UnsupportedOperationException("cannot modify read-only list");	
 	}
 
 	@Override
 	public int lastIndexOf(Object arg0) {
-		throw new UnsupportedOperationException("unsupported on contextualization results");
+		throw new UnsupportedOperationException("cannot modify read-only list");	
 	}
 
 	@Override
 	public ListIterator<T> listIterator() {
-		throw new UnsupportedOperationException("unsupported on contextualization results");
+		throw new UnsupportedOperationException("cannot modify read-only list");	
 	}
 
 	@Override
 	public ListIterator<T> listIterator(int arg0) {
-		throw new UnsupportedOperationException("unsupported on contextualization results");
+		throw new UnsupportedOperationException("cannot modify read-only list");	
 	}
 
 	@Override
 	public T remove(int arg0) {
-		throw new UnsupportedOperationException("unsupported on contextualization results");
+		throw new UnsupportedOperationException("cannot modify read-only list");	
 	}
 
 	@Override
 	public T set(int arg0, T arg1) {
-		throw new UnsupportedOperationException("unsupported on contextualization results");
+		throw new UnsupportedOperationException("cannot modify read-only list");	
 	}
 
 	@Override
 	public List<T> subList(int arg0, int arg1) {
-		throw new UnsupportedOperationException("unsupported on contextualization results");
+		throw new UnsupportedOperationException("cannot modify read-only list");	
 	}
 }
