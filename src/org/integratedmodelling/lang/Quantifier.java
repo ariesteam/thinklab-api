@@ -236,4 +236,8 @@ public class Quantifier implements IParseable {
 		return false;
 	}
 
+	public int getType() {
+		return type;
+	}
+
 }
