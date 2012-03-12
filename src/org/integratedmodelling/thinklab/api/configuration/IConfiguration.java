@@ -5,7 +5,9 @@ import java.util.Properties;
 
 /**
  * This interface tags objects that have configuration properties and
- * need workspace areas, such as sessions, project and plugins.
+ * need workspace areas, such as sessions, project and plugins. Objects
+ * implementing this interface can have installation directories and
+ * must have workspaces, temp areas and scratch areas.
  * 
  * @author Ferd
  *
@@ -13,11 +15,11 @@ import java.util.Properties;
 public interface IConfiguration {
 
 	// use these subspace names for extra consistency.
-	public final static String SUBSPACE_CONFIG = "config";
+	public final static String SUBSPACE_CONFIG    = "config";
 	public final static String SUBSPACE_KNOWLEDGE = "knowledge";
-	public final static String SUBSPACE_SOURCE = "src";
-	public final static String SUBSPACE_PLUGINS = "plugins";
-	public final static String SUBSPACE_LIB = "lib";
+	public final static String SUBSPACE_SOURCE    = "src";
+	public final static String SUBSPACE_PLUGINS   = "plugins";
+	public final static String SUBSPACE_LIB       = "lib";
 
 	/**
 	 * Configurable objects should have properties that can be 
@@ -27,7 +29,6 @@ public interface IConfiguration {
 	 */
 	public Properties getProperties();
 
-	
 	/**
 	 * Return a default workspace area where things of general use 
 	 * may be written. A Workspace is a known place that should 
@@ -51,7 +52,6 @@ public interface IConfiguration {
 	 * 	       valid, existing and writable path.
 	 */
 	public abstract File getWorkspace(String subspace);
-	
 	
 	/**
 	 * A scratch area is for places where stuff that's not going to
@@ -82,5 +82,16 @@ public interface IConfiguration {
 	 * @return
 	 */
 	public abstract File getTempArea(String subArea);
+	
+	/**
+	 * The load path is the equivalent of an installation directory: a 
+	 * read-only file space where resources may be. This one should
+	 * never create anything, but just return a File when the path
+	 * exists, or null when it doesn't. Passing null for a subArea
+	 * should get the unchanged load path if it's there.
+	 * 
+	 * @return
+	 */
+	public abstract File getLoadPath(String subArea);
 	
 }
