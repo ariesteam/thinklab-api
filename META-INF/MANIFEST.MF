@@ -9,6 +9,7 @@ Export-Package: org.integratedmodelling.collections;uses:="org.integratedmodelli
  org.integratedmodelling.lang.model;uses:="org.integratedmodelling.thinklab.api.lang,org.integratedmodelling.thinklab.api.project,org.integratedmodelling.thinklab.api.knowledge",
  org.integratedmodelling.list;uses:="org.integratedmodelling.thinklab.api.lang",
  org.integratedmodelling.thinklab.api.annotations,
+ org.integratedmodelling.thinklab.api.configuration,
  org.integratedmodelling.thinklab.api.factories;
   uses:="org.integratedmodelling.thinklab.api.project,
    org.integratedmodelling.thinklab.api.knowledge.kbox,
@@ -28,6 +29,7 @@ Export-Package: org.integratedmodelling.collections;uses:="org.integratedmodelli
    org.integratedmodelling.thinklab.api.listeners,
    org.integratedmodelling.thinklab.api.runtime,
    org.integratedmodelling.thinklab.api.knowledge",
+ org.integratedmodelling.thinklab.api.plugin,
  org.integratedmodelling.thinklab.api.project,
  org.integratedmodelling.thinklab.api.runtime;uses:="org.integratedmodelling.thinklab.api.listeners,org.integratedmodelling.thinklab.api.knowledge"
 Bundle-Vendor: org.integratedmodelling

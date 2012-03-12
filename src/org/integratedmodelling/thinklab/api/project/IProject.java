@@ -5,7 +5,9 @@ import java.util.Collection;
 import java.util.Properties;
 
 import org.integratedmodelling.exceptions.ThinklabException;
+import org.integratedmodelling.thinklab.api.configuration.IConfiguration;
 import org.integratedmodelling.thinklab.api.modelling.INamespace;
+import org.integratedmodelling.thinklab.api.plugin.IThinklabPlugin;
 
 /**
  * Thinklab projects are plug-in packages that provide Thinklab resources such as models, annotations etc. 
@@ -13,17 +15,13 @@ import org.integratedmodelling.thinklab.api.modelling.INamespace;
  * methods to manage their lifetime in Thinklab.
  * @author  Ferd
  */
-public interface IProject {
+public interface IProject extends IThinklabPlugin, IConfiguration {
 	
 	// properties for META-INF/thinklab.properties file
 	public static final String SOURCE_FOLDER_PROPERTY = "thinklab.source.folder";
 	public static final String ONTOLOGY_NAMESPACE_PREFIX_PROPERTY = "thinklab.ontology.prefix";
 	public static final String PREREQUISITES_PROPERTY = "thinklab.prerequisites";
-	
-	public String getId();
-
-	public Properties getProperties();
-		
+			
 	/**
 	 * Return all the namespaces defined in the project.
 	 * 
@@ -57,21 +55,6 @@ public interface IProject {
 	 * @throws ThinklabException
 	 */
 	public void addDependency(String plugin, boolean reload) throws ThinklabException;
-
-	/**
-	 * Get all the prerequisite projects, non-recursively.
-	 * 
-	 * @return
-	 */
-	public Collection<IProject> getPrerequisiteProjects();
-
-	/**
-	 * Find a resource file in the project. Return null if not found.
-	 * 
-	 * @param resource
-	 * @return
-	 */
-	public File findResource(String resource);
 
 	/**
 	 * Find the resource file that defines the passed namespace. If not
