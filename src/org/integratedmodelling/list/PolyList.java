@@ -70,7 +70,7 @@ public class PolyList implements IList {
 	 *  nil is the empty-list constant
 	 */
 	public static final PolyList nil = new PolyList();
-
+	private Long _referenceId;
 	private ConsCell ptr;
 
 	/*
@@ -81,6 +81,7 @@ public class PolyList implements IList {
 		public abstract Object transformDouble(String string);
 		public abstract Object transformQuote();
 	}
+	
 	
 	/**
 	 *  construct empty Polylist
@@ -338,6 +339,23 @@ public class PolyList implements IList {
 
 	public static IList list(Object ... objs) {
 		return fromArray(objs);
+	}
+
+	/**
+	 * Create a referenced list.
+	 * 
+	 * When two lists contain each other, they need a mechanism for identifying the
+	 * circular reference at creation time. The reference field is only instantiated
+	 * from the user using this function, but can be inspected and is used in 
+	 * printing and all recursive functions. The first time a referenced list is
+	 * seen, it's printed normally with a #id in front; the second time, only
+	 * (#id) is printed. Software using lists with a potential for self-reference
+	 * should honor this field.
+	 */
+	static public PolyList referencedList(long id, Object[] ref) {
+		PolyList ret = (PolyList) PolyList.list(ref);
+		ret._referenceId = id;
+		return ret;
 	}
 
 	public static IList listNotNull(Object ... objs) {
@@ -967,6 +985,19 @@ public class PolyList implements IList {
 		ls.add(o);
 		return PolyList.fromCollection(ls);
 	}
+		
+	public boolean isReference() {
+		return _referenceId != null;
+	}
+	
+	public long getReferenceId() {
+		return _referenceId;
+	}
+	
+	public void setReference(long l) {
+		_referenceId = l;
+	}
+
 	
 //	public XML.XmlNode createXmlNode() {
 //		XmlNode n = new XmlNode(first().toString());
