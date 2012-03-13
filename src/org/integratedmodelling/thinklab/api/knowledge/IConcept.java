@@ -55,7 +55,7 @@ public interface IConcept extends IKnowledge {
      * installed, and only follow transitive superclass relationships if not.
      * @return
      */
-	public abstract Collection<IConcept> getSemanticClosure();
+	public abstract Collection<IConcept> getAllParents();
 	
     /**
      * Return a collection of all direct subclasses.

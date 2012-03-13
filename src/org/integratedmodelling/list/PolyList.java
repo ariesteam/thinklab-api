@@ -42,8 +42,11 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -51,6 +54,8 @@ import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.exceptions.ThinklabIOException;
 import org.integratedmodelling.exceptions.ThinklabValidationException;
 import org.integratedmodelling.thinklab.api.lang.IList;
+
+import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
 
 /**   
  <pre>
@@ -60,9 +65,6 @@ import org.integratedmodelling.thinklab.api.lang.IList;
  non-empty, in which case it consists of:
  a Object as the first thing in the list
  a rest which is a Polylist.
- A Polylist can also be a Incremental, which may be converted into an
- ordinary Polylist by applying methods such as isEmpty(), first(), and
- rest(). 
  </pre>
  */
 public class PolyList implements IList {
@@ -145,11 +147,11 @@ public class PolyList implements IList {
 	}
 	
 	public static String prettyPrint(IList list) {
-		return prettyPrintInternal(list, 0, 2);
+		return prettyPrintInternal(list, 0, 2, new HashSet<Long>());
 	}
 
 	public static String prettyPrint(IList list, int indent) {
-		return prettyPrintInternal(list, indent, 2);
+		return prettyPrintInternal(list, indent, 2, new HashSet<Long>());
 	}
 	
 	private static boolean validateNumber(Object s) {
@@ -178,7 +180,9 @@ public class PolyList implements IList {
 		return true;
 	}
 	
-	private static String prettyPrintInternal(IList list, int indentLevel, int indentAmount) {
+	private static String prettyPrintInternal(
+			IList list, int indentLevel, int indentAmount,
+			Set<Long> seenIds) {
 
 		String ret = "";
 		String inds = "";
@@ -191,13 +195,24 @@ public class PolyList implements IList {
 		
 		boolean wrote = false;
 
+		/*
+		 * references already printed once are only printed as their ref number
+		 */
+		if (list.isReference()) {
+			if (seenIds.contains(list.getReferenceId())) {
+				return inds + "#" + list.getReferenceId();
+			} else {
+				seenIds.add(list.getReferenceId());
+			}
+		}
+		
 		ret += inds + "(";
 		
 		int i = 0;
-		for (Object o : list.array()) {
+		for (Object o : list.toArray()) {
 			
 			if (o instanceof IList) {
-				ret += "\n" + prettyPrintInternal((IList)o, indentLevel+1, indentAmount);
+				ret += "\n" + prettyPrintInternal((IList)o, indentLevel+1, indentAmount, seenIds);
 			} else {
 				String sep = " ";
 				String z = o == null ? "nil" : o.toString();
@@ -217,6 +232,10 @@ public class PolyList implements IList {
 		}
 		
 		ret += ")";
+		
+		if (list.isReference()) {
+			ret += "#" + list.getReferenceId();
+		}
 		
 		return ret;
 	}
@@ -253,23 +272,27 @@ public class PolyList implements IList {
 		return ptr.rest();
 	}
 
-	/**
-	 *  toString() converts Polylist to string, e.g. for printing
-	 */
-
+	@Override
 	public String toString() {
+		return toStringInternal(new HashSet<Long>());
+	}
+	
+	public String toStringInternal(Set<Long> refs) {
 
 		StringBuffer buff = new StringBuffer();
 
+		if (isReference()) {
+			if (refs.contains(getReferenceId())) {
+				buff.append("#" + getReferenceId());
+				return buff.toString();
+			} else {
+				refs.add(getReferenceId());
+			}
+		}
+		
 		buff.append("(");
 
-		// See if this is an incremental list; if so, show ...
-
-		if (this instanceof Incremental && !((Incremental) this).grown()) {
-			buff.append("...");
-		}
-
-		else if (nonEmpty()) {
+		if (nonEmpty()) {
 
 			buff.append(first());
 			IList L = rest();
@@ -277,10 +300,6 @@ public class PolyList implements IList {
 			// print the rest of the items
 
 			for (;;) {
-				if (L instanceof Incremental && !((Incremental) L).grown()) {
-					buff.append(" ...");
-					break;
-				}
 				if (L.isEmpty())
 					break;
 				buff.append(" ");
@@ -289,13 +308,17 @@ public class PolyList implements IList {
 			}
 		}
 		buff.append(")");
+		
+		if (isReference()) {
+			buff.append("#" + getReferenceId());
+		}
+		
 		return buff.toString();
 	}
 
 	/* (non-Javadoc)
 	 * @see org.integratedmodelling.list.IList#cons(java.lang.Object)
 	 */
-
 	@Override
 	public IList cons(Object First) {
 		return new PolyList(First, this);
@@ -308,11 +331,6 @@ public class PolyList implements IList {
 	public static IList cons(Object First, IList Rest) {
 		return ((IList)Rest).cons(First);
 	}
-
-	/**
-	 *  This variant of cons takes a Seed instead of a Polylist as rest, so
-	 *  the list can be grown incrementally.
-	 */
 
 	public static IList cons(Object First, Seed Rest) {
 		return new PolyList(First, Rest);
@@ -352,7 +370,7 @@ public class PolyList implements IList {
 	 * (#id) is printed. Software using lists with a potential for self-reference
 	 * should honor this field.
 	 */
-	static public PolyList referencedList(long id, Object[] ref) {
+	static public PolyList referencedList(long id, Object ... ref) {
 		PolyList ret = (PolyList) PolyList.list(ref);
 		ret._referenceId = id;
 		return ret;
@@ -379,7 +397,6 @@ public class PolyList implements IList {
 	 *  elements() returns a PolylistEnum object, which implements the
 	 *  interface java.util.Enumeration.
 	 */
-
 	public PolylistEnum elements() {
 		return new PolylistEnum(this);
 	}
@@ -431,7 +448,7 @@ public class PolyList implements IList {
 	 */
 
 	@Override
-	public boolean member(Object A) {
+	public boolean contains(Object A) {
 		for (Enumeration<?> e = elements(); e.hasMoreElements();)
 			if (Arith.equal(e.nextElement(), A))
 				return true;
@@ -872,7 +889,7 @@ public class PolyList implements IList {
 	 */
 
 	@Override
-	public Object[] array() {
+	public Object[] toArray() {
 		Object[] result = new Object[length()];
 		int i = 0;
 		for (Enumeration<?> e = elements(); e.hasMoreElements();) {
@@ -935,26 +952,13 @@ public class PolyList implements IList {
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.integratedmodelling.list.IList#implode()
-	 */
-
-	@Override
-	public String implode() {
-		StringBuffer buff = new StringBuffer();
-		for (Enumeration<?> e = elements(); e.hasMoreElements();) {
-			buff.append(e.nextElement().toString());
-		}
-		return buff.toString();
-	}
-
 	/**
 	 * map maps an object of class Function1 over a Polylist returning a 
 	 * Polylist
 	 */
 	public boolean hasMemberOfClass(Class<?> cls) {
 		boolean ret = false;
-		for (Object o : array())
+		for (Object o : toArray())
 			if (ret = (o.getClass().equals(cls)))
 				break;
 		return ret;
@@ -986,10 +990,12 @@ public class PolyList implements IList {
 		return PolyList.fromCollection(ls);
 	}
 		
+	@Override
 	public boolean isReference() {
 		return _referenceId != null;
 	}
 	
+	@Override
 	public long getReferenceId() {
 		return _referenceId;
 	}
@@ -998,7 +1004,11 @@ public class PolyList implements IList {
 		_referenceId = l;
 	}
 
-	
+	@Override
+	public Iterator<Object> iterator() {
+		return toCollection().iterator();
+	}
+
 //	public XML.XmlNode createXmlNode() {
 //		XmlNode n = new XmlNode(first().toString());
 //		for (Object o : rest().array()) {
@@ -1020,4 +1030,4 @@ public class PolyList implements IList {
 //		return XML.document(createXmlNode());
 //	}
 
-} // class Polylist
+} 
