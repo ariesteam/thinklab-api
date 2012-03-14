@@ -1,6 +1,7 @@
 package org.integratedmodelling.thinklab.api.lang;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Open linked list, LISP-style. Immutable and general, not generic. Contains a 
@@ -11,29 +12,6 @@ import java.util.List;
  *
  */
 public interface IList extends Iterable<Object> {
-		
-	/**
-	 * A special object to put in a list to reference another. Enables us to
-	 * construct linearized serializations of graphs. If a list member is
-	 * a IList.Ref, we can ask it to return the corresponding IList, with
-	 * the understanding that we will run into trouble if we process it
-	 * recursively without counting references.
-	 * 
-	 * Refs are always fully hashable and comparable, and can be 
-	 * serialized and parsed from list representations.
-	 * 
-	 * @author Ferd
-	 *
-	 */
-	public interface Ref {
-		
-		/**
-		 * Get the list this Ref refs to.
-		 * @return
-		 */
-		public abstract IList get();
-	}
-
 
 	/**
 	 *  isEmpty() tells whether the list is empty.
@@ -46,7 +24,7 @@ public interface IList extends Iterable<Object> {
 	 * @param o
 	 * @return
 	 */
-	public abstract IList append(Object o);
+	public abstract IList append(Object ... o);
 
 	/**
 	 *  first() returns the first element of a non-empty Polylist.
@@ -105,23 +83,5 @@ public interface IList extends Iterable<Object> {
 	 * @return
 	 */
 	public abstract List<Object> toCollection();
-
-	/**
-	 * Get a new Ref for the passed list, and store it along
-	 * with us so that it can be returned. The same Ref can
-	 * be reused. Don't use newReference for a self-reference:
-	 * use newReference() for that.
-	 * 
-	 * @param object
-	 * @return
-	 */
-	public Ref newReference(IList object);
-	
-	/**
-	 * Get a new self-reference.
-	 * 
-	 * @return
-	 */
-	public Ref newReference();
 	
 }

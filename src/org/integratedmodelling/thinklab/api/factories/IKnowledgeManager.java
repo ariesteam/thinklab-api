@@ -5,8 +5,8 @@ import org.integratedmodelling.exceptions.ThinklabValidationException;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.IProperty;
 import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
-import org.integratedmodelling.thinklab.api.knowledge.ISemantics;
 import org.integratedmodelling.thinklab.api.knowledge.kbox.IKbox;
+import org.integratedmodelling.thinklab.api.lang.IList;
 
 public interface IKnowledgeManager {
 
@@ -93,25 +93,25 @@ public interface IKnowledgeManager {
 	 */
 	public abstract IConcept getLeastGeneralCommonConcept(IConcept ... cc);
 
+//	/**
+//	 * Create a semantic annotation from the passed object. This will succeed if the
+//	 * object and its fields have semantic tags (@Concept, @Property, @Literal) and/or 
+//	 * is an IConceptualizable.
+//	 * 
+//	 * @param i
+//	 * @return
+//	 * @throws ThinklabException
+//	 */
+//	public abstract ISemantics conceptualize(Object object) throws ThinklabException;
+//	
 	/**
-	 * Create a semantic annotation from the passed object. This will succeed if the
-	 * object and its fields have semantic tags (@Concept, @Property, @Literal) and/or 
-	 * is an IConceptualizable.
-	 * 
-	 * @param i
-	 * @return
-	 * @throws ThinklabException
-	 */
-	public abstract ISemantics conceptualize(Object object) throws ThinklabException;
-	
-	/**
-	 * Reifies an annotation by producing the object it describes, if any. In order for an
-	 * object to be created, annotation tags must have specified the classes to associate to
-	 * concepts, properties and literals.
+	 * Reifies an annotation (e.g. parsed or serialized through a web service) by producing 
+	 * the object it describes, if any. In order for an object to be created, annotation tags 
+	 * must have specified the classes to associate to concepts, properties and literals.
 	 * 
 	 * @param a
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public Object instantiate(ISemantics a) throws ThinklabException;
+	public ISemanticObject instantiate(IList a) throws ThinklabException;
 }

@@ -2,7 +2,9 @@ package org.integratedmodelling.thinklab.api.knowledge;
 
 import java.util.List;
 
-import org.integratedmodelling.exceptions.ThinklabValidationException;
+import org.integratedmodelling.collections.Pair;
+import org.integratedmodelling.exceptions.ThinklabCircularDependencyException;
+import org.integratedmodelling.thinklab.api.lang.IList;
 
 /**
  * The result of semantic annotation in Thinklab. Objects can be turned into SemanticObjects by the
@@ -35,7 +37,7 @@ public interface ISemanticObject {
 	 * @return
 	 * @see IKnowledgeManager.instantiate()
 	 */
-	public abstract ISemantics getSemantics();
+	public abstract IList getSemantics();
 	
 	/**
 	 * Return the bare Java object that was annotated through this object. In most cases the
@@ -71,25 +73,47 @@ public interface ISemanticObject {
 	 * @return
 	 */
 	public boolean is(Object other);
+
+	/**
+	 * Return the total amount of objects that are in any relationship with this one.
+	 * 
+	 * @return
+	 */
+	public abstract int getRelationshipsCount();
+
+	/**
+	 * Return the total amount of objects that are in the named relationship with this one.
+	 * 
+	 * @param _subject
+	 * @return
+	 */
+	public abstract int getRelationshipsCount(IProperty _subject);
 	
 	/**
-	 * Return the target value of the passed relationship, or null if it doesn't exist in this object.
+	 * Return the target value of the passed property, assuming there is just one, or null 
+	 * if it doesn't exist in this object. If there is more than one value, throw a 
+	 * runtime exception.
 	 * 
 	 * @param property
 	 * @return
 	 */
 	public abstract ISemanticObject get(IProperty property);
-	
+
 	/**
-	 * Return all the values of the passed relationship, or an empty list if it doesn't exist
-	 * in this object.
+	 * Return all the relationships for this object.
 	 * 
-	 * Unless this object has been through OWL/RDF, the order of the relationships is preserved.
+	 * @return
+	 */
+	public abstract List<Pair<IProperty, ISemanticObject>> getRelationships();
+
+	/**
+	 * Return all the objects that this object is in the named relationship with.
 	 * 
 	 * @param property
 	 * @return
 	 */
-	public abstract List<ISemanticObject> getAll(IProperty property);
+	public abstract List<ISemanticObject> getRelationships(IProperty property);
+
 	
 	/**
 	 * Return whether this object represents a Java Plain Old Literal, such as a Double or a String, 
@@ -117,11 +141,37 @@ public interface ISemanticObject {
 	 * @return
 	 */
 	public boolean isObject();
-	
+
 	/*
-	 * TODO add optional semantic validation - which may use the reasoner in implementations 
+	 * -----------------------------------------------------------------------------------------
+	 * Introspection methods to investigate the nature of the semantic object
+	 * -----------------------------------------------------------------------------------------
 	 */
-	public abstract void validate() throws ThinklabValidationException;
+
+	/**
+	 * Return whether this object's relationships have circular dependencies.
+	 * 
+	 * @return
+	 */
+	public boolean isCyclic();
+	
+	/**
+	 * Apply any semantic validation defined by the host infrastructure and return whether
+	 * the object is semantically consistent.
+	 * 
+	 * @return
+	 */
+	public boolean isValid();
+		
+	/**
+	 * Follow the path to other objects identified by the passed property and return
+	 * the topological sorting of all objects encountered. If the graph is cyclic, throw
+	 * an exception. Ignores relationships to literal objects of course.
+	 *  
+	 * @return
+	 */
+	public List<ISemanticObject> getSortedRelationships(IProperty property) 
+			throws ThinklabCircularDependencyException;
 	
 	/*
 	 * -----------------------------------------------------------------------------------------
@@ -139,5 +189,7 @@ public interface ISemanticObject {
 	public float asFloat();
 	
 	public String asString();
-	
+
+
+
 }

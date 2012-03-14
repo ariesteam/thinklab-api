@@ -42,12 +42,13 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -58,35 +59,9 @@ import org.integratedmodelling.thinklab.api.lang.IList;
 
 public class PolyList implements IList {
 
-	private long _ids = 0;
-	private HashMap<Long, IList> _refs;
 	
 	public static final IList NIL = new PolyList();
 
-	class PRef implements Ref {
-
-		long _id = _ids++;
-		
-		@Override
-		public IList get() {
-			return 
-				_refs.containsKey(_id) ? 
-						_refs.get(_id) : 
-						PolyList.this;
-		}
-
-		@Override
-		public boolean equals(Object arg0) {
-			return arg0 instanceof PRef && ((PRef)arg0)._id == _id;
-		}
-
-		@Override
-		public int hashCode() {
-			return new Long(_id).hashCode();
-		}
-		
-	}
-	
 
 	private ConsCell ptr;
 
@@ -854,32 +829,21 @@ public class PolyList implements IList {
 	}
 	
 	/**
-	 * Return a new list like this with the passed object appended at the end of the list.
+	 * Return a new list like this with the passed object(s) appended at the end of the list.
 	 * 
 	 * @param o
 	 * @return
 	 */
-	public IList append(Object o) {
+	public IList append(Object ... o) {
 		List<Object> ls = toCollection();
-		ls.add(o);
+		for (Object oo : o)
+			ls.add(oo);
 		return PolyList.fromCollection(ls);
 	}
 		
 	@Override
 	public Iterator<Object> iterator() {
 		return toCollection().iterator();
-	}
-
-	@Override
-	public Ref newReference(IList object) {
-		PRef ret = new PRef();
-		_refs.put(ret._id, object);
-		return ret;
-	}
-
-	@Override
-	public Ref newReference() {
-		return new PRef();
 	}
 
 //	public XML.XmlNode createXmlNode() {
