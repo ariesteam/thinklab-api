@@ -1,8 +1,10 @@
 package org.integratedmodelling.list;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.integratedmodelling.exceptions.ThinklabException;
@@ -13,10 +15,7 @@ import org.integratedmodelling.thinklab.api.lang.IReferenceList;
 
 public class ReferenceList implements IReferenceList, IParseable {
 	
-	/*
-	 * used for validation of references
-	 */
-	long _listId = ThreadId.get();
+	long _id = ThreadId.get();
 	
 	/*
 	 * Increasing IDs are thread-private so we don't need to synchronize.
@@ -35,7 +34,7 @@ public class ReferenceList implements IReferenceList, IParseable {
 
 	     // Returns the current thread's unique ID, assigning it if necessary
 	     public static long get() {
-	         return threadId.get();
+	         return nextId.getAndIncrement();
 	     }		     
 	 }
 
@@ -49,29 +48,32 @@ public class ReferenceList implements IReferenceList, IParseable {
 		return _refs;
 	}
 	
-	class Ref implements Reference  {
-		
-		long _id = ThreadId.get();
-		long _ls = _listId;
-		
-		@Override
-		public IList getList() {
-			return _refs.get(_id);
+	private IList _list() {
+		IList ret = null;
+		if (_refs != null && _refs.containsKey(_id))
+			ret = _refs.get(_id);
+		else {
+			ret = _list;
 		}
+		if (ret == null)
+			throw new ThinklabRuntimeException("unresolved reference in list");
+		return ret;
+	}
 
-		@Override
-		public boolean equals(Object arg0) {
-			return arg0 instanceof Ref && ((Ref)arg0)._id == _id;
-		}
+	@Override
+	public boolean equals(Object arg0) {
+		return arg0 instanceof ReferenceList && ((ReferenceList)arg0)._id == _id;
+	}
+	
+	@Override
+	public int hashCode() {
+		return new Long(_id).hashCode();
+	}
 
-		@Override
-		public int hashCode() {
-			return new Long(_id).hashCode();
-		}
-		
-		public String toString() {
-			return "#" + _id;
-		}
+	@Override
+	public IList resolve(IList list) {
+		_refs().put(_id, list);
+		return this;
 	}
 
 	private ReferenceList(HashMap<Long, IList> refs, Object[] objects) {
@@ -82,111 +84,94 @@ public class ReferenceList implements IReferenceList, IParseable {
 	private ReferenceList(long id, HashMap<Long, IList> refs, IList list) {
 		_list = list;
 		_refs = refs;
-		_listId = id;
+		_id = id;
 	}
 	
 	public ReferenceList(Object[] objects) {
-		_list = PolyList.list(objects);
+		_list = objects == null ? null : PolyList.list(objects);
 	}
 
 
 	public ReferenceList() {
-		_list = new PolyList();
+		_list = null;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		return _list.isEmpty();
+		return _list().isEmpty();
 	}
 
 	@Override
 	public IList append(Object ... o) {
-		_list = _list.append(o);
+		_list = _list().append(o);
 		return this;
 	}
 
 	@Override
 	public Object first() {
-		return _list.first();
+		return _list().first();
 	}
 
 	@Override
 	public String prettyPrint() {
 		// TODO add reference info
-		return _list.prettyPrint();
+		return _list().prettyPrint();
 	}
 
 	@Override
 	public IList rest() {
-		return new ReferenceList(_listId, _refs, _list.rest());
+		return new ReferenceList(_id, _refs, _list().rest());
 	}
 
 	@Override
 	public IList cons(Object first) {
-		return new ReferenceList(_listId, _refs, _list.cons(first));
+		return new ReferenceList(_id, _refs, _list().cons(first));
 	}
 
 	@Override
 	public int length() {
-		return _list.length();
+		return _list().length();
 	}
 
 	@Override
 	public IList reverse() {
-		return new ReferenceList(_listId, _refs, _list.reverse());
+		return new ReferenceList(_id, _refs, _list().reverse());
 	}
 
 	@Override
 	public boolean contains(Object object) {
-		return _list.contains(object);
+		return _list().contains(object);
 	}
 
 	@Override
 	public Object nth(long n) {
-		return _list.nth(n);
+		return _list().nth(n);
 	}
 
 	@Override
 	public Object[] toArray() {
-		return _list.toArray();
+		return _list().toArray();
 	}
 
 	@Override
 	public List<Object> toCollection() {
-		return _list.toCollection();
+		return _list().toCollection();
 	}
 
 	@Override
 	public Iterator<Object> iterator() {
-		return _list.iterator();
+		return _list() == null ? new PolyList().iterator() : _list().iterator();
 	}
 
 	@Override
-	public Reference getForwardReference() {
-		return new Ref();
-	}
-
-	@Override
-	public IList resolveReference(Reference ref, IList list) {
-		if (((Ref)ref)._ls != _listId)
-			throw new ThinklabRuntimeException(
-					"internal error: foreign reference in reference list");
-		_refs().put(((Ref)ref)._id, list);
-		return this;
-	}
-
-	@Override
-	public IList getList(Reference ref) {
-		if (((Ref)ref)._ls != _listId)
-			throw new ThinklabRuntimeException(
-					"internal error: foreign reference in reference list");
-		return _refs().get(((Ref)ref)._id);
+	public IReferenceList getForwardReference() {
+		return new ReferenceList(_refs, (Object[])null);
 	}
 
 	@Override
 	public IReferenceList list(Object... objects) {
 		ReferenceList ret = new ReferenceList(_refs, objects);
-		ret._listId = _listId;
+//		ret._id = _id;
 		return ret;
 	}
 
@@ -215,21 +200,44 @@ public class ReferenceList implements IReferenceList, IParseable {
 
 	@Override
 	public String asText() {
-
-		if (_refs == null) {
-			return ((PolyList)_list).toString();
-		}
-		
-		String ret = "{";
-		ret += _list.toString();
-		for (long ref : _refs.keySet()) {
-			ret += " #" + ref + " " + _refs.get(ref);
-		}
-		ret += "}";
-		
-		return ret;
+		return asTextInternal("", new HashSet<Long>());
 	}
 	
+	private String asTextInternal(String ret, Set<Long> ids) {
+
+		if (ids.contains(_id))
+			return ret + (ret.isEmpty()? "" : " ") + "#"+ _id;
+
+		ids.add(_id);
+
+		if (_refs == null || _list instanceof PolyList)  {
+			return ret + (ret.isEmpty()? "" : " ") + printObject(_list,ids);
+		}
+		
+		ret +=  (ret.isEmpty()? "(" : " (");
+		for (Object o : _list()) {
+			ret +=	(ret.isEmpty()? "" : " ") + printObject(o, ids);
+		}
+		return ret + ")#" + _id; 
+		
+	}
+	
+	private String printObject(Object o, Set<Long> ids) {
+		
+		String ret = "";
+		if (o instanceof ReferenceList) {
+			return ((ReferenceList)o).asTextInternal("", ids);
+		} else if (o instanceof PolyList) {
+			ret +=	(ret.isEmpty()? "(" : " (");
+			for (Object oo : (PolyList)o) {
+				ret +=	(ret.isEmpty()? "" : " ") + printObject(oo, ids);
+			}
+			ret +=	(ret.isEmpty()? ")" : " )");
+			return ret;
+		}
+		return o.toString();
+	}
+
 	public String toString() {
 		return asText();
 	}
