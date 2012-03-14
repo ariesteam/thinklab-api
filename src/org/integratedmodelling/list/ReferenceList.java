@@ -170,9 +170,7 @@ public class ReferenceList implements IReferenceList, IParseable {
 
 	@Override
 	public IReferenceList list(Object... objects) {
-		ReferenceList ret = new ReferenceList(_refs, objects);
-//		ret._id = _id;
-		return ret;
+		return new ReferenceList(_refs, objects);
 	}
 
 	@Override
