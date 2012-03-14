@@ -11,6 +11,29 @@ import java.util.List;
  *
  */
 public interface IList extends Iterable<Object> {
+		
+	/**
+	 * A special object to put in a list to reference another. Enables us to
+	 * construct linearized serializations of graphs. If a list member is
+	 * a IList.Ref, we can ask it to return the corresponding IList, with
+	 * the understanding that we will run into trouble if we process it
+	 * recursively without counting references.
+	 * 
+	 * Refs are always fully hashable and comparable, and can be 
+	 * serialized and parsed from list representations.
+	 * 
+	 * @author Ferd
+	 *
+	 */
+	public interface Ref {
+		
+		/**
+		 * Get the list this Ref refs to.
+		 * @return
+		 */
+		public abstract IList get();
+	}
+
 
 	/**
 	 *  isEmpty() tells whether the list is empty.
@@ -84,21 +107,21 @@ public interface IList extends Iterable<Object> {
 	public abstract List<Object> toCollection();
 
 	/**
-	 * Check whether the list has been tagged as being referenced somewhere
-	 * else. If this returns true, getReferenceId() can be used to retrieve
-	 * the user-defined reference ID. Creation of referenced lists is left
-	 * to implementations.
+	 * Get a new Ref for the passed list, and store it along
+	 * with us so that it can be returned. The same Ref can
+	 * be reused. Don't use newReference for a self-reference:
+	 * use newReference() for that.
+	 * 
+	 * @param object
+	 * @return
+	 */
+	public Ref newReference(IList object);
+	
+	/**
+	 * Get a new self-reference.
 	 * 
 	 * @return
 	 */
-	boolean isReference();
-
-	/**
-	 * If isReference() returns true, this can be used to retrieve a unique ID. How
-	 * that is created depends on the implementation. 
-	 *  
-	 * @return
-	 */
-	long getReferenceId();
-
+	public Ref newReference();
+	
 }

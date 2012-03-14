@@ -42,6 +42,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -55,24 +56,38 @@ import org.integratedmodelling.exceptions.ThinklabIOException;
 import org.integratedmodelling.exceptions.ThinklabValidationException;
 import org.integratedmodelling.thinklab.api.lang.IList;
 
-import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
-
-/**   
- <pre>
- Polylist is the basic unit for constructing an open linked list of Objects.
- A Polylist can be either :
- empty, or
- non-empty, in which case it consists of:
- a Object as the first thing in the list
- a rest which is a Polylist.
- </pre>
- */
 public class PolyList implements IList {
-	/**
-	 *  nil is the empty-list constant
-	 */
-	public static final PolyList nil = new PolyList();
-	private Long _referenceId;
+
+	private long _ids = 0;
+	private HashMap<Long, IList> _refs;
+	
+	public static final IList NIL = new PolyList();
+
+	class PRef implements Ref {
+
+		long _id = _ids++;
+		
+		@Override
+		public IList get() {
+			return 
+				_refs.containsKey(_id) ? 
+						_refs.get(_id) : 
+						PolyList.this;
+		}
+
+		@Override
+		public boolean equals(Object arg0) {
+			return arg0 instanceof PRef && ((PRef)arg0)._id == _id;
+		}
+
+		@Override
+		public int hashCode() {
+			return new Long(_id).hashCode();
+		}
+		
+	}
+	
+
 	private ConsCell ptr;
 
 	/*
@@ -84,63 +99,32 @@ public class PolyList implements IList {
 		public abstract Object transformQuote();
 	}
 	
-	
-	/**
-	 *  construct empty Polylist
-	 */
 	public PolyList() {
 		ptr = null;
 	}
 
-	/**
-	 *  construct non-empty Polylist from a First and Rest
-	 */
 	PolyList(Object First, IList Rest) {
 		ptr = new ConsCell(First, Rest);
 	}
 
-	/**
-	 *  construct non-empty Polylist from a First and a Seed for the Rest
-	 */
 	PolyList(Object First, Seed Rest) {
 		ptr = new ConsCell(First, Rest);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.integratedmodelling.list.IList#isEmpty()
-	 */
 	@Override
 	public boolean isEmpty() {
 		return ptr == null;
 	}
 
-	/**
-	 *  nonEmpty() tells whether the Polylist is non-empty.
-	 */
 	public boolean nonEmpty() {
 		return ptr != null;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.integratedmodelling.list.IList#first()
-	 */
 	@Override
 	public Object first() {
 		return ptr.first();
 	}
-
-	/**
-	 *  setFirst() sets the first of a list to an object
-	 * @exception NullPointerException Can't take first of an empty Polylist.
-	 *
-	 */
-	public void setFirst(Object ob) {
-		ptr.setFirst(ob);
-	}
 	
-	/* (non-Javadoc)
-	 * @see org.integratedmodelling.list.IList#prettyPrint()
-	 */
 	@Override
 	public String prettyPrint() {
 		return prettyPrint(this);
@@ -195,17 +179,6 @@ public class PolyList implements IList {
 		
 		boolean wrote = false;
 
-		/*
-		 * references already printed once are only printed as their ref number
-		 */
-		if (list.isReference()) {
-			if (seenIds.contains(list.getReferenceId())) {
-				return inds + "#" + list.getReferenceId();
-			} else {
-				seenIds.add(list.getReferenceId());
-			}
-		}
-		
 		ret += inds + "(";
 		
 		int i = 0;
@@ -233,39 +206,8 @@ public class PolyList implements IList {
 		
 		ret += ")";
 		
-		if (list.isReference()) {
-			ret += "#" + list.getReferenceId();
-		}
-		
 		return ret;
 	}
-
-	/**
-	 * TBC an utility function that should either be generalized or moved to another class. If
-	 * passed object is a list and the string equivalent of its first element equals to the passed string,
-	 * the second object in the list is returned. Otherwise null is returned. Note that there is no
-	 * way to distinguish when the element is there and the second is null, or the element is not there
-	 * at all.
-	 * @param o
-	 * @param s
-	 * @return
-	 */
-	public static Object declares(Object o, String what) {
-
-		Object ret = null;
-
-		if (o.getClass() == PolyList.class && ((PolyList) o).nonEmpty()
-				&& ((IList) o).first().getClass() == String.class
-				&& ((IList) o).first().toString().equals(what)) {
-			ret = ((PolyList) o).second();
-		}
-
-		return ret;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.integratedmodelling.list.IList#rest()
-	 */
 
 	@Override
 	public IList rest() {
@@ -281,15 +223,6 @@ public class PolyList implements IList {
 
 		StringBuffer buff = new StringBuffer();
 
-		if (isReference()) {
-			if (refs.contains(getReferenceId())) {
-				buff.append("#" + getReferenceId());
-				return buff.toString();
-			} else {
-				refs.add(getReferenceId());
-			}
-		}
-		
 		buff.append("(");
 
 		if (nonEmpty()) {
@@ -308,25 +241,14 @@ public class PolyList implements IList {
 			}
 		}
 		buff.append(")");
-		
-		if (isReference()) {
-			buff.append("#" + getReferenceId());
-		}
-		
+				
 		return buff.toString();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.integratedmodelling.list.IList#cons(java.lang.Object)
-	 */
 	@Override
 	public IList cons(Object First) {
 		return new PolyList(First, this);
 	}
-
-	/**
-	 *  static cons returns a new Polylist given a First and a Rest.
-	 */
 
 	public static IList cons(Object First, IList Rest) {
 		return ((IList)Rest).cons(First);
@@ -336,53 +258,24 @@ public class PolyList implements IList {
 		return new PolyList(First, Rest);
 	}
 
-	/**
-	 *  PolylistFromEnum makes a Polylist out of any Enumeration.
-	 */
-
 	public static IList PolylistFromEnum(java.util.Enumeration<?> e) {
 		if (e.hasMoreElements())
 			return cons(e.nextElement(), PolylistFromEnum(e));
 		else
-			return nil;
+			return NIL;
 	}
 
-	/**
-	 *  return a list of no elements
-	 */
-
 	public static IList list() {
-		return nil;
+		return NIL;
 	}
 
 	public static IList list(Object ... objs) {
 		return fromArray(objs);
 	}
 
-	/**
-	 * Create a referenced list.
-	 * 
-	 * When two lists contain each other, they need a mechanism for identifying the
-	 * circular reference at creation time. The reference field is only instantiated
-	 * from the user using this function, but can be inspected and is used in 
-	 * printing and all recursive functions. The first time a referenced list is
-	 * seen, it's printed normally with a #id in front; the second time, only
-	 * (#id) is printed. Software using lists with a potential for self-reference
-	 * should honor this field.
-	 */
-	static public PolyList referencedList(long id, Object ... ref) {
-		PolyList ret = (PolyList) PolyList.list(ref);
-		ret._referenceId = id;
-		return ret;
-	}
-
 	public static IList listNotNull(Object ... objs) {
 		return fromArrayNotNull(objs);
 	}
-
-	/* (non-Javadoc)
-	 * @see org.integratedmodelling.list.IList#length()
-	 */
 
 	@Override
 	public int length() {
@@ -393,39 +286,21 @@ public class PolyList implements IList {
 		return len;
 	}
 
-	/**
-	 *  elements() returns a PolylistEnum object, which implements the
-	 *  interface java.util.Enumeration.
-	 */
 	public PolylistEnum elements() {
 		return new PolylistEnum(this);
 	}
-
-	/**
-	 *  first(L) returns the first element of its argument.
-	 * @exception NullPointerException Can't take first of empty List.
-	 */
 
 	static public Object first(IList L) {
 		return L.first();
 	}
 
-	/**
-	 *  rest(L) returns the rest of its argument.
-	 * @exception NullPointerException Can't take rest of empty Polylist.
-	 */
-
 	static public IList rest(IList L) {
 		return L.rest();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.integratedmodelling.list.IList#reverse()
-	 */
-
 	@Override
 	public IList reverse() {
-		IList rev = nil;
+		IList rev = NIL;
 		for (Enumeration<?> e = elements(); e.hasMoreElements();) {
 			rev = cons(e.nextElement(), rev);
 		}
@@ -461,7 +336,7 @@ public class PolyList implements IList {
 
 	public static IList range(long M, long N) {
 		if (M > N)
-			return nil;
+			return NIL;
 		else
 			return cons(new Long(M), range(M + 1, N));
 	}
@@ -483,7 +358,7 @@ public class PolyList implements IList {
 
 	static IList rangeUp(long M, long N, long S) {
 		if (M > N)
-			return nil;
+			return NIL;
 		else
 			return cons(new Long(M), rangeUp(M + S, N, S));
 	}
@@ -494,7 +369,7 @@ public class PolyList implements IList {
 
 	static IList rangeDown(long M, long N, long S) {
 		if (M < N)
-			return nil;
+			return NIL;
 		else
 			return cons(new Long(M), range(M + S, N, S));
 	}
@@ -903,7 +778,7 @@ public class PolyList implements IList {
 	 * is a collection, all of its objects are added one by one.
 	 */
 	public static IList fromArray(Object array[]) {
-		IList result = nil;
+		IList result = NIL;
 		for (int i = array.length - 1; i >= 0; i--) {
 			result = cons(array[i], result);
 		}
@@ -915,7 +790,7 @@ public class PolyList implements IList {
 	 * any nulls are not included in the list
 	 */
 	public static IList fromArrayNotNull(Object array[]) {
-		IList result = nil;
+		IList result = NIL;
 		for (int i = array.length - 1; i >= 0; i--)
 			if (array[i] != null)
 				result = cons(array[i], result);
@@ -927,7 +802,7 @@ public class PolyList implements IList {
 	 * PolylistFromArray makes a list out of an array of objects
 	 */
 	public static IList fromCollection(Collection<Object> collection) {
-		IList result = nil;
+		IList result = NIL;
 		List<Object> array = null;
 		if (collection instanceof List) {
 			array = (List<Object>)collection;
@@ -946,7 +821,7 @@ public class PolyList implements IList {
 	 */
 
 	public static IList explode(String S) {
-		IList result = nil;
+		IList result = NIL;
 		for (int i = S.length() - 1; i >= 0; i--)
 			result = cons(new Character(S.charAt(i)), result);
 		return result;
@@ -991,22 +866,20 @@ public class PolyList implements IList {
 	}
 		
 	@Override
-	public boolean isReference() {
-		return _referenceId != null;
-	}
-	
-	@Override
-	public long getReferenceId() {
-		return _referenceId;
-	}
-	
-	public void setReference(long l) {
-		_referenceId = l;
+	public Iterator<Object> iterator() {
+		return toCollection().iterator();
 	}
 
 	@Override
-	public Iterator<Object> iterator() {
-		return toCollection().iterator();
+	public Ref newReference(IList object) {
+		PRef ret = new PRef();
+		_refs.put(ret._id, object);
+		return ret;
+	}
+
+	@Override
+	public Ref newReference() {
+		return new PRef();
 	}
 
 //	public XML.XmlNode createXmlNode() {
