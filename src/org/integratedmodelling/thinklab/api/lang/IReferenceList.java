@@ -27,8 +27,18 @@ package org.integratedmodelling.thinklab.api.lang;
 public interface IReferenceList extends IList {
 
 	/**
+	 * Get a reference to this list that can be put in other lists without 
+	 * compromising our identity as an object.
+	 * 
+	 * @return
+	 */
+	public IReferenceList getReference();
+	
+	/**
 	 * Get a reference list that shares this list's references and will be
-	 * resolved later by calling resolve() on it.
+	 * resolved later by calling resolve() on it. Not resolving it will
+	 * cause a runtime unresolved reference exception when the object
+	 * is used.
 	 * 
 	 * @return
 	 */
@@ -51,5 +61,15 @@ public interface IReferenceList extends IList {
 	 * @return
 	 */
 	public IReferenceList newList(Object ... objects);
+
+	/**
+	 * Each reference list has an ID that is guaranteed equal for all 
+	 * references to the same object and different for all references to
+	 * different objects. Comes in handy to implement hashCode and equals
+	 * for objects created from a ref list.
+	 * 
+	 * @return
+	 */
+	long getId();
 	
 }

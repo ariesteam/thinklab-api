@@ -44,6 +44,10 @@ public interface ISemanticObject {
 	 * semantics can be reconstructed by the knowledge manager, although it may be more general
 	 * than what we have here.
 	 * 
+	 * For all practical purposes, this object should be consider immutable - except that Java doesn't
+	 * have that. Modifying the object will put it out of sync with its semantics, so make sure
+	 * you know what you're doing.
+	 * 
 	 * TBC could be called demote() - stripping the object of semantics. Don't know what is best.
 	 * 
 	 * @return

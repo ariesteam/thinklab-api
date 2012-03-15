@@ -1,5 +1,6 @@
 package org.integratedmodelling.list;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -15,29 +16,23 @@ import org.integratedmodelling.thinklab.api.lang.IReferenceList;
 
 public class ReferenceList implements IReferenceList, IParseable {
 	
-	long _id = ThreadId.get();
+    private static final AtomicLong nextId = new AtomicLong(0);
+    private static final ThreadLocal<Long> threadId =
+        new ThreadLocal<Long>() {
+            @Override protected Long initialValue() {
+                return nextId.getAndIncrement();
+        }   
+    };
+
+    // Returns the current thread's unique ID, assigning it if necessary
+    public static long nextId() {
+        Long id = threadId.get();
+        threadId.set(new Long(id.longValue() + 1l));
+        return id;
+    }		     
 	
-	/*
-	 * Increasing IDs are thread-private so we don't need to synchronize.
-	 */
-	 public static class ThreadId {
-	     // Atomic integer containing the next thread ID to be assigned
-	     private static final AtomicLong nextId = new AtomicLong(0);
-
-	     // Thread local variable containing each thread's ID
-	     private static final ThreadLocal<Long> threadId =
-	         new ThreadLocal<Long>() {
-	             @Override protected Long initialValue() {
-	                 return nextId.getAndIncrement();
-	         }   
-	     };
-
-	     // Returns the current thread's unique ID, assigning it if necessary
-	     public static long get() {
-	         return nextId.getAndIncrement();
-	     }		     
-	 }
-
+	long _id = nextId();
+	
 	 // the main list we represent.
 	IList   _list;
 	HashMap<Long, IList> _refs;
@@ -121,12 +116,6 @@ public class ReferenceList implements IReferenceList, IParseable {
 	}
 
 	@Override
-	public String prettyPrint() {
-		// this will never be pretty anyway
-		return asText();
-	}
-
-	@Override
 	public ReferenceList rest() {
 		return new ReferenceList(_id, _refs, _list().rest());
 	}
@@ -175,6 +164,12 @@ public class ReferenceList implements IReferenceList, IParseable {
 	public ReferenceList getForwardReference() {
 		return new ReferenceList(_refs, (Object[])null);
 	}
+	
+	@Override
+	public ReferenceList getReference() {
+		_refs.put(_id, this);
+		return new ReferenceList(_id, _refs, null);
+	}
 
 	@Override
 	public ReferenceList newList(Object... objects) {
@@ -185,23 +180,7 @@ public class ReferenceList implements IReferenceList, IParseable {
 	public void parse(String string) throws ThinklabException {
 
 		string = string.trim();
-		if (string.startsWith("("))
-			_list = PolyList.parse(string);
-		else {
-			
-			/*
-			 * chop final "}";
-			 */
-			
-			/*
-			 * read first list
-			 */
-			
-			/*
-			 * loop reading #n tokens and lists
-			 * alternatively until EOI
-			 */
-		}
+		
 	}
 
 	@Override
@@ -213,18 +192,14 @@ public class ReferenceList implements IReferenceList, IParseable {
 
 		if (ids.contains(_id))
 			return ret + (ret.isEmpty()? "" : " ") + "#"+ _id;
-
+		
 		ids.add(_id);
 
-		if (_refs == null || _list instanceof PolyList)  {
-			return ret + (ret.isEmpty()? "" : " ") + printObject(_list,ids);
-		}
-		
-		ret +=  (ret.isEmpty()? "(" : " (");
+		ret +=  (ret.isEmpty()? "" : " ") + "#" + _id + "(";
 		for (Object o : _list()) {
-			ret +=	(ret.isEmpty()? "" : " ") + printObject(o, ids);
+			ret +=	((ret.isEmpty() || ret.endsWith("(")) ? "" : " ") + printObject(o, ids);
 		}
-		return ret + ")#" + _id; 
+		return ret + ")"; 
 		
 	}
 	
@@ -246,6 +221,84 @@ public class ReferenceList implements IReferenceList, IParseable {
 
 	public String toString() {
 		return asText();
+	}
+	
+	@Override
+	public String prettyPrint() {
+		return prettyPrint(this);
+	}
+	
+	public static String prettyPrint(IList list) {
+		return prettyPrintInternal(list, 0, 2, new HashSet<Long>());
+	}
+
+	public static String prettyPrint(IList list, int indent) {
+		return prettyPrintInternal(list, indent, 2, new HashSet<Long>());
+	}
+	
+	private static String prettyPrintInternal(
+			IList list, int indentLevel, int indentAmount,
+			Set<Long> seenIds) {
+
+		String ret = "";
+		String inds = "";
+		
+		for (int i = 0; i < indentLevel*indentAmount; i++)
+			inds += ' ';
+
+		if (list == null)
+			return "(nil)";
+		
+		boolean wrote = false;
+
+		ret += inds;
+		
+		if (list instanceof ReferenceList) {
+			ret += "#" + ((ReferenceList)list)._id;
+			if (seenIds.contains(((ReferenceList)list)._id))
+				return ret;
+			seenIds.add(((ReferenceList)list)._id);
+		}
+		
+		ret += "(";
+		
+		int i = 0;
+		for (Object o : list.toArray()) {
+			if (o instanceof ReferenceList && seenIds.contains(((ReferenceList)o)._id)) {
+				if (wrote) ret += " ";
+				ret += "#" + ((ReferenceList)o)._id;
+			} else if (o instanceof IList) {
+				ret += "\n" + prettyPrintInternal((IList)o, indentLevel+1, indentAmount, seenIds);
+			} else {
+				String sep = " ";
+				String z = o == null ? "nil" : o.toString();
+				z = Escape.forDoubleQuotedString(z, false);
+				
+				// double quote anything that is not a number, doesn't look like one, contains spaces
+				// in its string representation, or is not a first element that looks like a semantic type.
+				if (z.contains(" ") || !PolyList.validateNumber(o) && !(i == 0 && PolyList.validateType(z))) {
+					z = "\"" + z + "\"";
+				}
+
+				if (wrote) ret += sep;
+				ret += z;
+				wrote = true;
+			}
+			i++;
+		}
+		
+		ret += ")";
+		
+		return ret;
+	}
+
+	public static IReferenceList fromCollection(ArrayList<Object> rl) {
+		return list(rl.toArray());
+	}
+
+	@Override
+	public long getId() {
+		return _id;
 	}
 	
 }

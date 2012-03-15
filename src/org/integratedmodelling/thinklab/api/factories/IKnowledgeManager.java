@@ -93,17 +93,6 @@ public interface IKnowledgeManager {
 	 */
 	public abstract IConcept getLeastGeneralCommonConcept(IConcept ... cc);
 
-//	/**
-//	 * Create a semantic annotation from the passed object. This will succeed if the
-//	 * object and its fields have semantic tags (@Concept, @Property, @Literal) and/or 
-//	 * is an IConceptualizable.
-//	 * 
-//	 * @param i
-//	 * @return
-//	 * @throws ThinklabException
-//	 */
-//	public abstract ISemantics conceptualize(Object object) throws ThinklabException;
-//	
 	/**
 	 * Reifies an annotation (e.g. parsed or serialized through a web service) by producing 
 	 * the object it describes, if any. In order for an object to be created, annotation tags 
@@ -113,5 +102,5 @@ public interface IKnowledgeManager {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public ISemanticObject instantiate(IList a) throws ThinklabException;
+	public Object instantiate(IList a) throws ThinklabException;
 }

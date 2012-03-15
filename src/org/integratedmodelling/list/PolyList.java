@@ -113,7 +113,7 @@ public class PolyList implements IList {
 		return prettyPrintInternal(list, indent, 2, new HashSet<Long>());
 	}
 	
-	private static boolean validateNumber(Object s) {
+	static boolean validateNumber(Object s) {
 		
 		if (s == null)
 			return false;
@@ -129,7 +129,7 @@ public class PolyList implements IList {
 		return true;
 	}
 	
-	private static boolean validateType(Object s) {
+	static boolean validateType(Object s) {
 	
 		if (s == null)
 			return false;

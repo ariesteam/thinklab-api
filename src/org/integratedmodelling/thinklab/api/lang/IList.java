@@ -1,15 +1,17 @@
 package org.integratedmodelling.thinklab.api.lang;
 
 import java.util.List;
-import java.util.Map;
 
 /**
- * Open linked list, LISP-style. Immutable and general, not generic. Contains a 
- * simple mechanism to tag lists as being referenced in more than one place with a
- * retrievable ID, so that circular containment relationships can be handled.
+ * Open linked list, LISP-style. Immutable and general, not generic. Supports
+ * the obvious basic operations.
+ * 
+ * Not meant to contain itself or lists that refer back to itself. I.e., it's
+ * suboptimal and laborious to build a graph representation with this one. If
+ * that's what you want, look at IReferenceList.
  * 
  * @author Ferd
- *
+ * @see IReferenceList
  */
 public interface IList extends Iterable<Object> {
 
@@ -19,7 +21,7 @@ public interface IList extends Iterable<Object> {
 	public abstract boolean isEmpty();
 	
 	/**
-	 * Return a new list with an object appended to it.
+	 * Return a new list with the passed objects appended to it.
 	 * 
 	 * @param o
 	 * @return

@@ -27,7 +27,8 @@ public interface IKbox {
 
 	/**
 	 * Retrieve all first-class objects in kbox (those that have been explicitly stored with a 
-	 * call to store(object)). 
+	 * call to store(object)). It's a convenience method that should return the result of 
+	 * an empty query, but may be able to use a more efficient strategy according to host platform.
 
 	 * The list returned should be read-only and implement lazy access. 
 	 * 
