@@ -9,10 +9,13 @@ package org.integratedmodelling.thinklab.api.lang;
  * The drawback is that it should be assumed to have lost any functional
  * behavior compared to IList: the result of all list operation may be the SAME list 
  * it's called on. So if you add another list to it, you should use 
- * ITS list(...) constructor instead of PolyList.list(...) to create it, to
+ * ITS newList(...) constructor instead of PolyList.list(...) to create it, to
  * ensure that all references are preserved. It should still be usable
  * the same way as other ILists, with assignment operators and everything
  * behaving properly.
+ * 
+ * To create the first instance of a ReferenceList, use either new ReferenceList()
+ * or ReferenceList.list(...).
  * 
  * The ReferenceList must implement hashCode and equals() properly so that
  * it can be used in a reference set by any recursive algorithm, preventing 
@@ -47,6 +50,6 @@ public interface IReferenceList extends IList {
 	 * @param objects
 	 * @return
 	 */
-	public IReferenceList list(Object ... objects);
+	public IReferenceList newList(Object ... objects);
 	
 }

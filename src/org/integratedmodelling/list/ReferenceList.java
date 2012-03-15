@@ -60,6 +60,11 @@ public class ReferenceList implements IReferenceList, IParseable {
 		return ret;
 	}
 
+	
+	public static ReferenceList list(Object ... objs) {
+		return new ReferenceList((Object[])objs);
+	}
+	
 	@Override
 	public boolean equals(Object arg0) {
 		return arg0 instanceof ReferenceList && ((ReferenceList)arg0)._id == _id;
@@ -73,6 +78,9 @@ public class ReferenceList implements IReferenceList, IParseable {
 	@Override
 	public IList resolve(IList list) {
 		_refs().put(_id, list);
+		if (list instanceof ReferenceList) {
+			((ReferenceList)list)._id = _id;
+		}
 		return this;
 	}
 
@@ -87,7 +95,7 @@ public class ReferenceList implements IReferenceList, IParseable {
 		_id = id;
 	}
 	
-	public ReferenceList(Object[] objects) {
+	private ReferenceList(Object[] objects) {
 		_list = objects == null ? null : PolyList.list(objects);
 	}
 
@@ -102,7 +110,7 @@ public class ReferenceList implements IReferenceList, IParseable {
 	}
 
 	@Override
-	public IList append(Object ... o) {
+	public ReferenceList append(Object ... o) {
 		_list = _list().append(o);
 		return this;
 	}
@@ -114,17 +122,17 @@ public class ReferenceList implements IReferenceList, IParseable {
 
 	@Override
 	public String prettyPrint() {
-		// TODO add reference info
-		return _list().prettyPrint();
+		// this will never be pretty anyway
+		return asText();
 	}
 
 	@Override
-	public IList rest() {
+	public ReferenceList rest() {
 		return new ReferenceList(_id, _refs, _list().rest());
 	}
 
 	@Override
-	public IList cons(Object first) {
+	public ReferenceList cons(Object first) {
 		return new ReferenceList(_id, _refs, _list().cons(first));
 	}
 
@@ -134,7 +142,7 @@ public class ReferenceList implements IReferenceList, IParseable {
 	}
 
 	@Override
-	public IList reverse() {
+	public ReferenceList reverse() {
 		return new ReferenceList(_id, _refs, _list().reverse());
 	}
 
@@ -164,12 +172,12 @@ public class ReferenceList implements IReferenceList, IParseable {
 	}
 
 	@Override
-	public IReferenceList getForwardReference() {
+	public ReferenceList getForwardReference() {
 		return new ReferenceList(_refs, (Object[])null);
 	}
 
 	@Override
-	public IReferenceList list(Object... objects) {
+	public ReferenceList newList(Object... objects) {
 		return new ReferenceList(_refs, objects);
 	}
 
