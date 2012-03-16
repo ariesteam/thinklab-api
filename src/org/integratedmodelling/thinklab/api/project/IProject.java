@@ -2,9 +2,9 @@ package org.integratedmodelling.thinklab.api.project;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.List;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.thinklab.api.configuration.IConfiguration;
 import org.integratedmodelling.thinklab.api.modelling.INamespace;
 import org.integratedmodelling.thinklab.api.plugin.IThinklabPlugin;
 
@@ -14,7 +14,7 @@ import org.integratedmodelling.thinklab.api.plugin.IThinklabPlugin;
  * methods to manage their lifetime in Thinklab.
  * @author  Ferd
  */
-public interface IProject extends IThinklabPlugin, IConfiguration {
+public interface IProject extends IThinklabPlugin {
 	
 	public static final String THINKLAB_META_INF = "THINKLAB_INF";
 	public static final String THINKLAB_PROPERTIES_FILE = "thinklab.properties";
@@ -68,5 +68,12 @@ public interface IProject extends IThinklabPlugin, IConfiguration {
 	 * @return
 	 */
 	public File findResourceForNamespace(String namespace, String extension);
+	
+	/**
+	 * Get all projects we depend on.
+	 * 
+	 * @return
+	 */
+	public abstract List<IProject> getPrerequisites();
 	
 }

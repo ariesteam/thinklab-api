@@ -1,5 +1,6 @@
 package org.integratedmodelling.thinklab.api.factories;
 
+import java.io.File;
 import java.util.Collection;
 
 import org.integratedmodelling.exceptions.ThinklabException;
@@ -21,4 +22,5 @@ public interface IProjectManager {
 
 	public void undeployProject(String projectId) throws ThinklabException;
 
+	public void addProjectDirectory(File projectDirectory);
 }

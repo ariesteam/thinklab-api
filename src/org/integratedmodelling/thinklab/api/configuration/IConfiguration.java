@@ -20,6 +20,7 @@ public interface IConfiguration {
 	public final static String SUBSPACE_SOURCE    = "src";
 	public final static String SUBSPACE_PLUGINS   = "plugins";
 	public final static String SUBSPACE_LIB       = "lib";
+	public final static String SUBSPACE_PROJECTS  = "projects";
 
 	/**
 	 * Configurable objects should have properties that can be 

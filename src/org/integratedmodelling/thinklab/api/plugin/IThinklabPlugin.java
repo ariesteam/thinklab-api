@@ -23,12 +23,14 @@ public interface IThinklabPlugin extends IConfiguration {
 	 */
 	public String getId();
 	
-	/**
-	 * Get all the plugin we depend on.
-	 * 
-	 * @return
-	 */
-	public abstract List<IThinklabPlugin> getPrerequisites();
+// CHECK disabling for the time being, as we don't need to know in the plugin - only the plugin manager should
+// worry about that. It is necessary in IProject, 
+//	/**
+//	 * Get all the plugin we depend on.
+//	 * 
+//	 * @return
+//	 */
+//	public abstract List<IThinklabPlugin> getPrerequisites();
 
 	/**
 	 * Callback called upon initialization.

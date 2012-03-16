@@ -1,5 +1,5 @@
 /**
- * ThinklabUnimplementedFeatureException.java
+ * ThinklabStorageException.java
  * ----------------------------------------------------------------------------------
  * 
  * Copyright (C) 2008 www.integratedmodelling.org
@@ -33,30 +33,26 @@
  **/
 package org.integratedmodelling.exceptions;
 
-/**
- * TODO rename to ThinklabUnsupportedOperation
- * @author Ferd
- *
- */
-public class ThinklabUnimplementedFeatureException extends ThinklabException {
 
-	private static final long serialVersionUID = 6916503711129030499L;
+public class ThinklabProjectException extends ThinklabException {
+	private static final long serialVersionUID = 1L;
 
-	public ThinklabUnimplementedFeatureException() {
+	public ThinklabProjectException() {
+		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ThinklabUnimplementedFeatureException(String arg0, Throwable arg1) {
+	public ThinklabProjectException(String arg0, Throwable arg1) {
 		super(arg0, arg1);
 		// TODO Auto-generated constructor stub
 	}
 
-	public ThinklabUnimplementedFeatureException(String arg0) {
+	public ThinklabProjectException(String arg0) {
 		super(arg0);
 		// TODO Auto-generated constructor stub
 	}
 
-	public ThinklabUnimplementedFeatureException(Throwable arg0) {
+	public ThinklabProjectException(Throwable arg0) {
 		super(arg0);
 		// TODO Auto-generated constructor stub
 	}
