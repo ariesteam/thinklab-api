@@ -34,6 +34,7 @@
 package org.integratedmodelling.thinklab.api.knowledge;
 
 import java.util.Collection;
+import java.util.Set;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.query.IQuery;
@@ -132,11 +133,18 @@ public interface IConcept extends IKnowledge {
 
 	public abstract IConcept getLeastGeneralCommonConcept(IConcept c);
 	
-	/**
-	 * @uml.property  name="definition"
-	 * @uml.associationEnd  
-	 */
 	public abstract IQuery getDefinition();
+
+	/**
+	 * Return the full set of concepts that are subsumed by this concept, using
+	 * whatever reasoning strategy is implemented or configured in.
+	 * 
+	 * This is used quite a bit in kbox queries, so it pays to make it
+	 * fast and/or cache results.
+	 * 
+	 * @return
+	 */
+	public abstract Set<IConcept> getSemanticClosure();
 	
 	
 }

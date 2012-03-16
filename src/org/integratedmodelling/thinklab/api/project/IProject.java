@@ -2,7 +2,6 @@ package org.integratedmodelling.thinklab.api.project;
 
 import java.io.File;
 import java.util.Collection;
-import java.util.Properties;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.configuration.IConfiguration;
@@ -16,6 +15,9 @@ import org.integratedmodelling.thinklab.api.plugin.IThinklabPlugin;
  * @author  Ferd
  */
 public interface IProject extends IThinklabPlugin, IConfiguration {
+	
+	public static final String THINKLAB_META_INF = "THINKLAB_INF";
+	public static final String THINKLAB_PROPERTIES_FILE = "thinklab.properties";
 	
 	// properties for META-INF/thinklab.properties file
 	public static final String SOURCE_FOLDER_PROPERTY = "thinklab.source.folder";
@@ -31,10 +33,12 @@ public interface IProject extends IThinklabPlugin, IConfiguration {
 	
 	/**
 	 * Source folders are scanned at startup and monitored during development. The location of
-	 * source folders is in the SOURCE_FOLDER_PROPERTY of the thinklab properties.
+	 * source folders is in the SOURCE_FOLDER_PROPERTY of the thinklab properties. There is
+	 * one source folder per project.
+	 * 
 	 * @return
 	 */
-	public Collection<File> getSourceFolders();
+	public File getSourceDirectory();
 	
 	/**
 	 * Any ontologies in the source folder must have a URL that matches the project's 

@@ -1,8 +1,9 @@
-package org.integratedmodelling.thinklab.api.project;
+package org.integratedmodelling.thinklab.api.factories;
 
 import java.util.Collection;
 
 import org.integratedmodelling.exceptions.ThinklabException;
+import org.integratedmodelling.thinklab.api.project.IProject;
 
 /**
  * The server side of project management.
@@ -14,7 +15,7 @@ public interface IProjectManager {
 	
 	public IProject getProject(String projectId);
 	
-	public Collection<IProject> getActiveProjects();
+	public Collection<IProject> getProjects();
 	
 	public IProject deployProject(String resourceId) throws ThinklabException;
 
