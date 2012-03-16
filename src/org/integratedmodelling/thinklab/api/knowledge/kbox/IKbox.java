@@ -94,4 +94,17 @@ public interface IKbox {
 	 * @return
 	 */
 	public abstract String getUri();
+	
+	/**
+	 * This should be called once upon kbox instantiation, and leave the kbox
+	 * in operational conditions. It should be smart about repeated calls to
+	 * it.
+	 */
+	public abstract void open();
+	
+	/**
+	 * This should always be called after a set of operations on the kbox, no matter 
+	 * whether you know it's needed or not.
+	 */
+	public abstract void close();
 }

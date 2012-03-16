@@ -106,7 +106,10 @@ public class ReferenceList implements IReferenceList, IParseable {
 
 	@Override
 	public ReferenceList append(Object ... o) {
-		_list = _list().append(o);
+		IList lst = _list();
+		for (Object oo : o)
+			lst = lst.append(oo);
+		_list = lst;
 		return this;
 	}
 
@@ -167,7 +170,7 @@ public class ReferenceList implements IReferenceList, IParseable {
 	
 	@Override
 	public ReferenceList getReference() {
-		_refs.put(_id, this);
+		_refs().put(_id, this);
 		return new ReferenceList(_id, _refs, null);
 	}
 
