@@ -18,7 +18,7 @@ public interface IProjectManager {
 	
 	public Collection<IProject> getProjects();
 	
-	public IProject deployProject(String resourceId) throws ThinklabException;
+	public IProject deployProject(String pluginId, String resourceId) throws ThinklabException;
 
 	public void undeployProject(String projectId) throws ThinklabException;
 

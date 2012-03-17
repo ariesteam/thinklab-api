@@ -83,13 +83,23 @@ public interface IConfiguration {
 	 * @return
 	 */
 	public abstract File getTempArea(String subArea);
+
+	
+	/**
+	 * The load path is the equivalent of an installation directory: a 
+	 * read-only file space where resources may be. Resources implementing
+	 * IConfiguration should always have a non-null load path. 
+	 * 
+	 * @return
+	 */
+	public abstract File getLoadPath();
+
 	
 	/**
 	 * The load path is the equivalent of an installation directory: a 
 	 * read-only file space where resources may be. This one should
 	 * never create anything, but just return a File when the path
-	 * exists, or null when it doesn't. Passing null for a subArea
-	 * should get the unchanged load path if it's there.
+	 * exists, or null when it doesn't. 
 	 * 
 	 * @return
 	 */

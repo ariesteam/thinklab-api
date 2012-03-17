@@ -54,10 +54,18 @@ public interface IKnowledgeManager {
 	 * are present, all the public fields (xxx) that resolve to a hasXxx property (isXxx for 
 	 * booleans) in the same namespace of the annotation concept will be automatically annotated.
 	 * 
-	 * @param cls
-	 * @param concept
+	 * The third parameter allows the semantically wrapped object to be of a specific class. If 
+	 * null is passed, the implementation should create the semantic equivalent of Object as the
+	 * result of annotate(object).
+	 * 
+	 * @param cls a Java class of any type to be associated with the concept for annotation.
+	 * @param concept the concept that will be associated to cls
+	 * @param semanticObjectClass pass null if a stock SemanticObject is desired, or another class
+	 *        derived from the basic implementation if you want a specific subtype of semantic object
+	 *        to be associated with this concept.
 	 */
-	public abstract void registerAnnotatedClass(Class<?> cls, IConcept concept);
+	public abstract void registerAnnotatedClass(Class<?> cls, IConcept concept, 
+			Class<? extends ISemanticObject> semanticObjectClass);
 	
 	/**
 	 * Create a kbox with the named uri, using the implementation assigned to the
