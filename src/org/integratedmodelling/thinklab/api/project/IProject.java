@@ -16,7 +16,7 @@ import org.integratedmodelling.thinklab.api.plugin.IThinklabPlugin;
  */
 public interface IProject extends IThinklabPlugin {
 	
-	public static final String THINKLAB_META_INF = "THINKLAB_INF";
+	public static final String THINKLAB_META_INF = "META-INF";
 	public static final String THINKLAB_PROPERTIES_FILE = "thinklab.properties";
 	
 	// properties for META-INF/thinklab.properties file
