@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Context extends ModelObject {
 
-	ArrayList<Observation> observations;
+	ArrayList<Observation> observations = new ArrayList<Observation>();
 	
 	@Override
 	public String getQualifiedName() {

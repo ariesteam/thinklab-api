@@ -13,7 +13,7 @@ import java.util.ListIterator;
  * @author Ferd
  *
  */
-public abstract class ReadOnlyList<T> implements List<T> {
+public abstract class ImmutableList<T> implements List<T> {
 
 	@Override
 	public boolean isEmpty() {
