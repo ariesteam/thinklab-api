@@ -20,6 +20,7 @@ Export-Package: org.integratedmodelling.collections;uses:="org.integratedmodelli
  org.integratedmodelling.thinklab.api.knowledge.kbox;uses:="org.integratedmodelling.thinklab.api.knowledge.query",
  org.integratedmodelling.thinklab.api.knowledge.query;uses:="org.integratedmodelling.thinklab.api.lang,org.integratedmodelling.thinklab.api.knowledge",
  org.integratedmodelling.thinklab.api.lang;uses:="org.integratedmodelling.thinklab.api.metadata,org.integratedmodelling.lang.model,org.integratedmodelling.thinklab.api.knowledge",
+ org.integratedmodelling.thinklab.api.lang.parsing,
  org.integratedmodelling.thinklab.api.listeners;uses:="org.integratedmodelling.thinklab.api.modelling,org.integratedmodelling.thinklab.api.runtime",
  org.integratedmodelling.thinklab.api.metadata,
  org.integratedmodelling.thinklab.api.modelling;

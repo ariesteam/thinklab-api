@@ -26,14 +26,14 @@ package org.integratedmodelling.thinklab.api.lang;
  */
 public interface IReferenceList extends IList {
 
-	/**
-	 * Get a reference to this list that can be put in other lists without 
-	 * compromising our identity as an object.
-	 * 
-	 * @return
-	 */
-	public IReferenceList getReference();
-	
+//	/**
+//	 * Get a reference to this list that can be put in other lists without 
+//	 * compromising our identity as an object.
+//	 * 
+//	 * @return
+//	 */
+//	public IReferenceList getReference();
+//	
 	/**
 	 * Get a reference list that shares this list's references and will be
 	 * resolved later by calling resolve() on it. Not resolving it will

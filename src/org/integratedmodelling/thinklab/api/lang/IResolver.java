@@ -9,8 +9,18 @@ import org.integratedmodelling.lang.model.ModelObject;
 import org.integratedmodelling.lang.model.Namespace;
 import org.integratedmodelling.lang.model.PropertyObject;
 import org.integratedmodelling.thinklab.api.knowledge.IExpression;
+import org.integratedmodelling.thinklab.api.lang.parsing.ILanguageDefinition;
 
 public interface IResolver {
+	
+	/**
+	 * This one returns a new "definable" object for the model class passed. This way each 
+	 * implementation can use their own objects and the API remains clean.
+	 * 
+	 * @param cls
+	 * @return
+	 */
+	public abstract ILanguageDefinition newLanguageObject(Class<? extends ILanguageObject> cls);
 	
 	/**
 	 * Override to fine-tune error management. If this throws an exception, the parser also will. If not, 

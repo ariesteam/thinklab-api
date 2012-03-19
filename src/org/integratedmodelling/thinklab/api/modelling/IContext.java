@@ -33,6 +33,8 @@ public interface IContext extends ITopology<IContext>, IModelObject, IListenable
 	public abstract Collection<IExtent> getExtents();
 
 	/**
+	 * The total number of states determined by the topologies in the context, i.e. the
+	 * size of the Cartesian product of the topologies.
 	 * 
 	 * @param concept
 	 * @return
@@ -42,7 +44,7 @@ public interface IContext extends ITopology<IContext>, IModelObject, IListenable
 			throws ThinklabException;
 
 	/**
-	 * Return the extent for a specific topology observable, or null if not
+	 * Return the extent for a specific topology observable type, or null if not
 	 * there.
 	 * 
 	 * @param observable
@@ -51,9 +53,9 @@ public interface IContext extends ITopology<IContext>, IModelObject, IListenable
 	public abstract IExtent getExtent(IConcept observable);
 
 	/**
-	 * True if all the extent states correspondent to the passed index are
+	 * True if all the extent states correspondent to the passed state index are
 	 * defined in all dimensions (meaning there is a correspondent topology
-	 * subdivision). If this is false for any extent, states using this context will
+	 * subdivision for all topologies). If this is false for any extent, states using this context will
 	 * have a no-data value at that index.
 	 * 
 	 * @param index
@@ -62,8 +64,7 @@ public interface IContext extends ITopology<IContext>, IModelObject, IListenable
 	public abstract boolean isCovered(int index);
 
 	/**
-	 * Return the extent for a specific topology observable, or null if not
-	 * there.
+	 * Return the state for a specific observable, or null if not there.
 	 * 
 	 * @param observable
 	 * @return
@@ -72,14 +73,16 @@ public interface IContext extends ITopology<IContext>, IModelObject, IListenable
 
 	/**
 	 * Merge in an observation: if there is already one for that observable, mediate it through
-	 * the extents we have; otherwise add it in.
+	 * the extents we have; otherwise add it in after ensuring it fits the topologies we adopt. 
+	 * If the passed observation is a IExtent, the context must be recomputed and all observations
+	 * mediated to the result.
 	 * 
 	 * @param observation
 	 */
 	public abstract void merge(IObservation observation) throws ThinklabException;
 
 	/**
-	 * Merge all the observations in the passed context
+	 * Merge all the observations in the passed context.
 	 * 
 	 * @param observation
 	 */
@@ -87,11 +90,17 @@ public interface IContext extends ITopology<IContext>, IModelObject, IListenable
 
 	
 	/**
+	 * Convenience method to get the temporal extent, if any, without having to know which
+	 * specific view of time we have.
+	 * 
 	 * @return
 	 */
 	public IExtent getTime();
 
 	/**
+	 * Convenience method to get the spatial extent, if any, without having to know which
+	 * specific view of space we have.
+	 * 
 	 * @return
 	 */
 	public IExtent getSpace();
@@ -102,14 +111,14 @@ public interface IContext extends ITopology<IContext>, IModelObject, IListenable
 	 */
 	public abstract Collection<IState> getStates();
 
-
 	/**
-	 * Return a new context with the given dimension collapsed to its total
+	 * Return a new context with the given extent collapsed to its total
 	 * extent (1 state only), thereby eliminating any multiplicity in the
-	 * distribution of states in that dimension. IState has an aggregate()
-	 * function that will create the correspondent aggregated state.
+	 * distribution of states in that dimension. Each state should be 
+	 * adjusted to reflect that (IState has an aggregate()
+	 * function that will create the correspondent aggregated state.)
 	 * 
-	 * If dimension is null, this function must aggregate all extents in their
+	 * If the dimension is null, this function must aggregate all extents in their
 	 * sorted order, resulting in a one-state overall aggregate.
 	 * 
 	 * @param dimension
@@ -117,23 +126,6 @@ public interface IContext extends ITopology<IContext>, IModelObject, IListenable
 	 * @throws ThinklabException
 	 */
 	public abstract IContext collapse(IConcept dimension)
-			throws ThinklabException;
-
-	/**
-	 * Return a context mapper that translates linear state coordinates to the
-	 * equivalent ones for the context defined by the extents of the passed
-	 * observation.
-	 * 
-	 * The passed observation must have been harmonized by the contextualizer
-	 * already, i.e. its context must have the same multiplicity or multiplicity
-	 * 1 along any common dimension and have no multiple \ dimensions than this
-	 * doesn't have.
-	 * 
-	 * @param context
-	 * @return
-	 * @throws ThinklabException
-	 */
-	public abstract IContextMapper mapContext(IObservation observation)
 			throws ThinklabException;
 
 }

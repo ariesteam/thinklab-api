@@ -15,6 +15,13 @@ import org.integratedmodelling.thinklab.api.lang.ILanguageObject;
  */
 public interface INamespace extends ILanguageObject {
 
+	/**
+	 * The ID that distinguished the object in its namespace
+	 * @return
+	 */
+	public abstract String getId();
+
+	@Deprecated
 	public abstract String getNamespace();
 	
 	public abstract IOntology getOntology();

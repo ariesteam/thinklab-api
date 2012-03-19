@@ -5,11 +5,7 @@ package org.integratedmodelling.thinklab.api.lang;
  */
 public interface INamespaceQualified {
 	
-	/**
-	 * The ID that distinguished the object in its namespace
-	 * @return
-	 */
-	public abstract String getId();
+
 	
 	/**
 	 * The namespace, which should be in the form of a dot-separated path

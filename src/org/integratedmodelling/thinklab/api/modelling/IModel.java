@@ -15,7 +15,7 @@ public interface IModel extends IModelObject {
 	 * Return the observable. Never null. 
 	 * @return
 	 */
-	public abstract ISemanticObject getObservable();
+	public abstract ISemanticObject<?> getObservable();
 	
 	/**
 	 * Return the observer(s) that made this observation and provides the

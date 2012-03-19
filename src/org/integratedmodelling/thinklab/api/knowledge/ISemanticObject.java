@@ -30,8 +30,6 @@ import org.integratedmodelling.thinklab.api.lang.IReferenceList;
  *
  */
 public interface ISemanticObject<T extends Object> {
-
-	public IList semantics = null;
 	
 	/**
 	 * Return the bare semantics of this object, from which another identical object can be
@@ -69,7 +67,7 @@ public interface ISemanticObject<T extends Object> {
 	/**
 	 * Use whatever reasoning strategy is supported in the implementation to check whether our direct type
 	 * is the passed one. Any object should be admitted without error, but only sensible ones should have
-	 * a chance of being this. Normally implementations will check concepts, ISemantics, ISemanticObject
+	 * a chance of resulting in a true return value. Normally implementations will check concepts, ISemantics, ISemanticObject
 	 * and Strings, if wanted, after converting them to concepts.
 	 * 
 	 * If the other object is a ISemanticObject, the function should checking whether the objects classify 
@@ -180,22 +178,5 @@ public interface ISemanticObject<T extends Object> {
 	public List<ISemanticObject<?>> getSortedRelationships(IProperty property) 
 			throws ThinklabCircularDependencyException;
 	
-	/*
-	 * -----------------------------------------------------------------------------------------
-	 * responding yes to isLiteral() or isConcept() gives us the right to call these. Not very elegant, but
-	 * the tradeoff is with the ugliness of the code that will use it.
-	 * -----------------------------------------------------------------------------------------
-	 */
-	public boolean asBoolean();
-	
-	public int asInteger();
-	
-	public double asDouble();
-	
-	public float asFloat();
-	
-	public String asString();
-
-
 
 }

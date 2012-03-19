@@ -18,8 +18,14 @@ import org.integratedmodelling.thinklab.api.lang.INamespaceQualified;
 public interface IModelObject extends ILanguageObject, INamespaceQualified, IMetadataHolder {
 
 	/**
+	 * The ID that distinguished the object in its namespace
+	 * @return
+	 */
+	public abstract String getId();
+	
+	/**
 	 * Return the set of all concepts observed in this model object
 	 * @return
 	 */
-	public Set<ISemanticObject> getObservables();
+	public Set<ISemanticObject<?>> getObservables();
 }

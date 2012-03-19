@@ -12,11 +12,13 @@ import org.integratedmodelling.lang.model.LanguageElement;
  */
 public interface ILanguageObject {
 
+	
 	/**
 	 * Return the language API bean that created this object, or null if the
 	 * object was added as a result of other reasoning.
 	 * 
 	 * @return
+	 * @deprecated it should BE the language element. 
 	 */
 	public abstract LanguageElement getLanguageElement();
 	

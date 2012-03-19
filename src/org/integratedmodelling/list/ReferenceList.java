@@ -168,11 +168,11 @@ public class ReferenceList implements IReferenceList, IParseable {
 		return new ReferenceList(_refs, (Object[])null);
 	}
 	
-	@Override
-	public ReferenceList getReference() {
-		_refs().put(_id, this);
-		return new ReferenceList(_id, _refs, null);
-	}
+//	@Override
+//	public ReferenceList getReference() {
+//		_refs().put(_id, this);
+//		return new ReferenceList(_id, _refs, null);
+//	}
 
 	@Override
 	public ReferenceList newList(Object... objects) {
