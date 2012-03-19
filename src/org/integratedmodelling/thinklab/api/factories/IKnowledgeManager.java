@@ -35,7 +35,7 @@ public interface IKnowledgeManager {
 	 * @throws ThinklabValidationException
 	 * @throws ThinklabException 
 	 */
-	public abstract ISemanticObject parse(String literal, IConcept c) throws ThinklabException;
+	public abstract ISemanticObject<?> parse(String literal, IConcept c) throws ThinklabException;
 	
 	/**
 	 * Return an annotated ISemanticObject for the passed Java object, or throw an exception if no
@@ -46,7 +46,7 @@ public interface IKnowledgeManager {
 	 * @throws ThinklabException
 	 * literals to instances.
 	 */
-	public abstract ISemanticObject annotate(Object object) throws ThinklabException;
+	public abstract ISemanticObject<?> annotate(Object object) throws ThinklabException;
 	
 	/**
 	 * Manually register an external class for semantic annotation (without a @Concept annotation).
@@ -60,12 +60,8 @@ public interface IKnowledgeManager {
 	 * 
 	 * @param cls a Java class of any type to be associated with the concept for annotation.
 	 * @param concept the concept that will be associated to cls
-	 * @param semanticObjectClass pass null if a stock SemanticObject is desired, or another class
-	 *        derived from the basic implementation if you want a specific subtype of semantic object
-	 *        to be associated with this concept.
 	 */
-	public abstract void registerAnnotatedClass(Class<?> cls, IConcept concept, 
-			Class<? extends ISemanticObject> semanticObjectClass);
+	public abstract void registerAnnotatedClass(Class<?> cls, IConcept concept);
 	
 	/**
 	 * Create a kbox with the named uri, using the implementation assigned to the

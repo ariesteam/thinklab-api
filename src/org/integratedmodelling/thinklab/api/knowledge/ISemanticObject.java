@@ -5,6 +5,7 @@ import java.util.List;
 import org.integratedmodelling.collections.Pair;
 import org.integratedmodelling.exceptions.ThinklabCircularDependencyException;
 import org.integratedmodelling.thinklab.api.lang.IList;
+import org.integratedmodelling.thinklab.api.lang.IReferenceList;
 
 /**
  * The result of semantic annotation in Thinklab. Objects can be turned into SemanticObjects by the
@@ -28,8 +29,10 @@ import org.integratedmodelling.thinklab.api.lang.IList;
  * @author Ferd
  *
  */
-public interface ISemanticObject {
+public interface ISemanticObject<T extends Object> {
 
+	public IList semantics = null;
+	
 	/**
 	 * Return the bare semantics of this object, from which another identical object can be
 	 * instantiated by the knowledge manager.
@@ -53,7 +56,7 @@ public interface ISemanticObject {
 	 * @return
 	 * @see IKnowledgeManager.conceptualize()
 	 */
-	public abstract Object getObject();
+	public abstract T demote();
 	
 	/**
 	 * Return the concept that this object directly incarnates. We assume it's one, i.e. semantic objects
@@ -101,14 +104,14 @@ public interface ISemanticObject {
 	 * @param property
 	 * @return
 	 */
-	public abstract ISemanticObject get(IProperty property);
+	public abstract ISemanticObject<?> get(IProperty property);
 
 	/**
 	 * Return all the relationships for this object.
 	 * 
 	 * @return
 	 */
-	public abstract List<Pair<IProperty, ISemanticObject>> getRelationships();
+	public abstract List<Pair<IProperty, ISemanticObject<?>>> getRelationships();
 
 	/**
 	 * Return all the objects that this object is in the named relationship with.
@@ -116,7 +119,7 @@ public interface ISemanticObject {
 	 * @param property
 	 * @return
 	 */
-	public abstract List<ISemanticObject> getRelationships(IProperty property);
+	public abstract List<ISemanticObject<?>> getRelationships(IProperty property);
 
 	
 	/**
@@ -148,7 +151,7 @@ public interface ISemanticObject {
 
 	/*
 	 * -----------------------------------------------------------------------------------------
-	 * Introspection methods to investigate the nature of the semantic object
+	 * Introspection methods to investigate the nature of the semantics
 	 * -----------------------------------------------------------------------------------------
 	 */
 
@@ -174,7 +177,7 @@ public interface ISemanticObject {
 	 *  
 	 * @return
 	 */
-	public List<ISemanticObject> getSortedRelationships(IProperty property) 
+	public List<ISemanticObject<?>> getSortedRelationships(IProperty property) 
 			throws ThinklabCircularDependencyException;
 	
 	/*
@@ -183,7 +186,6 @@ public interface ISemanticObject {
 	 * the tradeoff is with the ugliness of the code that will use it.
 	 * -----------------------------------------------------------------------------------------
 	 */
-	
 	public boolean asBoolean();
 	
 	public int asInteger();

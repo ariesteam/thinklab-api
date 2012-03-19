@@ -6,8 +6,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
-
 /**
  * Tag classes with this annotation to tell Thinklab to associate a particular concept with a 
  * Java class. Instances of this object are automatically conceptualizable by the knowledge
@@ -25,7 +23,6 @@ import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
 @Target(ElementType.TYPE)
 public @interface Concept {
 	public String value(); 
-	public Class<? extends ISemanticObject> semanticObjectClass() default ISemanticObject.class ;
 }
 
 

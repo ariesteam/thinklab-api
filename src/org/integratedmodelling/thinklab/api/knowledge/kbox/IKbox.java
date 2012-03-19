@@ -36,7 +36,7 @@ public interface IKbox {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public List<ISemanticObject> retrieveAll() throws ThinklabException;
+	public List<ISemanticObject<?>> retrieveAll() throws ThinklabException;
 
 	/**
 	 * Query kbox. The list returned should be read-only and of course implement lazy access. 
@@ -45,7 +45,7 @@ public interface IKbox {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public List<ISemanticObject> query(IQuery query) throws ThinklabException;
+	public List<ISemanticObject<?>> query(IQuery query) throws ThinklabException;
 
 	/**
 	 * Store object, return handle. Any object can be passed, as long as it can be
@@ -64,7 +64,7 @@ public interface IKbox {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public abstract ISemanticObject retrieve(long id) throws ThinklabException;	
+	public abstract ISemanticObject<?> retrieve(long id) throws ThinklabException;	
 	
 	/**
 	 * Remove object identified by handle
