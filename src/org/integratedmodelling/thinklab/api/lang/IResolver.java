@@ -11,6 +11,14 @@ import org.integratedmodelling.thinklab.api.lang.parsing.IPropertyDefinition;
 import org.integratedmodelling.thinklab.api.modelling.IModelObject;
 import org.integratedmodelling.thinklab.api.modelling.INamespace;
 
+/**
+ * A Resolver is used by anything that generates model objects to interface to the parser for
+ * whatever language is implemented. Using a resolver is a way to make any language implementation
+ * depend only on the API. 
+ * 
+ * @author Ferd
+ *
+ */
 public interface IResolver {
 	
 	/**

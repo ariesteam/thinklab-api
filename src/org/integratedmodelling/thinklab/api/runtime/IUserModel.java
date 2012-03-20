@@ -58,5 +58,5 @@ public interface IUserModel {
 	 * @uml.property  name="userInstance"
 	 * @uml.associationEnd  
 	 */
-	public abstract ISemanticObject getUser() throws ThinklabException;
+	public abstract ISemanticObject<?> getUser() throws ThinklabException;
 }

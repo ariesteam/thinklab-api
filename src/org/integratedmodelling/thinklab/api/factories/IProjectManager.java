@@ -7,7 +7,8 @@ import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.project.IProject;
 
 /**
- * The server side of project management.
+ * The server side of project management. Projects define namespaces, containing knowledge - either
+ * ontologies or model objects, plus any support resources necessary.
  * 
  * @author Ferd
  *

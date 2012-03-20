@@ -8,6 +8,12 @@ import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
 import org.integratedmodelling.thinklab.api.knowledge.kbox.IKbox;
 import org.integratedmodelling.thinklab.api.lang.IList;
 
+/**
+ * Handles creation, management, storage and introspection on semantic objects.
+ * 
+ * @author Ferd
+ *
+ */
 public interface IKnowledgeManager {
 
 	/**
