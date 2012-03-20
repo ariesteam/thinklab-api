@@ -1,9 +1,10 @@
-package org.integratedmodelling.lang.model;
+package org.integratedmodelling.lang;
 
 import org.integratedmodelling.thinklab.api.knowledge.IAxiom;
 
 /**
- * Just a holder for axiom information. 
+ * Just a holder for axiom information. Because axioms are basically just syntax, we provide an
+ * implementation here so you don't need to.
  * 
  * @author Ferd
  *

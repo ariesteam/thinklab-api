@@ -38,11 +38,8 @@ import org.integratedmodelling.thinklab.api.lang.IList;
 
 
 /**
- * Objects implementing this one are capable of being converted into an instance. In order to allow that,
- * they return a list representation of the instance that represents them. Instance implementations are
- * not automatically IConceptualizable, but if they are, they should be able to produce an instance that
- * will create a clone of themselves as implementation, or if the implementation wasn't created with 
- * an instance, may use themselves as implementation.
+ * A way to control conceptualization and definition of semantic objects that does not involve
+ * annotation with @Concept and @Property.
  * 
  * Essentially IConceptualizable is the semantic version of IParseable.
  * 
@@ -52,8 +49,8 @@ import org.integratedmodelling.thinklab.api.lang.IList;
 public interface IConceptualizable {
 	
 	/**
-	 * Conceptualize to an instance list. 
-	 * @param object
+	 * Conceptualize to a list. 
+	 * 
 	 * @return
 	 * @throws ThinklabException
 	 */

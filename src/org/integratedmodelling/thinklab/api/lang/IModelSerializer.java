@@ -3,7 +3,7 @@ package org.integratedmodelling.thinklab.api.lang;
 import java.io.File;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.lang.model.Namespace;
+import org.integratedmodelling.thinklab.api.modelling.INamespace;
 
 /**
  * If a IModelParser is also a IModelSerializer, its translation services may be offered in an
@@ -23,5 +23,5 @@ public interface IModelSerializer {
 	 * @param outputFile
 	 * @throws ThinklabException
 	 */
-	public abstract void writeNamespace(Namespace namespace, File outputFile) throws ThinklabException;
+	public abstract void writeNamespace(INamespace namespace, File outputFile) throws ThinklabException;
 }

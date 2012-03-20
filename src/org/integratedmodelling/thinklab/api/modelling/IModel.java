@@ -1,21 +1,14 @@
 package org.integratedmodelling.thinklab.api.modelling;
 
-import java.util.Collection;
-
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
-
+import org.integratedmodelling.thinklab.api.lang.IList;
 
 /**
- * A Model, i.e. a query that uses observers to produce its results.
+ * A Model, i.e. a query that uses observers to produce its results. It must have only one observable.
  */
-public interface IModel extends IModelObject {
+public interface IModel extends IObservingObject {
 	
-	/**
-	 * Return the observable. Never null. 
-	 * @return
-	 */
-	public abstract ISemanticObject<?> getObservable();
+	public IList getObservable();
 	
 	/**
 	 * Return the observer(s) that made this observation and provides the
@@ -23,15 +16,6 @@ public interface IModel extends IModelObject {
 	 * @return
 	 */
 	public IObserver getObserver();
-
-	/**
-	 * Return a collection of all observations on which this one depends except
-	 * the extents. These will be a subset of those in the context and this method
-	 * is just convenience to quickly extract the direct dependencies from it.
-	 * 
-	 * @return
-	 */
-	public abstract Collection<IObservation> getDependencies();
 
 	/**
 	 * Return an observation contextualized to the passed context, or throw an

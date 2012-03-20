@@ -1,6 +1,5 @@
 package org.integratedmodelling.thinklab.api.modelling;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.integratedmodelling.exceptions.ThinklabException;
@@ -9,23 +8,21 @@ import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 /**
  * A model producing observations of a given type (through its subclasses). 
  */
-public abstract interface IObserver extends IModelObject {
+public abstract interface IObserver extends IObservingObject {
 	
 	/**
-	 * Return an appropriate accessor chain to use during contextualization to obtain data in this context. Each
-	 * accessor will use whatever is left on the stack by the previous one.
+	 * In case this observer mediates another, return it. 
 	 * 
 	 * @return
 	 */
-	public abstract List<IAccessor> getAccessors(IContext context);
+	public abstract IObserver getMediated();
 	
 	/**
-	 * Return a type corresponding to the state. The first accessor will create the state if 
-	 * necessary, but the observer should be able to know the type.
-	 *  
+	 * Return the accessor that will compute states for this observer.
+	 * 
 	 * @return
 	 */
-	public abstract IConcept getStateType();
+	public abstract IAccessor getAccessor();
 
 
 	/**
@@ -73,12 +70,5 @@ public abstract interface IObserver extends IModelObject {
 	 */
 	public IObserver applyScenario(IScenario scenario) throws ThinklabException;
 
-	/**
-	 * Get the models that this one directly depends upon. Return an empty 
-	 * collection, not null, if none exist - it should always be legal to iterate
-	 * over the return value.
-	 * 
-	 * @return
-	 */
-	public abstract Collection<IModel> getDependencies();
+
 }

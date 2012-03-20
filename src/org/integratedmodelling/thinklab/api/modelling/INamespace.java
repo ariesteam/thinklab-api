@@ -1,33 +1,28 @@
 package org.integratedmodelling.thinklab.api.modelling;
 
-import java.util.Collection;
+import java.util.List;
 
-import org.integratedmodelling.thinklab.api.knowledge.IOntology;
-import org.integratedmodelling.thinklab.api.lang.ILanguageObject;
+import org.integratedmodelling.thinklab.api.knowledge.IConcept;
+import org.integratedmodelling.thinklab.api.knowledge.IProperty;
+import org.integratedmodelling.thinklab.api.project.IProject;
 
 /**
- * Describes an existing model namespace. All namespaces in thinklab have an associated ontology, although they may be in a one to many relationship 
- * with it. Namespaces may contain models, contexts, scenarios and annotations. 
- * 
- * TODO namespaces could work hierarchically and return their child namespaces, too. Not sure that's a good thing or not.
- * 
  * @author  Ferd
  */
-public interface INamespace extends ILanguageObject {
+public interface INamespace {
 
-	/**
-	 * The ID that distinguished the object in its namespace
-	 * @return
-	 */
 	public abstract String getId();
+		
+	public abstract long getTimeStamp();
+	
+	public abstract IConcept getConcept(String s);
+	
+	public abstract IProperty getProperty(String s);
+	
+	public abstract List<IModelObject> getModelObjects();
+	
+	public IModelObject getModelObject(String mod);
 
-	@Deprecated
-	public abstract String getNamespace();
-	
-	public abstract IOntology getOntology();
-	
-	public abstract Collection<IModelObject> getModelObjects();
-	
-	public abstract long getLastModification();
+	public IProject getProject();
 	
 }

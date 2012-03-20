@@ -1,5 +1,7 @@
 package org.integratedmodelling.thinklab.api.modelling;
 
+import org.integratedmodelling.thinklab.api.lang.IList;
+
 
 /**
  * An observation is a fully specified and resolved scientific statement about an observable. It usually exists
@@ -21,7 +23,11 @@ package org.integratedmodelling.thinklab.api.modelling;
  * @author  Ferd
  * @see IState
  */
-public interface IObservation extends IModel, IContextualizable<IObservation> {
+public interface IObservation extends IModelObject {
+	
+	public abstract IList getObservable();
+	
+	public abstract IDataSource getDataSource();
 	
 	/**
 	 * Observations are always part of a context, and must be able to return the context they are part of. The

@@ -12,12 +12,20 @@ import org.integratedmodelling.collections.Pair;
  */
 public interface IRankingObserver extends IObserver {
 
+	public enum Type {
+		BINARY_CODING,
+		NUMERIC_ENCODING,
+		RANKING
+	};
+	
+	public abstract Type getType();
+	
 	/**
 	 * Get the range of the ranking. If no range is specified, return null. If only
 	 * one boundary of the range is specified, return null for the unspecified one.
 	 * 
 	 * @return
 	 */
-	public Pair<Number, Number> getRange();
+	public abstract Pair<Number, Number> getRange();
 	
 }

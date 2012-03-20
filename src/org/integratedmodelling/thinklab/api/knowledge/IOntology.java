@@ -38,13 +38,12 @@ import java.net.URL;
 import java.util.Collection;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.exceptions.ThinklabIOException;
 import org.integratedmodelling.exceptions.ThinklabValidationException;
 import org.integratedmodelling.thinklab.api.lang.IList;
 
 /**
- * <p>The generalized ontology interface. Ontology objects are usually not accessed by the typical API user, who deals with concepts and with the knowledge manager directly. Yet, we need an ontology generalization layer to provide a smooth interface to most operations.</p>
- * @author  Ferdinando Villa, Ecoinformatics Collaboratory, UVM
+ * Ontologies are not first-class objects in Thinklab. This interface isn't deprecated at the moment, but
+ * it may go away any time. All retrieval of concepts should be done through INamespace.
  */
 public interface IOntology  extends IResource {
 
@@ -66,54 +65,6 @@ public interface IOntology  extends IResource {
 	 * @return an iterator over all the properties contained in the ontology. 
 	 */
 	public abstract Collection<IProperty> getProperties();
-//
-//	/**
-//	 * Iterate over all instances
-//	 * @return all the instances contained in the ontology. 
-//	 * @throws ThinklabException 
-//	 */
-//	public abstract Collection<IInstance> getInstances() throws ThinklabException;
-//	
-//	/**
-//	 * Create an instance of the given concept. The instance is "loose", not linked to the ontology unless
-//	 * it is passed to validateInstance after being created.
-//	 * @category Modifying methods
-//	 * @param ID the instance id.
-//	 * @return a loose instance to define and validate.
-//	 * @throws ThinklabDuplicateNameException 
-//	 * @throws ThinklabMalformedSemanticTypeException 
-//	 * @throws ThinklabIOException 
-//	 */
-//	public abstract IInstance createInstance(String ID, IConcept c) throws ThinklabException;
-//	
-//    /**
-//     * Create a copy of passed instance, which may come from a different ontology.
-//	 * @category Modifying methods
-//     * @param i
-//     * @return
-//     * @throws ThinklabException
-//     */
-//    public abstract IInstance createInstance(IInstance i) throws ThinklabException;
-//    
-//    /**
-//     * Create an instance from a list, imposing the specified ID.
-//	 * @category Modifying methods
-//     * @param ID 
-//     * @param list e.g. returned by asList() from another IInstance. 
-//     * @return
-//     * @throws ThinklabException
-//     */
-//	public abstract IInstance createInstance(String ID, IList list) throws ThinklabException;
-//
-//    /**
-//     * Create an instance from a list.
-//	 * @category Modifying methods
-//     * @param list
-//     * @return
-//     * @throws ThinklabException
-//     */
-//    public abstract IInstance createInstance(IList list) throws ThinklabException;
-//
 
 	/**
 	 * Return a concept, or null if not found.
@@ -121,27 +72,13 @@ public interface IOntology  extends IResource {
 	 * @return the concept or null
 	 */
 	public abstract IConcept getConcept(String ID);
-	
-//	/**
-//	 * Return an instance, or null if not found.
-//	 * @param ID the instance's ID
-//	 * @return the instance or null
-//	 */
-//	public abstract IInstance getInstance(String ID);
-//	
+
 	/**
 	 * Return a property, or null if not found.
 	 * @param ID the property's ID
 	 * @return the property or null
 	 */
 	public abstract IProperty getProperty(String ID);
-
-//	/**
-//	 * Remove the instance identified by the passed id
-//	 * @param uri
-//	 * @throws ThinklabException 
-//	 */
-//	public void removeInstance(String id) throws ThinklabException;
 
 	/**
 	 * The ID of the ontology concept space (its the XML namespace).
@@ -164,13 +101,6 @@ public interface IOntology  extends IResource {
 	 * @uml.property  name="uRI"
 	 */
 	public String getURI();
-
-//	/**
-//	 * Create an equivalence statement between the two instances passed.
-//	 * @param o1
-//	 * @param o2
-//	 */
-//	public void createEquivalence(IInstance o1, IInstance o2);
 
 	/**
 	 * 
@@ -222,7 +152,6 @@ public interface IOntology  extends IResource {
 	 * @throws ThinklabValidationException 
 	 */
 	public IConcept createConcept(String localName, IConcept[] parents) throws ThinklabException;
-	
 	
 	/**
 	 * The whole ontology should be serializable as a list. The KnowledgeManager is capable of digesting

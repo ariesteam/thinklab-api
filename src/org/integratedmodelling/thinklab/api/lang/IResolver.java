@@ -4,12 +4,12 @@ import java.io.InputStream;
 import java.util.Collection;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.lang.model.ConceptObject;
-import org.integratedmodelling.lang.model.ModelObject;
-import org.integratedmodelling.lang.model.Namespace;
-import org.integratedmodelling.lang.model.PropertyObject;
 import org.integratedmodelling.thinklab.api.knowledge.IExpression;
+import org.integratedmodelling.thinklab.api.lang.parsing.IConceptDefinition;
 import org.integratedmodelling.thinklab.api.lang.parsing.ILanguageDefinition;
+import org.integratedmodelling.thinklab.api.lang.parsing.IPropertyDefinition;
+import org.integratedmodelling.thinklab.api.modelling.IModelObject;
+import org.integratedmodelling.thinklab.api.modelling.INamespace;
 
 public interface IResolver {
 	
@@ -20,7 +20,7 @@ public interface IResolver {
 	 * @param cls
 	 * @return
 	 */
-	public abstract ILanguageDefinition newLanguageObject(Class<? extends ILanguageObject> cls);
+	public abstract ILanguageDefinition newLanguageObject(Class<?> cls);
 	
 	/**
 	 * Override to fine-tune error management. If this throws an exception, the parser also will. If not, 
@@ -69,7 +69,7 @@ public interface IResolver {
 	 * @param resourceId
 	 * @param namespace
 	 */
-	public abstract void onNamespaceDeclared(String namespaceId, String resourceId, Namespace namespace);
+	public abstract void onNamespaceDeclared(String namespaceId, String resourceId, INamespace namespace);
 	
 	/**
 	 * Callback invoked as soon as parsing of a namespace has been completed. The namespace will contain all
@@ -78,7 +78,7 @@ public interface IResolver {
 	 * @param namespace
 	 * @throws ThinklabException 
 	 */
-	public abstract void onNamespaceDefined(Namespace namespace) throws ThinklabException;
+	public abstract void onNamespaceDefined(INamespace namespace) throws ThinklabException;
 
 	/**
 	 * Callback invoked at every new model object at main level. Not all the namespace will be
@@ -87,8 +87,7 @@ public interface IResolver {
 	 * @param namespace
 	 * @param ret
 	 */
-	public abstract void onModelObjectDefined(
-			org.integratedmodelling.lang.model.Namespace namespace, ModelObject ret);
+	public abstract void onModelObjectDefined(INamespace namespace, IModelObject ret);
 
 	/**
 	 * Ensure that the namespace declaration conforms with the resource it comes from. Only called when the 
@@ -120,8 +119,7 @@ public interface IResolver {
 	 * @param line 
 	 * @return
 	 */
-	public abstract ConceptObject resolveExternalConcept(String id,
-			org.integratedmodelling.lang.model.Namespace namespace, int line) throws ThinklabException;
+	public abstract IConceptDefinition resolveExternalConcept(String id, INamespace namespace, int line) throws ThinklabException;
 	
 	/**
 	 * Called when an external property (with the :) is identified in a legal place in a model object. Should
@@ -133,8 +131,7 @@ public interface IResolver {
 	 * @param line 
 	 * @return
 	 */
-	public abstract PropertyObject resolveExternalProperty(String id,
-			org.integratedmodelling.lang.model.Namespace namespace, int line) throws ThinklabException;
+	public abstract IPropertyDefinition resolveExternalProperty(String id, INamespace namespace, int line) throws ThinklabException;
 
 	
 }

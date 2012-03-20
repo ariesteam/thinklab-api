@@ -12,6 +12,6 @@ package org.integratedmodelling.thinklab.api.lang.parsing;
  * @author Ferd
  *
  */
-public interface ILanguageDefinition {
+public abstract interface ILanguageDefinition {
 
 }
