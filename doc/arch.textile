@@ -4,6 +4,13 @@ h1. Knowledge in thinklab
 
 h2. Knowledge objects
 
+SemanticObject implementations need: 
+	a constructor that takes IReferenceList
+	a setSemantic(IReferenceList) method
+	
+Semantic literals need
+	a constructor that takes IConcept, <T>
+
 h2. Semantic query
 
 h2. Persistent semantic storage
