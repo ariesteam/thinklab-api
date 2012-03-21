@@ -1,5 +1,7 @@
 package org.integratedmodelling.thinklab.api.metadata;
 
+import java.util.Collection;
+
 
 public interface IMetadata {
 
@@ -195,5 +197,12 @@ public interface IMetadata {
 	 * @return
 	 */
 	public Object get(String string);
+
+	/**
+	 * Get all existing keys.
+	 * 
+	 * @return
+	 */
+	public Collection<String> getKeys();
 
 }
