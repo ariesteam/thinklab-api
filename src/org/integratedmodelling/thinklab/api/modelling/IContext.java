@@ -1,6 +1,7 @@
 package org.integratedmodelling.thinklab.api.modelling;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
@@ -26,11 +27,12 @@ import org.integratedmodelling.thinklab.api.listeners.IListenable;
 public interface IContext extends ITopology<IContext>, IModelObject, IListenable {
 
 	/**
-	 * Return all the states that describe topology extents.
+	 * Return all the states that describe topology extents. The extents should be
+	 * ordered appropriately for execution.
 	 * 
 	 * @return
 	 */
-	public abstract Collection<IExtent> getExtents();
+	public abstract List<IExtent> getExtents();
 
 	/**
 	 * The total number of states determined by the topologies in the context, i.e. the

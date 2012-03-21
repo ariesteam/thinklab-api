@@ -24,5 +24,7 @@ public interface INamespace {
 	public IModelObject getModelObject(String mod);
 
 	public IProject getProject();
+
+	public abstract String getResourceUrl();
 	
 }

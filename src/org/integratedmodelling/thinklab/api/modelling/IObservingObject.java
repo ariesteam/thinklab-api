@@ -3,7 +3,7 @@ package org.integratedmodelling.thinklab.api.modelling;
 import java.util.List;
 
 import org.integratedmodelling.collections.Triple;
-import org.integratedmodelling.thinklab.api.lang.IList;
+import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
 
 /**
  * Anything that observes anything must implement this interface, normally
@@ -22,7 +22,7 @@ public abstract interface IObservingObject extends IModelObject {
 	 * 
 	 * @return
 	 */
-	public List<IList> getObservables();
+	public List<ISemanticObject<?>> getObservables();
 	
 	/**
 	 * Return for each model we depend on: the model itself, the formal name

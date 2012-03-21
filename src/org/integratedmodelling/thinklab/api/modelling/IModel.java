@@ -1,14 +1,14 @@
 package org.integratedmodelling.thinklab.api.modelling;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.thinklab.api.lang.IList;
+import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
 
 /**
  * A Model, i.e. a query that uses observers to produce its results. It must have only one observable.
  */
 public interface IModel extends IObservingObject {
 	
-	public IList getObservable();
+	public ISemanticObject<?> getObservable();
 	
 	/**
 	 * Return the observer(s) that made this observation and provides the

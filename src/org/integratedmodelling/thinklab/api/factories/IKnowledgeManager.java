@@ -113,4 +113,15 @@ public interface IKnowledgeManager {
 	 * @throws ThinklabException
 	 */
 	public Object instantiate(IList a) throws ThinklabException;
+
+	/**
+	 * Take the passed semantics and produce the semantic object it specifies. Like 
+	 * instantiate(), but produces a semantic object; the results will be identical
+	 * only if the annotated class is a semantic object class.
+	 * 
+	 * @param instance
+	 * @return
+	 * @throws ThinklabException 
+	 */
+	public abstract ISemanticObject<?> entify(IList semantics) throws ThinklabException;
 }

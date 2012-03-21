@@ -13,5 +13,11 @@ package org.integratedmodelling.thinklab.api.lang.parsing;
  *
  */
 public abstract interface ILanguageDefinition {
+	
+	public void setLineNumbers(int startLine, int endLine);
+	
+	public abstract int getFirstLineNumber();
+
+	public abstract int getLastLineNumber();
 
 }

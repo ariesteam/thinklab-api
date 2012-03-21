@@ -11,4 +11,7 @@ public interface IObservationDefinition extends IModelObjectDefinition, IObserva
 	public void setObserver(IObserver observer);
 	
 	public void setDataSource(IDataSourceDefinition datasource);
+	
+	public void setInlineState(Object state);
+	
 }

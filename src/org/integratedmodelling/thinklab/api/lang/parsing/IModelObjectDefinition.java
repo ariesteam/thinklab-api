@@ -8,7 +8,5 @@ public abstract interface IModelObjectDefinition extends ILanguageDefinition, IM
 	
 	public void setNamespace(INamespaceDefinition namespace);
 	
-	public void setLineNumbers(int startLine, int endLine);
-	
 	public void setMetadata(IMetadataDefinition metadata);
 }
