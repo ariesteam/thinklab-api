@@ -77,7 +77,7 @@ public interface IResolver {
 	 * @param resourceId
 	 * @param namespace
 	 */
-	public abstract void onNamespaceDeclared(String namespaceId, String resourceId, INamespace namespace);
+	public abstract void onNamespaceDeclared(String namespaceId, INamespace namespace);
 	
 	/**
 	 * Callback invoked as soon as parsing of a namespace has been completed. The namespace will contain all
