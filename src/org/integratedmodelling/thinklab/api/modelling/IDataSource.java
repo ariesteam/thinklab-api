@@ -4,7 +4,10 @@ import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 
 /**
- * Datasources abstract generators of states for a given context.
+ * Datasources are non-semantic datasets for one observable that are aware of what 
+ * contexts mean, and are capable of recontextualizing to another context (or to complain
+ * about that). Datasource implementations are responsible for all context transformations
+ * in Thinklab.
  * 
  * @author  Ferd
  */
@@ -20,34 +23,24 @@ public interface IDataSource {
 	public abstract IConcept getValueType();
 
 	/**
-	 * Return the n-th value for the context that was passed to notifyTargetContext() and 
-	 * transform().
+	 * Return the n-th value for the context that was passed to contextualize().
 	 * 
 	 * @param index
 	 * @return
 	 */
 	public abstract Object getValue(int index);
-	
-	/**
-	 * This callback gets called before any value is extracted. The same context will later
-	 * be passed to transform() which expects the datasource to conform to it. It's a good 
-	 * place to check context compatibility, load data and prepare for processing. 
-	 * 
-	 * @param context
-	 * @throws ThinklabException
-	 */
-	public abstract void notifyTargetContext(IContext context) throws ThinklabException;
 
 	/**
-	 * Process the passed transformation created by the extents and
-	 * return the transformed datasource. If no transformation is necessary,
-	 * return this. The context is the same that was previously passed to
-	 * the single invocation of notifyTargetContext, where any compatibility
-	 * checking must have been done.
+	 * Produce a datasource that fits the passed context. If we don't need transformations,
+	 * return this. If we can't transform or don't understand the extents in the context,
+	 * throw an exception.
+	 * 
+	 * This one must store enough context information to be able to respond properly to
+	 * getValue(n).
 	 * 
 	 * @param context
 	 * @return
 	 * @throws ThinklabException if the transformation cannot be handled.
 	 */
-	public abstract IDataSource transform(IContext context) throws ThinklabException;
+	public abstract IDataSource contextualize(IContext context) throws ThinklabException;
 }

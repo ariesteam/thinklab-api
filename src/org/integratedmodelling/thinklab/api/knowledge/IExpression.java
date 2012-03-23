@@ -2,6 +2,8 @@ package org.integratedmodelling.thinklab.api.knowledge;
 
 import java.util.Map;
 
+import org.integratedmodelling.exceptions.ThinklabException;
+
 public interface IExpression {
 
 	/**
@@ -17,8 +19,9 @@ public interface IExpression {
 	 * 
 	 * @param parameters
 	 * @return
+	 * @throws ThinklabException TODO
 	 */
-    public abstract Object eval(Map<String,Object> parameters);
+    public abstract Object eval(Map<String,Object> parameters) throws ThinklabException;
     
 }
 
