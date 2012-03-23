@@ -1,4 +1,4 @@
-package org.integratedmodelling.thinklab.api.lang.parsing;
+package org.integratedmodelling.thinklab.api.modelling.parsing;
 
 /**
  * Includes all the methods that language objects need to implement in order to be 

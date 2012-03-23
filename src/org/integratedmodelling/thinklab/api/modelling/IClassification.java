@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.integratedmodelling.exceptions.ThinklabValidationException;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
-import org.integratedmodelling.thinklab.api.knowledge.IConceptualizable;
 
 /**
  * 

@@ -25,12 +25,6 @@ Export-Package: org.integratedmodelling.collections;uses:="org.integratedmodelli
    javax.xml.stream.events,
    org.integratedmodelling.thinklab.api.lang.parsing,
    org.integratedmodelling.thinklab.api.knowledge",
- org.integratedmodelling.thinklab.api.lang.parsing;
-  uses:="org.integratedmodelling.thinklab.api.metadata,
-   org.integratedmodelling.thinklab.api.lang,
-   org.integratedmodelling.thinklab.api.project,
-   org.integratedmodelling.thinklab.api.modelling,
-   org.integratedmodelling.thinklab.api.knowledge",
  org.integratedmodelling.thinklab.api.listeners;uses:="org.integratedmodelling.thinklab.api.modelling,org.integratedmodelling.thinklab.api.runtime",
  org.integratedmodelling.thinklab.api.metadata,
  org.integratedmodelling.thinklab.api.modelling;
@@ -39,6 +33,12 @@ Export-Package: org.integratedmodelling.collections;uses:="org.integratedmodelli
    org.integratedmodelling.thinklab.api.lang,
    org.integratedmodelling.thinklab.api.listeners,
    org.integratedmodelling.thinklab.api.runtime,
+   org.integratedmodelling.thinklab.api.knowledge",
+ org.integratedmodelling.thinklab.api.modelling.parsing;
+  uses:="org.integratedmodelling.thinklab.api.metadata,
+   org.integratedmodelling.thinklab.api.lang,
+   org.integratedmodelling.thinklab.api.project,
+   org.integratedmodelling.thinklab.api.modelling,
    org.integratedmodelling.thinklab.api.knowledge",
  org.integratedmodelling.thinklab.api.plugin;uses:="org.integratedmodelling.thinklab.api.configuration",
  org.integratedmodelling.thinklab.api.project;uses:="org.integratedmodelling.thinklab.api.plugin",

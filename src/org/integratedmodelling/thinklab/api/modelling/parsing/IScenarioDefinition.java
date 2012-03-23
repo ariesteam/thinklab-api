@@ -1,4 +1,4 @@
-package org.integratedmodelling.thinklab.api.lang.parsing;
+package org.integratedmodelling.thinklab.api.modelling.parsing;
 
 import org.integratedmodelling.thinklab.api.modelling.IScenario;
 

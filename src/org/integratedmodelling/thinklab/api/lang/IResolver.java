@@ -5,11 +5,11 @@ import java.util.Collection;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.IExpression;
-import org.integratedmodelling.thinklab.api.lang.parsing.IConceptDefinition;
-import org.integratedmodelling.thinklab.api.lang.parsing.ILanguageDefinition;
-import org.integratedmodelling.thinklab.api.lang.parsing.IPropertyDefinition;
 import org.integratedmodelling.thinklab.api.modelling.IModelObject;
 import org.integratedmodelling.thinklab.api.modelling.INamespace;
+import org.integratedmodelling.thinklab.api.modelling.parsing.IConceptDefinition;
+import org.integratedmodelling.thinklab.api.modelling.parsing.ILanguageDefinition;
+import org.integratedmodelling.thinklab.api.modelling.parsing.IPropertyDefinition;
 
 /**
  * A Resolver is used by anything that generates model objects to interface to the parser for
