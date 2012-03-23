@@ -92,7 +92,7 @@ public interface ISemanticObject<T extends Object> {
 	 * @param _subject
 	 * @return
 	 */
-	public abstract int getRelationshipsCount(IProperty _subject);
+	public abstract int getRelationshipsCount(IProperty property);
 	
 	/**
 	 * Return the target value of the passed property, assuming there is just one, or null 

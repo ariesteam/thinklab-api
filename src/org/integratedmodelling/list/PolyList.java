@@ -32,7 +32,6 @@
  * @license   http://www.gnu.org/licenses/gpl.txt GNU General Public License v3
  * @link      http://www.integratedmodelling.org
  **/
-
 package org.integratedmodelling.list;
 
 import java.io.IOException;
