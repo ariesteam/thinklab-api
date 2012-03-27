@@ -2,6 +2,7 @@ package org.integratedmodelling.thinklab.api.modelling;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
+import org.integratedmodelling.thinklab.api.provenance.IProvenance;
 
 /**
  * Datasources are non-semantic datasets for one observable that are aware of what 
@@ -11,7 +12,7 @@ import org.integratedmodelling.thinklab.api.knowledge.IConcept;
  * 
  * @author  Ferd
  */
-public interface IDataSource {
+public interface IDataSource extends IProvenance<IDataSource> {
 	
 	/**
 	 * All datasources must report what kind of value they are going to return. Core ontologies should
@@ -36,7 +37,7 @@ public interface IDataSource {
 	 * throw an exception.
 	 * 
 	 * This one must store enough context information to be able to respond properly to
-	 * getValue(n).
+	 * getValue(n). Whatever happened should be recorded in the provenance records.
 	 * 
 	 * @param context
 	 * @return

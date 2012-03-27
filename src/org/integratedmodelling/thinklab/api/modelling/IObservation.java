@@ -1,6 +1,6 @@
 package org.integratedmodelling.thinklab.api.modelling;
 
-import org.integratedmodelling.thinklab.api.lang.IList;
+import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
 
 
 /**
@@ -25,9 +25,11 @@ import org.integratedmodelling.thinklab.api.lang.IList;
  */
 public interface IObservation extends IModelObject {
 	
-	public abstract IList getObservable();
+	public abstract ISemanticObject<?> getObservable();
 	
 	public abstract IDataSource getDataSource();
+	
+	public abstract IObserver getObserver();
 	
 	/**
 	 * Observations are always part of a context, and must be able to return the context they are part of. The
