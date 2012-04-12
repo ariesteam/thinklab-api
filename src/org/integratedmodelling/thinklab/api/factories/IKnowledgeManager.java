@@ -45,7 +45,7 @@ public interface IKnowledgeManager {
 	
 	/**
 	 * Return an annotated ISemanticObject for the passed Java object, or throw an exception if no
-	 * annotation is possible. Should normally use conceptualize() to obtain the semantics.
+	 * annotation is possible.
 	 * 
 	 * @param object
 	 * @return
@@ -55,17 +55,18 @@ public interface IKnowledgeManager {
 	public abstract ISemanticObject<?> annotate(Object object) throws ThinklabException;
 	
 	/**
-	 * Manually register an external class for semantic annotation (without a @Concept annotation).
-	 * This class will follow the annotation rules of the others - if no @Property annotations
-	 * are present, all the public fields (xxx) that resolve to a hasXxx property (isXxx for 
-	 * booleans) in the same namespace of the annotation concept will be automatically annotated.
+	 * Manually register an external class for semantic annotation (alternative to using a 
+	 * @Concept annotation). This is normally used to register a class from an external 
+	 * library into the Thinklab annotation subsystem.
 	 * 
-	 * The third parameter allows the semantically wrapped object to be of a specific class. If 
-	 * null is passed, the implementation should create the semantic equivalent of Object as the
-	 * result of annotate(object).
+	 * This class will follow the annotation rules of the others - if no @Property annotations
+	 * are present for its fields, all the public fields (xxx) that resolve to a hasXxx property 
+	 * (isXxx for booleans) in the same namespace of the annotation concept will be automatically 
+	 * annotated. If @Property annotations have been provided, only the annotated fields will be
+	 * used and the property names will be those given in the annotation.
 	 * 
 	 * @param cls a Java class of any type to be associated with the concept for annotation.
-	 * @param concept the concept that will be associated to cls
+	 * @param concept the concept that will be associated to cls.
 	 */
 	public abstract void registerAnnotatedClass(Class<?> cls, IConcept concept);
 	
@@ -107,6 +108,10 @@ public interface IKnowledgeManager {
 	 * Reifies an annotation (e.g. parsed or serialized through a web service) by producing 
 	 * the object it describes, if any. In order for an object to be created, annotation tags 
 	 * must have specified the classes to associate to concepts, properties and literals.
+	 * 
+	 * This will not produce a semantic object unless the class annotated with the concept
+	 * leading the passed semantics implements ISemanticObject. The function that is guaranteed 
+	 * to always produce a semantic object is entify().
 	 * 
 	 * @param a
 	 * @return
