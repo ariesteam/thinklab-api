@@ -3,7 +3,6 @@ package org.integratedmodelling.thinklab.api.modelling;
 import java.util.List;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 
 /**
  * A model producing observations of a given type (through its subclasses). 
