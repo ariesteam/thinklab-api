@@ -49,13 +49,13 @@ public interface IState extends IObservation {
 	 */
 	public int getValueCount();
 
-	/**
-	 * Return the class of what our contents observe.
-	 * @return
-	 * @uml.property  name="observableClass"
-	 * @uml.associationEnd  
-	 */
-	public IConcept getObservableClass();
+//	/**
+//	 * Return the class of what our contents observe.
+//	 * @return
+//	 * @uml.property  name="observableClass"
+//	 * @uml.associationEnd  
+//	 */
+//	public IConcept getObservableClass();
 
 	/**
 	 * Return a state with the given context dimension collapsed to one, and

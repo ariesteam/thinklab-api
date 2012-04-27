@@ -153,10 +153,10 @@ public abstract interface IExtent extends IState, ITopology<IExtent> {
 	public boolean isDiscontinuous() throws ThinklabException;
 
 	/**
-	 * Return an extent that is capable of representing the passed one 
-	 * exactly. If the passed one is of the same class, it can just return
-	 * the passed one, but it's provided to give the extent a chance of 
-	 * adjustments or of raising errors when complex matches are done. 
+	 * Return an extent that is capable of representing the passed one through
+	 * the "lens" of our semantics. Return null if the operation is legal but
+	 * it results in no context, throw an exception if we don't know what to
+	 * do with the passed context.
 	 * 
 	 * @param extent
 	 * @return
