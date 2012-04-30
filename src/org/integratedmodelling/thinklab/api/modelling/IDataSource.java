@@ -1,47 +1,26 @@
 package org.integratedmodelling.thinklab.api.modelling;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.thinklab.api.knowledge.IConcept;
-import org.integratedmodelling.thinklab.api.provenance.IProvenance;
 
 /**
  * Datasources are non-semantic datasets for one observable that are aware of what 
- * contexts mean, and are capable of recontextualizing to another context (or to complain
- * about that). Datasource implementations are responsible for all context transformations
- * in Thinklab.
+ * contexts mean, and are capable of contextualizing to a context (or to complain
+ * about it) by producing an accessor. 
  * 
  * @author  Ferd
  */
-public interface IDataSource extends IProvenance<IDataSource> {
+public interface IDataSource {
 	
 	/**
-	 * All datasources must report what kind of value they are going to return. Core ontologies should
-	 * be used for base types; if not one of those, return the most specific common concept between the
-	 * (hopefully disjoint) state types.
+	 * Produce an accessor that extracts the data for a given context.If we don't understand 
+	 * the extents in the context, throw an exception.
 	 * 
-	 * @return
-	 */
-	public abstract IConcept getValueType();
-
-	/**
-	 * Return the n-th value for the context that was passed to contextualize().
-	 * 
-	 * @param index
-	 * @return
-	 */
-	public abstract Object getValue(int index);
-
-	/**
-	 * Produce a datasource that fits the passed context. If we don't need transformations,
-	 * return this. If we can't transform or don't understand the extents in the context,
-	 * throw an exception.
-	 * 
-	 * This one must store enough context information to be able to respond properly to
+	 * This one must store enough context information to allow the accessor to respond properly to
 	 * getValue(n). Whatever happened should be recorded in the provenance records.
 	 * 
 	 * @param context
 	 * @return
 	 * @throws ThinklabException if the transformation cannot be handled.
 	 */
-	public abstract IDataSource contextualize(IContext context) throws ThinklabException;
+	public abstract IAccessor contextualize(IContext context) throws ThinklabException;
 }
