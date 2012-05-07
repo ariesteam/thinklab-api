@@ -42,6 +42,7 @@ Export-Package: org.integratedmodelling.collections;uses:="org.integratedmodelli
    org.integratedmodelling.thinklab.api.knowledge",
  org.integratedmodelling.thinklab.api.plugin;uses:="org.integratedmodelling.thinklab.api.configuration",
  org.integratedmodelling.thinklab.api.project;uses:="org.integratedmodelling.thinklab.api.plugin",
+ org.integratedmodelling.thinklab.api.provenance,
  org.integratedmodelling.thinklab.api.runtime;uses:="org.integratedmodelling.thinklab.api.listeners,org.integratedmodelling.thinklab.api.knowledge"
 Bundle-Vendor: org.integratedmodelling
 Bundle-ClassPath: .

@@ -42,7 +42,7 @@ public interface IModel extends IObservingObject {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public abstract IObservation contextualize(IContext context) throws ThinklabException;
+	public abstract IObservation observe(IContext context) throws ThinklabException;
 
 
 	

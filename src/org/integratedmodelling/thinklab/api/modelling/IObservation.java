@@ -27,7 +27,7 @@ public interface IObservation extends IModelObject {
 	
 	public abstract ISemanticObject<?> getObservable();
 	
-	public abstract IDataSource getDataSource();
+//	public abstract IDataSource getDataSource();
 	
 	public abstract IObserver getObserver();
 	
