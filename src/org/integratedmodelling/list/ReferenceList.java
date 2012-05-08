@@ -25,7 +25,7 @@ public class ReferenceList implements IReferenceList, IParseable {
     };
 
     // Returns the current thread's unique ID, assigning it if necessary
-    public static long nextId() {
+    private static long nextId() {
         Long id = threadId.get();
         threadId.set(new Long(id.longValue() + 1l));
         return id;
