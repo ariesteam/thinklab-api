@@ -94,8 +94,9 @@ public interface IResolver {
 	 * 
 	 * @param namespace
 	 * @param ret
+	 * @throws ThinklabException 
 	 */
-	public abstract void onModelObjectDefined(INamespace namespace, IModelObject ret);
+	public abstract void onModelObjectDefined(INamespace namespace, IModelObject ret) throws ThinklabException;
 
 	/**
 	 * Ensure that the namespace declaration conforms with the resource it comes from. Only called when the 

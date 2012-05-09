@@ -204,5 +204,12 @@ public interface IMetadata {
 	 * @return
 	 */
 	public Collection<String> getKeys();
+	
+	/**
+	 * Merge two metadata objects into this.
+	 * 
+	 * @param md
+	 */
+	public void merge(IMetadata md);
 
 }

@@ -24,6 +24,7 @@ public abstract interface IObserver extends IObservingObject {
 	public abstract IAccessor getAccessor();
 
 
+
 	/**
 	 * The observe() operation is essentially a semantic query for an observation of an observable in a 
 	 * context. Because this can produce a set of possible results, each observation in the resulting
