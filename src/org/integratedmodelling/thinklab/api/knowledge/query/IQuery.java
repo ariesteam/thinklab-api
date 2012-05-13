@@ -60,7 +60,7 @@ public interface IQuery {
 	 * E.g. 
 	 *  
 	 	   // select john (it actually returns a list - just pretend)
-	       ISemanticObject john = 
+	       ISemanticObject<?> john = 
 	       		kbox.query(Query.select(PERSON).restrict(hasName, new Equality("John")));
 
     	   // select all of john's siblings
