@@ -130,4 +130,6 @@ public interface IContext extends ITopology<IContext>, IModelObject, IListenable
 	public abstract IContext collapse(IConcept dimension)
 			throws ThinklabException;
 
+	public abstract int hasEqualExtents(IContext second);
+
 }

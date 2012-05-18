@@ -75,7 +75,7 @@ public interface IQuery {
 	 *        existence of relationships of type property should be checked.
 	 * @return
 	 */
-	public abstract IQuery restrict(IProperty property, IQuery ... query);
+	public abstract IQuery restrict(IProperty property, IQuery query);
 	
 	/**
 	 * Validate passed object for conditions expressed in the query. The object
