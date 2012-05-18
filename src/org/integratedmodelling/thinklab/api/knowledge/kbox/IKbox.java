@@ -26,6 +26,12 @@ import org.integratedmodelling.thinklab.api.knowledge.query.IQuery;
 public interface IKbox {
 
 	/**
+	 * Metadata key for queries that want sorting of the results. Make the query implementation be
+	 * a IMetadataHolder and set this field to the property that identifies the sort field.
+	 */
+	public static final String SORT_FIELD = "___sort_field";
+
+	/**
 	 * Retrieve all first-class objects in kbox (those that have been explicitly stored with a 
 	 * call to store(object)). It's a convenience method that should return the result of 
 	 * an empty query, but may be able to use a more efficient strategy according to host platform.
@@ -78,8 +84,9 @@ public interface IKbox {
 	 * Remove all objects matching the query.
 	 * 
 	 * @param query
+	 * @throws ThinklabException 
 	 */
-	public abstract void removeAll(IQuery query);
+	public abstract void removeAll(IQuery query) throws ThinklabException;
 
 	/**
 	 * Remove everything in kbox.
