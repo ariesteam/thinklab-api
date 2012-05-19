@@ -5,24 +5,26 @@ import java.util.List;
 import org.integratedmodelling.collections.Pair;
 import org.integratedmodelling.exceptions.ThinklabCircularDependencyException;
 import org.integratedmodelling.thinklab.api.lang.IList;
-import org.integratedmodelling.thinklab.api.lang.IReferenceList;
 
 /**
  * The result of semantic annotation in Thinklab. Objects can be turned into SemanticObjects by the
  * annotate() operation of the knowledge manager. Being a semantic object implies to have both
- * the original Java Object nature and a semantic annotation, instance of ISemantics, that expresses
- * the object semantics and can recreate another (semantically) identical SemanticObject.
+ * the original Java Object nature and a semantic annotation, expressed as a IList (most likely
+ * a IReferenceList), that expresses the object semantics and can recreate another 
+ * (semantically) identical SemanticObject.
  * 
  * In order for the magic of semantic annotation and instantiation to happen, there must be
  * semantic support (ontologies) for the meaning of the object and enough annotation at the
  * Java side to link concepts and properties to the ontologies. This can happen in a few 
  * ways:
  * 
- * 1. By tagging the Java class with @Concept and optionally with @Property, and/or 
- *    using the conventions for field naming that allow automatic linking of fields
- *    to properties;
+ * 1. By tagging the Java class with @Concept, which establishes the mapping of the class to
+ *    an instance of that concept, and either using @Property to link fields to properties or 
+ *    letting the conventions for field naming automatically link fields to properties;
+ *    
  * 2. By tagging the Java class with @Concept and implementing the IConceptualizable
  *    interface;
+ *    
  * 3. By manually registering the class to a concept in the knowledge manager, and
  *    proceeding as in (1) or (2) to link fields to properties.
  *    
@@ -46,10 +48,8 @@ public interface ISemanticObject<T extends Object> {
 	 * than what we have here.
 	 * 
 	 * For all practical purposes, this object should be consider immutable - except that Java doesn't
-	 * have that. Modifying the object will put it out of sync with its semantics, so make sure
+	 * allow that. Modifying the object may put it out of sync with its semantics, so make sure
 	 * you know what you're doing.
-	 * 
-	 * TBC could be called demote() - stripping the object of semantics. Don't know what is best.
 	 * 
 	 * @return
 	 * @see IKnowledgeManager.conceptualize()
@@ -70,7 +70,7 @@ public interface ISemanticObject<T extends Object> {
 	 * a chance of resulting in a true return value. Normally implementations will check concepts, ISemantics, ISemanticObject
 	 * and Strings, if wanted, after converting them to concepts.
 	 * 
-	 * If the other object is a ISemanticObject, the function should checking whether the objects classify 
+	 * If the other object is a ISemanticObject, the function should check whether the objects classify 
 	 * to the same object in the implemented ontology infrastructure. The meaning of conformance can be 
 	 * defined by using a default conformance operator. 
 	 * 

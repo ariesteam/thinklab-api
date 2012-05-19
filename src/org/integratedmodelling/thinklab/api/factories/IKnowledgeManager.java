@@ -72,7 +72,8 @@ public interface IKnowledgeManager {
 	
 	/**
 	 * Create a kbox with the named uri, using the implementation assigned to the
-	 * URI protocol.
+	 * URI protocol. A simple string with no prefix should be supported and given
+	 * a default kbox type.
 	 * 
 	 * @param uri
 	 * @return
@@ -129,4 +130,15 @@ public interface IKnowledgeManager {
 	 * @throws ThinklabException 
 	 */
 	public abstract ISemanticObject<?> entify(IList semantics) throws ThinklabException;
+
+	/**
+	 * Return the concept that the given datatype URI resolves to in Thinklab, if any. These
+	 * URIs are the datatypes registered with the literal types and may be any kind of
+	 * URI. Proper implementations should at least provide literal handling for all common
+	 * XSD types.
+	 * 
+	 * @param string
+	 * @return
+	 */
+	public abstract IConcept getXSDMapping(String string);
 }
