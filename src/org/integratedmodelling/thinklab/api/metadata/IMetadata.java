@@ -186,7 +186,13 @@ public interface IMetadata {
 	 * ISO639-2 http://www.w3.org/TR/NOTE-datetime
 	 * RFC1766 http://www.ietf.org/rfc/rfc1766.txt
 	 */
-	public static String DC_LANGUAGE = "dc:language";
+	public static final String DC_LANGUAGE = "dc:language";
+
+	
+	/**
+	 * Bounding box - expected to point to a PolygonValue
+	 */
+	public static final String GEOSPACE_BOUNDING_BOX = "geospace:hasBoundingBox";
 
 	/**
 	 * The object returned will be a String, IMetadata, Number or IList for textually defined
