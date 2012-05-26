@@ -162,7 +162,7 @@ public interface IOntology  extends IResource {
 	public IList asList();
 	
 	/**
-	 * Define the ontology from a collection of axioms.
+	 * Define the ontology from a collection of axioms. Must work incrementally.
 	 * @param axioms
 	 * @throws ThinklabException
 	 */
