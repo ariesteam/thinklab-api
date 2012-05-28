@@ -176,8 +176,23 @@ public class ReferenceList implements IReferenceList, IParseable {
 
 	@Override
 	public ReferenceList newList(Object... objects) {
+		
+		/*
+		 * internalize the objects if any of them are lists
+		 * TODO check - this may be smart to leave.
+		 */
+//		ArrayList<Object> o = new ArrayList<Object>();
+//		for (Object obj : objects) {
+//			if (obj instanceof ReferenceList) {
+//				o.add(newList(((IList)obj).toArray()));				
+//			} else {
+//				o.add(obj);
+//			}
+//		}
+//		return new ReferenceList(_refs, o.toArray());
 		return new ReferenceList(_refs, objects);
 	}
+
 
 	@Override
 	public void parse(String string) throws ThinklabException {
