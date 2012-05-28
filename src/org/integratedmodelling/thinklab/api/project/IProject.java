@@ -25,6 +25,7 @@ public interface IProject extends IThinklabPlugin {
 	public static final String PREREQUISITES_PROPERTY = "thinklab.prerequisites";
 	public static final String STORAGE_KBOX_PROPERTY = "thinklab.storage.kbox";
 	public static final String LOOKUP_KBOX_PROPERTY = "thinklab.lookup.kbox";
+	public static final String TRAINING_KBOX_PROPERTY = "thinklab.training.kbox";
 			
 	/**
 	 * Return all the namespaces defined in the project.

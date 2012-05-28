@@ -19,4 +19,10 @@ public interface INamespaceDefinition extends ILanguageDefinition, INamespace {
 	public void addModelObject(IModelObjectDefinition modelObject);
 	
 	public void setProject(IProject project);
+	
+	public void setStorageKbox(String kboxUri);
+
+	public void setTrainingKbox(String kboxUri);
+
+	public void setLookupKbox(String kboxUri);
 }

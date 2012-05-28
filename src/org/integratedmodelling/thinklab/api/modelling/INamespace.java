@@ -26,5 +26,10 @@ public interface INamespace {
 	public IProject getProject();
 
 	public abstract String getResourceUrl();
+
+	public abstract String getStorageKbox();
+
+	public abstract String getTrainingKbox();
 	
+	public abstract String getLookupKbox();
 }
