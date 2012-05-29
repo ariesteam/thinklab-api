@@ -27,6 +27,12 @@ import org.integratedmodelling.thinklab.api.listeners.IListenable;
 public interface IContext extends ITopology<IContext>, IModelObject, IListenable {
 
 	/**
+	 * Constant to be used in functions that take an extent index to extend the
+	 * result to the combined extents.
+	 */
+	public static final int ALL_EXTENTS = -1;
+	
+	/**
 	 * Return all the states that describe topology extents. The extents should be
 	 * ordered appropriately for execution.
 	 * 
@@ -60,7 +66,7 @@ public interface IContext extends ITopology<IContext>, IModelObject, IListenable
 	 * subdivision for all topologies). If this is false for any extent, states using this context will
 	 * have a no-data value at that index.
 	 * 
-	 * @param index
+	 * @param index index of extent, or ALL_EXTENTS for all of them.
 	 * @return
 	 */
 	public abstract boolean isCovered(int index);

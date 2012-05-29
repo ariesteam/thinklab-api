@@ -44,6 +44,14 @@ public interface IModel extends IObservingObject {
 	 */
 	public abstract IObservation observe(IContext context) throws ThinklabException;
 
-
+	/**
+	 * If a model was given a specific coverage in any extent, either directly or through
+	 * a namespace-wide specification, return the context that
+	 * expresses that coverage. If no coverage has been specified, return an empty
+	 * context.
+	 * 
+	 * @return
+	 */
+	public abstract IContext getCoverage();
 	
 }

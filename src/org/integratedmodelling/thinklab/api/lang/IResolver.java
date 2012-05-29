@@ -8,6 +8,7 @@ import org.integratedmodelling.thinklab.api.knowledge.IExpression;
 import org.integratedmodelling.thinklab.api.modelling.IModelObject;
 import org.integratedmodelling.thinklab.api.modelling.INamespace;
 import org.integratedmodelling.thinklab.api.modelling.parsing.IConceptDefinition;
+import org.integratedmodelling.thinklab.api.modelling.parsing.IFunctionDefinition;
 import org.integratedmodelling.thinklab.api.modelling.parsing.ILanguageDefinition;
 import org.integratedmodelling.thinklab.api.modelling.parsing.IPropertyDefinition;
 
@@ -159,5 +160,14 @@ public interface IResolver {
 	 * @return
 	 */
 	public abstract String generateId(IModelObject o);
+
+	/**
+	 * Resolve the passed function from its definition and run it with the parameters set in the
+	 * def. If not resolved just return null.
+	 * 
+	 * @param function
+	 * @return
+	 */
+	public abstract Object runFunction(IFunctionDefinition function);
 	
 }
