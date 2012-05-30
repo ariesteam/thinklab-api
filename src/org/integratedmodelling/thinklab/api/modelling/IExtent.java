@@ -36,6 +36,7 @@ import java.util.Collection;
 
 import org.integratedmodelling.collections.Pair;
 import org.integratedmodelling.exceptions.ThinklabException;
+import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 
 /**
  * An Extent describes the topology of the observable
@@ -51,42 +52,18 @@ import org.integratedmodelling.exceptions.ThinklabException;
  */
 public abstract interface IExtent extends IState, ITopology<IExtent> {
 
-//	/**
-//	 * One of these is set into AggregationParameters to properly return the
-//	 * aggregation multiplier for each topology granule.
-//	 * 
-//	 * @author ferdinando.villa
-//	 *
-//	 */
-//	public static interface Aggregator {
-//		public abstract double getAggregationFactor(int granule);
-//	}
-//	
-//	/**
-//	 * Returned by getAggregationParameters
-//	 * @author  ferdinando.villa
-//	 */
-//	public static interface AggregationParameters {
-//		
-//		/**
-//		 * @uml.property  name="aggregator" default="null"
-//		 * @uml.associationEnd  
-//		 */
-//		public Aggregator     aggregator = null;
-//		/**
-//		 * @uml.property  name="aggregatedUnit" default="null"
-//		 * @uml.associationEnd  
-//		 */
-//		public IUnit          aggregatedUnit = null;
-//		/**
-//		 * @uml.property  name="aggregatedNature" default="null"
-//		 * @uml.associationEnd  
-//		 */
-//		public PhysicalNature aggregatedNature = null;
-//		public String         aggregationOperator = IOperator.AVG;
-//		public String         uncertaintyOperator = IOperator.CV; 
-//	}
-//	
+	/**
+	 * Return the main concept for the topological class represented by this extent. It should
+	 * be the same concept for all the different kinds of extents representing the same domain,
+	 * i.e. geospace:Space, which should be an ancestor to the observable of this
+	 * extent. It will be used to ensure that no two extents of the same domain concept
+	 * appear in a context. The context implementation is expected to try to merge extents
+	 * that share the same domain concept even if their observables are not the same.
+	 * 
+	 * @return
+	 */
+	public abstract IConcept getDomainConcept();
+	
 	/**
 	 * Collapse the multiplicity and return the extent that represents
 	 * the full extent of our topology in one single state. This extent may
@@ -114,13 +91,6 @@ public abstract interface IExtent extends IState, ITopology<IExtent> {
 	 * @return whether there is an observable world at the given location.
 	 */
 	public abstract boolean isCovered(int stateIndex);
-
-//	/**
-//	 * Return a semantic query that will match observations that are in the
-//	 * relationship with this extent expressed by the passed operator. 
-//   NOT NECESSARY - SHOULD BE A COVERS() conformance operator decided by model configuration.
-//	 */
-//	public abstract IRestriction getConstraint(IOperator operator) throws ThinklabException;
 
 	/**
 	 * Return a list of location references to use in expressions and
@@ -164,18 +134,5 @@ public abstract interface IExtent extends IState, ITopology<IExtent> {
 	 */
 	public IExtent force(IExtent extent) throws ThinklabException;
 
-//	/**
-//	 * Return a descriptor of how aggregation should be performed in this
-//	 * extent for a value of the passed type. If a unit is associated, it
-//	 * must be capable of creating the unit of the aggregated concept, which
-//	 * will eliminate the dimension we represent if the concept is an
-//	 * extensive one.
-//	 * 
-//	 * @param concept
-//	 * @param unit
-//	 * @return
-//	 * @throws ThinklabException 
-//	 */
-//	public abstract AggregationParameters getAggregationParameters(IConcept concept, IUnit unit) throws ThinklabException;
 	
 }
