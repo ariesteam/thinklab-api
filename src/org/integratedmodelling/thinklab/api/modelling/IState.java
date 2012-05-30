@@ -1,7 +1,6 @@
 package org.integratedmodelling.thinklab.api.modelling;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.exceptions.ThinklabValidationException;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 
 /**
@@ -36,26 +35,18 @@ public interface IState extends IObservation {
 	 * 
 	 * @return
 	 */
-	public double[] getDataAsDoubles() throws ThinklabValidationException;
+	public double[] getDataAsDoubles() throws ThinklabException;
 
 	/**
 	 * get a single double for the given index.
 	 */
-	public double getDoubleValue(int index) throws ThinklabValidationException;
+	public double getDoubleValue(int index) throws ThinklabException;
 	
 	/**
 	 * Return the total number of states.
 	 * @return
 	 */
 	public int getValueCount();
-
-//	/**
-//	 * Return the class of what our contents observe.
-//	 * @return
-//	 * @uml.property  name="observableClass"
-//	 * @uml.associationEnd  
-//	 */
-//	public IConcept getObservableClass();
 
 	/**
 	 * Return a state with the given context dimension collapsed to one, and
