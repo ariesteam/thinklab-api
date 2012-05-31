@@ -63,5 +63,13 @@ public interface IReferenceList extends IList {
 	 * @return
 	 */
 	long getId();
+
+	/**
+	 * Take any list and internalize its references.
+	 * 
+	 * @param conceptualize
+	 * @return
+	 */
+	public IList internalize(IList conceptualize);
 	
 }

@@ -179,21 +179,42 @@ public class ReferenceList implements IReferenceList, IParseable {
 		
 		/*
 		 * internalize the objects if any of them are lists
-		 * TODO check - this may be smart to leave.
 		 */
-//		ArrayList<Object> o = new ArrayList<Object>();
-//		for (Object obj : objects) {
-//			if (obj instanceof ReferenceList) {
-//				o.add(newList(((IList)obj).toArray()));				
-//			} else {
-//				o.add(obj);
-//			}
-//		}
-//		return new ReferenceList(_refs, o.toArray());
+		for (int i = 0; i < objects.length; i++) {
+			if (objects[i] instanceof IList) {
+				objects[i] = internalize((IList)objects[i]);
+			}
+		}
 		return new ReferenceList(_refs, objects);
 	}
+	
+	@Override
+	public ReferenceList internalize(IList semantics) {
+		return internalize(semantics, new HashMap<Long, Long> ());
+	}
 
-
+	private ReferenceList internalize(IList semantics, HashMap<Long, Long> refs) {
+		
+		ArrayList<Object> objs = new ArrayList<Object>();
+		for (Object o : semantics.toArray()) {
+			if (o instanceof ReferenceList) {
+				long oldid = ((ReferenceList)o)._id;
+				if (refs.containsKey(((ReferenceList)o)._id)) {
+					o = new ReferenceList(_refs, null);
+					((ReferenceList) o)._id = refs.get(oldid);
+				} else {
+					ReferenceList rl = getForwardReference();
+					refs.put(oldid, rl._id);
+					rl.resolve(internalize((IList)o, refs));
+				}
+			} 	else if (o instanceof IList) {
+				o = internalize((IList)o, refs);
+			}
+			objs.add(o);
+		}
+		return new ReferenceList(_refs, objs.toArray());
+	}
+	
 	@Override
 	public void parse(String string) throws ThinklabException {
 
