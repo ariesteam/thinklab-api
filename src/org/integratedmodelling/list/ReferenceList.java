@@ -177,14 +177,14 @@ public class ReferenceList implements IReferenceList, IParseable {
 	@Override
 	public ReferenceList newList(Object... objects) {
 		
-		/*
-		 * internalize the objects if any of them are lists
-		 */
-		for (int i = 0; i < objects.length; i++) {
-			if (objects[i] instanceof IList) {
-				objects[i] = internalize((IList)objects[i]);
-			}
-		}
+//		/*
+//		 * internalize the objects if any of them are lists
+//		 */
+//		for (int i = 0; i < objects.length; i++) {
+//			if (objects[i] instanceof IList) {
+//				objects[i] = internalize((IList)objects[i]);
+//			}
+//		}
 		return new ReferenceList(_refs, objects);
 	}
 	
