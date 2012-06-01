@@ -1,5 +1,7 @@
 package org.integratedmodelling.thinklab.api.modelling;
 
+import java.util.List;
+
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
 
@@ -9,10 +11,24 @@ import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
  */
 public interface IModel extends IObservingObject {
 	
+
+	/**
+	 * Return the semantics of all observables we are observing. The first
+	 * in the list is the actual observable and must exist; the others are
+	 * expected side-effects of observing the first, which must correspond
+	 * to models in the same namespace.
+	 * 
+	 * @return
+	 */
+	public List<ISemanticObject<?>> getObservables();
+	
+	
 	/**
 	 * Return the single observable as a semantic object.
 	 * 
 	 * @return
+	 * @deprecated this should disappear - observables may always be more than one, although
+	 * the semantics of multiple observables must rely on other specifications.
 	 */
 	public ISemanticObject<?> getObservable();
 	

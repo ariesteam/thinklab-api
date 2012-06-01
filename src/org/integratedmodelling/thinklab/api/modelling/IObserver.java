@@ -10,11 +10,19 @@ import org.integratedmodelling.exceptions.ThinklabException;
 public abstract interface IObserver extends IObservingObject {
 	
 	/**
-	 * In case this observer mediates another, return it. 
+	 * Observers do not properly have observables: they either
+	 * mediate another observer or link to another model through
+	 * its observable. This function returns the link object, either
+	 * an observer or a general semantic object that describes the
+	 * observable. At the end of a mediation chain there is always
+	 * an observable. 
 	 * 
-	 * @return
+	 * @return the object observed by this observable. Use instanceof
+	 * to check whether it's another observer or not. If not, it's a
+	 * open observable for which compatible resolving models should be
+	 * found in the model base. It will never return null.
 	 */
-	public abstract IObserver getMediated();
+	public abstract Object getObservedObject();
 	
 	/**
 	 * Return the accessor that will compute states for this observer.
