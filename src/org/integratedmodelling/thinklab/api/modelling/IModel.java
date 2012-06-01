@@ -7,7 +7,13 @@ import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
 
 /**
  * A Model, i.e. a query that uses observers to produce its result observation. It 
- * must have only one observable.
+ * must have at least one observable. If it has more, they must have been given
+ * observation semantics through other models in the same namespace.
+ * 
+ * Models may be unresolved (i.e. they leave their observable specified only at a
+ * semantic level) or resolved (they specify an actual datasource and the observation
+ * semantics for it). 
+ * 
  */
 public interface IModel extends IObservingObject {
 	
@@ -22,15 +28,14 @@ public interface IModel extends IObservingObject {
 	 */
 	public List<ISemanticObject<?>> getObservables();
 	
-	
 	/**
-	 * Return the single observable as a semantic object.
-	 * 
+	 * Return the datasource, if any. If we have a datasource, the observer 
+	 * defines its observable through its observed "endpoint" - either an
+	 * observable object or a model.
+	 *  
 	 * @return
-	 * @deprecated this should disappear - observables may always be more than one, although
-	 * the semantics of multiple observables must rely on other specifications.
 	 */
-	public ISemanticObject<?> getObservable();
+	public IDataSource getDatasource();
 	
 	/**
 	 * Return the observer that made this observation and provides the
