@@ -5,6 +5,7 @@ import java.util.List;
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
 import org.integratedmodelling.thinklab.api.knowledge.query.IQuery;
+import org.integratedmodelling.thinklab.api.metadata.IMetadata;
 
 /**
  * K-box or Knowledge Box is the only place where semantic objects get stored permanently. Being an instance
@@ -46,6 +47,8 @@ public interface IKbox {
 
 	/**
 	 * Query kbox. The list returned should be read-only and of course implement lazy access. 
+	 * Sorting, grouping or any other query option should be specified within the query
+	 * object, using metadata or other strategy.
 	 * 
 	 * @param query
 	 * @return
@@ -64,8 +67,8 @@ public interface IKbox {
 	public abstract long store(Object o) throws ThinklabException;
 	
 	/**
-	 * Retrieve the object named by this id, or null if it's not there.
-	 * Shorthand for retrieve(id, flags);
+	 * Retrieve the object pointed to by this id, or null if it's not there.
+	 * 
 	 * @param o
 	 * @return
 	 * @throws ThinklabException
@@ -114,4 +117,16 @@ public interface IKbox {
 	 * whether you know it's needed or not.
 	 */
 	public abstract void close();
+
+	/**
+	 * Kboxes have the option of storing metadata with each object they store. They can
+	 * either be the floated metadata of the actual object if it's a IMetadataHolder, or
+	 * other metadata such as timestamp of storage etc. This function should retrieve
+	 * the metadata for the object identified by the given handle, and return an empty
+	 * IMetadata object if no metadata exist or the kbox does not support metadata.
+	 * 
+	 * @param handle
+	 * @return
+	 */
+	public IMetadata getObjectMetadata(long handle);
 }

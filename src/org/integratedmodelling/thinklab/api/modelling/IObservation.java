@@ -18,7 +18,8 @@ import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
  * for the observation process. Observations that have a IObserver also have "data" and are instances of
  * the derived IState which holds all data access methods. 
  * 
- * An observation without data is essentially a resolved model with no further info.
+ * An observation without data is essentially a resolved model with no further info, and is used to access
+ * other states through the context.
  * 
  * @author  Ferd
  * @see IState
@@ -27,8 +28,12 @@ public interface IObservation extends IModelObject {
 	
 	public abstract ISemanticObject<?> getObservable();
 	
-//	public abstract IDataSource getDataSource();
-	
+	/**
+	 * An observation retains the observer that provides its semantics, coming
+	 * from a model. It may be null if the model is a simple identification.
+	 * 
+	 * @return
+	 */
 	public abstract IObserver getObserver();
 	
 	/**

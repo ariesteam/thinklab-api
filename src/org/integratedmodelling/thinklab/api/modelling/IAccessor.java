@@ -62,12 +62,15 @@ public abstract interface IAccessor {
 	
 	/**
 	 * This method is called once per dependency before any values are extracted, passing
-	 * the key that will be available for get() when values are extracted. If MEDIATED_KEY 
-	 * is passed, the accessor is a mediator.
+	 * the key that will be available for get() when values are extracted.
+	 * 
+	 * TODO this should probably move to ISerialAccessor. ITransformingAccessor should
+	 * have a similar method but taking a IState instead of an accessor.
+	 * 
+	 * TODO we need a separate notifyMediated for IMediatingAccessor.
 	 * 
 	 * @param key the formal name of the parameter that will be passed to the 
-	 * @param concept the concept incarnated by the value, whose meaning changes
-	 *        from case to case.
+	 * @param accessor the accessor that will be used to get the dependency.
 	 */
-	public abstract void notifyDependencyKey(String key, IConcept concept);
+	public abstract void notifyDependency(String key, IAccessor accessor);
 }
