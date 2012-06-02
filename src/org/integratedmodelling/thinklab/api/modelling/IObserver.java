@@ -93,4 +93,12 @@ public abstract interface IObserver extends IObservingObject {
 	public IObserver applyScenario(IScenario scenario) throws ThinklabException;
 
 
+	/**
+	 * Get the observer we are mediating if any.
+	 * 
+	 * @return
+	 */
+	public abstract IObserver getMediatedObserver();
+
+
 }
