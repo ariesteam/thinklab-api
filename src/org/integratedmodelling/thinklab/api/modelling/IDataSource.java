@@ -5,7 +5,9 @@ import org.integratedmodelling.exceptions.ThinklabException;
 /**
  * Datasources are non-semantic datasets for one observable that are aware of what 
  * contexts mean, and are capable of contextualizing to a context (or to complain
- * about it) by producing an accessor. 
+ * about it) by producing an accessor. This accessor will be passed as the mediated
+ * accessor to a model's observer's accessor, which will assume that the data have
+ * the intended semantics (declared in a resolved model thus safe).
  * 
  * @author  Ferd
  */

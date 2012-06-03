@@ -1,6 +1,5 @@
 package org.integratedmodelling.thinklab.api.modelling;
 
-import java.util.Map;
 
 /**
  * A serial accessor computes states one context state at a time. Most standard accessors are
@@ -13,10 +12,10 @@ import java.util.Map;
 public interface ISerialAccessor extends IAccessor {
 	
 	/**
-	 * Compute or retrieve the value for the passed context index. If that requires parameters, the
-	 * current values are passed as the context with definition-dependent string IDs.
+	 * Compute or retrieve the value for the passed context index. Any dependencies have
+	 * been passed as independent accessors using notifyDependency before this is called.
 	 * 
 	 * @return
 	 */
-	public Object getValue(int overallContextIndex, Map<String, Object> context);
+	public Object getValue(int overallContextIndex);
 }

@@ -9,10 +9,12 @@ import org.integratedmodelling.exceptions.ThinklabException;
  * @author Ferd
  *
  */
-public interface IMediatingAccessor extends IAccessor {
+public interface IMediatingAccessor  {
 
 	/**
-	 * Receive an accessor to mediate and ensure it is compatible with our semantics.
+	 * Receive an accessor to mediate and ensure it is compatible with our semantics. Note that
+	 * if the accessor comes from a datasource, it may only be needed for initialization so
+	 * it may only be capable of computing initial states.
 	 * 
 	 * @param accessor
 	 * @throws ThinklabException

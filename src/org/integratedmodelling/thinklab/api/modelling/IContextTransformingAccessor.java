@@ -2,7 +2,7 @@ package org.integratedmodelling.thinklab.api.modelling;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 
-public interface IContextTransformingAccessor extends ITransformingAccessor {
+public interface IContextTransformingAccessor extends IParallelAccessor {
 
 	/**
 	 * Return the context that this observation will have once transformed in the 

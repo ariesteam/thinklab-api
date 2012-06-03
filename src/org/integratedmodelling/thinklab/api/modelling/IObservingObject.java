@@ -3,7 +3,6 @@ package org.integratedmodelling.thinklab.api.modelling;
 import java.util.List;
 
 import org.integratedmodelling.collections.Triple;
-import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
 
 /**
  * Anything that observes anything must implement this interface, normally

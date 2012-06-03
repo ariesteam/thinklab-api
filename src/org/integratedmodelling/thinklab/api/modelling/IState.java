@@ -5,21 +5,12 @@ import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 
 /**
  * A State is a stateful observation that represents its observable in its context using indirect 
- * information, i.e. "data". 
+ * information, i.e. "data". It extends ISerialAccessor and may be used as such when a model is
+ * contextualized in a context that already contains a state for a required observable.
  * 
  * @author  Ferdinando
  */
-public interface IState extends IObservation {
-	
-	/**
-	 * Return the unmodified object at given offset. Most times it will be a duplicate of
-	 * super.getValue(offset, parameters) but should not make any modification. If data are 
-	 * unknown (nodata), return null.
-	 * 
-	 * @param previousOffset
-	 * @return
-	 */
-	public Object getValue(int offset);
+public interface IState extends IObservation, ISerialAccessor {
 
 	/**
 	 * This will return an array of the appropriate type without any further allocation. It's terrifying to use in Java, but just fine for dynamically typed embedded languages. 

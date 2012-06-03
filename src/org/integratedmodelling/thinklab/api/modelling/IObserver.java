@@ -3,6 +3,7 @@ package org.integratedmodelling.thinklab.api.modelling;
 import java.util.List;
 
 import org.integratedmodelling.exceptions.ThinklabException;
+import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
 
 /**
  * A model producing observations of a given type (through its subclasses). 
@@ -30,7 +31,19 @@ public abstract interface IObserver extends IObservingObject {
 	 * @return
 	 */
 	public abstract IAccessor getAccessor();
-
+	
+	/**
+	 * Observers are responsible for creating the empty result observation
+	 * when they are contextualized.
+	 * @param observable TODO
+	 * @param context  the context that the state will represent. The state must
+	 * be able to accommodate context.getMultiplicity() elements.
+	 * 
+	 * @return
+	 * @throws ThinklabException
+	 */
+	public abstract IState createState(ISemanticObject<?> observable, IContext context) throws ThinklabException;
+		
 
 	/**
 	 * Return the sub-context of the passed one that this observer isn't capable
