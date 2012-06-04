@@ -6,5 +6,15 @@ public abstract interface IObservingObjectDefinition extends IModelObjectDefinit
 
 	public void addObservable(IList semantics);
 	
-	public void addDependency(IModelDefinition model, String formalName, boolean isRequired);
+	/**
+	 * A dependency can be added for any object - the implementation should ensure that
+	 * there is a resolution strategy of the object to a model that can observe it. 
+	 * 
+	 * Thinklab will support models and other semantic objects, seen as observables.
+	 * 
+	 * @param model
+	 * @param formalName
+	 * @param isRequired
+	 */
+	public void addDependency(Object model, String formalName, boolean isRequired);
 }

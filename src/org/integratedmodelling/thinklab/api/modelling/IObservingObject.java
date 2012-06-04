@@ -20,5 +20,5 @@ public abstract interface IObservingObject extends IModelObject {
 	 * 
 	 * @return
 	 */
-	public List<Triple<IModel,String,Boolean>> getDependencies();
+	public List<Triple<Object,String,Boolean>> getDependencies();
 }
