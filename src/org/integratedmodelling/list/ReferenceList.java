@@ -25,7 +25,7 @@ public class ReferenceList implements IReferenceList, IParseable {
     };
 
     // Returns the current thread's unique ID, assigning it if necessary
-    private static long nextId() {
+    private static synchronized long nextId() {
         Long id = threadId.get();
         threadId.set(new Long(id.longValue() + 1l));
         return id;
@@ -189,15 +189,17 @@ public class ReferenceList implements IReferenceList, IParseable {
 	}
 	
 	@Override
-	public ReferenceList internalize(IList semantics) {
-		return internalize(semantics, new HashMap<Long, Long> ());
+	public ReferenceList internalize(IList orig) {
+		return internalize(orig, new HashMap<Long, Long> ());
 	}
 
-	private ReferenceList internalize(IList semantics, HashMap<Long, Long> refs) {
+	private ReferenceList internalize(IList orig, HashMap<Long, Long> refs) {
 		
 		ArrayList<Object> objs = new ArrayList<Object>();
-		for (Object o : semantics.toArray()) {
+		for (Object o : orig.toArray()) {
+			
 			if (o instanceof ReferenceList) {
+				
 				long oldid = ((ReferenceList)o)._id;
 				if (refs.containsKey(((ReferenceList)o)._id)) {
 					o = new ReferenceList(_refs, null);
@@ -207,9 +209,11 @@ public class ReferenceList implements IReferenceList, IParseable {
 					refs.put(oldid, rl._id);
 					rl.resolve(internalize((IList)o, refs));
 				}
-			} 	else if (o instanceof IList) {
+				
+			} else if (o instanceof IList) {
 				o = internalize((IList)o, refs);
 			}
+			
 			objs.add(o);
 		}
 		return new ReferenceList(_refs, objs.toArray());

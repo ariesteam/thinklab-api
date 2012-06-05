@@ -154,7 +154,7 @@ public interface ISemanticObject<T extends Object> {
 	 */
 
 	/**
-	 * Return whether this object's relationships have circular dependencies.
+	 * Return whether the graph created by this object's relationships has circular dependencies.
 	 * 
 	 * @return
 	 */

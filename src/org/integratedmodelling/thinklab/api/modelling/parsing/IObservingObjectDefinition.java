@@ -7,6 +7,14 @@ public abstract interface IObservingObjectDefinition extends IModelObjectDefinit
 	public void addObservable(IList semantics);
 	
 	/**
+	 * Required before the concepts are actually generated, right after addObservable
+	 * has been called, so that naming defaults can be used.
+	 * 
+	 * @return
+	 */
+	public String getObservableConceptName();
+	
+	/**
 	 * A dependency can be added for any object - the implementation should ensure that
 	 * there is a resolution strategy of the object to a model that can observe it. 
 	 * 

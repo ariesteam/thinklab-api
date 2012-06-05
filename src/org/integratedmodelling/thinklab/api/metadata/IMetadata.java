@@ -2,6 +2,8 @@ package org.integratedmodelling.thinklab.api.metadata;
 
 import java.util.Collection;
 
+import org.integratedmodelling.thinklab.api.knowledge.IConcept;
+
 
 public interface IMetadata {
 
@@ -217,5 +219,34 @@ public interface IMetadata {
 	 * @param md
 	 */
 	public void merge(IMetadata md);
+	
+	public abstract String getString(String field);
+
+	public abstract Integer getInt(String field);
+	
+	public abstract Long getLong(String field);
+	
+	public abstract Double getDouble(String field);
+	
+	public abstract Float getFloat(String field);
+	
+	public abstract Boolean getBoolean(String field);
+
+	public abstract IConcept getConcept(String field);
+
+	public abstract String  getString(String field, String def);
+
+	public abstract int getInt(String field, int def);
+	
+	public abstract long getLong(String field, long def);
+	
+	public abstract double getDouble(String field, double def);
+	
+	public abstract float getFloat(String field, float def);
+	
+	public abstract boolean getBoolean(String field, boolean def);
+
+	public abstract IConcept getConcept(String field, IConcept def);
+
 
 }
