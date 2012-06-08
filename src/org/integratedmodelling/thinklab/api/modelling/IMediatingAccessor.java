@@ -17,8 +17,18 @@ public interface IMediatingAccessor  {
 	 * it may only be capable of computing initial states.
 	 * 
 	 * @param accessor
+	 * @throws ThinklabException if the accessor is incompatible
+	 */
+	public abstract void notifyMediatedAccessor(IAccessor accessor) throws ThinklabException;
+	
+	/**
+	 * Run the required mediation step by reinterpreting the passed object, which
+	 * holds the semantics given in notifyMediatedAccessor, according to our own
+	 * semantics.
+	 * 
+	 * @param object
+	 * @return
 	 * @throws ThinklabException
 	 */
-	public abstract void addMediatedAccessor(IAccessor accessor) throws ThinklabException;
-	
+	public Object mediate(Object object) throws ThinklabException;
 }

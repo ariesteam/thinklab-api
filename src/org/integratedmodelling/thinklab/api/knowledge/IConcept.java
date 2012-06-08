@@ -40,7 +40,7 @@ import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.query.IQuery;
 
 /**
- * The main interface that a concept must support. Note that many of the methods require that some sort of reasoner is connected, and in Jena the choice of reasoner will change the results. This is not optional in the IMA: implementations that do not provide these functionalities as expected are considered incomplete, and the results of all ops on concepts should be the same for the same ontologies regardless of the implementation choices.
+ * 
  * @author  Ferdinando Villa
  */
 public interface IConcept extends IKnowledge {
