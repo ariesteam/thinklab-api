@@ -47,6 +47,9 @@ public interface IComputingAccessor extends ISerialAccessor {
 	 * After this is called, the appropriate getValue will
 	 * be called to retrieve the output(s).
 	 * 
+	 * NOTE: this may be called more than once with the same observable and 
+	 * different names. It must be capable of handling that correctly.
+	 * 
 	 * @return
 	 */
 	public void process(int stateIndex) throws ThinklabException;

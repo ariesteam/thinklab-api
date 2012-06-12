@@ -20,7 +20,7 @@ public interface IParallelAccessor extends IAccessor {
 	 * @param key the formal name of the parameter that will be passed to the 
 	 * @param accessor the accessor that will be used to get the dependency.
 	 */
-	public abstract void notifyDependency(ISemanticObject<?> observable, String key);
+	public abstract void notifyDependency(IState state);
 
 	/**
 	 * Called at initialization to inform the accessor that it's expected to produce
@@ -50,5 +50,5 @@ public interface IParallelAccessor extends IAccessor {
 	 * @param outputKey
 	 * @return
 	 */
-	public Object getState(String outputKey);
+	public IState getState(String outputKey);
 }
