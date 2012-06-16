@@ -35,9 +35,10 @@ public abstract interface IObserver extends IObservingObject {
 	/**
 	 * Observers are responsible for creating the empty result observation
 	 * when they are contextualized.
-	 * @param observable TODO
+	 * @param observable The observable we need the state for. Some observers
+	 * 	      handle more than one observable.
 	 * @param context  the context that the state will represent. The state must
-	 * be able to accommodate context.getMultiplicity() elements.
+	 *        be able to accommodate context.getMultiplicity() elements.
 	 * 
 	 * @return
 	 * @throws ThinklabException
