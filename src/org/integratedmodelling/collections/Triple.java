@@ -50,8 +50,6 @@ public class Triple<T1,T2, T3> implements Serializable
 	{
 	}
 	/**
-	 *  This method was created in VisualAge.
-	 *
 	 * @param  first java.lang.Object
 	 * @param  second java.lang.Object
 	 */
@@ -61,9 +59,8 @@ public class Triple<T1,T2, T3> implements Serializable
 		this.second = second;
         this.third = third;
 	}
+
 	/**
-	 *  This method was created in VisualAge.
-	 *
 	 * @param  newValue java.lang.Object
 	 */
 	public void setFirst(T1 newValue)
@@ -71,26 +68,21 @@ public class Triple<T1,T2, T3> implements Serializable
 		this.first = newValue;
 	}
 	/**
-	 *  This method was created in VisualAge.
-	 *
 	 * @param  newValue java.lang.Object
 	 */
 	public void setSecond(T2 newValue)
 	{
 		this.second = newValue;
 	}
-    /**
-     *  This method was NOT created in VisualAge.
-     *
-     * @param  newValue java.lang.Object
+
+	/**
      */
     public void setThird(T3 newValue)
     {
         this.third = newValue;
     }
-	/**
-	 *  This method was created in VisualAge.
-	 *
+
+    /**
 	 * @return  java.lang.Object
 	 */
 	public T1 getFirst()
@@ -98,8 +90,6 @@ public class Triple<T1,T2, T3> implements Serializable
 		return first;
 	}
 	/**
-	 *  This method was created in VisualAge.
-	 *
 	 * @return  java.lang.Object
 	 */
 	public T2 getSecond()
@@ -110,9 +100,8 @@ public class Triple<T1,T2, T3> implements Serializable
     public T3 getThird() {
         return third;
     }
-	/**
-	 *  This method was created in VisualAge.
-	 *
+
+    /**
 	 * @return  java.lang.String
 	 */
 	public String toString()

@@ -5,6 +5,7 @@ import java.util.List;
 import org.integratedmodelling.collections.Pair;
 import org.integratedmodelling.exceptions.ThinklabCircularDependencyException;
 import org.integratedmodelling.thinklab.api.lang.IList;
+import org.integratedmodelling.thinklab.api.modelling.INamespace;
 
 /**
  * The result of semantic annotation in Thinklab. Objects can be turned into SemanticObjects by the
@@ -32,6 +33,15 @@ import org.integratedmodelling.thinklab.api.lang.IList;
  *
  */
 public interface ISemanticObject<T extends Object> {
+	
+	/**
+	 * All semantic objects live in a namespace - if they haven't been explicitly 
+	 * declared as such, their namespace is the namespace of the concept they
+	 * incarnate.
+	 * 
+	 * @return
+	 */
+	public INamespace getNamespace();
 	
 	/**
 	 * Return the bare semantics of this object, from which another identical object can be

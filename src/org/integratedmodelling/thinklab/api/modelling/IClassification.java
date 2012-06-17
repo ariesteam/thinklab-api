@@ -25,6 +25,14 @@ public interface IClassification  {
 	public void initialize(IConcept type, Type typeHint) throws ThinklabValidationException;
 	
 	/**
+	 * Return the root concept for the classification. All concepts that can be attributed
+	 * to the classifiers should be direct, disjoint children of it.
+	 * 
+	 * @return
+	 */
+	public IConcept getConceptSpace();
+	
+	/**
 	 * Return the concept that the passed object classifies to.
 	 * 
 	 * @param o

@@ -11,6 +11,7 @@ import org.integratedmodelling.thinklab.api.modelling.IContext;
 import org.integratedmodelling.thinklab.api.modelling.IModel;
 import org.integratedmodelling.thinklab.api.modelling.IModelObject;
 import org.integratedmodelling.thinklab.api.modelling.INamespace;
+import org.integratedmodelling.thinklab.api.modelling.IObservation;
 import org.integratedmodelling.thinklab.api.modelling.IScenario;
 import org.integratedmodelling.thinklab.api.project.IProject;
 
@@ -26,6 +27,20 @@ import org.integratedmodelling.thinklab.api.project.IProject;
  */
 public interface IModelManager {
 
+	
+	/**
+	 * The key function in the modeling system is observing something in a context. The passed
+	 * object may be a model (which is going to be contextualized and run) or something else,
+	 * for which Thinklab will try to build the appropriate model for the context. If successful,
+	 * an observation of the object will be returned, whose context will link to all other 
+	 * contingent observations made in the process.
+	 * 
+	 * @param object
+	 * @param context
+	 * @return
+	 */
+	public IObservation observe(Object object, IContext context) throws ThinklabException;
+	
 	public abstract IModel getModel(String s);
 	
 	public abstract IAgentModel getAgentModel(String s);

@@ -38,8 +38,7 @@ package org.integratedmodelling.thinklab.api.knowledge;
  * @author  Ferdinando Villa, Ecoinformatics Collaboratory, UVM
  */
 public interface IResource {
-	
-	
+		
 	/**
 	 * The ID of the concept space (the first field or the semantic type). All Resources have (or ARE) a concept space.
 	 * @return  the concept space ID. Can't fail.

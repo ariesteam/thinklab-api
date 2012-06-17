@@ -1,6 +1,6 @@
 package org.integratedmodelling.thinklab.api.modelling;
 
-import org.integratedmodelling.collections.Pair;
+import org.integratedmodelling.lang.RankingScale;
 
 /**
  * Rankings are numerically ordered, linear quantification of a value that has no further
@@ -20,12 +20,6 @@ public interface IRankingObserver extends IObserver {
 	
 	public abstract Type getType();
 	
-	/**
-	 * Get the range of the ranking. If no range is specified, return null. If only
-	 * one boundary of the range is specified, return null for the unspecified one.
-	 * 
-	 * @return
-	 */
-	public abstract Pair<Number, Number> getRange();
+	public abstract RankingScale getScale();
 	
 }
