@@ -72,12 +72,27 @@ public interface IContext extends ITopology<IContext>, IModelObject, IListenable
 	public abstract boolean isCovered(int index);
 
 	/**
-	 * Return the state for a specific observable, or null if not there.
+	 * Return the state for a specific observable, or null if not there. Before 
+	 * returning null, a child context should look for the state in the 
+	 * parent context(s), and if found, return its own view of it according to 
+	 * the extents it implements.
 	 * 
 	 * @param observable
 	 * @return
 	 */
 	public abstract IState getState(IConcept observable);
+	
+	
+	/**
+	 * Contexts are hierarchically composable. This is what allows agent-based modeling
+	 * and many other things. The requirement is that the parent context contains the 
+	 * children completely, and that it has all the extent types of its children.
+	 * 
+	 * This one returns null for the top-level context that contains all the others.
+	 * 
+	 * @return
+	 */
+	public IContext getParentContext();
 
 	/**
 	 * Merge in an observation: if there is already one for that observable, mediate it through

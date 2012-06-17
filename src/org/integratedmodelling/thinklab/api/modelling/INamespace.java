@@ -32,4 +32,6 @@ public interface INamespace {
 	public abstract String getTrainingKbox();
 	
 	public abstract String getLookupKbox();
+
+	public abstract String getExpressionLanguage();
 }

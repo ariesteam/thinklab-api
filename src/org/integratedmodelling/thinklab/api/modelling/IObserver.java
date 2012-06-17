@@ -30,7 +30,7 @@ public abstract interface IObserver extends IObservingObject {
 	 * 
 	 * @return
 	 */
-	public abstract IAccessor getAccessor();
+	public abstract IAccessor getAccessor(IContext context);
 	
 	/**
 	 * Observers are responsible for creating the empty result observation
@@ -60,24 +60,6 @@ public abstract interface IObserver extends IObservingObject {
 	 * @return
 	 */
 	public abstract IContext getUnresolvedContext(IContext totalContext);
-
-	/**
-	 * The observe() operation is essentially a semantic query for an observation of an observable in a 
-	 * context. Because this can produce a set of possible results, each observation in the resulting
-	 * collection should represent a unique and complete solution. Thinklab will expect the collection to
-	 * be sorted using some criterion of decreasing relevance, so that the first observation in the list will
-	 * be the most likely to be useful. Implementations should also make the assumption that extracting each
-	 * observation from the collection will be a potentially very expensive operation, so they should minimize
-	 * iteration and expect a lazy behavior for the iterator.
-	 * 
-	 * The context of each observation extracted will give access to all states in the observation structure
-	 * represented, and can be used to create any IDataset for communication or storage.
-	 * 
-	 * @param context
-	 * @return
-	 * @throws ThinklabException
-	 */
-	public List<IObservation> observe(IContext context) throws ThinklabException;
 
 	/**
 	 * Train the model to match any output state that can be

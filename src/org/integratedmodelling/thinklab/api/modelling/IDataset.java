@@ -14,7 +14,6 @@ public interface IDataset {
 	 * 
 	 * @param context
 	 * @throws ThinklabException
-	 * @uml.property  name="context"
 	 */
 	public abstract void setContext(IContext context) throws ThinklabException;
 	
@@ -23,8 +22,6 @@ public interface IDataset {
 	 * @param context
 	 * @return
 	 * @throws ThinklabException
-	 * @uml.property  name="context"
-	 * @uml.associationEnd  
 	 */
 	public abstract IContext getContext();
 

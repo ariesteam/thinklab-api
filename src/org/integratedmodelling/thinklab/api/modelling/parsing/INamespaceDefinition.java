@@ -25,4 +25,6 @@ public interface INamespaceDefinition extends ILanguageDefinition, INamespace {
 	public void setTrainingKbox(String kboxUri);
 
 	public void setLookupKbox(String kboxUri);
+	
+	public void setExpressionLanguage(String language);
 }
