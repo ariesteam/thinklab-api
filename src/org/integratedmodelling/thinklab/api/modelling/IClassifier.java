@@ -1,8 +1,7 @@
 package org.integratedmodelling.thinklab.api.modelling;
 
-import org.integratedmodelling.thinklab.api.lang.IParseable;
 
-public interface IClassifier extends IParseable {
+public interface IClassifier  {
 
 	public boolean classify(Object o);
 
@@ -11,4 +10,6 @@ public interface IClassifier extends IParseable {
 	boolean isNil();
 
 	boolean isInterval();
+	
+	void negate();
 }
