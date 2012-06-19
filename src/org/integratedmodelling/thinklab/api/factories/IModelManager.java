@@ -126,6 +126,6 @@ public interface IModelManager {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	Collection<INamespace> loadSourceDirectory(File sourcedir) throws ThinklabException;
+	Collection<INamespace> loadSourceDirectory(File sourcedir, IProject project) throws ThinklabException;
 
 }

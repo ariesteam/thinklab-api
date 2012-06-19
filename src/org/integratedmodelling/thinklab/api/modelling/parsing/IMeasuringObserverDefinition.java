@@ -5,5 +5,7 @@ import org.integratedmodelling.thinklab.api.modelling.IMeasuringObserver;
 public interface IMeasuringObserverDefinition extends IObserverDefinition, IMeasuringObserver {
 
 	public void setUnit(IUnitDefinition unit);
+
+	public void setDiscretization(IClassificationDefinition classification);
 	
 }

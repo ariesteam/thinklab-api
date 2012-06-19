@@ -2,7 +2,6 @@ package org.integratedmodelling.thinklab.api.modelling;
 
 import java.util.List;
 
-import org.integratedmodelling.exceptions.ThinklabValidationException;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 
 /**
@@ -21,9 +20,7 @@ public interface IClassification  {
 		ORDERED_RANKING,
 		ORDERED_RANGE_MAPPING
 	}
-	
-	public void initialize(IConcept type, Type typeHint) throws ThinklabValidationException;
-	
+		
 	/**
 	 * Return the root concept for the classification. All concepts that can be attributed
 	 * to the classifiers should be direct, disjoint children of it.

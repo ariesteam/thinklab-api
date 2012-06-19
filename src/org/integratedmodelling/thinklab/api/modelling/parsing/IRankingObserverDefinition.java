@@ -7,5 +7,7 @@ public interface IRankingObserverDefinition extends IObserverDefinition, IRankin
 	public void setType(IRankingObserver.Type type);
 	
 	public void setScale(Number from, Number to);
+
+	public void setDiscretization(IClassificationDefinition classification);
 	
 }
