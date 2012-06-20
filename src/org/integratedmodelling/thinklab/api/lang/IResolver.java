@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.IExpression;
+import org.integratedmodelling.thinklab.api.modelling.IContext;
 import org.integratedmodelling.thinklab.api.modelling.IModelObject;
 import org.integratedmodelling.thinklab.api.modelling.INamespace;
 import org.integratedmodelling.thinklab.api.modelling.parsing.IConceptDefinition;
@@ -169,5 +170,34 @@ public interface IResolver {
 	 * @return
 	 */
 	public abstract Object runFunction(IFunctionDefinition function);
+
+	/**
+	 * Return the last model object notified to the resolver. Used by interactive
+	 * applications only. Should not return any object more than once.
+	 * 
+	 * @return
+	 */
+	public abstract IModelObject getLastProcessedObject();
+
+	/**
+	 * Return whether the resolver is being used in an interactive session. The parser may
+	 * allow or disallow some statements in that case. 
+	 * 
+	 * @return
+	 */
+	boolean isInteractive();
+
+	/**
+	 * In an interactive session, an 'observe' command should be supported which calls
+	 * this method for handling. The command is expected to contribute observations to
+	 * the current context in the session.
+	 * 
+	 * @param observable
+	 * @param ctx 
+	 * @param ctx
+	 * @throws ThinklabException 
+	 */
+	public abstract void handleObserveStatement(Object observable, INamespace namespace, IContext ctx, boolean resetContext) 
+		throws ThinklabException;
 	
 }
