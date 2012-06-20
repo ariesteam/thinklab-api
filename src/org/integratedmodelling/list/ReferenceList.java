@@ -201,7 +201,7 @@ public class ReferenceList implements IReferenceList, IParseable {
 			if (o instanceof ReferenceList) {
 				
 				long oldid = ((ReferenceList)o)._id;
-				if (refs.containsKey(((ReferenceList)o)._id)) {
+				if (refs.containsKey(oldid)) {
 					o = new ReferenceList(_refs, null);
 					((ReferenceList) o)._id = refs.get(oldid);
 				} else {
