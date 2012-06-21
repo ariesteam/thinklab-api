@@ -6,32 +6,36 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicLong;
 
-import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.exceptions.ThinklabRuntimeException;
 import org.integratedmodelling.thinklab.api.lang.IList;
-import org.integratedmodelling.thinklab.api.lang.IParseable;
 import org.integratedmodelling.thinklab.api.lang.IReferenceList;
 
-public class ReferenceList implements IReferenceList, IParseable {
+public class ReferenceList implements IReferenceList {
 	
-    private static final AtomicLong nextId = new AtomicLong(0);
-    private static final ThreadLocal<Long> threadId =
-        new ThreadLocal<Long>() {
-            @Override protected Long initialValue() {
-                return nextId.getAndIncrement();
-        }   
-    };
+//    private static final AtomicLong nextId = new AtomicLong(0);
+//    private static final ThreadLocal<Long> threadId =
+//        new ThreadLocal<Long>() {
+//            @Override protected Long initialValue() {
+//                return nextId.getAndIncrement();
+//        }   
+//    };
+
+	static long ___ID;
 
     // Returns the current thread's unique ID, assigning it if necessary
     private static synchronized long nextId() {
-        Long id = threadId.get();
-        threadId.set(new Long(id.longValue() + 1l));
-        return id;
+//        Long id = threadId.get();
+//        threadId.set(new Long(id.longValue() + 1l));
+//        return id;
+    	return ___ID ++;
     }		     
 	
-	long _id = nextId();
+    /*
+     * IDs will be unique to threads, so all we need to do to merge references
+     * from different lists is merge the ref tables.
+     */
+	long _id;
 	
 	 // the main list we represent.
 	IList   _list;
@@ -52,6 +56,7 @@ public class ReferenceList implements IReferenceList, IParseable {
 		}
 		if (ret == null)
 			throw new ThinklabRuntimeException("unresolved reference in list");
+		ret = ret instanceof ReferenceList ? ((ReferenceList)ret)._list : ret;
 		return ret;
 	}
 
@@ -71,9 +76,13 @@ public class ReferenceList implements IReferenceList, IParseable {
 
 	@Override
 	public IList resolve(IList list) {
-		_refs().put(_id, list);
+		IList l = (IList) internalize(list);
+		_refs().put(_id, l);
 		if (list instanceof ReferenceList) {
 			((ReferenceList)list)._id = _id;
+			
+			if (((ReferenceList)list)._list == null)
+				System.out.println("PORCODIO");
 		}
 		return this;
 	}
@@ -81,6 +90,7 @@ public class ReferenceList implements IReferenceList, IParseable {
 	private ReferenceList(HashMap<Long, IList> refs, Object[] objects) {
 		this(objects);
 		_refs = refs;
+		_id = nextId();
 	}
 	
 	private ReferenceList(long id, HashMap<Long, IList> refs, IList list) {
@@ -90,11 +100,13 @@ public class ReferenceList implements IReferenceList, IParseable {
 	}
 	
 	private ReferenceList(Object[] objects) {
+		_id = nextId();
 		_list = objects == null ? null : PolyList.list(objects);
 	}
 
 
 	public ReferenceList() {
+		_id = nextId();
 		_list = null;
 	}
 
@@ -107,7 +119,7 @@ public class ReferenceList implements IReferenceList, IParseable {
 	public ReferenceList append(Object ... o) {
 		IList lst = _list();
 		for (Object oo : o)
-			lst = lst.append(oo);
+			lst = lst.append(internalize(oo));
 		_list = lst;
 		return this;
 	}
@@ -124,7 +136,7 @@ public class ReferenceList implements IReferenceList, IParseable {
 
 	@Override
 	public ReferenceList cons(Object first) {
-		return new ReferenceList(_id, _refs, _list().cons(first));
+		return new ReferenceList(_id, _refs, _list().cons(internalize(first)));
 	}
 
 	@Override
@@ -169,98 +181,26 @@ public class ReferenceList implements IReferenceList, IParseable {
 
 	@Override
 	public ReferenceList newList(Object... objects) {
-		
-//		/*
-//		 * internalize the objects if any of them are lists
-//		 */
-//		for (int i = 0; i < objects.length; i++) {
-//			if (objects[i] instanceof ReferenceList) {
-//				objects[i] = internalize((IList)objects[i]);
-//			}
-//		}
+
+		for (int i = 0; i < objects.length; i++) {
+			if (objects[i] instanceof ReferenceList) {
+				objects[i] = internalize(objects[i]);
+			}
+		}
 		return new ReferenceList(_refs, objects);
 	}
 	
-	@Override
-	public ReferenceList internalize(IList orig) {
-		return internalize(orig, new HashMap<Long, Long> ());
-	}
-
-	private ReferenceList internalize(IList orig, HashMap<Long, Long> refs) {
-		
-		ArrayList<Object> objs = new ArrayList<Object>();
-		for (Object o : orig.toArray()) {
-			
-			if (o instanceof ReferenceList) {
-				
-				long oldid = ((ReferenceList)o)._id;
-				if (refs.containsKey(oldid)) {
-					o = new ReferenceList(_refs, null);
-					((ReferenceList) o)._id = refs.get(oldid);
-				} else {
-					ReferenceList rl = getForwardReference();
-					refs.put(oldid, rl._id);
-					rl.resolve(internalize((IList)o, refs));
-				}
-				
-			} else if (o instanceof IList) {
-				o = internalize((IList)o, refs);
-			}
-			
-			objs.add(o);
+	public Object internalize(Object orig) {
+		if (orig instanceof ReferenceList) {
+			ReferenceList rl = (ReferenceList)orig;
+			if (_refs != null && rl._refs != null)
+				_refs.putAll(((ReferenceList)orig)._refs);
+			else if (_refs == null)
+				_refs = rl._refs;
 		}
-		return new ReferenceList(_refs, objs.toArray());
-	}
-	
-//	private Object internalize(Object o) {
-//		if (o instanceof ReferenceList) {
-//			return internalizeInternal((RefList)o, new HashMap<Integer, Integer>());
-//		} else if (o instanceof IList) {
-//			Object[] oo = ((IList)o).toArray();
-//			for (int i = 0; i < oo.length; i++)
-//				oo[i] = internalize(oo[i]);
-//			return PolyList.list(oo);
-//		}
-//		return o;
-//	}
-//
-//	/*
-//	 * winner of the "sick method name of the year" award
-//	 */
-//	RefList internalizeInternal(RefList rl, HashMap<Integer, Integer> rr) {
-//
-//		Object[] io = new Object[rl.length()];
-//		int i = 0;
-//		long oldid = rl._id;
-//		for (Object obj : rl._list.toArray()) {
-//			if (obj instanceof ReferenceList) {
-//				if (rr.containsKey(((ReferenceList)obj)._id)) 
-//					io[i] = new ReferenceList(((ReferenceList)obj)._id, null);
-//				else {
-//					Ref r = new Ref(_id++);
-//					rr.put(((Ref)obj)._n, r._n);
-//					_refs.put(r._n, rl._refs.get(((Ref)obj)._n));
-//					io[i] = r;
-//				}
-//			} else if (obj instanceof RefList) {
-//				io[i] = internalizeInternal((RefList)obj, rr);
-//			} else {
-//				io[i] = obj;
-//			}
-//			i++;
-//		}
-//		return new RefList(_refs, _id, PolyList.list(io));
-//
-//	}
-//	
-	@Override
-	public void parse(String string) throws ThinklabException {
-
-		string = string.trim();
-		
+		return orig;
 	}
 
-	@Override
 	public String asText() {
 		return asTextInternal("", new HashSet<Long>());
 	}
@@ -376,6 +316,11 @@ public class ReferenceList implements IReferenceList, IParseable {
 	@Override
 	public long getId() {
 		return _id;
+	}
+
+	@Override
+	public IReferenceList getReference() {
+		return new ReferenceList(_id, _refs, null);
 	}
 	
 }
