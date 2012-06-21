@@ -55,7 +55,6 @@ public class ReferenceList implements IReferenceList, IParseable {
 		return ret;
 	}
 
-	
 	public static ReferenceList list(Object ... objs) {
 		return new ReferenceList((Object[])objs);
 	}
@@ -167,12 +166,6 @@ public class ReferenceList implements IReferenceList, IParseable {
 	public ReferenceList getForwardReference() {
 		return new ReferenceList(_refs, (Object[])null);
 	}
-	
-//	@Override
-//	public ReferenceList getReference() {
-//		_refs().put(_id, this);
-//		return new ReferenceList(_id, _refs, null);
-//	}
 
 	@Override
 	public ReferenceList newList(Object... objects) {
@@ -181,7 +174,7 @@ public class ReferenceList implements IReferenceList, IParseable {
 //		 * internalize the objects if any of them are lists
 //		 */
 //		for (int i = 0; i < objects.length; i++) {
-//			if (objects[i] instanceof IList) {
+//			if (objects[i] instanceof ReferenceList) {
 //				objects[i] = internalize((IList)objects[i]);
 //			}
 //		}
@@ -219,6 +212,47 @@ public class ReferenceList implements IReferenceList, IParseable {
 		return new ReferenceList(_refs, objs.toArray());
 	}
 	
+//	private Object internalize(Object o) {
+//		if (o instanceof ReferenceList) {
+//			return internalizeInternal((RefList)o, new HashMap<Integer, Integer>());
+//		} else if (o instanceof IList) {
+//			Object[] oo = ((IList)o).toArray();
+//			for (int i = 0; i < oo.length; i++)
+//				oo[i] = internalize(oo[i]);
+//			return PolyList.list(oo);
+//		}
+//		return o;
+//	}
+//
+//	/*
+//	 * winner of the "sick method name of the year" award
+//	 */
+//	RefList internalizeInternal(RefList rl, HashMap<Integer, Integer> rr) {
+//
+//		Object[] io = new Object[rl.length()];
+//		int i = 0;
+//		long oldid = rl._id;
+//		for (Object obj : rl._list.toArray()) {
+//			if (obj instanceof ReferenceList) {
+//				if (rr.containsKey(((ReferenceList)obj)._id)) 
+//					io[i] = new ReferenceList(((ReferenceList)obj)._id, null);
+//				else {
+//					Ref r = new Ref(_id++);
+//					rr.put(((Ref)obj)._n, r._n);
+//					_refs.put(r._n, rl._refs.get(((Ref)obj)._n));
+//					io[i] = r;
+//				}
+//			} else if (obj instanceof RefList) {
+//				io[i] = internalizeInternal((RefList)obj, rr);
+//			} else {
+//				io[i] = obj;
+//			}
+//			i++;
+//		}
+//		return new RefList(_refs, _id, PolyList.list(io));
+//
+//	}
+//	
 	@Override
 	public void parse(String string) throws ThinklabException {
 

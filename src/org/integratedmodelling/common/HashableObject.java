@@ -29,7 +29,7 @@ public class HashableObject {
         return id;
     }		     
 	
-	Long __id = nextId();
+	protected Long __id = nextId();
 	
 	public int hashCode() {
 		return __id.hashCode();
