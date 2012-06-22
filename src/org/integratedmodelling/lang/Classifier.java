@@ -72,11 +72,14 @@ public class Classifier implements IClassifier {
 		}
 
 		if (o == null)
-			return isNil;
+			return negated ?
+					!isNil : isNil;
 		
 		if (number != null) {
 			
-			return number.equals(asNumber(o));
+			return negated?
+					!number.equals(asNumber(o)) :
+					number.equals(asNumber(o));
 			
 		} else if (classifiers != null) {
 			
@@ -89,15 +92,21 @@ public class Classifier implements IClassifier {
 			
 			Double d = asNumber(o);
 			if (d != null)
-				return interval.contains(d);
+				return negated?
+						!interval.contains(d) :
+						interval.contains(d);
 			
 		} else if (concept != null) {
 
-			return asConcept(o).is(concept);
+			return negated ?
+					!asConcept(o).is(concept) :
+					asConcept(o).is(concept);
 
 		} else if (string != null) { 
 
-			return string.equals(o.toString());
+			return negated ?
+					!string.equals(o.toString()) :
+					string.equals(o.toString());
 
 		} else if (closure != null) {
 		
@@ -108,7 +117,9 @@ public class Classifier implements IClassifier {
 				 */
 				HashMap<String, Object> parms = new HashMap<String, Object>();
 				parms.put("self", o);
-				return (Boolean)closure.eval(parms);
+				return negated ?
+						!(Boolean)closure.eval(parms) :
+						(Boolean)closure.eval(parms);
 
 			} catch (Exception e) {
 				throw new ThinklabRuntimeException(e);
