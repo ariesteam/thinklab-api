@@ -84,7 +84,7 @@ public interface IContext extends ITopology<IContext>, IModelObject, IListenable
 	
 	
 	/**
-	 * Contexts are hierarchically composable. This is what allows agent-based modeling
+	 * Contexts are hierarchically composable. This is what enables agent-based modeling
 	 * and many other things. The requirement is that the parent context contains the 
 	 * children completely, and that it has all the extent types of its children.
 	 * 
