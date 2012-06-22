@@ -13,6 +13,11 @@ import org.integratedmodelling.thinklab.api.lang.IReferenceList;
 
 public class ReferenceList implements IReferenceList {
 	
+/*
+ * TODO the commented thread-local version should suffice, and be less likely to 
+ * incur into overrunning the available ids in long-running server
+ * applications. CHECK.	
+ */
 //    private static final AtomicLong nextId = new AtomicLong(0);
 //    private static final ThreadLocal<Long> threadId =
 //        new ThreadLocal<Long>() {
@@ -32,8 +37,9 @@ public class ReferenceList implements IReferenceList {
     }		     
 	
     /*
-     * IDs will be unique to threads, so all we need to do to merge references
-     * from different lists is merge the ref tables.
+     * IDs will be unique, so all we need to do to merge references
+     * from different lists is merge the ref tables. Only case when
+     * IDs are the same is for references.
      */
 	long _id;
 	
@@ -123,6 +129,19 @@ public class ReferenceList implements IReferenceList {
 		_list = lst;
 		return this;
 	}
+	
+	@Override
+	public ReferenceList assign(IList list) {
+		
+		if (list instanceof ReferenceList) {
+			internalize(list);
+		}
+		Object[] oo = list.toArray();
+		for (int i = 0; i < oo.length; i++)
+			oo[i] = internalize(oo[i]);
+		_list = PolyList.list(oo);
+		return this;
+	}
 
 	@Override
 	public Object first() {
@@ -179,16 +198,16 @@ public class ReferenceList implements IReferenceList {
 		return new ReferenceList(_refs, (Object[])null);
 	}
 
-	@Override
-	public ReferenceList newList(Object... objects) {
-
-		for (int i = 0; i < objects.length; i++) {
-			if (objects[i] instanceof ReferenceList) {
-				objects[i] = internalize(objects[i]);
-			}
-		}
-		return new ReferenceList(_refs, objects);
-	}
+//	@Override
+//	public ReferenceList newList(Object... objects) {
+//
+//		for (int i = 0; i < objects.length; i++) {
+//			if (objects[i] instanceof ReferenceList) {
+//				objects[i] = internalize(objects[i]);
+//			}
+//		}
+//		return new ReferenceList(_refs, objects);
+//	}
 	
 	public Object internalize(Object orig) {
 		if (orig instanceof ReferenceList) {
