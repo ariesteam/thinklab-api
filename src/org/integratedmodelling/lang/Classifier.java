@@ -19,8 +19,8 @@
  */
 package org.integratedmodelling.lang;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Vector;
 
 import org.integratedmodelling.collections.NumericInterval;
 import org.integratedmodelling.exceptions.ThinklabRuntimeException;
@@ -33,13 +33,13 @@ import org.integratedmodelling.thinklab.api.modelling.IClassifier;
  */
 public class Classifier implements IClassifier {
 
-	Vector<Classifier> classifiers = null;
-	Double number = null;
-	NumericInterval interval = null;
-	IConcept concept = null;
-	String string = null;
+	ArrayList<Classifier> classifierMatches = null;
+	Double numberMatch = null;
+	NumericInterval intervalMatch = null;
+	IConcept conceptMatch = null;
+	String stringMatch = null;
 	boolean negated = false;
-	private IExpression closure = null;
+	private IExpression expressionMatch = null;
 	
 	/*
 	 * if true, this is an :otherwise classifier, that needs to be known
@@ -51,7 +51,7 @@ public class Classifier implements IClassifier {
 	 * normally, nil does not reclassify unless there is one of these in a 
 	 * classification.
 	 */
-	private boolean isNil = false;
+	private boolean nullMatch = false;
 	
 	public Classifier() {
 	}
@@ -73,42 +73,42 @@ public class Classifier implements IClassifier {
 
 		if (o == null)
 			return negated ?
-					!isNil : isNil;
+					!nullMatch : nullMatch;
 		
-		if (number != null) {
+		if (numberMatch != null) {
 			
 			return negated?
-					!number.equals(asNumber(o)) :
-					number.equals(asNumber(o));
+					!numberMatch.equals(asNumber(o)) :
+					numberMatch.equals(asNumber(o));
 			
-		} else if (classifiers != null) {
+		} else if (classifierMatches != null) {
 			
-			for (Classifier cl : classifiers) {
+			for (Classifier cl : classifierMatches) {
 				if (cl.classify(o))
 					return true;
 			}
 			
-		} else if (interval != null) {
+		} else if (intervalMatch != null) {
 			
 			Double d = asNumber(o);
 			if (d != null)
 				return negated?
-						!interval.contains(d) :
-						interval.contains(d);
+						!intervalMatch.contains(d) :
+						intervalMatch.contains(d);
 			
-		} else if (concept != null) {
+		} else if (conceptMatch != null) {
 
 			return negated ?
-					!asConcept(o).is(concept) :
-					asConcept(o).is(concept);
+					!asConcept(o).is(conceptMatch) :
+					asConcept(o).is(conceptMatch);
 
-		} else if (string != null) { 
+		} else if (stringMatch != null) { 
 
 			return negated ?
-					!string.equals(o.toString()) :
-					string.equals(o.toString());
+					!stringMatch.equals(o.toString()) :
+					stringMatch.equals(o.toString());
 
-		} else if (closure != null) {
+		} else if (expressionMatch != null) {
 		
 			try {
 				/*
@@ -118,8 +118,8 @@ public class Classifier implements IClassifier {
 				HashMap<String, Object> parms = new HashMap<String, Object>();
 				parms.put("self", o);
 				return negated ?
-						!(Boolean)closure.eval(parms) :
-						(Boolean)closure.eval(parms);
+						!(Boolean)expressionMatch.eval(parms) :
+						(Boolean)expressionMatch.eval(parms);
 
 			} catch (Exception e) {
 				throw new ThinklabRuntimeException(e);
@@ -157,41 +157,41 @@ public class Classifier implements IClassifier {
 	}
 	
 	public void addClassifier(Classifier c) {
-		if (classifiers == null)
-			classifiers = new Vector<Classifier>();
-		classifiers.add(c);
+		if (classifierMatches == null)
+			classifierMatches = new ArrayList<Classifier>();
+		classifierMatches.add(c);
 	}
 
 	public void setConcept(IConcept c) {
-			concept = c;
+			conceptMatch = c;
 	}
 
 	public void setInterval(NumericInterval interval) {
-		this.interval = interval;
+		this.intervalMatch = interval;
 	}
 
 	public void setNumber(Object classifier) {
-		number = asNumber(classifier);
+		numberMatch = asNumber(classifier);
 	}
 	
 	public String toString() {
 		String ret = null;
-		if (classifiers != null) {
+		if (classifierMatches != null) {
 			ret = "mul:";
-			for (Classifier c : classifiers) {
+			for (Classifier c : classifierMatches) {
 				ret += "[" + c + "]";
 			}
-		} else if (number != null) {
-			ret = "num:" + number;
-		} else if (interval != null) {
-			ret = "int:" + interval;
-		} else if (concept != null) {
-			ret = "con:" + concept;
-		} else if (string != null) {
-			ret = "str:" + string;
+		} else if (numberMatch != null) {
+			ret = "num:" + numberMatch;
+		} else if (intervalMatch != null) {
+			ret = "int:" + intervalMatch;
+		} else if (conceptMatch != null) {
+			ret = "con:" + conceptMatch;
+		} else if (stringMatch != null) {
+			ret = "str:" + stringMatch;
 		} else if (catchAll) {
 			ret = "tru:true";
-		} else if (isNil) {
+		} else if (nullMatch) {
 			ret = "nil:true";
 		}
 		return ret;
@@ -202,46 +202,46 @@ public class Classifier implements IClassifier {
 	}
 
 	public void setString(String classifier) {
-		this.string = classifier;
+		this.stringMatch = classifier;
 	}
 
 	public void setNil() {
-		this.isNil = true;
+		this.nullMatch = true;
 	}
 
 	@Override
 	public boolean isInterval() {
-		return interval != null;
+		return intervalMatch != null;
 	}
 
 	public NumericInterval getInterval() {
-		return interval;
+		return intervalMatch;
 	}
 
 	@Override
 	public boolean isNil() {
-		return this.isNil;
+		return this.nullMatch;
 	}
 
 	public void setExpression(IExpression e) {
-		this.closure = e;
+		this.expressionMatch = e;
 	}
 	
 	public static Classifier NumberMatcher(Number n) {
 		Classifier ret = new Classifier();
-		ret.number = n.doubleValue();
+		ret.numberMatch = n.doubleValue();
 		return ret;
 	}
 	
 	public static Classifier RangeMatcher(NumericInterval interval) {
 		Classifier ret = new Classifier();
-		ret.interval = interval;
+		ret.intervalMatch = interval;
 		return ret;
 	}
 	
 	public static Classifier ConceptMatcher(IConcept concept) {
 		Classifier ret = new Classifier();
-		ret.concept = concept;
+		ret.conceptMatch = concept;
 		return ret;
 	}
 	
@@ -254,7 +254,7 @@ public class Classifier implements IClassifier {
 	
 	public static Classifier StringMatcher(String string) {
 		Classifier ret = new Classifier();
-		ret.string = string;
+		ret.stringMatch = string;
 		return ret;
 	}
 	
@@ -266,7 +266,7 @@ public class Classifier implements IClassifier {
 	
 	public static Classifier NullMatcher() {
 		Classifier ret = new Classifier();
-		ret.isNil = true;
+		ret.nullMatch = true;
 		return ret;
 	}
 

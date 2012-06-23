@@ -39,10 +39,10 @@ public class NumericInterval implements IParseable {
 
 	double lowerBound = 0.0;
 	double upperBound = 0.0;
-	boolean isLowerOpen = false;
-	boolean isUpperOpen = false;
-	boolean isLowerUndefined = true;
-	boolean isUpperUndefined = true;
+	boolean lowerOpen = false;
+	boolean upperOpen = false;
+	boolean lowerUndefined = true;
+	boolean upperUndefined = true;
 	
 	public NumericInterval(String intvs) throws ThinklabException {
 		parse(intvs);
@@ -50,13 +50,13 @@ public class NumericInterval implements IParseable {
 
 	public NumericInterval(Double left, Double right, boolean leftOpen, boolean rightOpen) {
 
-		if (!( isLowerUndefined = (left == null))) 
+		if (!( lowerUndefined = (left == null))) 
 			lowerBound = left;
-		if (!( isUpperUndefined = (right == null))) 
+		if (!( upperUndefined = (right == null))) 
 			upperBound = right;
 
-		isLowerOpen = leftOpen;
-		isUpperOpen = rightOpen;
+		lowerOpen = leftOpen;
+		upperOpen = rightOpen;
 	}
 	
 	@Override
@@ -91,22 +91,22 @@ public class NumericInterval implements IParseable {
 				if (nnums > 0) 
 					throw new ThinklabValidationException("invalid interval syntax: " + s);
 				lowdef = true;
-				isLowerOpen = true;
+				lowerOpen = true;
 			} else  if (token == '[') {
 				if (nnums > 0) 
 					throw new ThinklabValidationException("invalid interval syntax: " + s);
 				lowdef = true;
-				isLowerOpen = false;
+				lowerOpen = false;
 			} else  if (token == ')') {
 				if (nnums == 0) 
 					throw new ThinklabValidationException("invalid interval syntax: " + s);
 				highdef = true;
-				isUpperOpen = true;
+				upperOpen = true;
 			} else  if (token == ']') {
 				if (nnums == 0) 
 					throw new ThinklabValidationException("invalid interval syntax: " + s);
 				highdef = true;
-				isUpperOpen = false;
+				upperOpen = false;
 			} else  if (token == ',') {
 				/* accept and move on */
 			} else {
@@ -118,14 +118,14 @@ public class NumericInterval implements IParseable {
 		 * all read, assemble interval info
 		 */
 		if (lowdef && highdef && nnums == 2) {
-			isLowerUndefined = isUpperUndefined = false;
+			lowerUndefined = upperUndefined = false;
 			lowerBound = low;
 			upperBound = high;
 		} else if (lowdef && !highdef && nnums == 1) {
-			isLowerUndefined = false;
+			lowerUndefined = false;
 			lowerBound = low;
 		} else if (highdef && !lowdef && nnums == 1) {
-			isUpperUndefined = false;
+			upperUndefined = false;
 			upperBound = low;
 		} else {
 			throw new ThinklabValidationException("invalid interval syntax: " + s);
@@ -134,10 +134,10 @@ public class NumericInterval implements IParseable {
 
 	public int compare(NumericInterval i) {
 		
-		if (isLowerUndefined == i.isLowerUndefined &&
-				isLowerOpen == i.isLowerOpen &&
-				isUpperUndefined == i.isUpperUndefined &&
-				isUpperOpen == i.isUpperOpen &&
+		if (lowerUndefined == i.lowerUndefined &&
+				lowerOpen == i.lowerOpen &&
+				upperUndefined == i.upperUndefined &&
+				upperOpen == i.upperOpen &&
 				lowerBound == i.lowerBound &&
 				upperBound == i.upperBound)
 			return 0;
@@ -153,11 +153,11 @@ public class NumericInterval implements IParseable {
 	}
 	
 	public boolean isRightInfinite() {
-		return isUpperUndefined;
+		return upperUndefined;
 	}
 
 	public boolean isLeftInfinite() {
-		return isLowerUndefined;
+		return lowerUndefined;
 	}
 
 	/**
@@ -165,7 +165,7 @@ public class NumericInterval implements IParseable {
 	 * @return
 	 */
 	public boolean isRightBounded() {
-		return !isUpperOpen;
+		return !upperOpen;
 	}
 
 	/**
@@ -173,7 +173,7 @@ public class NumericInterval implements IParseable {
 	 * @return
 	 */
 	public boolean isLeftBounded() {
-		return !isLowerOpen;
+		return !lowerOpen;
 	}
 	
 	public double getMinimumValue() {
@@ -186,14 +186,14 @@ public class NumericInterval implements IParseable {
 
 	public boolean contains(double d) {
 
-		if (isLowerUndefined)
-			return (isUpperOpen ? d < upperBound : d <= upperBound);
-		else if (isUpperUndefined)
-			return (isLowerOpen ? d > lowerBound : d >= lowerBound);
+		if (lowerUndefined)
+			return (upperOpen ? d < upperBound : d <= upperBound);
+		else if (upperUndefined)
+			return (lowerOpen ? d > lowerBound : d >= lowerBound);
 		else 
 			return
-				(isUpperOpen ? d < upperBound : d <= upperBound) &&
-				(isLowerOpen ? d > lowerBound : d >= lowerBound);	
+				(upperOpen ? d < upperBound : d <= upperBound) &&
+				(lowerOpen ? d > lowerBound : d >= lowerBound);	
 	}
 
 	@Override
@@ -201,15 +201,15 @@ public class NumericInterval implements IParseable {
 	
 		String ret = "";
 		
-		if (!isLowerUndefined) {
-			ret += isLowerOpen ? "(" : "[";
+		if (!lowerUndefined) {
+			ret += lowerOpen ? "(" : "[";
 			ret += lowerBound;
 		}
-		if (!isUpperUndefined) {
-			if (!isLowerUndefined) 
+		if (!upperUndefined) {
+			if (!lowerUndefined) 
 				ret += " ";
 			ret += upperBound;
-			ret += isUpperOpen ? ")" : "]";
+			ret += upperOpen ? ")" : "]";
 		}
 		
 		return ret;
