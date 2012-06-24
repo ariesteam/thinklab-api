@@ -12,13 +12,11 @@ import org.integratedmodelling.lang.RankingScale;
  */
 public interface IRankingObserver extends IObserver {
 
-	public enum Type {
-		BINARY_CODING,
-		NUMERIC_ENCODING,
-		RANKING
-	};
+	static final int BINARY_CODING = 2;
+	static final int NUMERIC_ENCODING = 1;
+	static final int RANKING = 0;
 	
-	public abstract Type getType();
+	public abstract int getType();
 	
 	public abstract RankingScale getScale();
 	

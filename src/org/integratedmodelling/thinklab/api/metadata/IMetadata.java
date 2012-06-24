@@ -248,5 +248,7 @@ public interface IMetadata {
 
 	public abstract IConcept getConcept(String field, IConcept def);
 
+	public Collection<Object> getValues();
+
 
 }

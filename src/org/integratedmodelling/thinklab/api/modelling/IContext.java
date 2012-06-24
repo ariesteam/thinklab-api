@@ -152,5 +152,25 @@ public interface IContext extends ITopology<IContext>, IModelObject, IListenable
 			throws ThinklabException;
 
 	public abstract int hasEqualExtents(IContext second);
+	
+	/**
+	 * Use the passed objects to cover some or all of our extents. Return the
+	 * difference between the previous total coverage and the coverage after
+	 * merging in the extents.
+	 * 
+	 * @param context
+	 * @return
+	 */
+	public abstract double cover(ITopologicallyComparable<?>[] context);
+
+	/**
+	 * Get the total covered proportion in the passed extent, or in all extents (as a
+	 * product) if extent index is ALL_EXTENTS. This should be 0 unless cover() has
+	 * been called (one or more times) to provide covering extents.
+	 * 
+	 * @param extent
+	 * @return the extent as a ratio (0 to 1).
+	 */
+	public abstract double getCoverage(int extent);
 
 }

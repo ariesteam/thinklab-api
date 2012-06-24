@@ -11,11 +11,11 @@ import org.integratedmodelling.collections.Pair;
  */
 public class RankingScale {
 
-	Number _from = null;
-	Number _to = null;
+	Number _lowerBound = null;
+	Number _upperBound = null;
 	
-	boolean _isInteger = false;
-	boolean _isBounded = false;
+	boolean _integerScale = false;
+	boolean _bounded = false;
 	
 	/**
 	 * Unbounded ranking, basically a no-op to filter values through.
@@ -31,13 +31,13 @@ public class RankingScale {
 	 */
 	public RankingScale(Number from, Number to) {
 		// TODO Auto-generated constructor stub
-		_from = from;
-		_to = to;
-		_isInteger =  ((from instanceof Integer || from instanceof Long) &&
+		_lowerBound = from;
+		_upperBound = to;
+		_integerScale =  ((from instanceof Integer || from instanceof Long) &&
 			(to instanceof Integer || to instanceof Long));
-		_isBounded =
-				_from != null && _to != null &&
-				!checkInfinity(_from) && !checkInfinity(_to);
+		_bounded =
+				_lowerBound != null && _upperBound != null &&
+				!checkInfinity(_lowerBound) && !checkInfinity(_upperBound);
 	}
 
 	private boolean checkInfinity(Number n) {
@@ -52,7 +52,7 @@ public class RankingScale {
 	}
 
 	public Pair<Number, Number> getRange() {
-		return new Pair<Number, Number>(_from, _to);
+		return new Pair<Number, Number>(_lowerBound, _upperBound);
 	}
 
 	/**
@@ -66,13 +66,13 @@ public class RankingScale {
 	 */
 	public Number convert(Number d, RankingScale scale) {
 		
-		if (scale != null && _isBounded && scale._isBounded) {
+		if (scale != null && _bounded && scale._bounded) {
 			
 			double conversion = 
-					(_to.doubleValue() - _from.doubleValue()) /
-					(scale._to.doubleValue() - scale._from.doubleValue());
-			d = _from.doubleValue() + (d.doubleValue() * conversion);
-			if (_isInteger) {
+					(_upperBound.doubleValue() - _lowerBound.doubleValue()) /
+					(scale._upperBound.doubleValue() - scale._lowerBound.doubleValue());
+			d = _lowerBound.doubleValue() + (d.doubleValue() * conversion);
+			if (_integerScale) {
 				d = new Integer((int) Math.rint(d.doubleValue()));
 			}
 		}
@@ -81,11 +81,11 @@ public class RankingScale {
 	}
 	
 	public boolean isBounded() {
-		return _isBounded;
+		return _bounded;
 	}
 	
 	public boolean isInteger() {
-		return _isInteger;
+		return _integerScale;
 	}
 	
 }

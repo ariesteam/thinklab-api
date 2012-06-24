@@ -133,6 +133,16 @@ public abstract interface IExtent extends IState, ITopology<IExtent> {
 	 * @throws ThinklabException
 	 */
 	public IExtent force(IExtent extent) throws ThinklabException;
+	
+	/**
+	 * Pass a topologically comparable object and return how much of this
+	 * extent it covers. If it's not of a compatible type, do not raise errors
+	 * and return 0.
+	 *  
+	 * @param obj
+	 * @return the coverage proportion as a double [0..1]
+	 */
+	public double getCoverage(ITopologicallyComparable<?> obj);
 
 	
 }
