@@ -199,5 +199,12 @@ public interface IResolver {
 	 */
 	public abstract void handleObserveStatement(Object observable, INamespace namespace, IContext ctx, boolean resetContext) 
 		throws ThinklabException;
+
+	/**
+	 * Get another resolver to handle an import, whose lifetime is local to ours.
+	 * 
+	 * @return
+	 */
+	public abstract IResolver getImportResolver();
 	
 }
