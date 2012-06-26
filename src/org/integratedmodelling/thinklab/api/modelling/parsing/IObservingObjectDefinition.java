@@ -1,5 +1,6 @@
 package org.integratedmodelling.thinklab.api.modelling.parsing;
 
+import org.integratedmodelling.thinklab.api.knowledge.IProperty;
 import org.integratedmodelling.thinklab.api.lang.IList;
 
 public abstract interface IObservingObjectDefinition extends IModelObjectDefinition {
@@ -22,7 +23,8 @@ public abstract interface IObservingObjectDefinition extends IModelObjectDefinit
 	 * 
 	 * @param model
 	 * @param formalName
+	 * @param property
 	 * @param isRequired
 	 */
-	public void addDependency(Object model, String formalName, boolean isRequired);
+	public void addDependency(Object model, String formalName, IPropertyDefinition property, boolean isOptional);
 }

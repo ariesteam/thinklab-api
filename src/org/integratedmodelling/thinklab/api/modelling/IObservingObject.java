@@ -2,7 +2,7 @@ package org.integratedmodelling.thinklab.api.modelling;
 
 import java.util.List;
 
-import org.integratedmodelling.collections.Triple;
+import org.integratedmodelling.thinklab.api.knowledge.IProperty;
 
 /**
  * Anything that observes anything must implement this interface, normally
@@ -13,12 +13,44 @@ import org.integratedmodelling.collections.Triple;
  */
 public abstract interface IObservingObject extends IModelObject {
 
+	public static interface IDependency {
+		
+		/**
+		 * The object that we need to observe to satisfy this dependency.
+		 * @return
+		 */
+		public Object getObservable();
+		
+		/**
+		 * The name that the state of this object will be known as to the
+		 * embedding model. Should never be null.
+		 * 
+		 * @return
+		 */
+		public String getFormalName();
+		
+		/**
+		 * Whether we can do without this dependency or not.
+		 * @return
+		 */
+		public boolean isOptional();
+		
+		/**
+		 * The property that expresses the counterpart of this dependency in
+		 * the conceptual model for the observable of the embedding model. May
+		 * be null. If not, the dependency resolution strategy must honor
+		 * the restrictions of the property in the context of each matched
+		 * observable for the embedding model.
+		 * 
+		 * @return
+		 */
+		public IProperty getProperty();
+	}
+	
 	/**
-	 * Return for each model we depend on: the model itself, the formal name
-	 * that identifies it in this model, and whether it's a required dependency
-	 * or not.
+	 * Dependency information using the structure above.
 	 * 
 	 * @return
 	 */
-	public List<Triple<Object,String,Boolean>> getDependencies();
+	public List<IDependency> getDependencies();
 }
