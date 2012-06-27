@@ -11,6 +11,7 @@ import org.integratedmodelling.thinklab.api.modelling.INamespace;
 import org.integratedmodelling.thinklab.api.modelling.parsing.IConceptDefinition;
 import org.integratedmodelling.thinklab.api.modelling.parsing.IFunctionDefinition;
 import org.integratedmodelling.thinklab.api.modelling.parsing.ILanguageDefinition;
+import org.integratedmodelling.thinklab.api.modelling.parsing.IModelObjectDefinition;
 import org.integratedmodelling.thinklab.api.modelling.parsing.IPropertyDefinition;
 
 /**
@@ -206,5 +207,23 @@ public interface IResolver {
 	 * @return
 	 */
 	public abstract IResolver getImportResolver();
+
+	/**
+	 * Return whether the namespace was defined already, to prevent recursions in the 
+	 * parser.
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public abstract boolean isNamespaceDefined(String id);
+
+	/**
+	 * Resolve the given object or return null.
+	 * 
+	 * @param ns
+	 * @param object
+	 * @return
+	 */
+	public abstract IModelObjectDefinition resolveModelObject(String ns, String object);
 	
 }
