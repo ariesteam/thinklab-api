@@ -4,6 +4,7 @@ Bundle-Name: thinklab-api
 Bundle-SymbolicName: thinklab-api;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Export-Package: org.integratedmodelling.collections;uses:="org.integratedmodelling.thinklab.api.lang",
+ org.integratedmodelling.common,
  org.integratedmodelling.exceptions,
  org.integratedmodelling.lang;uses:="org.integratedmodelling.thinklab.api.lang,org.integratedmodelling.thinklab.api.factories,org.integratedmodelling.thinklab.api.knowledge",
  org.integratedmodelling.list;uses:="org.integratedmodelling.thinklab.api.lang",
