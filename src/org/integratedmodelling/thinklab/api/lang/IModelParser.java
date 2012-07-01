@@ -1,5 +1,6 @@
 package org.integratedmodelling.thinklab.api.lang;
 
+import java.io.File;
 import java.io.InputStream;
 
 import org.integratedmodelling.exceptions.ThinklabException;
@@ -39,6 +40,14 @@ public interface IModelParser {
 	 * @throws ThinklabException
 	 */
 	public abstract INamespace parse(String resource, IResolver resolver) throws ThinklabException;
+	
+	/**
+	 * Call this with any directory where you expect to find things to import that the resolver
+	 * can't see.
+	 * 
+	 * @param file
+	 */
+	public abstract void notifyImportDirectory(File file);
 	
 
 }
