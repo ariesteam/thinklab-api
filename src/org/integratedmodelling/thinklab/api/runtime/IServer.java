@@ -1,5 +1,7 @@
 package org.integratedmodelling.thinklab.api.runtime;
 
+import java.io.File;
+
 import org.integratedmodelling.thinklab.api.lang.IMetadataHolder;
 import org.integratedmodelling.thinklab.api.project.IProject;
 
@@ -137,6 +139,14 @@ public interface IServer extends IMetadataHolder {
 	 */
 	public abstract Result authenticate(Object ... authInfo);
 
+	/**
+	 * Return a LOCAL directory that can be loaded by the client project manager to provide
+	 * any knowledge needed to use the server. 
+	 * 
+	 * @return
+	 */
+	public abstract File getRequiredKnowledge();
+	
 	/**
 	 * Deploy project (with all its prerequisites). If privileges are not enough or there are errors,
 	 * just return false. If project is already deployed, undeploy first.

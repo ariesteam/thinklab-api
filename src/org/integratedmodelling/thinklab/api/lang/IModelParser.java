@@ -41,13 +41,5 @@ public interface IModelParser {
 	 */
 	public abstract INamespace parse(String resource, IResolver resolver) throws ThinklabException;
 	
-	/**
-	 * Call this with any directory where you expect to find things to import that the resolver
-	 * can't see.
-	 * 
-	 * @param file
-	 */
-	public abstract void notifyImportDirectory(File file);
-	
 
 }
