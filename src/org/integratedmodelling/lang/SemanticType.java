@@ -174,13 +174,8 @@ public final class SemanticType implements Serializable {
 	 * @return true if valid token in the form "ontology:resource_id"
 	 */
 	public static boolean validate(String t) {
-		boolean ret = true;
-		try {
-			new SemanticType(t);
-		} catch (ThinklabRuntimeException e) {
-			ret = false;
-		}
-		return ret;
+		String[] ss = t.split(":");
+		return ss.length == 2 && !ss[0].isEmpty() && !ss[1].isEmpty();
 	}
 
 	@Override

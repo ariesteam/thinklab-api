@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: thinklab-api
 Bundle-SymbolicName: thinklab-api;singleton:=true
-Bundle-Version: 1.0.0.alpha
+Bundle-Version: 1.0.0.qualifier
 Export-Package: org.integratedmodelling.collections;uses:="org.integratedmodelling.thinklab.api.lang",
  org.integratedmodelling.common,
  org.integratedmodelling.exceptions,
