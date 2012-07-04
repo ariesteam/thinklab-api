@@ -1,6 +1,5 @@
 package org.integratedmodelling.thinklab.api.lang;
 
-import java.io.File;
 import java.io.InputStream;
 
 import org.integratedmodelling.exceptions.ThinklabException;

@@ -1,8 +1,10 @@
 package org.integratedmodelling.thinklab.api.runtime;
 
 import java.io.File;
+import java.util.List;
 
 import org.integratedmodelling.thinklab.api.lang.IMetadataHolder;
+import org.integratedmodelling.thinklab.api.lang.IPrototype;
 import org.integratedmodelling.thinklab.api.project.IProject;
 
 /**
@@ -40,10 +42,11 @@ public interface IServer extends IMetadataHolder {
 	public static final String FREE_MEMORY_MB = "IServer.FREE_MEMORY_MB";
 	public static final String LOAD_FACTOR_PERCENT = "IServer.LOAD_FACTOR_PERCENT";
 	public static final String VERSION_STRING = "IServer.VERSION_STRING";
+	public static final String AVAILABLE_PROCESSORS = "IServer.AVAILABLE_PROCESSORS";
 
 	/**
 	 * This is used to communicate results of operations.
-	 * 
+	 *
 	 * @author Ferd
 	 *
 	 */
@@ -55,7 +58,6 @@ public interface IServer extends IMetadataHolder {
 		public Throwable getException();
 	}
 		
-	
 	/**
 	 * Execute a statement in modeling language. Block until
 	 * result is returned.
@@ -138,15 +140,6 @@ public interface IServer extends IMetadataHolder {
 	 * @return
 	 */
 	public abstract Result authenticate(Object ... authInfo);
-
-	/**
-	 * Return a LOCAL directory that can be loaded by the client project manager to provide
-	 * any knowledge needed to use the server. 
-	 * 
-	 * @return
-	 */
-	public abstract File getRequiredKnowledge();
-	
 	/**
 	 * Deploy project (with all its prerequisites). If privileges are not enough or there are errors,
 	 * just return false. If project is already deployed, undeploy first.
@@ -163,4 +156,42 @@ public interface IServer extends IMetadataHolder {
 	 * @return
 	 */
 	public abstract Result undeploy(IProject p);
+
+	/*
+	 * Inquiry functions: we must be able to know what languages, commands, functions and projects
+	 * are supported in the server. These are basic inquiries for which we need prototype API - 
+	 * anything else can be done through commands.
+	 */
+	
+	/**
+	 * Return prototypes for all known functions.
+	 * @return
+	 */
+	public List<IPrototype> getFunctionPrototypes();
+	
+	/**
+	 * Return prototypes for all known commands.
+	 * @return
+	 */
+	public List<IPrototype> getCommandPrototypes();
+	
+	/**
+	 * Return the name of all supported languages for knowledge representation.
+	 * 
+	 * @return
+	 */
+	public List<String> getSupportedLanguages();
+	
+	/**
+	 * Export any knowledge needed to use the server to the local directory given, in a form that
+	 * can be loaded by a standard resolver. This should be used for core ontologies, not for
+	 * projects.
+	 * 
+	 * @return
+	 */
+	public abstract Result exportCoreKnowledge(File file);
+	
+	
+
+
 }

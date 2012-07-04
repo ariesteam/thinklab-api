@@ -1,6 +1,5 @@
 package org.integratedmodelling.thinklab.api.modelling.parsing;
 
-import org.integratedmodelling.thinklab.api.knowledge.IProperty;
 import org.integratedmodelling.thinklab.api.lang.IList;
 
 public abstract interface IObservingObjectDefinition extends IModelObjectDefinition {
