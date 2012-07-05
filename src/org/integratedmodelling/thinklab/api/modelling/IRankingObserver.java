@@ -18,6 +18,20 @@ public interface IRankingObserver extends IObserver {
 	
 	public abstract int getType();
 	
+	/**
+	 * A ranking may or may not be bound to a specific ranking scale. Only true
+	 * rankings (getType() == RANKING) may return a non-null scale.
+	 * 
+	 * @return
+	 */
 	public abstract RankingScale getScale();
+
+	/**
+	 * If states are expressed as discrete distribution, we have a classification that
+	 * defines the discretization.
+	 * 
+	 * @return
+	 */
+	public abstract IClassification getDiscretization();
 	
 }

@@ -133,14 +133,6 @@ public interface IServer extends IMetadataHolder {
 	public abstract boolean isActive();
 	
 	/**
-	 * Authenticate with the information provided (usually a username
-	 * and password). If unsuccessful, return false. If no need for 
-	 * authentication, do nothing.
-	 * 
-	 * @return
-	 */
-	public abstract Result authenticate(Object ... authInfo);
-	/**
 	 * Deploy project (with all its prerequisites). If privileges are not enough or there are errors,
 	 * just return false. If project is already deployed, undeploy first.
 	 * 
