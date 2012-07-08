@@ -1,0 +1,356 @@
+<class-diagram version="1.0.9" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true">  
+  <interface id="1" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.modelling.IModelObject" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/modelling/IModelObject.java" binary="false">    
+    <position height="78" width="196" x="1599" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="2" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.modelling.IMediatingAccessor" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/modelling/IMediatingAccessor.java" binary="false">    
+    <position height="95" width="223" x="65" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="3" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.modelling.IRankingObserver" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/modelling/IRankingObserver.java" binary="false">    
+    <position height="163" width="196" x="396" y="901"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="4" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.modelling.IClassifier" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/modelling/IClassifier.java" binary="false">    
+    <position height="146" width="196" x="328" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="5" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.modelling.IObservingObject.IDependency" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/modelling/IObservingObject.java" binary="false">    
+    <position height="-1" width="-1" x="1360" y="233"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <enumeration id="6" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.modelling.IClassification.Type" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/modelling/IClassification.java" binary="false">    
+    <position height="146" width="196" x="2134" y="342"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </enumeration>  
+  <interface id="7" corner="BOTTOM_RIGHT" language="java" name="org.integratedmodelling.thinklab.api.modelling.IExtent" 
+    project="thinklab-api" file="/thinklab-api/src/org/integratedmodelling/thinklab/api/modelling/IExtent.java" 
+    binary="false">    
+    <position height="197" width="281" x="2053" y="901"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="8" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.modelling.IClassifyingObserver" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/modelling/IClassifyingObserver.java" binary="false">    
+    <position height="78" width="196" x="632" y="901"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="9" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.modelling.IValuingObserver" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/modelling/IValuingObserver.java" binary="false">    
+    <position height="61" width="196" x="868" y="901"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="10" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.modelling.IContextTransformingAccessor" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/modelling/IContextTransformingAccessor.java" 
+    binary="false">    
+    <position height="78" width="227" x="158" y="528"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="11" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.modelling.IMeasuringObserver" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/modelling/IMeasuringObserver.java" binary="false">    
+    <position height="95" width="196" x="1104" y="901"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="12" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.modelling.IAccessor" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/modelling/IAccessor.java" binary="false">    
+    <position height="78" width="196" x="1045" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="13" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.modelling.IParallelAccessor" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/modelling/IParallelAccessor.java" binary="false">    
+    <position height="129" width="285" x="601" y="342"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="14" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.modelling.ISerialAccessor" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/modelling/ISerialAccessor.java" binary="false">    
+    <position height="78" width="196" x="1045" y="342"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="15" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.modelling.IComputingAccessor" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/modelling/IComputingAccessor.java" binary="false">    
+    <position height="146" width="285" x="425" y="528"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="16" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.modelling.ICategorizingObserver" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/modelling/ICategorizingObserver.java" binary="false">    
+    <position height="78" width="196" x="1340" y="901"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="17" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.modelling.ITopologicallyComparable" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/modelling/ITopologicallyComparable.java" binary="false">    
+    <position height="112" width="196" x="1898" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="18" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.modelling.IObserver" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/modelling/IObserver.java" binary="false">    
+    <position height="180" width="255" x="986" y="528"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="19" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.modelling.IContext" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/modelling/IContext.java" binary="false">    
+    <position height="333" width="239" x="1793" y="528"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="20" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.modelling.IConditionalObserver" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/modelling/IConditionalObserver.java" binary="false">    
+    <position height="78" width="267" x="1576" y="901"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="21" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.modelling.IClassification" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/modelling/IClassification.java" binary="false">    
+    <position height="180" width="200" x="2134" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="22" corner="BOTTOM_RIGHT" language="java" name="org.integratedmodelling.thinklab.api.modelling.IState" 
+    project="thinklab-api" file="/thinklab-api/src/org/integratedmodelling/thinklab/api/modelling/IState.java" 
+    binary="false">    
+    <position height="180" width="196" x="1557" y="528"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="23" corner="BOTTOM_RIGHT" language="java" name="org.integratedmodelling.thinklab.api.modelling.IModel" 
+    project="thinklab-api" file="/thinklab-api/src/org/integratedmodelling/thinklab/api/modelling/IModel.java" 
+    binary="false">    
+    <position height="-1" width="-1" x="1408" y="600"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="24" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.modelling.IDataset" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/modelling/IDataset.java" binary="false">    
+    <position height="129" width="196" x="564" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="25" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.modelling.IObservingObject" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/modelling/IObservingObject.java" binary="false">    
+    <position height="78" width="211" x="1281" y="342"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="26" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.modelling.INamespace" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/modelling/INamespace.java" binary="false">    
+    <position height="265" width="205" x="800" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="27" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.modelling.ITopology" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/modelling/ITopology.java" binary="false">    
+    <position height="112" width="196" x="1898" y="342"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="28" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.modelling.IObservation" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/modelling/IObservation.java" binary="false">    
+    <position height="112" width="201" x="1557" y="342"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <generalization id="29">    
+    <bendpoint x="2062" y="528"/>    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <generalization id="30">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <generalization id="31">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <generalization id="32">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <generalization id="33">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <generalization id="34">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <generalization id="35">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="18"/>  
+  </generalization>  
+  <generalization id="36">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="25"/>  
+  </generalization>  
+  <generalization id="37">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="18"/>  
+  </generalization>  
+  <generalization id="38">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="18"/>  
+  </generalization>  
+  <generalization id="39">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="18"/>  
+  </generalization>  
+  <generalization id="40">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="22"/>  
+  </generalization>  
+  <generalization id="41">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <generalization id="42">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="18"/>  
+  </generalization>  
+  <generalization id="43">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="18"/>  
+  </generalization>  
+  <generalization id="44">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <generalization id="45">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="28"/>  
+  </generalization>  
+  <generalization id="46">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <nesting id="47">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="5"/>  
+  </nesting>  
+  <generalization id="48">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="25"/>  
+  </generalization>  
+  <generalization id="49">    
+    <bendpoint x="1788" y="342"/>    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <generalization id="50">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="17"/>  
+  </generalization>  
+  <nesting id="51">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="6"/>  
+  </nesting>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true"/>    
+    <operations public="true" package="true" protected="true" private="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

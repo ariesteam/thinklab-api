@@ -1,6 +1,7 @@
 package org.integratedmodelling.thinklab.api.runtime;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.List;
 
 import org.integratedmodelling.thinklab.api.lang.IMetadataHolder;
@@ -182,6 +183,13 @@ public interface IServer extends IMetadataHolder {
 	 * @return
 	 */
 	public abstract Result exportCoreKnowledge(File file);
+
+	/**
+	 * Import and load all the Thinklab projects passed, handling their dependencies appropriately.
+	 * 
+	 * @param projectDirectory
+	 */
+	public abstract void loadAll(Collection<IProject> projects);
 	
 	
 

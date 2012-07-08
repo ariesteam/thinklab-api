@@ -1,0 +1,101 @@
+<class-diagram version="1.0.9" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true">  
+  <interface id="1" corner="BOTTOM_RIGHT" language="java" name="org.integratedmodelling.thinklab.api.knowledge.IAxiom" 
+    project="thinklab-api" file="/thinklab-api/src/org/integratedmodelling/thinklab/api/knowledge/IAxiom.java" 
+    binary="false">    
+    <position height="-1" width="-1" x="202" y="605"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="2" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.knowledge.IKnowledge" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/knowledge/IKnowledge.java" binary="false">    
+    <position height="-1" width="-1" x="962" y="603"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="3" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.knowledge.ISemanticLiteral" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/knowledge/ISemanticLiteral.java" binary="false">    
+    <position height="-1" width="-1" x="721" y="316"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="4" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.knowledge.IProperty" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/knowledge/IProperty.java" binary="false">    
+    <position height="-1" width="-1" x="875" y="1060"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="5" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.knowledge.IResource" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/knowledge/IResource.java" binary="false">    
+    <position height="-1" width="-1" x="961" y="359"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="6" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.knowledge.IOntology" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/knowledge/IOntology.java" binary="false">    
+    <position height="-1" width="-1" x="1211" y="688"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="7" corner="BOTTOM_RIGHT" language="java" name="org.integratedmodelling.thinklab.api.knowledge.IConcept" 
+    project="thinklab-api" file="/thinklab-api/src/org/integratedmodelling/thinklab/api/knowledge/IConcept.java" 
+    binary="false">    
+    <position height="-1" width="-1" x="1123" y="1068"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="8" corner="BOTTOM_RIGHT" language="java" 
+    name="org.integratedmodelling.thinklab.api.knowledge.ISemanticObject" project="thinklab-api" 
+    file="/thinklab-api/src/org/integratedmodelling/thinklab/api/knowledge/ISemanticObject.java" binary="false">    
+    <position height="-1" width="-1" x="666" y="696"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <generalization id="9">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <generalization id="10">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <generalization id="11">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="12">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <generalization id="13">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true"/>    
+    <operations public="true" package="true" protected="true" private="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
