@@ -39,9 +39,9 @@ public interface IProject extends IThinklabPlugin {
 	 * source folders is in the SOURCE_FOLDER_PROPERTY of the thinklab properties. There is
 	 * one source folder per project.
 	 * 
-	 * @return
+	 * @return the path of the source directory, relative to the project workspace.
 	 */
-	public File getSourceDirectory();
+	public String getSourceDirectory();
 	
 	/**
 	 * Any ontologies in the source folder must have a URL that matches the project's 
