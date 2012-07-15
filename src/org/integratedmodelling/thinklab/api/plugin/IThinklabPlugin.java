@@ -1,7 +1,6 @@
 package org.integratedmodelling.thinklab.api.plugin;
 
 import java.io.File;
-import java.util.List;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.configuration.IConfiguration;
@@ -23,24 +22,17 @@ public interface IThinklabPlugin extends IConfiguration {
 	 */
 	public String getId();
 	
-// CHECK disabling for the time being, as we don't need to know in the plugin - only the plugin manager should
-// worry about that. It is necessary in IProject, 
-//	/**
-//	 * Get all the plugin we depend on.
-//	 * 
-//	 * @return
-//	 */
-//	public abstract List<IThinklabPlugin> getPrerequisites();
-
 	/**
-	 * Callback called upon initialization.
+	 * Make all resources available. Before loading, ensure that anything that depends
+	 * on us is also loaded.
 	 * 
 	 * @throws ThinklabException
 	 */
 	public abstract void load() throws ThinklabException;
 
 	/**
-	 * Callback called when Thinklab shuts down. No provision for
+	 * Unload and make all the resources unavailable. Also unload anything that depends on
+	 * it. No provision for
 	 * hot-swapping is expected.
 	 * 
 	 * @throws ThinklabException
@@ -58,4 +50,11 @@ public interface IThinklabPlugin extends IConfiguration {
 	public File findResource(String resource);
 
 
+	/**
+	 * True if unload() can be called.
+	 * 
+	 * @return
+	 */
+	public boolean isLoaded();
+	
 }

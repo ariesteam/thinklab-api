@@ -79,4 +79,11 @@ public interface IProject extends IThinklabPlugin {
 	 */
 	public abstract List<IProject> getPrerequisites();
 	
+	/**
+	 * Return when this was last modified, so that we can load efficiently.
+	 * 
+	 * @return
+	 */
+	public long getLastModificationTime();
+	
 }
