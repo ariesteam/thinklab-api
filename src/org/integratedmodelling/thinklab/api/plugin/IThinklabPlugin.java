@@ -22,23 +22,23 @@ public interface IThinklabPlugin extends IConfiguration {
 	 */
 	public String getId();
 	
-	/**
-	 * Make all resources available. Before loading, ensure that anything that depends
-	 * on us is also loaded.
-	 * 
-	 * @throws ThinklabException
-	 */
-	public abstract void load() throws ThinklabException;
+//	/**
+//	 * Make all resources available. Before loading, ensure that anything that depends
+//	 * on us is also loaded.
+//	 * 
+//	 * @throws ThinklabException
+//	 */
+//	protected abstract void load() throws ThinklabException;
 
-	/**
-	 * Unload and make all the resources unavailable. Also unload anything that depends on
-	 * it. No provision for
-	 * hot-swapping is expected.
-	 * 
-	 * @throws ThinklabException
-	 */
-	public abstract void unload() throws ThinklabException;
-	
+//	/**
+//	 * Unload and make all the resources unavailable. Also unload anything that depends on
+//	 * it. No provision for
+//	 * hot-swapping is expected.
+//	 * 
+//	 * @throws ThinklabException
+//	 */
+//	public abstract void unload() throws ThinklabException;
+//	
 	/**
 	 * Find a resource file or directory in the plugin. Extract it to a scratch
 	 * area if necessary so it is a File that can be copied and 
@@ -50,11 +50,11 @@ public interface IThinklabPlugin extends IConfiguration {
 	public File findResource(String resource);
 
 
-	/**
-	 * True if unload() can be called.
-	 * 
-	 * @return
-	 */
-	public boolean isLoaded();
+//	/**
+//	 * True if unload() can be called.
+//	 * 
+//	 * @return
+//	 */
+//	public boolean isLoaded();
 	
 }

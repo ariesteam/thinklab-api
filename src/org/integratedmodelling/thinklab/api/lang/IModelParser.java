@@ -26,7 +26,6 @@ public interface IModelParser {
 	 * @return a namespace containing whatever NEW model objects and axioms have been parsed from the input.
 	 */
 	public abstract INamespace parseInNamespace(InputStream input, String namespace, IResolver resolver) throws ThinklabException;
-	
 
 	/**
 	 * Main entry point into the parser. Turns a resource into a Namespace bean, from which point on it's the job

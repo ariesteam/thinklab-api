@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.Collection;
 import java.util.List;
 
-import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.modelling.INamespace;
 import org.integratedmodelling.thinklab.api.plugin.IThinklabPlugin;
 
@@ -19,13 +18,27 @@ public interface IProject extends IThinklabPlugin {
 	public static final String THINKLAB_META_INF = "META-INF";
 	public static final String THINKLAB_PROPERTIES_FILE = "thinklab.properties";
 	
-	// properties for META-INF/thinklab.properties file
+	// properties for META-INF/thinklab.properties file. May also have metadata
+	// according to IMetadata fields.
 	public static final String SOURCE_FOLDER_PROPERTY = "thinklab.source.folder";
 	public static final String ONTOLOGY_NAMESPACE_PREFIX_PROPERTY = "thinklab.ontology.prefix";
 	public static final String PREREQUISITES_PROPERTY = "thinklab.prerequisites";
-	public static final String STORAGE_KBOX_PROPERTY = "thinklab.storage.kbox";
-	public static final String LOOKUP_KBOX_PROPERTY = "thinklab.lookup.kbox";
-	public static final String TRAINING_KBOX_PROPERTY = "thinklab.training.kbox";
+	
+	/**
+	 * TODO remove this - these should become namespaces and the obvious namespace to store into
+	 * is the native one.
+	 * @deprecated
+	 */
+	public static final String STORAGE_NAMESPACES_PROPERTY = "thinklab.storage.kbox";
+	
+	/*
+	 * TODO this becomes a LIST of namespaces
+	 */
+	public static final String LOOKUP_NAMESPACES_PROPERTY = "thinklab.lookup.kbox";
+	/*
+	 * TODO this becomes a LIST of namespaces
+	 */
+	public static final String TRAINING_NAMESPACES_PROPERTY = "thinklab.training.kbox";
 			
 	/**
 	 * Return all the namespaces defined in the project.
@@ -51,17 +64,6 @@ public interface IProject extends IThinklabPlugin {
 	 * @return
 	 */
 	public String getOntologyNamespacePrefix();
-
-	/**
-	 * Add a dependency on another project and save all the related info in manifest and
-	 * properties. If reload == true, reload the project and its
-	 * dependencies.
-	 * 
-	 * @param plugin
-	 * @param reload
-	 * @throws ThinklabException
-	 */
-	public void addDependency(String plugin, boolean reload) throws ThinklabException;
 
 	/**
 	 * Find the resource file that defines the passed namespace. If not

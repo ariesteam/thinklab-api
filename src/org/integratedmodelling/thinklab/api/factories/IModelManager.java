@@ -6,7 +6,6 @@ import java.util.Collection;
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.exceptions.ThinklabIOException;
 import org.integratedmodelling.thinklab.api.knowledge.IExpression;
-import org.integratedmodelling.thinklab.api.modelling.IAgentModel;
 import org.integratedmodelling.thinklab.api.modelling.IContext;
 import org.integratedmodelling.thinklab.api.modelling.IModel;
 import org.integratedmodelling.thinklab.api.modelling.IModelObject;
@@ -42,8 +41,6 @@ public interface IModelManager {
 	public IObservation observe(Object object, IContext context) throws ThinklabException;
 	
 	public abstract IModel getModel(String s);
-	
-	public abstract IAgentModel getAgentModel(String s);
 
 	public abstract IScenario getScenario(String s);
 

@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Collection;
 
 import org.integratedmodelling.exceptions.ThinklabException;
+import org.integratedmodelling.thinklab.api.lang.IResolver;
 import org.integratedmodelling.thinklab.api.project.IProject;
 
 /**
@@ -65,8 +66,17 @@ public interface IProjectManager {
 	 * @param projectDir
 	 * @return
 	 */
-	public String[] registerProject(File ... projectDir) throws ThinklabException;
+	public String[] registerProject(File ... projectDir);
 	
+	/**
+	 * Load a project, ensuring all its prerequisites are also loaded. This should work as
+	 * refresh() as well, but not throw an exception if the project isn't loaded.
+	 * @param projectId
+	 * @return 
+	 * @throws ThinklabException
+	 */
+	public IProject loadProject(String projectId) throws ThinklabException;
+
 	/**
 	 * Unregister the project, unloading it (and those that depend on it) if loaded. After this
 	 * is called, load(id) will throw an exception.
@@ -91,4 +101,13 @@ public interface IProjectManager {
 	 * @param projectDirectory
 	 */
 	public void registerProjectDirectory(File projectDirectory);
+	
+	/**
+	 * Return a resolver to load the resources in a project.
+	 * 
+	 * @param project
+	 * @return
+	 */
+	public IResolver getResolver();
+
 }
