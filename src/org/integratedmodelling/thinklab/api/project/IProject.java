@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Collection;
 import java.util.List;
 
+import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.modelling.INamespace;
 import org.integratedmodelling.thinklab.api.plugin.IThinklabPlugin;
 
@@ -75,11 +76,12 @@ public interface IProject extends IThinklabPlugin {
 	public File findResourceForNamespace(String namespace, String extension);
 	
 	/**
-	 * Get all projects we depend on.
+	 * Get all projects we depend on. These should be ordered in load order.
 	 * 
 	 * @return
+	 * @throws ThinklabException 
 	 */
-	public abstract List<IProject> getPrerequisites();
+	public abstract List<IProject> getPrerequisites() throws ThinklabException;
 	
 	/**
 	 * Return when this was last modified, so that we can load efficiently.
