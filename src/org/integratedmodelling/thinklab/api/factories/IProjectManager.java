@@ -108,6 +108,16 @@ public interface IProjectManager {
 	 * @param project
 	 * @return
 	 */
-	public IResolver getResolver();
+	public IResolver getResolver(IProject project);
+
+	/**
+	 * Unload the project. Should count references to the project and leave its definitions
+	 * in the knowledge base unless no other loaded projects reference it.
+	 * 
+	 * @param projectId
+	 * @throws ThinklabException
+	 */
+	void unloadProject(String projectId) throws ThinklabException;
+
 
 }

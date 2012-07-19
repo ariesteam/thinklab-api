@@ -73,7 +73,7 @@ public interface IProject extends IThinklabPlugin {
 	 * @param namespace
 	 * @return
 	 */
-	public File findResourceForNamespace(String namespace, String extension);
+	public File findResourceForNamespace(String namespace);
 	
 	/**
 	 * Get all projects we depend on. These should be ordered in load order.
@@ -84,10 +84,20 @@ public interface IProject extends IThinklabPlugin {
 	public abstract List<IProject> getPrerequisites() throws ThinklabException;
 	
 	/**
-	 * Return when this was last modified, so that we can load efficiently.
+	 * Return when this was last modified, so that we can load efficiently. This should
+	 * return the modification time of the newest resource.
 	 * 
 	 * @return
 	 */
 	public long getLastModificationTime();
-	
+
+	/**
+	 * Return true if this provides a definition for the named namespace. Must be
+	 * able to answer without loading anything.
+	 * 
+	 * @param namespaceId
+	 * @return
+	 */
+	boolean providesNamespace(String namespaceId);
+
 }

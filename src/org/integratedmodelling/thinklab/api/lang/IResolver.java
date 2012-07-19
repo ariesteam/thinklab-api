@@ -2,6 +2,7 @@ package org.integratedmodelling.thinklab.api.lang;
 
 import java.io.InputStream;
 import java.util.Collection;
+import java.util.HashMap;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.IExpression;
@@ -12,7 +13,9 @@ import org.integratedmodelling.thinklab.api.modelling.parsing.IConceptDefinition
 import org.integratedmodelling.thinklab.api.modelling.parsing.IFunctionDefinition;
 import org.integratedmodelling.thinklab.api.modelling.parsing.ILanguageDefinition;
 import org.integratedmodelling.thinklab.api.modelling.parsing.IModelObjectDefinition;
+import org.integratedmodelling.thinklab.api.modelling.parsing.INamespaceDefinition;
 import org.integratedmodelling.thinklab.api.modelling.parsing.IPropertyDefinition;
+import org.integratedmodelling.thinklab.api.project.IProject;
 
 /**
  * A Resolver is used by anything that generates model objects to interface to the parser for
@@ -59,28 +62,14 @@ public interface IResolver {
 	public abstract boolean onInfo(String info, int lineNumber);
 
 	/**
-	 * Resolve a namespace (optionally further specified by an import URI) to an input stream. Either the namespace id or
-	 * the reference may be null, i.e. it must be prepared to produce an inputstream based on a namespace id only (e.g. 
-	 * resolving across dependent plugin classpaths) and/or based on an external reference URI; if both are present, 
-	 * it should ensure that they're compatible name-wise. 
-	 *
-	 * @param namespace. May be null if only the reference is passed.
-	 * @param reference where to look for the namespace to load if not known. May be null.
-	 * @return a valid input stream which will be read and closed by the parser.
-	 * @throws ThinklabException
-	 */
-	public abstract InputStream resolveNamespace(String namespace, String reference);
-	
-	/**
-	 * Callback invoked as soon as a namespace declaration is parsed. Passed back the parameters that were
-	 * used in namespace resolution (see resolveNamespace for docs) both of which may be null. Should ensure that 
-	 * the namespace declaration is appropriate for the resources. Any imports will be parsed before this is called.
+	 * Callback invoked as soon as a namespace declaration is parsed. The resolver should contain
+	 * the namespace it is being used for.
 	 * 
 	 * @param namespaceId
 	 * @param resourceId
 	 * @param namespace
 	 */
-	public abstract void onNamespaceDeclared(String namespaceId, INamespace namespace);
+	public abstract void onNamespaceDeclared();
 	
 	/**
 	 * Callback invoked as soon as parsing of a namespace has been completed. The namespace will contain all
@@ -89,7 +78,7 @@ public interface IResolver {
 	 * @param namespace
 	 * @throws ThinklabException 
 	 */
-	public abstract void onNamespaceDefined(INamespace namespace);
+	public abstract void onNamespaceDefined();
 
 	/**
 	 * Callback invoked at every new model object at main level. Not all the namespace will be
@@ -99,18 +88,7 @@ public interface IResolver {
 	 * @param ret
 	 * @throws ThinklabException 
 	 */
-	public abstract void onModelObjectDefined(INamespace namespace, IModelObject ret);
-
-	/**
-	 * Ensure that the namespace declaration conforms with the resource it comes from. Only called when the 
-	 * resource is an actual model file.
-	 * 
-	 * @param resource
-	 * @param namespace
-	 * @throws ThinklabException 
-	 */
-	public abstract void validateNamespaceForResource(String resource,
-			String namespace);
+	public abstract void onModelObjectDefined(IModelObject ret);
 
 	/**
 	 * Resolve a function to the corresponding expression. Just return null if not found.
@@ -122,7 +100,7 @@ public interface IResolver {
 	public abstract IExpression resolveFunction(String functionId, Collection<String> parameterNames);
 	
 	/**
-	 * Called when an external concept (with the :) is identified in a legal place in a model object. Should
+	 * Called when an external concept name (with the :) is identified in a legal place in a model object. Should
 	 * return a ConceptObject pointing to whatever definition of the import we need, which will be set in the
 	 * model tree.
 	 *  
@@ -131,11 +109,11 @@ public interface IResolver {
 	 * @param line 
 	 * @return
 	 */
-	public abstract IConceptDefinition resolveExternalConcept(String id, INamespace namespace, int line);
+	public abstract IConceptDefinition resolveExternalConcept(String id, int line);
 	
 	/**
-	 * Called when an external property (with the :) is identified in a legal place in a model object. Should
-	 * return a ConceptObject pointing to whatever definition of the import we need, which will be set in the
+	 * Called when an external property name (with the :) is identified in a legal place in a model object. Should
+	 * return a PropertyObject pointing to whatever definition of the import we need, which will be set in the
 	 * model tree.
 	 *  
 	 * @param id
@@ -143,7 +121,7 @@ public interface IResolver {
 	 * @param line 
 	 * @return
 	 */
-	public abstract IPropertyDefinition resolveExternalProperty(String id, INamespace namespace, int line);
+	public abstract IPropertyDefinition resolveExternalProperty(String id, int line);
 
 	/**
 	 * Check if a passed model object ID has been generated by generateId().
@@ -191,38 +169,82 @@ public interface IResolver {
 	/**
 	 * In an interactive session, an 'observe' command should be supported which calls
 	 * this method for handling. The command is expected to contribute observations to
-	 * the current context in the session.
+	 * the current context in the current session. It will not be called on a resolver
+	 * whose isInteractive() returns false.
 	 * 
 	 * @param observable
 	 * @param ctx 
-	 * @param ctx
+	 * @param resetContext
+	 * @param lineNumber
 	 * @throws ThinklabException 
 	 */
-	public abstract void handleObserveStatement(Object observable, INamespace namespace, IContext ctx, boolean resetContext);
+	public abstract void handleObserveStatement(
+			Object observable, IContext ctx, boolean resetContext, int lineNumber);
 
 	/**
-	 * Get another resolver to handle an import, whose lifetime is local to ours.
+	 * Get another resolver to handle an imported project. The lifetime of this new 
+	 * resolver is local to ours.
+	 * 
+	 * @param p 
 	 * 
 	 * @return
 	 */
-	public abstract IResolver getImportResolver();
+	public abstract IResolver getImportResolver(IProject p);
+	
+	/**
+	 * Return a resolver for parsing the passed namespace, part of the project this resolver
+	 * was created for. This one must check that the 
+	 * resource is OK, that the namespace ID and the resource ID match if necessary, 
+	 * prepare to return a valid (empty) namespace when getNamespace() is called, and
+	 * a valid InputStream for the resource when openStream() is called. Resource checks
+	 * should be done here - if this exits successfully, openStream should not fail.
+	 * 
+	 * For now resource may be null - flagging an interactive namespace that will be
+	 * defined incrementally without an input stream.
+	 * 
+	 * @param namespace
+	 * @param resource
+	 * @return
+	 */
+	public abstract IResolver getNamespaceResolver(String namespace, String resource);
 
 	/**
-	 * Return whether the namespace was defined already, to prevent recursions in the 
-	 * parser.
+	 * Return the INamespaceDefinition corresponding to the specs given when this resolver
+	 * was created using getNamespaceResolver(). Must not be null. It will not be called on
+	 * a resolver not returned by getNamespaceResolver().
+	 * 
+	 * @return
+	 */
+	public abstract INamespaceDefinition getNamespace();
+	
+	
+	/**
+	 * Return an open InputStream corresponding to the resource given at creation by
+	 * getNamespaceResolver().  It will not be called on a resolver not returned by 
+	 * getNamespaceResolver() or on a namespace whose isInteractive() returns true.
+	 * 
+	 * @return
+	 */
+	public abstract InputStream openStream();
+	
+	/**
+	 * Return a previously defined namespace from the global namespace catalog, or null if
+	 * not seen before. It is called to resolve imports, so all projects imported by the 
+	 * currently parsing project should have been parsed when this is called.
 	 * 
 	 * @param id
+	 * @param lineNumber the line where the namespace is called for, for error reporting.
 	 * @return
 	 */
-	public abstract boolean isNamespaceDefined(String id);
+	public abstract INamespace getNamespace(String id, int lineNumber);
 
 	/**
-	 * Resolve the given object or return null.
+	 * Return a namespace-specific symbol table that will be filled in by the parser as
+	 * required.  It will not be called on a resolver not returned by getNamespaceResolver().
 	 * 
-	 * @param ns
-	 * @param object
 	 * @return
 	 */
-	public abstract IModelObjectDefinition resolveModelObject(String ns, String object);
+	public abstract HashMap<String, IModelObjectDefinition>  getSymbolTable();
+
 	
 }

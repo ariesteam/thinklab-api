@@ -37,7 +37,7 @@ public interface IModelParser {
 	 * @return a finished namespace bean to be turned into usable model objects by the implementation.
 	 * @throws ThinklabException
 	 */
-	public abstract INamespace parse(String resource, IResolver resolver) throws ThinklabException;
+	public abstract INamespace parse(String namespace, String resource, IResolver resolver) throws ThinklabException;
 	
 
 }
