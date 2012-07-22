@@ -85,4 +85,20 @@ public interface IClassification  {
 	 */
 	public double[] getDistributionBreakpoints();
 
+	/**
+	 * Return true if one of the possible rank concepts corresponds to a logical
+	 * zero - e.g. NoHousehold or WetlandAbsent.
+	 * 
+	 * @return
+	 */
+	public boolean hasZeroRank();
+
+	/**
+	 * Return true if the classes in this classification are supposed to mean just
+	 * that - disjoint classes not representing a numeric range or a logical ranking.
+	 * 
+	 * @return
+	 */
+	public boolean isCategorical();
+
 }

@@ -44,6 +44,8 @@ public interface IServer extends IMetadataHolder {
 	public static final String LOAD_FACTOR_PERCENT = "IServer.LOAD_FACTOR_PERCENT";
 	public static final String VERSION_STRING = "IServer.VERSION_STRING";
 	public static final String AVAILABLE_PROCESSORS = "IServer.AVAILABLE_PROCESSORS";
+	public static final String EXCEPTION_CLASS = "IServer.EXCEPTION_CLASS";
+	public static final String STACK_TRACE = "IServer.STACK_TRACE";
 
 	/**
 	 * This is used to communicate results of operations.
