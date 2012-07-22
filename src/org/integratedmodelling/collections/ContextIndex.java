@@ -152,5 +152,12 @@ public class ContextIndex {
 		return stateIDs;
 	}
 
+	public String getExtentLabel(String eid) {
+		return extentIndex.get(eid).getSecond();
+	}
+
+	public String getStateLabel(String eid) {
+		return stateIndex.get(eid).getFirst();
+	}
 
 }
