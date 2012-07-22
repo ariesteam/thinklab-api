@@ -57,6 +57,7 @@ public interface IServer extends IMetadataHolder {
 		public String getCommand();
 		public String getOutput();
 		public Throwable getException();
+		public Object getResult();
 	}
 		
 	/**

@@ -105,7 +105,9 @@ public interface IContext extends ITopology<IContext>, IModelObject, IListenable
 	public abstract void merge(IObservation observation) throws ThinklabException;
 
 	/**
-	 * Merge all the observations in the passed context.
+	 * Merge all the observations in the passed context. TODO use only one merge:
+	 * if context merge observations, if observation merge it, otherwise 
+	 * observe whatever it is in this context and merge the results.
 	 * 
 	 * @param observation
 	 */
