@@ -100,4 +100,12 @@ public interface IProject extends IThinklabPlugin {
 	 */
 	boolean providesNamespace(String namespaceId);
 
+	/**
+	 * Return the name of each top-level resource folder in the project that
+	 * is not one of the automatically managed ones.
+	 * 
+	 * @return
+	 */
+	public abstract List<String> getUserResourceFolders();
+
 }
