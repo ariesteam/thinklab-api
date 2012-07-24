@@ -160,4 +160,7 @@ public class ContextIndex {
 		return stateIndex.get(eid).getFirst();
 	}
 
+	public File getPath() {
+		return new File(filePrefix);
+	}
 }

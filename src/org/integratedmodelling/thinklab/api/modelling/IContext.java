@@ -70,18 +70,6 @@ public interface IContext extends ITopology<IContext>, IModelObject, IListenable
 	 * @return
 	 */
 	public abstract boolean isCovered(int index);
-
-	/**
-	 * Return the state for a specific observable, or null if not there. Before 
-	 * returning null, a child context should look for the state in the 
-	 * parent context(s), and if found, return its own view of it according to 
-	 * the extents it implements.
-	 * 
-	 * @param observable
-	 * @return
-	 */
-	public abstract IState getState(IConcept observable);
-	
 	
 	/**
 	 * Contexts are hierarchically composable. This is what enables agent-based modeling
@@ -95,23 +83,15 @@ public interface IContext extends ITopology<IContext>, IModelObject, IListenable
 	public IContext getParentContext();
 
 	/**
-	 * Merge in an observation: if there is already one for that observable, mediate it through
-	 * the extents we have; otherwise add it in after ensuring it fits the topologies we adopt. 
-	 * If the passed observation is a IExtent, the context must be recomputed and all observations
-	 * mediated to the result.
+	 * Merge anything that is related to observation. If the passed object is an IExtent, the 
+	 * context should be recomputed and all observations mediated to the result. If it is a 
+	 * IState, it should be added to the context if compatible, mediating if necessary. If it
+	 * is another IContext, extents and states from it should be merged. If it is anything 
+	 * else, we should attempt to observe it in this context, and merge the results. 
 	 * 
 	 * @param observation
 	 */
-	public abstract void merge(IObservation observation) throws ThinklabException;
-
-	/**
-	 * Merge all the observations in the passed context. TODO use only one merge:
-	 * if context merge observations, if observation merge it, otherwise 
-	 * observe whatever it is in this context and merge the results.
-	 * 
-	 * @param observation
-	 */
-	public abstract void merge(IContext context) throws ThinklabException;
+	public abstract void merge(Object object) throws ThinklabException;
 
 	
 	/**

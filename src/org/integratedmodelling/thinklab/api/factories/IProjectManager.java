@@ -65,8 +65,9 @@ public interface IProjectManager {
 	 * 
 	 * @param projectDir
 	 * @return
+	 * @throws ThinklabException 
 	 */
-	public String[] registerProject(File ... projectDir);
+	public String[] registerProject(File ... projectDir) throws ThinklabException;
 	
 	/**
 	 * Load a project, ensuring all its prerequisites are also loaded. This should work as
@@ -99,8 +100,9 @@ public interface IProjectManager {
 	 * the projects in it.
 	 *  
 	 * @param projectDirectory
+	 * @throws ThinklabException 
 	 */
-	public void registerProjectDirectory(File projectDirectory);
+	public void registerProjectDirectory(File projectDirectory) throws ThinklabException;
 	
 	/**
 	 * Return a resolver to load the resources in a project.

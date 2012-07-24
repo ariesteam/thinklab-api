@@ -107,4 +107,12 @@ public interface INamespace {
 	 * @return
 	 */
 	public abstract IContext getCoverage();
+
+	/**
+	 * Return true if the namespace has any errors that will prevent the use of its
+	 * model objects.
+	 * 
+	 * @return
+	 */
+	public abstract boolean hasErrors();
 }
