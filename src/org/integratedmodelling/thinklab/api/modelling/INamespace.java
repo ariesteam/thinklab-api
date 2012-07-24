@@ -1,7 +1,10 @@
 package org.integratedmodelling.thinklab.api.modelling;
 
+import java.util.Collection;
 import java.util.List;
 
+import org.integratedmodelling.collections.Pair;
+import org.integratedmodelling.collections.Triple;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.IProperty;
 import org.integratedmodelling.thinklab.api.project.IProject;
@@ -115,4 +118,17 @@ public interface INamespace {
 	 * @return
 	 */
 	public abstract boolean hasErrors();
+
+	/**
+	 * Get all errors in the namespace: error code, message and line number (1-based, 0 for no line)
+	 * @return
+	 */
+	public abstract Collection<Triple<Integer, String, Integer>> getErrors();
+
+	/**
+	 * Get all warnings in the namespace: message and line number (1-based, 0 for no line)
+	 * 
+	 * @return
+	 */
+	public abstract Collection<Pair<String, Integer>> getWarnings();
 }
