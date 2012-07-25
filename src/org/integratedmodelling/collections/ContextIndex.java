@@ -163,4 +163,8 @@ public class ContextIndex {
 	public File getPath() {
 		return new File(filePrefix);
 	}
+
+	public String getModelGraph() {
+		return modelDOTGraph;
+	}
 }

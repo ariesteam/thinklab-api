@@ -196,6 +196,11 @@ public interface IMetadata {
 	 */
 	public static final String GEOSPACE_BOUNDING_BOX = "geospace:hasBoundingBox";
 
+	/*
+	 * Special fields for model metadata.
+	 */
+	public static String MODEL_ACCESSOR_GRAPH = "model:accessorGraph";
+
 	/**
 	 * The object returned will be a String, IMetadata, Number or IList for textually defined
 	 * metadata. May be anything else if defined through the API.
