@@ -1,12 +1,10 @@
 package org.integratedmodelling.thinklab.api.modelling;
 
-import java.util.List;
-
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
 
 /**
- * A model producing observations of a given type (through its subclasses). 
+ * A model producing data observations of a given type (through its subclasses). 
  */
 public abstract interface IObserver extends IObservingObject {
 	

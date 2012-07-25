@@ -18,9 +18,18 @@ public interface IClassification  {
 		UNORDERED,
 		BOOLEAN_RANKING,
 		ORDERED_RANKING,
-		ORDERED_RANGE_MAPPING
+		RANGE_DISCRETIZATION
 	}
 		
+	/**
+	 * This must be known after initialization. The classification should use hints coming from
+	 * the concept, the observer type etc. to determine the type. There is also a type hint that
+	 * can be explicitly submitted in the IClassificationDefinition interface.
+	 * 
+	 * @return
+	 */
+	public Type getType();
+	
 	/**
 	 * Return the root concept for the classification. All concepts that can be attributed
 	 * to the classifiers should be direct, disjoint children of it.
