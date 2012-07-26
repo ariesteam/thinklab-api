@@ -3,25 +3,27 @@ package org.integratedmodelling.thinklab.api.knowledge;
 import java.util.Map;
 
 import org.integratedmodelling.exceptions.ThinklabException;
+import org.integratedmodelling.thinklab.api.project.IProject;
 
 public interface IExpression {
-
-	/**
-	 * Expressions must be able to identify the language they're implemented in, so that they
-	 * can be connected to an interpreter if necessary.
-	 *
-	 * @return
-	 */
-	public abstract String getLanguage();
 	
 	/**
-	 * Simple execution interface for expressions.
+	 * Simple execution interface for expressions. A new expression is generated per each call
+	 * to the corresponding language statement, so it can store local data about its call context.
 	 * 
 	 * @param parameters
 	 * @return
 	 * @throws ThinklabException TODO
 	 */
     public abstract Object eval(Map<String,Object> parameters) throws ThinklabException;
+
+    /**
+     * If an expression has been created within a project, we pass the project context so
+     * that relative paths and other project-specific information can be resolved.
+     * 
+     * @param project
+     */
+	public abstract void setProjectContext(IProject project);
     
 }
 
