@@ -32,18 +32,6 @@ public interface IKnowledgeManager {
 	public abstract IProperty getProperty(String concept);
 	
 	/**
-	 * Parse a literal into a semantic object of the passed concept. The concept must have 
-	 * been used to annotate a class that implements IParseable.
-	 * 
-	 * @param c A concept to validate to
-	 * @param literal a literal representing an instance of that concept
-	 * @return a Value containing the concept
-	 * @throws ThinklabValidationException
-	 * @throws ThinklabException 
-	 */
-	public abstract ISemanticObject<?> parse(String literal, IConcept c) throws ThinklabException;
-	
-	/**
 	 * Return an annotated ISemanticObject for the passed Java object, or throw an exception if no
 	 * annotation is possible.
 	 * 
@@ -72,8 +60,8 @@ public interface IKnowledgeManager {
 	
 	/**
 	 * Create a kbox with the named uri, using the implementation assigned to the
-	 * URI protocol. A simple string with no prefix should be supported and given
-	 * a default kbox type.
+	 * URI protocol. A simple string with no prefix should be supported and return
+	 * a default kbox type good for most common operations.
 	 * 
 	 * @param uri
 	 * @return
@@ -82,7 +70,9 @@ public interface IKnowledgeManager {
 	public abstract IKbox createKbox(String uri) throws ThinklabException;
 	
 	/**
-	 * Drop the kbox indicated by the uri.
+	 * Drop the kbox indicated by the uri. The kbox storage should be freed
+	 * after this, and requireKbox() on the same URI after this should return
+	 * an empty kbox.
 	 * 
 	 * @param uri
 	 * @throws ThinklabException
@@ -91,6 +81,7 @@ public interface IKnowledgeManager {
 	
 	/**
 	 * Get the kbox with the named URI, creating it if it does not exist.
+	 * 
 	 * @param uri
 	 * @return
 	 * @throws ThinklabException
@@ -141,4 +132,18 @@ public interface IKnowledgeManager {
 	 * @return
 	 */
 	public abstract IConcept getXSDMapping(String string);
+	
+	/**
+	 * Parse a literal into a semantic object of the passed concept. The concept must have 
+	 * been used to annotate a class that implements IParseable.
+	 * 
+	 * @param c A concept to validate to
+	 * @param literal a literal representing an instance of that concept
+	 * @return a Value containing the concept
+	 * @throws ThinklabValidationException
+	 * @throws ThinklabException 
+	 */
+	public abstract ISemanticObject<?> parse(String literal, IConcept c) throws ThinklabException;
+	
+
 }

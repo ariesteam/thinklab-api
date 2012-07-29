@@ -1,16 +1,14 @@
 package org.integratedmodelling.thinklab.api.lang;
 
 import java.io.InputStream;
-import java.util.Collection;
 import java.util.HashMap;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.thinklab.api.knowledge.IExpression;
 import org.integratedmodelling.thinklab.api.modelling.IContext;
 import org.integratedmodelling.thinklab.api.modelling.IModelObject;
 import org.integratedmodelling.thinklab.api.modelling.INamespace;
 import org.integratedmodelling.thinklab.api.modelling.parsing.IConceptDefinition;
-import org.integratedmodelling.thinklab.api.modelling.parsing.IFunctionDefinition;
+import org.integratedmodelling.thinklab.api.modelling.parsing.IFunctionCall;
 import org.integratedmodelling.thinklab.api.modelling.parsing.ILanguageDefinition;
 import org.integratedmodelling.thinklab.api.modelling.parsing.IModelObjectDefinition;
 import org.integratedmodelling.thinklab.api.modelling.parsing.INamespaceDefinition;
@@ -91,15 +89,6 @@ public interface IResolver {
 	public abstract void onModelObjectDefined(IModelObject ret);
 
 	/**
-	 * Resolve a function to the corresponding expression. Just return null if not found.
-	 * 
-	 * @param resource
-	 * @param parameterNames
-	 * @return
-	 */
-	public abstract IExpression resolveFunction(String functionId, Collection<String> parameterNames);
-	
-	/**
 	 * Called when an external concept name (with the :) is identified in a legal place in a model object. Should
 	 * return a ConceptObject pointing to whatever definition of the import we need, which will be set in the
 	 * model tree.
@@ -140,15 +129,6 @@ public interface IResolver {
 	 * @return
 	 */
 	public abstract String generateId(IModelObject o);
-
-	/**
-	 * Resolve the passed function from its definition and run it with the parameters set in the
-	 * def. If not resolved just return null.
-	 * 
-	 * @param function
-	 * @return
-	 */
-	public abstract Object runFunction(IFunctionDefinition function);
 
 	/**
 	 * Return the last model object notified to the resolver. Used by interactive
@@ -217,7 +197,6 @@ public interface IResolver {
 	 */
 	public abstract INamespaceDefinition getNamespace();
 	
-	
 	/**
 	 * Return an open InputStream corresponding to the resource given at creation by
 	 * getNamespaceResolver().  It will not be called on a resolver not returned by 
@@ -245,6 +224,23 @@ public interface IResolver {
 	 * @return
 	 */
 	public abstract HashMap<String, IModelObjectDefinition>  getSymbolTable();
+
+	/**
+	 * If the resolver is for a project, as it should be, return the project.
+	 * Namespace resolvers are expected to return the project that the namespace
+	 * belongs to.
+	 * 
+	 * @return
+	 */
+	public abstract IProject getProject();
+
+	/**
+	 * Pass a function call, warn or complain if it doesn't match a known prototype.
+	 * 
+	 * @param ret
+	 * @return 
+	 */
+	public abstract boolean validateFunctionCall(IFunctionCall ret);
 
 	
 }

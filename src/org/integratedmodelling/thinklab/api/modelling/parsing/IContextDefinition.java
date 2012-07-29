@@ -14,6 +14,6 @@ public interface IContextDefinition extends IModelObjectDefinition, IContext {
 	 * 
 	 * @param function
 	 */
-	public void addObservationGeneratorFunction(IFunctionDefinition function) throws ThinklabValidationException;
+	public void addObservationGeneratorFunction(IFunctionCall function) throws ThinklabValidationException;
 	
 }

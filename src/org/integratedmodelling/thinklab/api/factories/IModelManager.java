@@ -103,17 +103,8 @@ public interface IModelManager {
 	public abstract Collection<INamespace> load(final IProject project)
 			throws ThinklabException;
 
-	/**
-	 * Syntactic functions are used throughout the system to encapsulate creation of various
-	 * elements, like predefined observations or datasources. They must resolve to expressions
-	 * before they are used. This function returns an expression for the given function and
-	 * parameter names, or null.
-	 * 
-	 * @param functionId
-	 * @param parameterNames
-	 * @return
-	 */
-	public IExpression resolveFunction(String functionId, Collection<String> parameterNames);
+
+//	public IExpression resolveFunction(String functionId, Collection<String> parameterNames);
 
 	/**
 	 * Load a whole source directory recursively, attributing namespaces based on 

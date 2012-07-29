@@ -29,6 +29,8 @@ public interface IKbox {
 	/**
 	 * Metadata key for queries that want sorting of the results. Make the query implementation be
 	 * a IMetadataHolder and set this field to the property that identifies the sort field.
+	 * 
+	 * TODO move to implementation
 	 */
 	public static final String SORT_FIELD = "___sort_field";
 
@@ -56,9 +58,22 @@ public interface IKbox {
 	 */
 	public List<ISemanticObject<?>> query(IQuery query) throws ThinklabException;
 
+	
+	/**
+	 * Perform the same query as query() but only return the IDs of matching objects.
+	 * This is provided so that metadata can be inspected before extracting potentially
+	 * large or complex objects.
+	 * 
+	 * @param query
+	 * @return
+	 * @throws ThinklabException
+	 */
+	public List<Long> queryIDs(IQuery query) throws ThinklabException;
+	
 	/**
 	 * Store object, return handle. Any object can be passed, as long as it can be
-	 * annotated.
+	 * annotated. Return an ID that can be passed to retrieve() to reconstruct the
+	 * object.
 	 * 
 	 * @param o
 	 * @return
@@ -120,7 +135,7 @@ public interface IKbox {
 
 	/**
 	 * Kboxes have the option of storing metadata with each object they store. They can
-	 * either be the floated metadata of the actual object if it's a IMetadataHolder, or
+	 * either be the metadata of the actual object if it's a IMetadataHolder, or
 	 * other metadata such as timestamp of storage etc. This function should retrieve
 	 * the metadata for the object identified by the given handle, and return an empty
 	 * IMetadata object if no metadata exist or the kbox does not support metadata.

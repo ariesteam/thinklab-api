@@ -10,7 +10,7 @@ public abstract interface IObserverDefinition extends IObservingObjectDefinition
 	 * 
 	 * @param function
 	 */
-	public void setAccessorGeneratorFunction(IFunctionDefinition function);
+	public void setAccessorGeneratorFunction(IFunctionCall function);
 	
 	public void addMediatedObserver(IObserverDefinition observer, IExpressionDefinition condition);
 	

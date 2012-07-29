@@ -11,7 +11,7 @@ public interface IModelDefinition extends IObservingObjectDefinition, IModel {
 		
 	public void setDataSource(IDataSource datasource);
 	
-	public void setDatasourceGeneratorFunction(IFunctionDefinition function);
+	public void setDatasourceGeneratorFunction(IFunctionCall function);
 	
 	public void setInlineState(Object state);
 	
