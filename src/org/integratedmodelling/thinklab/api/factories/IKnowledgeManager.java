@@ -15,7 +15,7 @@ import org.integratedmodelling.thinklab.api.lang.IList;
  *
  */
 public interface IKnowledgeManager {
-
+	
 	/**
 	 * Find and return the named concept. If not found, return null.
 	 * @param prop

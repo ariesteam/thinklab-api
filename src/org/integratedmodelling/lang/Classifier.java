@@ -26,6 +26,7 @@ import org.integratedmodelling.collections.NumericInterval;
 import org.integratedmodelling.exceptions.ThinklabRuntimeException;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.IExpression;
+import org.integratedmodelling.thinklab.api.lang.IList;
 import org.integratedmodelling.thinklab.api.modelling.IClassifier;
 
 /**
@@ -273,6 +274,32 @@ public class Classifier implements IClassifier {
 	@Override
 	public void negate() {
 		negated = true;
+	}
+
+	/**
+	 * Create a classifier that will match any of a set of literals. Admitted literals
+	 * are numbers, strings, concepts, null and nested lists, which are all in OR. 
+	 * 
+	 * @param set
+	 * @return
+	 */
+	public static IClassifier Multiple(IList set) {
+		
+		Classifier ret = new Classifier();
+		for (Object o : set) {
+			if (o instanceof Number) {
+				ret.addClassifier(NumberMatcher((Number) o));
+			} else if (o instanceof String) {
+				ret.addClassifier(StringMatcher((String) o));
+			} else if (o instanceof IConcept) {
+				ret.addClassifier(ConceptMatcher((IConcept)o));
+			} else if (o == null) {
+				ret.addClassifier(NullMatcher());
+			} else if (o instanceof IList) {
+				ret.addClassifier((Classifier) Multiple((IList)o));
+			}
+		}
+		return ret;
 	}
 	
 // may be useful (or not) but requires a knowledge manager for parsing concept names.

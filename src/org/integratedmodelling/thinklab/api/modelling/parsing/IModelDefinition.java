@@ -11,7 +11,19 @@ public interface IModelDefinition extends IObservingObjectDefinition, IModel {
 		
 	public void setDataSource(IDataSource datasource);
 	
-	public void setDatasourceGeneratorFunction(IFunctionCall function);
+	/**
+	 * Function passed in the observable list. May return a datasource or be a shorthand
+	 * to create an ugly instance of something, e.g. uncertainty for a concept. Interpretation
+	 * and validation are left to the model's initialization method.
+	 * 
+	 * @param function a function returning something to observe. Should be validated for
+	 * 		  appropriateness in the models' initialize() method.
+	 * 
+	 * @param formalName an optional name for an observable, which may be used to 
+	 * 	      label a state in a result dataset or to refer to states of the observable
+	 * 	      in previously computed contexts. May be null and will often be.
+	 */
+	public void setObservableFunction(IFunctionCall function, String formalName);
 	
 	public void setInlineState(Object state);
 	

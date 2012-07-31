@@ -4,7 +4,17 @@ import org.integratedmodelling.thinklab.api.lang.IList;
 
 public abstract interface IObservingObjectDefinition extends IModelObjectDefinition {
 
-	public void addObservable(IList semantics);
+	/**
+	 * Add an observable as the semantic representation. Should be instantiated to a semantic
+	 * object at initialization, not immediately after setting because the semantics inferred
+	 * from the model may not be yet complete.
+	 * 
+	 * @param semantics list that can be passed to instantiate() to create the actual observable.
+	 * @param formalName an optional name for an observable, which may be used to 
+	 * 	      label a state in a result dataset or to refer to states of the observable
+	 * 	      in previously computed contexts. May be null and will often be.
+	 */
+	public void addObservable(IList semantics, String formalName);
 	
 	/**
 	 * Required before the concepts are actually generated, right after addObservable

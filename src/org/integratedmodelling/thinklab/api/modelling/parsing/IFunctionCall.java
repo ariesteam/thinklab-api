@@ -14,6 +14,12 @@ import org.integratedmodelling.thinklab.api.project.IProject;
  */
 public interface IFunctionCall extends ILanguageDefinition {
 
+	/**
+	 * name given to a single parameter passed by itself, outside of a named list.
+	 */
+	String DEFAULT_PARAMETER_NAME = "_default";
+
+
 	public void set(String id, Map<String,Object> parameters);
 	
 	public String getId();
