@@ -121,4 +121,5 @@ public interface INamespaceDefinition extends ILanguageDefinition, INamespace {
 	 * @param lineNumber
 	 */
 	public void addWarning(String warning, int lineNumber);
+	
 }
