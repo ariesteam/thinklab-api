@@ -33,26 +33,15 @@
  **/
 package org.integratedmodelling.thinklab.api.knowledge;
 
-import java.net.URI;
-import java.net.URL;
 import java.util.Collection;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.exceptions.ThinklabValidationException;
-import org.integratedmodelling.thinklab.api.lang.IList;
 
 /**
  * Ontologies are not first-class objects in Thinklab. This interface isn't deprecated at the moment, but
  * it may go away any time. All retrieval of concepts should be done through INamespace.
  */
 public interface IOntology  extends IResource {
-
-    /**
-     * Return a string identifier for an object that is guaranteed not to be in the ontology.
-     * @param prefix a string prefix or null if you don't care.
-     * @return unique name. Must succeed and behave properly in threaded environment.
-     */
-    public String getUniqueObjectName(String prefix);
     
 	/**
 	 * Iterate over all concepts
@@ -80,25 +69,8 @@ public interface IOntology  extends IResource {
 	 */
 	public abstract IProperty getProperty(String ID);
 
-	/**
-	 * The ID of the ontology concept space (its the XML namespace).
-	 * @return  the concept space ID. Can't fail.
-	 * @uml.property  name="conceptSpace"
-	 */
-	public String  getConceptSpace();
 
 	/**
-	 * Load an ontology from a specific URL. 
-	 * In the second time it is called it should merge the content of the
-	 * second URL in the current Ontology. 
-	 * However this is not supported in protege and jena implementations. 
-	 * 
-	 * @param url
-	 */
-	public void read(URL url);
-
-	/**
-	 * @uml.property  name="uRI"
 	 */
 	public String getURI();
 
@@ -109,57 +81,13 @@ public interface IOntology  extends IResource {
 	public abstract long getLastModificationDate();
 
 	/**
-	 * Write the ontology to the passed physical URI. If the URI is 
-	 * null, the ontology should be written to its original file 
-	 * location; if it was not loaded from a file, the request should
-	 * be ignored and false should be returned. If the URI is not
-	 * null, the request should be attempted and an exception raised
-	 * on error.
+	 * Write the ontology to the passed physical location.
 	 * 
 	 * @param uri
 	 * @throws ThinklabException 
 	 */
-	public boolean write(URI uri) throws ThinklabException;
+	public boolean write(String uri) throws ThinklabException;
 
-
-	/**
-	 * Ontologies should be able to return whether they've been
-	 * created as temporary, anonymous ones.
-	 * 
-	 * @return
-	 */
-	public boolean isAnonymous();
-
-
-	/**
-	 * Create a concept from a list specification and return it. This must be capable to create
-	 * hasValue restrictions on an existing concept, and throw an exception on anything else.
-	 * List syntax is parallel to what used to create an object.
-	 * 
-	 * @param list
-	 * @return
-	 */
-	public IConcept createConcept(IList list) throws ThinklabException;
-
-	/**
-	 * Create the passed concept, using the passed parents as its superclasses, and
-	 * return it. The concept may exist, if so only the
-	 * parents that are not already its parents should be added.
-	 * 
-	 * @param localName
-	 * @param parents
-	 * @return a pair <concept, boolean> with the boolean set to true if the concept was there already.
-	 * @throws ThinklabValidationException 
-	 */
-	public IConcept createConcept(String localName, IConcept[] parents) throws ThinklabException;
-	
-	/**
-	 * The whole ontology should be serializable as a list. The KnowledgeManager is capable of digesting
-	 * knowledge in form of a list.
-	 * 
-	 * @return
-	 */
-	public IList asList();
 	
 	/**
 	 * Define the ontology from a collection of axioms. Must work incrementally.

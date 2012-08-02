@@ -33,88 +33,33 @@
  **/
 package org.integratedmodelling.thinklab.api.knowledge;
 
+import org.integratedmodelling.thinklab.api.lang.IMetadataHolder;
+
 /**
- * Basic methods that any RDF resource must implement.
+ * Basic methods that any knowledge resource must implement.Resources
+ * are metadata holders, which is the way they publish their annotation
+ * properties - no annotation property methods such as getLabel is 
+ * provided anymore.
+ * 
  * @author  Ferdinando Villa, Ecoinformatics Collaboratory, UVM
  */
-public interface IResource {
+public interface IResource extends IMetadataHolder {
 		
 	/**
 	 * The ID of the concept space (the first field or the semantic type). All Resources have (or ARE) a concept space.
 	 * @return  the concept space ID. Can't fail.
-	 * @uml.property  name="conceptSpace"
 	 */
 	public String       getConceptSpace();
 	
 	/**
 	 * The fully specified URI of the resource. All resources have a URI.
 	 * @return  the URI. Can't fail.
-	 * @uml.property  name="uRI"
 	 */
 	public String       getURI();
-	
+		
 	/**
-	 * The label associated with the resource in the default language, set in preferences.
-	 * @return  the label, or an empty string if not found.
-	 * @uml.property  name="label"
-	 */
-	public String       getLabel();
-	
-	/**
-	 * The description associated with the resource in the default language, set in preferences.
-	 * @return  the description, or an empty string if not found.
-	 * @uml.property  name="description"
-	 */
-	public String       getDescription();
-	
-	/**
-	 * The label associated with the resource in the passed language.
-	 * @return the label, or an empty string if not found.
-	 */
-	public String       getLabel(String languageCode);
-
-	/**
-	 * The description associated with the resource in the passed language.
-	 * @return the description, or an empty string if not found.
-	 */
-	public String  getDescription(String languageCode);
-	
-	/**
-	 * Add a description in the default language.
-	 * @category Modifying methods
-	 * @param desc
-	 */
-	public abstract void addDescription(String desc);
-
-	/**
-	 * Add a description in the passed language.
-	 * @category Modifying methods
-	 * @param desc
-	 * @param language
-	 */
-	public abstract void addDescription(String desc, String language);
-
-	/**
-	 * Add a label in the default language.
-	 * @category Modifying methods
-	 * @param desc
-	 */
-	public abstract void addLabel(String desc);
-
-	/**
-	 * Add a label in the passed language.
-	 * @category Modifying methods
-	 * @param desc
-	 * @param language
-	 */
-	public abstract void addLabel(String desc, String language);
-
-	/**
-	 * Return the ontology this comes from.
-	 * @uml.property  name="ontology"
-	 * @uml.associationEnd  
+	 * Return the ontology this comes from (or is).
 	 */
 	public abstract IOntology getOntology();
 	
-
 }
