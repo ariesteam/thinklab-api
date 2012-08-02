@@ -69,16 +69,9 @@ public interface IOntology  extends IResource {
 	 */
 	public abstract IProperty getProperty(String ID);
 
-
 	/**
 	 */
 	public String getURI();
-
-	/**
-	 * 
-	 * @return
-	 */
-	public abstract long getLastModificationDate();
 
 	/**
 	 * Write the ontology to the passed physical location.
