@@ -101,35 +101,14 @@ public interface IConcept extends IKnowledge {
     public abstract boolean isAbstract();
 
     /**
-	 * Return the (only) parent class, or throw an exception if there's more than one parent.
-	 * @uml.property  name="parent"
-	 * @uml.associationEnd  
+	 * Return the (only) parent class, or throw an unchecked exception if there's more than one parent.
 	 */
-	public abstract IConcept getParent() throws ThinklabException;
+	public abstract IConcept getParent();
 
 
 	/** get the number of properties for this type */
 	public abstract int getPropertiesCount(String property);
 
-	/**
-	 * Get the minimum cardinality of the passed property in the domain of this
-	 * concept.
-	 * @param property
-	 */
-	public abstract int getMinCardinality(IProperty property);
-
-	/**
-	 * Get the maximum cardinality of the passed property in the domain of this
-	 * concept.
-	 * @param property
-	 */
-	public abstract int getMaxCardinality(IProperty property);
-
-	/**
-	 * 
-	 * @return
-	 */
-	public abstract Collection<IProperty> getAnnotationProperties();
 
 	public abstract IConcept getLeastGeneralCommonConcept(IConcept c);
 	
@@ -145,6 +124,15 @@ public interface IConcept extends IKnowledge {
 	 * @return
 	 */
 	public abstract Set<IConcept> getSemanticClosure();
+
+	/**
+	 * Return min,max cardinality of property when applied to this concept. -1 on either end
+	 * indicates no cardinality given.
+	 * 
+	 * @param property
+	 * @return
+	 */
+	int[] getCardinality(IProperty property);
 	
 	
 }
