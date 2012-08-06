@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Collection;
 import java.util.List;
 
+import org.integratedmodelling.thinklab.api.factories.IKnowledgeManager;
 import org.integratedmodelling.thinklab.api.lang.IMetadataHolder;
 import org.integratedmodelling.thinklab.api.lang.IPrototype;
 import org.integratedmodelling.thinklab.api.project.IProject;
@@ -47,6 +48,13 @@ public interface IServer extends IMetadataHolder {
 	public static final String EXCEPTION_CLASS = "IServer.EXCEPTION_CLASS";
 	public static final String STACK_TRACE = "IServer.STACK_TRACE";
 
+	
+	/**
+	 * Servers use this workspace subarea as an exchange for ontologies; clients
+	 * read knowledge from there after server was started.
+	 */
+	public static final String KNOWLEDGE_STORAGE_AREA = "knowledge";
+	
 	/**
 	 * This is used to communicate results of operations.
 	 *
@@ -195,6 +203,17 @@ public interface IServer extends IMetadataHolder {
 	public abstract void loadAll(Collection<IProject> projects);
 	
 	
-
+	/**
+	 * A server should publish its knowledge manager to provide knowledge resolution and
+	 * reasoning services. The KM resulting from this one should know the same things
+	 * the remote server knows, although it should not be expected to provide annotation
+	 * services.
+	 * 
+	 * Never return null - if need be, return a dumb KM that does nothing.
+	 * 
+	 * @return
+	 */
+	public abstract IKnowledgeManager getKnowledgeManager();
+	
 
 }
