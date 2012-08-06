@@ -88,4 +88,18 @@ public interface IOntology  extends IResource {
 	 * @throws ThinklabException
 	 */
 	public void define(Collection<IAxiom> axioms) throws ThinklabException;
+
+	/**
+	 * Return the number of (named, useful) concepts, hopefully quickly. 
+	 * 
+	 * @return
+	 */
+	public abstract int getConceptCount();
+
+	/**
+	 * Return the number of (named, useful) properties, hopefully quickly.
+	 * 
+	 * @return
+	 */
+	public abstract int getPropertyCount();
 }

@@ -108,4 +108,13 @@ public interface IProject extends IThinklabPlugin {
 	 */
 	public abstract List<String> getUserResourceFolders();
 
+	/**
+	 * Return true if any of the resources in the project has caused compilation errors. If
+	 * this is true, the project should not be used.
+	 * 
+	 * @return
+	 */
+	public boolean hasErrors();
+
+	public boolean hasWarnings();
 }

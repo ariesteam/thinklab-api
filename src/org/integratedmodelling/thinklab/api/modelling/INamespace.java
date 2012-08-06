@@ -6,6 +6,7 @@ import java.util.List;
 import org.integratedmodelling.collections.Pair;
 import org.integratedmodelling.collections.Triple;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
+import org.integratedmodelling.thinklab.api.knowledge.IOntology;
 import org.integratedmodelling.thinklab.api.knowledge.IProperty;
 import org.integratedmodelling.thinklab.api.project.IProject;
 
@@ -118,6 +119,14 @@ public interface INamespace {
 	 * @return
 	 */
 	public abstract boolean hasErrors();
+	
+	/**
+	 * Return true if the namespace has warnings that should be reported before use.
+	 * 
+	 * @return
+	 */
+	public abstract boolean hasWarnings();
+
 
 	/**
 	 * Get all errors in the namespace: error code, message and line number (1-based, 0 for no line)
@@ -131,4 +140,13 @@ public interface INamespace {
 	 * @return
 	 */
 	public abstract Collection<Pair<String, Integer>> getWarnings();
+
+	/**
+	 * Returns the ontology associated with the namespace. Not that you should do anything
+	 * with it.
+	 * 
+	 * @return
+	 */
+	public abstract IOntology getOntology();
+
 }
