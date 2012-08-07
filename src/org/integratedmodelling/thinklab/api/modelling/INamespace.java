@@ -77,24 +77,16 @@ public interface INamespace {
 	public IProject getProject();
 
 	public abstract String getResourceUrl();
-
-	/**
-	 * @deprecated - should disappear as we use namespaces now
-	 * @return
-	 */
-	public abstract String getStorageKbox();
 	
 	/**
-	 * @deprecated - should return a list of namespaces instead, or null to mean "all namespaces"
 	 * @return
 	 */
-	public abstract String getTrainingKbox();
+	public abstract List<String> getTrainingNamespaces();
 	
 	/**
-	 * @deprecated - should return a list of namespaces instead, or null to mean "all namespaces"
 	 * @return
 	 */
-	public abstract String getLookupKbox();
+	public abstract List<String> getLookupNamespaces();
 
 	/**
 	 * Return the plug-in language that is used in this namespace to parse expressions.

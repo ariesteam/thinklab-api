@@ -1,6 +1,7 @@
 package org.integratedmodelling.thinklab.api.modelling.parsing;
 
 import org.integratedmodelling.thinklab.api.knowledge.IAxiom;
+import org.integratedmodelling.thinklab.api.knowledge.IOntology;
 import org.integratedmodelling.thinklab.api.modelling.IExtent;
 import org.integratedmodelling.thinklab.api.modelling.INamespace;
 import org.integratedmodelling.thinklab.api.project.IProject;
@@ -56,26 +57,7 @@ public interface INamespaceDefinition extends ILanguageDefinition, INamespace {
 	 * @param project
 	 */
 	public void setProject(IProject project);
-	
-	/**
-	 * FIXME must disappear - use namespaces and of course we are our own storage.
-	 * @param kboxUri
-	 */
-	public void setStorageKbox(String kboxUri);
 
-	/**
-	 * FIXME should be a list of training namespaces, default is train everywhere.
-	 * 
-	 * @param kboxUri
-	 */
-	public void setTrainingKbox(String kboxUri);
-
-	/**
-	 * FIXME should be a list of lookup namespaces, default is look everywhere.
-	 * 
-	 * @param kboxUri
-	 */
-	public void setLookupKbox(String kboxUri);
 	
 	/**
 	 * Set from namespace header specs if a language was defined. The language used for 
@@ -121,5 +103,30 @@ public interface INamespaceDefinition extends ILanguageDefinition, INamespace {
 	 * @param lineNumber
 	 */
 	public void addWarning(String warning, int lineNumber);
+
+	/**
+	 * Add a namespace ID that will be used to resolve dependencies. Default when none
+	 * is added is to use all visible namespaces.
+	 * 
+	 * @param tns
+	 */
+	public void addLookupNamespace(String tns);
+
+	/**
+	 * Add a namespace ID that will be used to find evidence for training. Default is
+	 * to use all visible namespaces, which is bad. TODO may want to make it mandatory
+	 * for training to happen.
+	 *
+	 * @param tns
+	 */
+	public void addTrainingNamespace(String tns);
+
+	/**
+	 * Set the ontology manually. Done when the ontology is created externally to the
+	 * namespace.
+	 * 
+	 * @param iOntology
+	 */
+	public void setOntology(IOntology iOntology);
 	
 }
