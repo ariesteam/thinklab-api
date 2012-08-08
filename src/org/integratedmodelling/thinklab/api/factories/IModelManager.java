@@ -5,7 +5,6 @@ import java.util.Collection;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.exceptions.ThinklabIOException;
-import org.integratedmodelling.thinklab.api.knowledge.IExpression;
 import org.integratedmodelling.thinklab.api.modelling.IContext;
 import org.integratedmodelling.thinklab.api.modelling.IModel;
 import org.integratedmodelling.thinklab.api.modelling.IModelObject;
@@ -102,9 +101,6 @@ public interface IModelManager {
 	 */
 	public abstract Collection<INamespace> load(final IProject project)
 			throws ThinklabException;
-
-
-//	public IExpression resolveFunction(String functionId, Collection<String> parameterNames);
 
 	/**
 	 * Load a whole source directory recursively, attributing namespaces based on 
