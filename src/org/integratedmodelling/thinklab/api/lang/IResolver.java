@@ -2,6 +2,7 @@ package org.integratedmodelling.thinklab.api.lang;
 
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.modelling.IContext;
@@ -218,12 +219,22 @@ public interface IResolver {
 	public abstract INamespace getNamespace(String id, int lineNumber);
 
 	/**
-	 * Return a namespace-specific symbol table that will be filled in by the parser as
-	 * required.  It will not be called on a resolver not returned by getNamespaceResolver().
+	 * Define symbol with current namespace visibility. Won't be called on a resolver not
+	 * returned by getNamespaceResolver().
+	 * 
+	 * @param id
+	 * @param value
+	 * @param lineNumber 
+	 */
+	public abstract void defineSymbol(String id, Object value, int lineNumber);
+	
+	/**
+	 * Return the namespace-specific symbol table that is filled in by the parser using
+	 * defineSymbol().  It will not be called on a resolver not returned by getNamespaceResolver().
 	 * 
 	 * @return
 	 */
-	public abstract HashMap<String, Object>  getSymbolTable();
+	public abstract Map<String, Object>  getSymbolTable();
 
 	/**
 	 * If the resolver is for a project, as it should be, return the project.

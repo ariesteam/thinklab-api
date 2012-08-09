@@ -2,6 +2,7 @@ package org.integratedmodelling.thinklab.api.modelling;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.integratedmodelling.collections.Pair;
 import org.integratedmodelling.collections.Triple;
@@ -140,5 +141,13 @@ public interface INamespace {
 	 * @return
 	 */
 	public abstract IOntology getOntology();
+	
+	/**
+	 * The namespace's symbol table should contain any model objects and define's encountered, plus
+	 * all the imported symbols from any imported namespaces.
+	 * 
+	 * @return
+	 */
+	public abstract Map<String, Object> getSymbolTable();
 
 }
