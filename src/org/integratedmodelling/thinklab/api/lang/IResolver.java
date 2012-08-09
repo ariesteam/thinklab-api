@@ -223,7 +223,7 @@ public interface IResolver {
 	 * 
 	 * @return
 	 */
-	public abstract HashMap<String, IModelObjectDefinition>  getSymbolTable();
+	public abstract HashMap<String, Object>  getSymbolTable();
 
 	/**
 	 * If the resolver is for a project, as it should be, return the project.
