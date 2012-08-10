@@ -24,6 +24,7 @@ public interface IExpression {
      * @param project
      */
 	public abstract void setProjectContext(IProject project);
+
     
 }
 

@@ -214,6 +214,22 @@ public interface IServer extends IMetadataHolder {
 	 * @return
 	 */
 	public abstract IKnowledgeManager getKnowledgeManager();
+
+	/**
+	 * Send command directly without parsing a command line. This works like Session.send() and 
+	 * blocks until command returns.
+	 * 
+	 * @param cmd
+	 * @return
+	 */
+	public abstract Result send(String ... cmd);
 	
+	/**
+	 * Like send() but non-blocking.
+	 * 
+	 * @param cmd
+	 * @return
+	 */
+	public abstract Result sendAsynchronous(String ... cmd);
 
 }
