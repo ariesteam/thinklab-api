@@ -155,12 +155,11 @@ public interface IResolver {
 	 * 
 	 * @param observable
 	 * @param ctx 
-	 * @param resetContext
 	 * @param lineNumber
 	 * @throws ThinklabException 
 	 */
 	public abstract void handleObserveStatement(
-			Object observable, IContext ctx, boolean resetContext, int lineNumber);
+			Object observable, IContext ctx, int lineNumber);
 
 	/**
 	 * Get another resolver to handle an imported project. The lifetime of this new 

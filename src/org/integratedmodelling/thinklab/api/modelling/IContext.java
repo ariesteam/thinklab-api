@@ -8,19 +8,17 @@ import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.listeners.IListenable;
 
 /**
- * A Context represents the observed world during a modelling session. It
- * contains a set of observations with explicit states (State) that belong to
- * the same observation session. Contexts are populated with observations by
- * running models in them. A context is usually started by observing a topology
- * of reference (space and/or time), i.e. adding Extents to it. When a model is
- * run in a context, it creates States for that context and adds them to it. Any
- * requirement of the model that is already in the context is taken from it even
- * if there is a model for it, and all States in the same context have a
- * representation compatible with the set of Extents contained. The context has
- * specialized methods to operate on states and extents. The modeling language
- * defines contexts as named templates that build a Context for an observation
- * structure. Such structures are contexts "primed" with temporal/spatial
- * observations and/or global observations for parameters.
+ * Context are the result of observing an agent. As such, their observable is a concrete SemanticObject
+ * and they can have other concepts observed in them to extend the agent's semantics with new knowledge.
+ * 
+ * Context must start with something (usually a spatial and/or temporal observation) and are bound by
+ * the semantics of the observable in adding new observations. When the context is first used as the
+ * base for a model session (by observing it), we make sure that all the functional properties of the
+ * observable are bound to observations. We can later add more knowledge by observing other things
+ * 'at' it, compatibly with the current semantics. 
+ * 
+ * Contexts are defined with the observe instruction that specifies a concept and a definition (often
+ * just a name) for its instance.
  * 
  * @author ferdinando.villa
  */
