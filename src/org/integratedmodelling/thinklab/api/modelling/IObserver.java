@@ -1,5 +1,7 @@
 package org.integratedmodelling.thinklab.api.modelling;
 
+import java.util.List;
+
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
 
@@ -41,7 +43,7 @@ public abstract interface IObserver extends IObservingObject {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public abstract IState createState(ISemanticObject<?> observable, IContext context) throws ThinklabException;
+	public abstract IState createState(ISemanticObject<?> observable, ISubject context) throws ThinklabException;
 		
 
 	/**
@@ -57,7 +59,7 @@ public abstract interface IObserver extends IObservingObject {
 	 * @param totalContext
 	 * @return
 	 */
-	public abstract IContext getUnresolvedContext(IContext totalContext);
+	public abstract List<IExtent> getUnresolvedContext(ISubject totalContext);
 
 	/**
 	 * Train the model to match any output state that can be

@@ -45,6 +45,14 @@ public abstract interface IObservingObject extends IModelObject {
 		 * @return
 		 */
 		public IProperty getProperty();
+
+		/**
+		 * If true, the dependency should be for an agent that is distributed over the domain
+		 * returned by running the model returned by getDistributionContext() in the context
+		 * of observation.
+		 * @return
+		 */
+		boolean isDistributed();
 	}
 	
 	/**

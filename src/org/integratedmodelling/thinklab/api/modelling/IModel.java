@@ -17,7 +17,6 @@ import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
  */
 public interface IModel extends IObservingObject {
 	
-
 	/**
 	 * Return the semantics of all observables we are observing. The first
 	 * in the list is the actual observable and must exist; the others are
@@ -39,8 +38,9 @@ public interface IModel extends IObservingObject {
 	
 	/**
 	 * Return the observer that made this observation and provides the
-	 * full observation semantics for it. There is always one observer, which
-	 * may be a IConditionalObserver switching to others according to context.
+	 * full observation semantics for it. Data models have one observer, which
+	 * may be a IConditionalObserver switching to others according to context. Object
+	 * models (agent models) have no observer.
 	 * 
 	 * @return
 	 */
@@ -63,7 +63,7 @@ public interface IModel extends IObservingObject {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public abstract IObservation observe(IContext context) throws ThinklabException;
+	public abstract ISubject observe(ISubject context) throws ThinklabException;
 
 	/**
 	 * If a model was given a specific coverage in any extent, either directly or through

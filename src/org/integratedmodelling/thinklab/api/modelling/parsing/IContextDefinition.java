@@ -1,12 +1,13 @@
 package org.integratedmodelling.thinklab.api.modelling.parsing;
 
 import org.integratedmodelling.exceptions.ThinklabValidationException;
+import org.integratedmodelling.thinklab.api.knowledge.IProperty;
 import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
 import org.integratedmodelling.thinklab.api.modelling.IContext;
 
 public interface IContextDefinition extends IModelObjectDefinition, IContext {
 
-	public void addModel(IModelDefinition observation);
+	public void addModel(IModelDefinition observation, IProperty property);
 	
 	/**
 	 * Instead of an actual observation, we may need to pass a function definition to
