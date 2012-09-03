@@ -1,7 +1,8 @@
 package org.integratedmodelling.thinklab.api.listeners;
 
-import org.integratedmodelling.thinklab.api.modelling.IContext;
-import org.integratedmodelling.thinklab.api.modelling.IObservation;
+import org.integratedmodelling.thinklab.api.modelling.IScale;
+import org.integratedmodelling.thinklab.api.modelling.ISubject;
+import org.integratedmodelling.thinklab.api.modelling.scheduling.ISchedule;
 
 /**
  * An array of contextualization listeners can be passed to Compiler.contextualize() to be notified
@@ -26,7 +27,7 @@ public interface IContextualizationListener extends IListener {
 	 * @param iObservation
 	 * @param observationContext
 	 */
-	public abstract void onContextualization(IObservation original, IContext context);
+	public abstract void onContextualization(ISubject original, IScale context);
 
 	/**
 	 * Called before a TransformerObservation is transformed. The contextualized obs
@@ -38,7 +39,7 @@ public interface IContextualizationListener extends IListener {
 	 * @param iObservation
 	 * @param observationContext
 	 */
-	public abstract void postTransformation(IObservation original, IContext context);
+	public abstract void postTransformation(ISubject original, IScale context);
 
 	/**
 	 * Called after a TransformerObservation is transformed. The transformed obs
@@ -49,5 +50,5 @@ public interface IContextualizationListener extends IListener {
 	 * @param iObservation
 	 * @param observationContext
 	 */
-	public abstract void preTransformation(IObservation original, IContext context);
+	public abstract void preTransformation(ISubject original, IScale context);
 }

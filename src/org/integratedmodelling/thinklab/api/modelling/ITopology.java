@@ -2,12 +2,15 @@ package org.integratedmodelling.thinklab.api.modelling;
 
 public interface ITopology<T> extends ITopologicallyComparable<T> {
 
+	public static final long INFINITE = -1L;
+	
 	/**
-	 * Return the total number of distinct subdivisions in this topology. 
+	 * Return the total number of distinct subdivisions in this topology. INFINITE is
+	 * an option when applicable.
 	 * 
 	 * @return
 	 */
-	public int getMultiplicity();
+	public long getMultiplicity();
 	
 	/**
 	 * Return a topology which represents the intersection of this with the passed

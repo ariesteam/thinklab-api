@@ -5,9 +5,9 @@ import java.util.Collection;
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.exceptions.ThinklabIOException;
 import org.integratedmodelling.thinklab.api.knowledge.IProperty;
-import org.integratedmodelling.thinklab.api.modelling.IContext;
 import org.integratedmodelling.thinklab.api.modelling.IModel;
 import org.integratedmodelling.thinklab.api.modelling.INamespace;
+import org.integratedmodelling.thinklab.api.modelling.IScale;
 import org.integratedmodelling.thinklab.api.modelling.IScenario;
 import org.integratedmodelling.thinklab.api.modelling.ISubject;
 import org.integratedmodelling.thinklab.api.project.IProject;
@@ -76,7 +76,7 @@ public interface IModelManager {
 	 * @param model
 	 * @return
 	 */
-	public abstract IContext getCoverage(IModel model);
+	public abstract IScale getCoverage(IModel model);
 
 	/**
 	 * Get all scenarios that apply to the passed model.

@@ -14,6 +14,6 @@ public interface IContextTransformingAccessor extends IParallelAccessor {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public IContext getTransformedContext(IContext context)
+	public IScale getTransformedContext(IScale context)
 		throws ThinklabException;
 }

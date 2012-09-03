@@ -42,7 +42,7 @@ public interface IParallelAccessor extends IAccessor {
 	 * 
 	 * @return
 	 */
-	public void process(IContext context) throws ThinklabException;
+	public void process(ISubject context) throws ThinklabException;
 	
 	/**
 	 * Return the computed state for the context passed to process().

@@ -73,6 +73,6 @@ public interface IModel extends IObservingObject {
 	 * 
 	 * @return
 	 */
-	public abstract IContext getCoverage();
+	public abstract IScale getCoverage();
 	
 }

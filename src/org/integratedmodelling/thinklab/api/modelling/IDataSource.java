@@ -24,5 +24,5 @@ public interface IDataSource {
 	 * @return
 	 * @throws ThinklabException if the transformation cannot be handled.
 	 */
-	public abstract IAccessor getAccessor(IContext context) throws ThinklabException;
+	public abstract IAccessor getAccessor(IScale context) throws ThinklabException;
 }

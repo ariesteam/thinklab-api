@@ -30,7 +30,7 @@ public abstract interface IObserver extends IObservingObject {
 	 * 
 	 * @return
 	 */
-	public abstract IAccessor getAccessor(IContext context);
+	public abstract IAccessor getAccessor(IScale context);
 	
 	/**
 	 * Observers are responsible for creating the empty result observation
@@ -75,7 +75,7 @@ public abstract interface IObserver extends IObservingObject {
 	 * 		   observed on the passed kbox.
 	 * @throws ThinklabException
 	 */
-	public IObserver train(IContext context) throws ThinklabException;
+	public IObserver train(ISubject context) throws ThinklabException;
 
 	/**
 	 * A scenario is a model modifier, containing alternative models for given observables.

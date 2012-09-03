@@ -50,8 +50,8 @@ public class ContextIndex {
 	 * display label, an integer for its total multiplicity and a tag 
 	 * for its topology type.
 	 */
-	HashMap<String, Pair<Integer, String>> extentIndex = 
-			new HashMap<String, Pair<Integer,String>>();
+	HashMap<String, Pair<Long, String>> extentIndex = 
+			new HashMap<String, Pair<Long,String>>();
 	
 	/*
 	 * a thumbnail (relative to the path of the file that hosts the
@@ -111,7 +111,7 @@ public class ContextIndex {
 		stateIndex.put(id, new Pair<String, String>(displayLabel, observable.getDirectType().toString()));
 	}
 	
-	public void addExtent(String id, int multiplicity, String thumbnailFile, String mediaFile, String typeTag) {
+	public void addExtent(String id, long multiplicity, String thumbnailFile, String mediaFile, String typeTag) {
 		
 		extentIDs.add(id);
 		
@@ -120,7 +120,7 @@ public class ContextIndex {
 		if (mediaFile != null)
 			imageIndex.put(id, mediaFile);
 		
-		extentIndex.put(id, new Pair<Integer, String>(multiplicity, typeTag));
+		extentIndex.put(id, new Pair<Long, String>(multiplicity, typeTag));
 	}
 	
 	public void setFilePrefix(String fp) {

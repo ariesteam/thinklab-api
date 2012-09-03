@@ -15,10 +15,29 @@ import org.integratedmodelling.thinklab.api.modelling.ISubject;
  */
 public interface ISubjectGenerator extends IModelObjectDefinition {
 
+	/**
+	 * Create an instance of the subject defined by this model object. This may
+	 * involve building a model for it as an observable, with any dependencies
+	 * implied by its functional properties. Called when the subject is observed.
+	 * 
+	 * @return
+	 */
 	ISubject createSubject();
 
+	/**
+	 * Set the definition of the observable that specifies the semantic object. It
+	 * may be partial - functional properties will be observed automatically.
+	 * 
+	 * @param odef
+	 */
 	void setObservable(IList odef);
 
+	/**
+	 * Add a function that will be run when createSubject() is called to provide
+	 * pre-observed state.
+	 * 
+	 * @param ff
+	 */
 	void addObservationGeneratorFunction(IFunctionCall ff);
 
 	/**
@@ -27,7 +46,9 @@ public interface ISubjectGenerator extends IModelObjectDefinition {
 	 * 
 	 * @param property
 	 * @param observer
+	 * @param propagate whether the model should create more than one object (if propagate == true,
+	 * 	  the property must be an object property.
 	 */
-	void addModelDependency(IPropertyDefinition property, IModel observer);
+	void addModelDependency(IPropertyDefinition property, IModel observer, boolean propagate);
 	
 }

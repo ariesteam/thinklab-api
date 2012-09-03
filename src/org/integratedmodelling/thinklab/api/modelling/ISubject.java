@@ -67,15 +67,20 @@ public interface ISubject extends ISemanticObject<Object>, IMetadataHolder {
 	public Collection<IProperty> getExtentProperties();
 	
 	/**
-	 * Returning a generator of all the events corresponding to the possible transitions 
-	 * in the abstract universe that reflects the extents owned by this ISubject, representing 
-	 * its view of time, space etc. The schedule contains the appropriate ordering of the 
-	 * extents and is used to explain the arrangement of the values in each IState owned 
-	 * by this ISubject.
+	 * Return the scale seen by this subject, merging all the extents declared
+	 * for the subject in the observation context.
 	 * 
 	 * @return
 	 */
-	public ISchedule getSchedule();
+	public IScale getScale();
 	
-	
+	/**
+	 * Observe the passed observable according to our point of view and return
+	 * a new ISubject where the resulting state has been made part of the 
+	 * object.
+	 * 
+	 * @param observable
+	 * @return
+	 */
+	public ISubject observe(Object observable);
 }

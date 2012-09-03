@@ -103,7 +103,7 @@ public interface INamespace {
 	 * 
 	 * @return
 	 */
-	public abstract IContext getCoverage();
+	public abstract IScale getCoverage();
 
 	/**
 	 * Return true if the namespace has any errors that will prevent the use of its
