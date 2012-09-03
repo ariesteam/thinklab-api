@@ -11,7 +11,7 @@ package org.integratedmodelling.thinklab.api.knowledge;
  * @author Ferd
  *
  */
-public interface IAxiom {
+public interface IAxiom extends Iterable<Object> {
 
 	/*
 	 * class axioms
