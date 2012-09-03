@@ -1,19 +1,17 @@
 package org.integratedmodelling.thinklab.api.lang;
 
 import java.io.InputStream;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.thinklab.api.modelling.IContext;
 import org.integratedmodelling.thinklab.api.modelling.IModelObject;
 import org.integratedmodelling.thinklab.api.modelling.INamespace;
 import org.integratedmodelling.thinklab.api.modelling.parsing.IConceptDefinition;
 import org.integratedmodelling.thinklab.api.modelling.parsing.IFunctionCall;
 import org.integratedmodelling.thinklab.api.modelling.parsing.ILanguageDefinition;
-import org.integratedmodelling.thinklab.api.modelling.parsing.IModelObjectDefinition;
 import org.integratedmodelling.thinklab.api.modelling.parsing.INamespaceDefinition;
 import org.integratedmodelling.thinklab.api.modelling.parsing.IPropertyDefinition;
+import org.integratedmodelling.thinklab.api.modelling.parsing.ISubjectGenerator;
 import org.integratedmodelling.thinklab.api.project.IProject;
 
 /**
@@ -159,7 +157,7 @@ public interface IResolver {
 	 * @throws ThinklabException 
 	 */
 	public abstract void handleObserveStatement(
-			Object observable, IContext ctx, int lineNumber);
+			Object observable, ISubjectGenerator ctx,  boolean distribute, IPropertyDefinition property, int lineNumber);
 
 	/**
 	 * Get another resolver to handle an imported project. The lifetime of this new 

@@ -23,7 +23,7 @@ public class ContextIndex {
 	/*
 	 * total number of states in context
 	 */
-	int multiplicity;
+	long multiplicity;
 	
 	/*
 	 * The DOT representation of the model graph that created the context.
@@ -87,7 +87,7 @@ public class ContextIndex {
 	 * relatively obvious setters
 	 */
 	
-	public void setMultiplicity(int m) {
+	public void setMultiplicity(long m) {
 		multiplicity = m;
 	}
 	

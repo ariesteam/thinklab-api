@@ -15,7 +15,7 @@ public interface IDataset {
 	 * @param context
 	 * @throws ThinklabException
 	 */
-	public abstract void setContext(IContext context) throws ThinklabException;
+	public abstract void setContext(ISubject context) throws ThinklabException;
 	
 	/**
 	 * Return the context we represent, creating it if we were loaded from persistent storage.
@@ -23,7 +23,7 @@ public interface IDataset {
 	 * @return
 	 * @throws ThinklabException
 	 */
-	public abstract IContext getContext();
+	public abstract ISubject getContext();
 
 	/**
 	 * Ensure we can get GC's without losing data. We should know where. Return a 

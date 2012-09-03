@@ -33,7 +33,13 @@ public abstract interface IObservingObjectDefinition extends IModelObjectDefinit
 	 * @param model
 	 * @param formalName
 	 * @param property
-	 * @param isRequired
+	 * @param isOptional
+	 * @param distribute 
 	 */
-	public void addDependency(Object model, String formalName, IPropertyDefinition property, boolean isOptional);
+	public void addDependency(
+			Object model, 
+			String formalName, 
+			IPropertyDefinition property, 
+			boolean isOptional, 
+			boolean distribute);
 }

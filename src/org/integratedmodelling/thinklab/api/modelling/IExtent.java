@@ -144,11 +144,4 @@ public abstract interface IExtent extends IState, ITopology<IExtent> {
 	 */
 	public double getCoverage(ITopologicallyComparable<?> obj);
 
-	/**
-	 * Return a schedule of events representing this topology for an observer
-	 * that is observed over it.
-	 * 
-	 * @return
-	 */
-	public ISchedule getSchedule();
 }

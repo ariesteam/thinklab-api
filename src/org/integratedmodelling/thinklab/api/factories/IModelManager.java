@@ -1,16 +1,15 @@
 package org.integratedmodelling.thinklab.api.factories;
 
-import java.io.File;
 import java.util.Collection;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.exceptions.ThinklabIOException;
+import org.integratedmodelling.thinklab.api.knowledge.IProperty;
 import org.integratedmodelling.thinklab.api.modelling.IContext;
 import org.integratedmodelling.thinklab.api.modelling.IModel;
-import org.integratedmodelling.thinklab.api.modelling.IModelObject;
 import org.integratedmodelling.thinklab.api.modelling.INamespace;
-import org.integratedmodelling.thinklab.api.modelling.IObservation;
 import org.integratedmodelling.thinklab.api.modelling.IScenario;
+import org.integratedmodelling.thinklab.api.modelling.ISubject;
 import org.integratedmodelling.thinklab.api.project.IProject;
 
 /**
@@ -25,36 +24,47 @@ import org.integratedmodelling.thinklab.api.project.IProject;
  */
 public interface IModelManager {
 
-	
 	/**
-	 * The key function in the modeling system is observing something in a context. The passed
-	 * object may be a model (which is going to be contextualized and run) or something else,
-	 * for which Thinklab will try to build the appropriate model for the context. If successful,
-	 * an observation of the object will be returned, whose context will link to all other 
-	 * contingent observations made in the process.
+	 * Create an observation of an object. In order to use this one, the object is first 
+	 * annotated to a ISemanticObject, which must not be a literal because literals can only
+	 * be contingencies in other ISubjects.
+	 * 
+	 * @param object
+	 * @return
+	 * @throws ThinklabException
+	 */
+	public ISubject observe(Object observable) throws ThinklabException;
+
+	/**
+	 * Observe an object whose observation will be set as a contingency of the passed
+	 * ISubject, linked to it by a relationship incarnating the passed property. If a 
+	 * property is not passed, a specific 'hasXXX' one will be added to the namespace
+	 * of the subject and used.
+     *
+	 * The observable decides whether the target of the new contingency is a IState or
+	 * a ISubject. The property must match the data/object nature of the observable if
+	 * it is passed.
+	 * 
+	 * The distribute parameter only applies when the observable determines an object
+	 * property linking to ISubject. If so, distribute=true will create relationships
+	 * to one ISubject per state of the abstract extents observed for the observable;
+	 * otherwise only one ISubject with the same extents will be created.
 	 * 
 	 * @param object
 	 * @param context
+	 * @param property
+	 * @param distribute
 	 * @return
+	 * @throws ThinklabException
 	 */
-	public IObservation observe(Object object, IContext context) throws ThinklabException;
+	public ISubject observe(Object observable, ISubject context, 
+							IProperty property, boolean distribute) 
+					throws ThinklabException;
 	
-	public abstract IModel getModel(String s);
-
-	public abstract IScenario getScenario(String s);
-
-	public abstract IContext getContext(String s);
-
 	public abstract INamespace getNamespace(String ns);
 
 	public abstract void releaseNamespace(String namespace);
 
-	public abstract IModelObject getModelObject(String object);
-
-	public abstract String getSource(String object);
-	
-	public Collection<IModelObject> getDependencies(String object);
-	
 	public Collection<INamespace> getNamespaces();
 		
 	/**
@@ -75,12 +85,12 @@ public interface IModelManager {
 	 * @return
 	 * @throws ThinklabException 
 	 */
-	public abstract Collection<IScenario> getApplicableScenarios(IModel model,
-			IContext context, boolean isPublic) throws ThinklabException;
+	public abstract Collection<IScenario> getScenarios(IModel model, ISubject context) throws ThinklabException;
 
 	/**
 	 * Load all model objects defined in the given file, adding them to the model map.
-	 *  
+	 * TODO shouldn't be here? Or not name the NS? Accept a directory?
+	 * 
 	 * @param resourceId
 	 * @param namespaceId 
 	 * @param the project to look up resource and imports (may be null)
@@ -90,26 +100,5 @@ public interface IModelManager {
 	public abstract INamespace loadFile(final String resourceId, final String namespaceId, final IProject project)
 			throws ThinklabException;
 
-	
-	/**
-	 * Load all model objects defined in the project's source directories, 
-	 * adding each found resource to the model map.
-	 *  
-	 * @param resourceId
-	 * @return the namespaces defined
-	 * @throws ThinklabIOException 
-	 */
-	public abstract Collection<INamespace> load(final IProject project)
-			throws ThinklabException;
-
-	/**
-	 * Load a whole source directory recursively, attributing namespaces based on 
-	 * source file and subdirectory names. Return all the namespaces defined.
-	 * 
-	 * @param sourcedir
-	 * @return
-	 * @throws ThinklabException
-	 */
-	Collection<INamespace> loadSourceDirectory(File sourcedir, IProject project) throws ThinklabException;
 
 }

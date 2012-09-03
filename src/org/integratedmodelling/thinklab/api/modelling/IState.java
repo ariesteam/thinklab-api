@@ -1,28 +1,30 @@
 package org.integratedmodelling.thinklab.api.modelling;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.thinklab.api.knowledge.IConcept;
+import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
 
 /**
- * A State is a stateful observation that represents its observable in its context using indirect 
- * information, i.e. "data". It extends ISerialAccessor and may be used as such when a model is
- * contextualized in a context that already contains a state for a required observable.
+ * An IState is the result of observing a quality. IStates only exists in the context of an ISubject
+ * and are the target of relationships defined by data properties. As such an IState classifies as
+ * a literal semantic object.
+ * 
+ * Because ISubjects are physical objects and may exist in time/space or other abstract regions,
+ * the IState is a complex literal that has as many states as the cartesian product of all the
+ * IExtents owned by the ISubject that contains it. The demote() operation will therefore return
+ * collections or atomic objects according to the extents adopted. Specialized access methods
+ * return the event index of the ISchedule that represents the ISubject's view of the extents.
+ * 
+ * IState extends ISerialAccessor so that it can be used as such when observing something
+ * in the context of a ISubject that already contains the IState for a required observable.
  * 
  * @author  Ferdinando
  */
-public interface IState extends IObservation, ISerialAccessor {
+public interface IState extends ISemanticObject<Object>, ISerialAccessor {
 
 	/**
-	 * This will return an array of the appropriate type without any further allocation. It's terrifying to use in Java, but just fine for dynamically typed embedded languages. 
-	 * @return
-	 * @uml.property  name="rawData"
-	 */
-	public Object getRawData();
-
-	/**
-	 * Should endeavor to return doubles as long as it's not entirely meaningless. Many 
+	 * Should endeavor to return doubles as long as it's not meaningless. Many 
 	 * procedures will require doubles and the more are supported, the more can be done
-	 * with all scientific plugins.
+	 * in processing and visualization plugins.
 	 * 
 	 * @return
 	 */
@@ -34,38 +36,48 @@ public interface IState extends IObservation, ISerialAccessor {
 	public double getDoubleValue(int index) throws ThinklabException;
 	
 	/**
-	 * Return the total number of states.
+	 * Return the total number of values determined by the extents owned by
+	 * the owning ISubject.
+	 * 
 	 * @return
 	 */
 	public int getValueCount();
 
-	/**
-	 * Return a state with the given context dimension collapsed to one, and
-	 * the data appropriately aggregated. Return self if the dimension is not
-	 * in the context and throw an exception if data along that dimension cannot
-	 * be aggregated. It's expected to handle the metadata appropriately, e.g. 
-	 * modify the units if necessary.
-	 * 
-	 * @param concept
-	 * @return
-	 * @throws ThinklabException
-	 */
-	public IState aggregate(IConcept concept) throws ThinklabException;
+//	/**
+//	 * Return a state with the given context dimension collapsed to one, and
+//	 * the data appropriately aggregated. Return self if the dimension is not
+//	 * in the context and throw an exception if data along that dimension cannot
+//	 * be aggregated. It's expected to handle the metadata appropriately, e.g. 
+//	 * modify the units if necessary.
+//	 * 
+//	 * @param concept
+//	 * @return
+//	 * @throws ThinklabException
+//	 */
+//	public IState aggregate(IConcept concept) throws ThinklabException;
 
 	/**
-	 * True if the state has more than one value over any spatial 
-	 * dimension. 
+	 * True if the owning ISubject has an observation of space with more than
+	 * one state value. 
 	 * 
 	 * @return
 	 */
 	public abstract boolean isSpatiallyDistributed();
 	
 	/**
-	 * True if the state has more than one value over any temporal
-	 * dimension.
+	 * True if the owning ISubject has an observation of time with more than
+	 * one state value. 
 	 * 
 	 * @return
 	 */
 	public abstract boolean isTemporallyDistributed();
+	
+	/**
+	 * States are created by observers and will store them to provide a
+	 * link to the observation semantics.
+	 * 
+	 * @return
+	 */
+	public abstract IObserver getObserver();
 	
 }
