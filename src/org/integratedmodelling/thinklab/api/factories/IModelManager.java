@@ -26,40 +26,24 @@ public interface IModelManager {
 
 	/**
 	 * Create an observation of an object. In order to use this one, the object is first 
-	 * annotated to a ISemanticObject, which must not be a literal because literals can only
-	 * be contingencies in other ISubjects.
+	 * annotated to a ISemanticObject. The object must annotate to an endurant or perdurant
+	 * in order to produce an ISubject as an observation - it cannot annotate to a quality
+	 * as that needs a ISubject as a context.
+	 * 
+	 * Because an ISubject is normally distributed in time/space, this method will only
+	 * work when the observable is already an ISubject or when the model chosen is constrained
+	 * to a fully specified scale. The normal way to instantiate an ISubject is by using a
+	 * declared ISubjectGenerator.
+	 * 
+	 * A IModel or an ISubjectGenerator can be passed as a delegate to an observable. In that case, the observable
+	 * of the model will be used to provide the ISubject's semantics, and the model itself
+	 * will be used to observe it.
 	 * 
 	 * @param object
 	 * @return
 	 * @throws ThinklabException
 	 */
 	public ISubject observe(Object observable) throws ThinklabException;
-
-	/**
-	 * Observe an object whose observation will be set as a contingency of the passed
-	 * ISubject, linked to it by a relationship incarnating the passed property. If a 
-	 * property is not passed, a specific 'hasXXX' one will be added to the namespace
-	 * of the subject and used.
-     *
-	 * The observable decides whether the target of the new contingency is a IState or
-	 * a ISubject. The property must match the data/object nature of the observable if
-	 * it is passed.
-	 * 
-	 * The distribute parameter only applies when the observable determines an object
-	 * property linking to ISubject. If so, distribute=true will create relationships
-	 * to one ISubject per state of the abstract extents observed for the observable;
-	 * otherwise only one ISubject with the same extents will be created.
-	 * 
-	 * @param object
-	 * @param context
-	 * @param property
-	 * @param distribute
-	 * @return
-	 * @throws ThinklabException
-	 */
-	public ISubject observe(Object observable, ISubject context, 
-							IProperty property, boolean distribute) 
-					throws ThinklabException;
 	
 	public abstract INamespace getNamespace(String ns);
 

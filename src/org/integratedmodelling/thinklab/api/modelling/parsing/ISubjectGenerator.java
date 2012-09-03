@@ -22,7 +22,7 @@ public interface ISubjectGenerator extends IModelObjectDefinition {
 	 * 
 	 * @return
 	 */
-	ISubject createSubject();
+	ISubject observe();
 
 	/**
 	 * Set the definition of the observable that specifies the semantic object. It

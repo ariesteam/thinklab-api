@@ -13,14 +13,13 @@ package org.integratedmodelling.thinklab.api.modelling.scheduling;
 public interface ITransition {
 
 	public enum Relevance {
-		IRRELEVANT,
 		PARTIAL,
 		FULL
 	}
 	
 	/**
-	 * Return whether the event that generated this transition is relevant to the context of
-	 * discussion. Relevant means that any extent in the context has been covered partially or
+	 * Return how the event that generated this transition is relevant to the context of
+	 * interest, i.e. whether extents in the context has been covered partially or
 	 * fully.
 	 * 
 	 * @return

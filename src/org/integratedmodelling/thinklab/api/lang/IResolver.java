@@ -6,12 +6,12 @@ import java.util.Map;
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.modelling.IModelObject;
 import org.integratedmodelling.thinklab.api.modelling.INamespace;
+import org.integratedmodelling.thinklab.api.modelling.ISubject;
 import org.integratedmodelling.thinklab.api.modelling.parsing.IConceptDefinition;
 import org.integratedmodelling.thinklab.api.modelling.parsing.IFunctionCall;
 import org.integratedmodelling.thinklab.api.modelling.parsing.ILanguageDefinition;
 import org.integratedmodelling.thinklab.api.modelling.parsing.INamespaceDefinition;
 import org.integratedmodelling.thinklab.api.modelling.parsing.IPropertyDefinition;
-import org.integratedmodelling.thinklab.api.modelling.parsing.ISubjectGenerator;
 import org.integratedmodelling.thinklab.api.project.IProject;
 
 /**
@@ -152,12 +152,11 @@ public interface IResolver {
 	 * whose isInteractive() returns false.
 	 * 
 	 * @param observable
-	 * @param ctx 
 	 * @param lineNumber
 	 * @throws ThinklabException 
 	 */
 	public abstract void handleObserveStatement(
-			Object observable, ISubjectGenerator ctx,  boolean distribute, IPropertyDefinition property, int lineNumber);
+			Object observable,  boolean distribute, IPropertyDefinition property, int lineNumber);
 
 	/**
 	 * Get another resolver to handle an imported project. The lifetime of this new 
@@ -249,6 +248,13 @@ public interface IResolver {
 	 * @return 
 	 */
 	public abstract boolean validateFunctionCall(IFunctionCall ret);
+
+	/**
+	 * Set the current context to the given ISubject.
+	 * 
+	 * @param observe
+	 */
+	public abstract void setCurrentContext(ISubject observe);
 
 	
 }

@@ -15,8 +15,6 @@ import org.integratedmodelling.thinklab.api.modelling.IScale;
  *
  */
 public interface ISchedule extends Iterable<IEvent> {
-
-	public static final long UNLIMITED = -1;
 	
 	/**
 	 * Merge a scale into this schedule. 
