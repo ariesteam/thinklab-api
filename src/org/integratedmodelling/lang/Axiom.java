@@ -1,5 +1,9 @@
 package org.integratedmodelling.lang;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
+
 import org.integratedmodelling.thinklab.api.knowledge.IAxiom;
 
 /**
@@ -86,9 +90,9 @@ public class Axiom implements IAxiom {
 		return _args[index];
 	}
 
+	@Override
+	public Iterator<Object> iterator() {
+		return Arrays.asList(_args).iterator();
+	}
 
-
-	
-	
-	
 }
