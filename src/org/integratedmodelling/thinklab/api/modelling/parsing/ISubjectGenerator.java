@@ -1,5 +1,6 @@
 package org.integratedmodelling.thinklab.api.modelling.parsing;
 
+import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.lang.IList;
 import org.integratedmodelling.thinklab.api.modelling.IModel;
 import org.integratedmodelling.thinklab.api.modelling.ISubject;
@@ -21,8 +22,9 @@ public interface ISubjectGenerator extends IModelObjectDefinition {
 	 * implied by its functional properties. Called when the subject is observed.
 	 * 
 	 * @return
+	 * @throws ThinklabException 
 	 */
-	ISubject observe();
+	ISubject observe() throws ThinklabException;
 
 	/**
 	 * Set the definition of the observable that specifies the semantic object. It

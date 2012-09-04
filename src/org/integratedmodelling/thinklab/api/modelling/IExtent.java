@@ -37,6 +37,7 @@ import java.util.Collection;
 import org.integratedmodelling.collections.Pair;
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
+import org.integratedmodelling.thinklab.api.knowledge.IProperty;
 
 /**
  * An Extent describes the topology of the observable
@@ -63,6 +64,15 @@ public abstract interface IExtent extends IState, ITopology<IExtent> {
 	 * @return
 	 */
 	public abstract IConcept getDomainConcept();
+	
+	/**
+	 * Return the property that should link this extent to a ISubject. It should be
+	 * a data property.
+	 * 
+	 * @return
+	 */
+	public abstract IProperty getDomainProperty();
+
 	
 	/**
 	 * Collapse the multiplicity and return the extent that represents
@@ -143,5 +153,6 @@ public abstract interface IExtent extends IState, ITopology<IExtent> {
 	 * @return the coverage proportion as a double [0..1]
 	 */
 	public double getCoverage(ITopologicallyComparable<?> obj);
+
 
 }

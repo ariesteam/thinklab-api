@@ -1,5 +1,7 @@
 package org.integratedmodelling.thinklab.api.modelling;
 
+import org.integratedmodelling.exceptions.ThinklabException;
+
 public interface ITopology<T> extends ITopologicallyComparable<T> {
 
 	public static final long INFINITE = -1L;
@@ -20,8 +22,9 @@ public interface ITopology<T> extends ITopologicallyComparable<T> {
 	 * 
 	 * @param myExtent
 	 * @return
+	 * @throws ThinklabException 
 	 */
-	public T intersection(T other);
+	public T intersection(T other) throws ThinklabException;
 	
 	/**
 	 * Return a topology which represents the union of this with the passed
@@ -30,7 +33,8 @@ public interface ITopology<T> extends ITopologicallyComparable<T> {
 	 * 
 	 * @param myExtent
 	 * @return
+	 * @throws ThinklabException 
 	 */
-	public T union(T other);
+	public T union(T other) throws ThinklabException;
 	
 }
