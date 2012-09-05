@@ -11,28 +11,21 @@ package org.integratedmodelling.thinklab.api.modelling.scheduling;
  *
  */
 public interface ITransition {
-
-	public enum Relevance {
-		PARTIAL,
-		FULL
-	}
 	
 	/**
-	 * Return how the event that generated this transition is relevant to the context of
-	 * interest, i.e. whether extents in the context has been covered partially or
-	 * fully.
+	 * Return whether the event that generated this transition covers the extents 
+	 * in the corresponding context fully.
 	 * 
 	 * @return
 	 */
-	public Relevance getRelevance();
+	public boolean isComplete();
 	
 	/**
 	 * Returns the percentage of coverage of each extent determined by the last transition 
 	 * event in the context it's called for, expressed as an array of doubles (0 to 1) indexed
 	 * by the extents in the context.
 	 * 
-	 * This should only be called when getRelevance() returns PARTIAL or FULL. If FULL,
-	 * it should trivially return an array of 1.0s. If PARTIAL, at least one of the 
+	 * This should only be called when isComplete() returns false. If so, at least one of the 
 	 * coverages will be < 1.
 	 * 
 	 * @return
