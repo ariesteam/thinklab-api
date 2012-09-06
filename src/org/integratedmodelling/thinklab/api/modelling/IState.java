@@ -19,7 +19,7 @@ import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
  * 
  * @author  Ferdinando
  */
-public interface IState extends ISemanticObject<Object>, ISerialAccessor {
+public interface IState extends ISemanticObject<Object>, IStateAccessor {
 
 	/**
 	 * Should endeavor to return doubles as long as it's not meaningless. Many 

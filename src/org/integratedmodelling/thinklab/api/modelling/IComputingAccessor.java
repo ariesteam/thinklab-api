@@ -14,7 +14,7 @@ import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
  * @author Ferd
  *
  */
-public interface IComputingAccessor extends ISerialAccessor {
+public interface IComputingAccessor extends IStateAccessor {
 
 	/**
 	 * This method is called once per dependency before any values are extracted, passing

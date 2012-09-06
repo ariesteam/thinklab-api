@@ -27,13 +27,6 @@ import org.integratedmodelling.thinklab.api.knowledge.IConcept;
  */
 public abstract interface IAccessor {	
 	
-	/**
-	 * Return a type corresponding to the state. The first accessor will create the state if 
-	 * necessary, but the observer should be able to know the type.
-	 *  
-	 * @return
-	 */
-	public abstract IConcept getStateType();
-	
+
 	
 }

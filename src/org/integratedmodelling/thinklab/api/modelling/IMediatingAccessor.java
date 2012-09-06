@@ -4,7 +4,7 @@ import org.integratedmodelling.exceptions.ThinklabException;
 
 
 /**
- * Accessors must implement this one in order to be allowed to mediate another.
+ * State accessors must implement this one in order to be allowed to mediate another.
  * 
  * @author Ferd
  *

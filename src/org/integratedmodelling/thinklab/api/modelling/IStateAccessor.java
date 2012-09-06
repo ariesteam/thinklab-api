@@ -1,5 +1,7 @@
 package org.integratedmodelling.thinklab.api.modelling;
 
+import org.integratedmodelling.thinklab.api.knowledge.IConcept;
+
 /**
  * A serial accessor computes states one context state at a time. Most standard accessors are
  * serial. Given the choice, serial accessors should be used as they ensure proper behavior
@@ -12,7 +14,16 @@ package org.integratedmodelling.thinklab.api.modelling;
  * @author Ferd
  *
  */
-public interface ISerialAccessor extends IAccessor {
+public interface IStateAccessor extends IAccessor {
 
+	/**
+	 * Return a type corresponding to the state. The first accessor will create the state if 
+	 * necessary, but the observer should be able to know the type.
+	 *  
+	 * @return
+	 */
+	public abstract IConcept getStateType();
+	
+	
 	public Object getValue(int contextIndex); 
 }
