@@ -48,25 +48,6 @@ public interface IModel extends IObservingObject {
 	public IObserver getObserver();
 
 	/**
-	 * Return an observation contextualized to the passed context, or throw an
-	 * exception if that's not possible. Recontextualization is the
-	 * core of thinklab and is done based on extent-specific algorithms.
-	 * 
-	 * For conventional modelers: the "output data" are the IStates contained in
-	 * the observation's context, accessed through getContext(). This context will
-	 * also contain any states and extents from the passed one, harmonized and
-	 * transformed as required by the accessors in the contextualization chain.
-	 * 
-	 * Contextualization keeps the observation structure consistent across
-	 * dependencies and contingencies.
-	 * 
-	 * @param context
-	 * @return
-	 * @throws ThinklabException
-	 */
-	public abstract ISubject observe(ISubject context) throws ThinklabException;
-
-	/**
 	 * If a model was given a specific coverage in any extent, either directly or through
 	 * a namespace-wide specification, return the context that
 	 * expresses that coverage. If no coverage has been specified, return an empty
