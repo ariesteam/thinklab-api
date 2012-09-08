@@ -76,6 +76,14 @@ public interface IQuery {
 	 * @return
 	 */
 	public abstract IQuery restrict(IProperty property, IQuery query);
+
+	/**
+	 * Restrict with a query on the same object - basically a fluent AND.
+	 * @param query
+	 * @return
+	 */
+	public abstract IQuery restrict(IQuery query);
+
 	
 	/**
 	 * Validate passed object for conditions expressed in the query. The object
@@ -86,5 +94,6 @@ public interface IQuery {
 	 * @throws ThinklabException 
 	 */
 	public abstract boolean match(Object i) throws ThinklabException;
+
 
 }

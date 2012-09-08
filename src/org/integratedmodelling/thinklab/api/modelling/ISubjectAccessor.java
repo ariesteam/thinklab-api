@@ -1,6 +1,7 @@
 package org.integratedmodelling.thinklab.api.modelling;
 
 import org.integratedmodelling.exceptions.ThinklabException;
+import org.integratedmodelling.thinklab.api.knowledge.IProperty;
 import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
 
 /**
@@ -31,6 +32,15 @@ public interface ISubjectAccessor extends IAccessor {
 	 * @param key
 	 */
 	public abstract void notifyExpectedOutput(ISemanticObject<?> observable, String key);
+	
+	/**
+	 * Called once after the subject is created and placed in its context. The father context
+	 * and the property that links to it is also passed.
+	 * 
+	 * @param context
+	 * @throws ThinklabException
+	 */
+	public abstract void init(ISubject context, ISubject rootContext, IProperty property) throws ThinklabException;
 	
 	/**
 	 * Compute anything the accessor computes over the expected context (which will

@@ -21,4 +21,6 @@ public interface IScale extends Iterable<IExtent>, ITopology<IScale> {
 	public IExtent getSpace();
 
 	public IExtent getTime();
+
+	public int getExtentCount();
 }
