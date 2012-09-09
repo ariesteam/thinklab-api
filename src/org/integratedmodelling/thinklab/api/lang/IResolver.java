@@ -249,12 +249,5 @@ public interface IResolver {
 	 */
 	public abstract boolean validateFunctionCall(IFunctionCall ret);
 
-	/**
-	 * Set the current context to the given ISubject.
-	 * 
-	 * @param observe
-	 */
-	public abstract void setCurrentContext(ISubject observe);
-
 	
 }

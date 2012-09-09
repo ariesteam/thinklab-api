@@ -14,7 +14,7 @@ public interface INamespaceQualified {
 	public abstract INamespace getNamespace();	
 	
 	/**
-	 * The fully qualified name of the object. Must return getNamespace() + "/" + getId()
+	 * The fully qualified name of the object. Must return getNamespace() + "." + getId()
 	 * @return
 	 */
 	public abstract String getName();

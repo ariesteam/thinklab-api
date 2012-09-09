@@ -42,6 +42,22 @@ public class Axiom implements IAxiom {
 		return new Axiom(DATA_PROPERTY_ASSERTION, string);
 	}
 	
+	public static IAxiom ObjectPropertyRange(String property, String concept) {
+		return new Axiom(OBJECT_PROPERTY_RANGE, property, concept);
+	}
+
+	public static IAxiom DataPropertyRange(String property, String concept) {
+		return new Axiom(DATA_PROPERTY_RANGE, property, concept);
+	}
+
+	public static IAxiom ObjectPropertyDomain(String property, String concept) {
+		return new Axiom(OBJECT_PROPERTY_DOMAIN, property, concept);
+	}
+
+	public static IAxiom DataPropertyDomain(String property, String concept) {
+		return new Axiom(DATA_PROPERTY_DOMAIN, property, concept);
+	}
+	
 	public static IAxiom AnnotationPropertyAssertion(String id) {
 		/*
 		 * TODO check: is this what we need to say?
@@ -94,5 +110,6 @@ public class Axiom implements IAxiom {
 	public Iterator<Object> iterator() {
 		return Arrays.asList(_args).iterator();
 	}
+
 
 }
