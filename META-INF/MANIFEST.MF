@@ -41,6 +41,7 @@ Export-Package: org.integratedmodelling.collections;uses:="org.integratedmodelli
    org.integratedmodelling.thinklab.api.project,
    org.integratedmodelling.thinklab.api.modelling,
    org.integratedmodelling.thinklab.api.knowledge",
+ org.integratedmodelling.thinklab.api.modelling.scheduling,
  org.integratedmodelling.thinklab.api.plugin;uses:="org.integratedmodelling.thinklab.api.configuration",
  org.integratedmodelling.thinklab.api.project;uses:="org.integratedmodelling.thinklab.api.plugin",
  org.integratedmodelling.thinklab.api.provenance,
