@@ -58,6 +58,14 @@ public class Axiom implements IAxiom {
 		return new Axiom(DATA_PROPERTY_DOMAIN, property, concept);
 	}
 	
+	public static IAxiom FunctionalDataProperty(String id) {
+		return new Axiom(FUNCTIONAL_DATA_PROPERTY, id);
+	}
+	
+	public static IAxiom FunctionalObjectProperty(String id) {
+		return new Axiom(FUNCTIONAL_OBJECT_PROPERTY, id);
+	}
+
 	public static IAxiom AnnotationPropertyAssertion(String id) {
 		/*
 		 * TODO check: is this what we need to say?
@@ -110,6 +118,8 @@ public class Axiom implements IAxiom {
 	public Iterator<Object> iterator() {
 		return Arrays.asList(_args).iterator();
 	}
+
+
 
 
 }
