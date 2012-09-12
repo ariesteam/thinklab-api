@@ -1,7 +1,7 @@
 package org.integratedmodelling.thinklab.api.modelling;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
+import org.integratedmodelling.thinklab.api.knowledge.ISemanticLiteral;
 
 /**
  * An IState is the result of observing a quality. IStates only exists in the context of an ISubject
@@ -19,7 +19,7 @@ import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
  * 
  * @author  Ferdinando
  */
-public interface IState extends ISemanticObject<Object>, IStateAccessor {
+public interface IState extends ISemanticLiteral<Object>, IStateAccessor {
 
 	/**
 	 * Should endeavor to return doubles as long as it's not meaningless. Many 
