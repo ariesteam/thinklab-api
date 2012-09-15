@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
+import org.integratedmodelling.thinklab.api.lang.IList;
 
 /**
  * A model producing data observations of a given type (through its subclasses). 
@@ -35,7 +36,7 @@ public abstract interface IObserver extends IObservingObject {
 	 * 
 	 * @return
 	 */
-	public abstract ISemanticObject<?> getFinalObservable();
+	public abstract IList getFinalObservable();
 
 	
 	/**

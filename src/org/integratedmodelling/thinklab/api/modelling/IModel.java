@@ -56,17 +56,5 @@ public interface IModel extends IObservingObject {
 	 */
 	public abstract IScale getCoverage();
 
-	/**
-	 * Given the observable for a dependency and that of an extent implemented, return
-	 * whether the model has any actions that define the state of that dependency at 
-	 * domain transitions for that domain concept. This will tell the API whether the
-	 * dependency needs to be supplied in full or we only need to supply enough state 
-	 * to initialize it.
-	 *  
-	 * @param observable
-	 * @param timeDomain
-	 * @return
-	 */
-	public boolean hasActionsFor(IConcept observable, IConcept domainConcept);
 	
 }
