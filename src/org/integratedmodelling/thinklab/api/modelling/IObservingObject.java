@@ -53,6 +53,21 @@ public abstract interface IObservingObject extends IModelObject {
 		 * @return
 		 */
 		boolean isDistributed();
+		
+		/**
+		 * Return whatever model was passed to contextualize the dependency (the 'at'
+		 * part of the specification).
+		 * 
+		 * @return
+		 */
+		IModel getContextModel();
+		
+		/**
+		 * The object, if any, which 
+		 * @return
+		 */
+		Object getWhereCondition();
+		
 	}
 	
 	/**

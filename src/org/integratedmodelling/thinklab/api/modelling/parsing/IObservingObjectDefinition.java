@@ -35,11 +35,16 @@ public abstract interface IObservingObjectDefinition extends IModelObjectDefinit
 	 * @param property
 	 * @param isOptional
 	 * @param distribute 
+	 * @param whereCondition 
+	 * @param whenCondition 
+	 * @param contextModel 
 	 */
 	public void addDependency(
 			Object model, 
 			String formalName, 
 			IPropertyDefinition property, 
 			boolean isOptional, 
-			boolean distribute);
+			boolean distribute, 
+			IModelDefinition contextModel, 
+			Object whereCondition);
 }

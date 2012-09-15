@@ -18,12 +18,25 @@ public abstract interface IObserver extends IObservingObject {
 	 * observable. At the end of a mediation chain there is always
 	 * an observable. 
 	 * 
-	 * @return the object observed by this observable. Use instanceof
+	 * @return the object directly observed by this observable. Use instanceof
 	 * to check whether it's another observer or not. If not, it's a
 	 * open observable for which compatible resolving models should be
 	 * found in the model base. It will never return null.
 	 */
 	public abstract Object getObservedObject();
+	
+	/**
+	 * Return the observable for this observer if it has one, or the one for the mediated
+	 * observer if we are mediating. At the end of a chain of mediation there must always
+	 * be an observable.
+	 * 
+	 * This one follows the chain of mediation so it returns a semantic object. getObservedObject
+	 * just returns the directly observed object.
+	 * 
+	 * @return
+	 */
+	public abstract ISemanticObject<?> getFinalObservable();
+
 	
 	/**
 	 * Return the accessor that will compute states for this observer.
@@ -95,6 +108,7 @@ public abstract interface IObserver extends IObservingObject {
 	 * @return
 	 */
 	public abstract IObserver getMediatedObserver();
+
 
 
 }
