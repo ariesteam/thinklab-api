@@ -38,14 +38,6 @@ public abstract interface IObserver extends IObservingObject {
 	 */
 	public abstract IList getFinalObservable();
 
-	
-	/**
-	 * Return the accessor that will compute states for this observer.
-	 * 
-	 * @return
-	 */
-	public abstract IAccessor getAccessor(IScale context);
-	
 	/**
 	 * Observers are responsible for creating the empty result observation
 	 * when they are contextualized.

@@ -47,4 +47,13 @@ public abstract interface IObservingObjectDefinition extends IModelObjectDefinit
 			boolean distribute, 
 			IModelDefinition contextModel, 
 			Object whereCondition);
+
+	/**
+	 * Accessors are not created directly in the language, but referred to through
+	 * an external function definition which may have parameters.
+	 * 
+	 * @param function
+	 */
+	public void setAccessorGeneratorFunction(IFunctionCall function);
+	
 }

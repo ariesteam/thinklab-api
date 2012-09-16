@@ -90,4 +90,14 @@ public abstract interface IObservingObject extends IModelObject {
 	 * @return
 	 */
 	boolean hasActionsFor(IConcept observable, IConcept domainConcept);
+	
+	/**
+	 * Return the accessor that will compute states for this observer. An observer must
+	 * return a valid accessor; an agent model will only return an accessor if it has
+	 * been given one in the specifications.
+	 * 
+	 * @return
+	 */
+	public abstract IAccessor getAccessor(IScale context);
+	
 }
