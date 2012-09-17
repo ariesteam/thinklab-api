@@ -12,6 +12,15 @@ import org.integratedmodelling.exceptions.ThinklabException;
 public interface IMediatingAccessor  {
 
 	/**
+	 * Return true if the accessor we are mediating to is equivalent to us, rendering the
+	 * mediation unnecessary. Used for workflow optimization.
+	 * 
+	 * @param accessor
+	 * @return
+	 */
+	public boolean isIdentity(IMediatingAccessor accessor);
+	
+	/**
 	 * Receive an accessor to mediate and ensure it is compatible with our semantics. Note that
 	 * if the accessor comes from a datasource, it may only be needed for initialization so
 	 * it may only be capable of computing initial states.
