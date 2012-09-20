@@ -34,13 +34,13 @@ public interface ISubjectAccessor extends IAccessor {
 	public abstract void notifyExpectedOutput(ISemanticObject<?> observable, String key);
 	
 	/**
-	 * Called once after the subject is created and placed in its context. The father context
-	 * and the property that links to it is also passed.
+	 * Called once after the subject is created and placed in its context. If not the root
+	 * subject, the father context and the property that links us to it is also passed.
 	 * 
 	 * @param context
 	 * @throws ThinklabException
 	 */
-	public abstract void init(ISubject context, ISubject rootContext, IProperty property) throws ThinklabException;
+	public abstract void init(ISubject subject, ISubject context, IProperty property) throws ThinklabException;
 	
 	/**
 	 * Compute anything the accessor computes over the expected context (which will
