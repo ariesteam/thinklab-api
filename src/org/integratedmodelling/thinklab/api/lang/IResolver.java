@@ -23,6 +23,38 @@ import org.integratedmodelling.thinklab.api.project.IProject;
  */
 public interface IResolver {
 	
+	/*
+	 * the following are IDs for concepts that the upper ontology is expected to
+	 * provide. Concept definitions will be automatically derived from these 
+	 * according to the idiom used to declare them.
+	 */
+	public static final String OBJECT_CONCEPT = "";
+	public static final String PROCESS_CONCEPT = "";
+	public static final String QUALITY_CONCEPT = "";
+	public static final String THING_CONCEPT = "";
+	public static final String ENERGY_CONCEPT = "";
+	public static final String ENTROPY_CONCEPT = "";
+	public static final String LENGTH_CONCEPT = "";
+	public static final String MASS_CONCEPT = "";
+	public static final String THERMODYNAMIC_POTENTIAL_CONCEPT = "";
+	public static final String VOLUME_CONCEPT = "";
+	public static final String WEIGHT_CONCEPT = "";
+	public static final String MONETARY_VALUE_CONCEPT = "";
+	public static final String PREFERENCE_VALUE_CONCEPT = "";
+	public static final String ACCELERATION_CONCEPT = "";
+	public static final String AREA_CONCEPT = "";
+	public static final String DENSITY_CONCEPT = "";
+	public static final String ELECTRIC_POTENTIAL_CONCEPT = "";
+	public static final String CHARGE_CONCEPT = "";
+	public static final String RESISTANCE_CONCEPT = "";
+	public static final String RESISTIVITY_CONCEPT = "";
+	public static final String PRESSURE_CONCEPT = "";
+	public static final String SLOPE_CONCEPT = "";
+	public static final String SPEED_CONCEPT = "";
+	public static final String TEMPERATURE_CONCEPT = "";
+	public static final String VISCOSITY_CONCEPT = "";
+	public static final String AGENT_CONCEPT = "";
+
 	/**
 	 * This one returns a new "definable" object for the model class passed. This way each 
 	 * implementation can use their own objects and the API remains clean.
