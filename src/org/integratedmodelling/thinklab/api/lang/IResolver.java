@@ -32,6 +32,7 @@ public interface IResolver {
 	public static final String OBJECT_CONCEPT = "object";
 	public static final String PROCESS_CONCEPT = "process";
 	public static final String QUALITY_CONCEPT = "quality";
+	public static final String QUALITY_SPACE_CONCEPT = "class";
 	public static final String THING_CONCEPT = "thing";
 	public static final String ENERGY_CONCEPT = "energy";
 	public static final String ENTROPY_CONCEPT = "entropy";
