@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.util.Map;
 
 import org.integratedmodelling.exceptions.ThinklabException;
+import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.modelling.IModelObject;
 import org.integratedmodelling.thinklab.api.modelling.INamespace;
 import org.integratedmodelling.thinklab.api.modelling.parsing.IConceptDefinition;
@@ -24,37 +25,47 @@ import org.integratedmodelling.thinklab.api.project.IProject;
 public interface IResolver {
 	
 	/*
-	 * the following are IDs for concepts that the upper ontology is expected to
+	 * the following are keys for concepts that the upper ontology is expected to
 	 * provide. Concept definitions will be automatically derived from these 
 	 * according to the idiom used to declare them.
 	 */
-	public static final String OBJECT_CONCEPT = "";
-	public static final String PROCESS_CONCEPT = "";
-	public static final String QUALITY_CONCEPT = "";
-	public static final String THING_CONCEPT = "";
-	public static final String ENERGY_CONCEPT = "";
-	public static final String ENTROPY_CONCEPT = "";
-	public static final String LENGTH_CONCEPT = "";
-	public static final String MASS_CONCEPT = "";
-	public static final String THERMODYNAMIC_POTENTIAL_CONCEPT = "";
-	public static final String VOLUME_CONCEPT = "";
-	public static final String WEIGHT_CONCEPT = "";
-	public static final String MONETARY_VALUE_CONCEPT = "";
-	public static final String PREFERENCE_VALUE_CONCEPT = "";
-	public static final String ACCELERATION_CONCEPT = "";
-	public static final String AREA_CONCEPT = "";
-	public static final String DENSITY_CONCEPT = "";
-	public static final String ELECTRIC_POTENTIAL_CONCEPT = "";
-	public static final String CHARGE_CONCEPT = "";
-	public static final String RESISTANCE_CONCEPT = "";
-	public static final String RESISTIVITY_CONCEPT = "";
-	public static final String PRESSURE_CONCEPT = "";
-	public static final String SLOPE_CONCEPT = "";
-	public static final String SPEED_CONCEPT = "";
-	public static final String TEMPERATURE_CONCEPT = "";
-	public static final String VISCOSITY_CONCEPT = "";
-	public static final String AGENT_CONCEPT = "";
+	public static final String OBJECT_CONCEPT = "object";
+	public static final String PROCESS_CONCEPT = "process";
+	public static final String QUALITY_CONCEPT = "quality";
+	public static final String THING_CONCEPT = "thing";
+	public static final String ENERGY_CONCEPT = "energy";
+	public static final String ENTROPY_CONCEPT = "entropy";
+	public static final String LENGTH_CONCEPT = "length";
+	public static final String MASS_CONCEPT = "mass";
+	public static final String THERMODYNAMIC_POTENTIAL_CONCEPT = "thermodynamic-potential";
+	public static final String VOLUME_CONCEPT = "volume";
+	public static final String WEIGHT_CONCEPT = "weight";
+	public static final String MONETARY_VALUE_CONCEPT = "monetary-value";
+	public static final String PREFERENCE_VALUE_CONCEPT = "preference-value";
+	public static final String ACCELERATION_CONCEPT = "acceleration";
+	public static final String AREA_CONCEPT = "area";
+	public static final String DENSITY_CONCEPT = "density";
+	public static final String ELECTRIC_POTENTIAL_CONCEPT = "electric-potential";
+	public static final String CHARGE_CONCEPT = "charge";
+	public static final String RESISTANCE_CONCEPT = "resistance";
+	public static final String RESISTIVITY_CONCEPT = "resistivity";
+	public static final String PRESSURE_CONCEPT = "pressure";
+	public static final String SLOPE_CONCEPT = "slope";
+	public static final String SPEED_CONCEPT = "speed";
+	public static final String TEMPERATURE_CONCEPT = "temperature";
+	public static final String VISCOSITY_CONCEPT = "viscosity";
+	public static final String AGENT_CONCEPT = "agent";
 
+	/**
+	 * Return the core ontology concept corresponding to the passed key - chosen between 
+	 * those above. These are used to define the semantics of specific observables using 
+	 * language keywords instead of explicit derivations.
+	 *  
+	 * @param key
+	 * @return
+	 */
+	public abstract IConcept getConceptFor(String key);
+	
 	/**
 	 * This one returns a new "definable" object for the model class passed. This way each 
 	 * implementation can use their own objects and the API remains clean.
