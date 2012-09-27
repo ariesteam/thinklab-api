@@ -110,4 +110,12 @@ public interface IClassification  {
 	 */
 	public boolean isCategorical();
 
+	/**
+	 * Return true if all the intervals are contiguous and the extreme intervals have
+	 * finite boundaries.
+	 * 
+	 * @return
+	 */
+	public boolean isContiguousAndFinite();
+
 }
