@@ -36,7 +36,7 @@ public interface IKnowledgeFactory extends IKnowledgeManager {
 	 * @return the ID of the ontology if it has been loaded or refreshed, null otherwise
 	 * @throws ThinklabException if anything goes wrong
 	 */
-	public abstract String refreshOntology(URL url, String name) throws ThinklabException;
+	public abstract IOntology refreshOntology(URL url, String name) throws ThinklabException;
 	
 	/**
 	 * Release the passed ontology and delete from repository. Nothing should happen if name is not found.
@@ -89,6 +89,7 @@ public interface IKnowledgeFactory extends IKnowledgeManager {
 	 * 
 	 * @param ontologyId
 	 * @return
+	 * @throws ThinklabException 
 	 */
-	public abstract File exportOntology(String ontologyId);
+	public abstract File exportOntology(String ontologyId) throws ThinklabException;
 }
