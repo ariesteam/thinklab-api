@@ -1,7 +1,6 @@
 package org.integratedmodelling.lang;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Iterator;
 
 import org.integratedmodelling.thinklab.api.knowledge.IAxiom;
@@ -30,8 +29,8 @@ public class Axiom implements IAxiom {
 		return new Axiom(ANNOTATION_ASSERTION, targetConcept, annotationProperty, value);
 	}
 	
-	static public Axiom SubClass(String concept, String ancestor) {
-		return new Axiom(SUBCLASS_OF, concept, ancestor);
+	static public Axiom SubClass(String superclass, String subclass) {
+		return new Axiom(SUBCLASS_OF, superclass, subclass);
 	}
 	
 	public static Axiom ObjectPropertyAssertion(String string) {
