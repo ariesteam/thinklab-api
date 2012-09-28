@@ -89,6 +89,13 @@ public interface IKnowledgeManager {
 	public abstract IKbox requireKbox(String uri) throws ThinklabException;
 
 	/**
+	 * Return the concept at the root of all the concept hierarchy.
+	 * 
+	 * @return
+	 */
+	public abstract IConcept getRootConcept();
+	
+	/**
 	 * Return the least general common concept in a collection of concept, or null if there
 	 * is none.
 	 * @param cc
