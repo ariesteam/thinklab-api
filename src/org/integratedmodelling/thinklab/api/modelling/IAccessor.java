@@ -1,6 +1,5 @@
 package org.integratedmodelling.thinklab.api.modelling;
 
-import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 
 /**
  * Accessors give access to the raw values of observations. The IAccessor interface should not be implemented
