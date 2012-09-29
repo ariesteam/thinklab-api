@@ -38,11 +38,10 @@ public interface IResolver {
 	public static final String ENTROPY_CONCEPT = "entropy";
 	public static final String LENGTH_CONCEPT = "length";
 	public static final String MASS_CONCEPT = "mass";
-	public static final String THERMODYNAMIC_POTENTIAL_CONCEPT = "thermodynamic-potential";
 	public static final String VOLUME_CONCEPT = "volume";
 	public static final String WEIGHT_CONCEPT = "weight";
-	public static final String MONETARY_VALUE_CONCEPT = "monetary-value";
-	public static final String PREFERENCE_VALUE_CONCEPT = "preference-value";
+	public static final String MONETARY_VALUE_CONCEPT = "money";
+	public static final String PREFERENCE_VALUE_CONCEPT = "priority";
 	public static final String ACCELERATION_CONCEPT = "acceleration";
 	public static final String AREA_CONCEPT = "area";
 	public static final String DENSITY_CONCEPT = "density";
