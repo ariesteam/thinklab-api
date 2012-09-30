@@ -199,7 +199,9 @@ public interface IMetadata {
 	/*
 	 * Special fields for model metadata.
 	 */
-	public static String MODEL_ACCESSOR_GRAPH = "model:accessorGraph";
+	public static final String MODEL_ACCESSOR_GRAPH = "model:accessorGraph";
+	public static final String MODEL_WORKFLOW_GRAPH = "model:workflowGraph";
+	public static final String MODEL_BYTECODE_DUMP  = "model:bytecodeDump";
 
 	/**
 	 * The object returned will be a String, IMetadata, Number or IList for textually defined

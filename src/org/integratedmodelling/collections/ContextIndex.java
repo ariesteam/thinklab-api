@@ -29,6 +29,36 @@ public class ContextIndex {
 	 * The DOT representation of the model graph that created the context.
 	 */
 	String modelDOTGraph = null;
+	String workflowDOTGraph = null;
+	/**
+	 * @return the workflowDOTGraph
+	 */
+	public String getWorkflowDOTGraph() {
+		return workflowDOTGraph;
+	}
+
+	/**
+	 * @param workflowDOTGraph the workflowDOTGraph to set
+	 */
+	public void setWorkflowDOTGraph(String workflowDOTGraph) {
+		this.workflowDOTGraph = workflowDOTGraph;
+	}
+
+	/**
+	 * @return the bytecodeDump
+	 */
+	public String getBytecodeDump() {
+		return bytecodeDump;
+	}
+
+	/**
+	 * @param bytecodeDump the bytecodeDump to set
+	 */
+	public void setBytecodeDump(String bytecodeDump) {
+		this.bytecodeDump = bytecodeDump;
+	}
+
+	String bytecodeDump = null;
 	
 	/*
 	 * a file containing the actual data - normally a NetCDF file. Should have
