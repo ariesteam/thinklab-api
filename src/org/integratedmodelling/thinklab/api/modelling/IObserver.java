@@ -7,7 +7,10 @@ import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
 import org.integratedmodelling.thinklab.api.lang.IList;
 
 /**
- * A model producing data observations of a given type (through its subclasses). 
+ * An observer is linked to all data models and is responsible for interpreting
+ * the states (numbers or otherwise) produces by the accessor. Agent models do not 
+ * have observers as their outputs are fully self-annotating.
+ * 
  */
 public abstract interface IObserver extends IObservingObject {
 	
@@ -37,20 +40,6 @@ public abstract interface IObserver extends IObservingObject {
 	 * @return
 	 */
 	public abstract IList getFinalObservable();
-
-	/**
-	 * Observers are responsible for creating the empty result observation
-	 * when they are contextualized.
-	 * @param observable The observable we need the state for. Some observers
-	 * 	      handle more than one observable.
-	 * @param context  the context that the state will represent. The state must
-	 *        be able to accommodate context.getMultiplicity() elements.
-	 * 
-	 * @return
-	 * @throws ThinklabException
-	 */
-	public abstract IState createState(ISemanticObject<?> observable, ISubject context) throws ThinklabException;
-		
 
 	/**
 	 * Return the sub-context of the passed one that this observer isn't capable
@@ -101,6 +90,16 @@ public abstract interface IObserver extends IObservingObject {
 	 * @return
 	 */
 	public abstract IObserver getMediatedObserver();
+
+	/**
+	 * Check if mediating to the given observer would produce a different result
+	 * than the one we would produce without mediation. Used to optimize mediation
+	 * chains when models are linked.
+	 * 
+	 * @param observer2
+	 * @return
+	 */
+	public abstract boolean isTrivialMediation(IObserver observer2);
 
 
 

@@ -118,4 +118,13 @@ public interface IClassification  {
 	 */
 	public boolean isContiguousAndFinite();
 
+	/**
+	 * Check with another classification and ensure they do exactly the same things. 
+	 * Could be "equals"- FIXME check if that creates any problem.
+	 * 
+	 * @param _classification
+	 * @return
+	 */
+	public boolean isIdentical(IClassification _classification);
+
 }
