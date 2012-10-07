@@ -24,26 +24,27 @@ import org.integratedmodelling.thinklab.api.project.IProject;
  */
 public interface IModelManager {
 
-	/**
-	 * Create an observation of an object. In order to use this one, the object is first 
-	 * annotated to a ISemanticObject. The object must annotate to an endurant or perdurant
-	 * in order to produce an ISubject as an observation - it cannot annotate to a quality
-	 * as that needs a ISubject as a context.
-	 * 
-	 * Because an ISubject is normally distributed in time/space, this method will only
-	 * work when the observable is already an ISubject or when the model chosen is constrained
-	 * to a fully specified scale. The normal way to instantiate an ISubject is by using a
-	 * declared ISubjectGenerator.
-	 * 
-	 * A IModel or an ISubjectGenerator can be passed as a delegate to an observable. In that case, the observable
-	 * of the model will be used to provide the ISubject's semantics, and the model itself
-	 * will be used to observe it.
-	 * 
-	 * @param object
-	 * @return
-	 * @throws ThinklabException
-	 */
-	public ISubject observe(Object observable) throws ThinklabException;
+//	/**
+//	 * Create an observation of an object. In order to use this one, the object is first 
+//	 * annotated to a ISemanticObject. The object must annotate to an endurant or perdurant
+//	 * in order to produce an ISubject as an observation - it cannot annotate to a quality
+//	 * as that needs a ISubject as a context.
+//	 * 
+//	 * Because an ISubject is normally distributed in time/space, this method will only
+//	 * work when the observable is already an ISubject or when the model chosen is constrained
+//	 * to a fully specified scale. The normal way to instantiate an ISubject is by using a
+//	 * declared ISubjectGenerator.
+//	 * 
+//	 * A IModel or an ISubjectGenerator can be passed as a delegate to an observable. In that case, the observable
+//	 * of the model will be used to provide the ISubject's semantics, and the model itself
+//	 * will be used to observe it.
+//	 * 
+//	 * @param object
+//	 * @return
+//	 * @throws ThinklabException
+//	 */
+//	public ISubject observe(Object observable) throws ThinklabException;
+//	
 	
 	public abstract INamespace getNamespace(String ns);
 
