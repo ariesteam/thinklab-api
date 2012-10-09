@@ -3,7 +3,6 @@ package org.integratedmodelling.thinklab.api.modelling;
 import java.util.List;
 
 import org.integratedmodelling.exceptions.ThinklabException;
-import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
 import org.integratedmodelling.thinklab.api.lang.IList;
 
 /**
@@ -40,21 +39,6 @@ public abstract interface IObserver extends IObservingObject {
 	 * @return
 	 */
 	public abstract IList getFinalObservable();
-
-	/**
-	 * Return the sub-context of the passed one that this observer isn't capable
-	 * of computing without external input. If no external input is necessary,
-	 * return null. If all the context is unresolved, return the passed context.
-	 * 
-	 * Normally the only case when the return value will be not null and different
-	 * from the totalContext is when one extent in the context supports a notion of
-	 * "initial" (i.e., time) and the observer is capable of inferring the remaining
-	 * states when initial values are provided.
-	 * 
-	 * @param totalContext
-	 * @return
-	 */
-	public abstract List<IExtent> getUnresolvedContext(ISubject totalContext);
 
 	/**
 	 * Train the model to match any output state that can be
