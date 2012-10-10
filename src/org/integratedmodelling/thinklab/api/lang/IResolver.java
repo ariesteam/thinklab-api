@@ -290,6 +290,14 @@ public interface IResolver {
 	 * @return 
 	 */
 	public abstract boolean validateFunctionCall(IFunctionCall ret);
+	
+	/**
+	 * Return a language adapter for the expression language that this
+	 * namespace expects.
+	 * 
+	 * @return
+	 */
+	public abstract IExpressionLanguageAdapter getLanguageAdapter();
 
 	
 }
