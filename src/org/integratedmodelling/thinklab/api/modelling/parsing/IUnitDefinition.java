@@ -1,6 +1,8 @@
 package org.integratedmodelling.thinklab.api.modelling.parsing;
 
-public interface IUnitDefinition extends IExpressionDefinition {
+public interface IUnitDefinition {
+	
+	public void setExpression(String expression);
 	
 	/**
 	 * Return a parseable string representation of the unit. Could simply be

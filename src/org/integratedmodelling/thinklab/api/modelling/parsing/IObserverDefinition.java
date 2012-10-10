@@ -1,10 +1,11 @@
 package org.integratedmodelling.thinklab.api.modelling.parsing;
 
+import org.integratedmodelling.thinklab.api.knowledge.IExpression;
 import org.integratedmodelling.thinklab.api.modelling.IObserver;
 
 public abstract interface IObserverDefinition extends IObservingObjectDefinition, IObserver {
 
 
-	public void addMediatedObserver(IObserverDefinition observer, IExpressionDefinition condition);
+	public void addMediatedObserver(IObserverDefinition observer, IExpression condition);
 	
 }

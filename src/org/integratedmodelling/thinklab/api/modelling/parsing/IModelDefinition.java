@@ -1,13 +1,14 @@
 package org.integratedmodelling.thinklab.api.modelling.parsing;
 
 import org.integratedmodelling.exceptions.ThinklabException;
+import org.integratedmodelling.thinklab.api.knowledge.IExpression;
 import org.integratedmodelling.thinklab.api.modelling.IDataSource;
 import org.integratedmodelling.thinklab.api.modelling.IExtent;
 import org.integratedmodelling.thinklab.api.modelling.IModel;
 
 public interface IModelDefinition extends IObservingObjectDefinition, IModel {
 
-	public void addObserver(IObserverDefinition observer, IExpressionDefinition expression);
+	public void addObserver(IObserverDefinition observer, IExpression expression);
 		
 	public void setDataSource(IDataSource datasource);
 	

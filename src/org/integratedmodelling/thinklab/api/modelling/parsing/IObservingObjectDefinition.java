@@ -1,5 +1,7 @@
 package org.integratedmodelling.thinklab.api.modelling.parsing;
 
+import org.integratedmodelling.thinklab.api.knowledge.IConcept;
+import org.integratedmodelling.thinklab.api.knowledge.IExpression;
 import org.integratedmodelling.thinklab.api.lang.IList;
 
 public abstract interface IObservingObjectDefinition extends IModelObjectDefinition {
@@ -55,5 +57,9 @@ public abstract interface IObservingObjectDefinition extends IModelObjectDefinit
 	 * @param function
 	 */
 	public void setAccessorGeneratorFunction(IFunctionCall function);
+
+	public void addAction(IConcept domain, String subject,
+			IExpression action, IExpression condition,
+			boolean negated);
 	
 }
