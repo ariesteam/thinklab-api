@@ -58,8 +58,19 @@ public abstract interface IObservingObjectDefinition extends IModelObjectDefinit
 	 */
 	public void setAccessorGeneratorFunction(IFunctionCall function);
 
-	public void addAction(IConcept domain, String subject,
-			IExpression action, IExpression condition,
-			boolean negated);
+	/**
+	 * Add an action, consisting of a "what to do" and a "when to do it" parts. Both
+	 * are IExpressions, defined with appropriate receivers and arguments so that they
+	 * do their thing without further intervention.
+	 * 
+	 * @param target the string key of the object that this action will change, if any. May be 
+	 *        null for side-effect actions.
+	 * @param type one of the numeric constants in IObservingObject, to indicate which action type we target
+	 * @param action what to do - never null.
+	 * @param condition when to do it - returns boolean and may be null.
+	 * @param domains the domains of the events that trigger this action. Null means
+	 * 	      initialization.
+	 */
+	public void addAction(String target, int type, IExpression action, IExpression condition, IConcept[] domains);
 	
 }

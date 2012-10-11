@@ -13,6 +13,16 @@ import org.integratedmodelling.thinklab.api.knowledge.IProperty;
  *
  */
 public abstract interface IObservingObject extends IModelObject {
+	
+	/*
+	 * action types
+	 * TODO complete, synchronize with leading agent frameworks
+	 */
+	public static final int ACTION_DO = 1;
+	public static final int ACTION_MOVE = 2;
+	public static final int ACTION_CHANGE = 3;
+	public static final int ACTION_INTEGRATE = 4;
+	public static final int ACTION_MOVE_AWAY = 5;
 
 	public static interface IDependency {
 		
