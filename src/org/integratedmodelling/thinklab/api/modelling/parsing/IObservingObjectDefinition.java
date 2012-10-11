@@ -50,6 +50,20 @@ public abstract interface IObservingObjectDefinition extends IModelObjectDefinit
 			IModelDefinition contextModel, 
 			Object whereCondition);
 
+	
+	/**
+	 * Specific extents may be mentioned in action specifications to trigger actions
+	 * on transition. We set function calls so they can be created at initialization and
+	 * not at parsing. This one must return the domain concept of the extent that the
+	 * function adds - which may require to call it, according to implementation. Avoid
+	 * that if possible.
+	 * 
+	 * @param extentGenerator
+	 * @return the domain concept for the extent. If this returns null, the extent and
+	 * 		   all the corresponding actions will be ignored.
+	 */
+	public IConcept addExtentConstraintFunction(IFunctionCall extentGenerator);
+	
 	/**
 	 * Accessors are not created directly in the language, but referred to through
 	 * an external function definition which may have parameters.

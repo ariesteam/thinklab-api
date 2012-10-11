@@ -1,7 +1,9 @@
 package org.integratedmodelling.thinklab.api.modelling;
 
+import java.util.Collection;
 import java.util.List;
 
+import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.IConcept;
 import org.integratedmodelling.thinklab.api.knowledge.IProperty;
 
@@ -109,5 +111,18 @@ public abstract interface IObservingObject extends IModelObject {
 	 * @return
 	 */
 	public abstract IAccessor getAccessor(IScale context);
+	
+	/**
+	 * If the object was given actions that are constrained to the presence and/or
+	 * specific attributes of certain extents, the (usually partial) extents defined
+	 * in them are returned here. These extents will be mandatory in the observation
+	 * context and will influence the contextualization scale of the subject.
+	 * 
+	 * Such extents come from specifications like "over time(step=1h) do ...".
+	 * 
+	 * @return
+	 * @throws ThinklabException 
+	 */
+	public Collection<IExtent> getExtentConstraints() throws ThinklabException;
 	
 }
