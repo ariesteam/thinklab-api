@@ -2,9 +2,9 @@ package org.integratedmodelling.thinklab.api.modelling;
 
 
 /**
- * An ObservationContext is an immutable list of the IExtents seen by a ISubject, which can be
- * compared with others topologically. Contexts generate events that are merged in ISchedules
- * for contextualization.
+ * An Scale is an immutable list of the IExtents seen by a ISubject, which can be
+ * compared with others topologically. Scales can be discretized into transitions, corresponding to
+ * events that are merged in ISchedules for contextualization.
  * 
  * The IExtents must be presented in the appropriate and stable order for contextualization.
  * 
