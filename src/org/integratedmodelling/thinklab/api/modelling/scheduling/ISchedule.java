@@ -22,7 +22,7 @@ public interface ISchedule extends Iterable<IEvent> {
 	 * @param context
 	 * @throws ThinklabException
 	 */
-	public abstract void merge(IScale context) throws ThinklabException;
+	public abstract void merge(ISchedule schedule) throws ThinklabException;
 	
 	/**
 	 * Remove a previously merge scale from this schedule.

@@ -34,25 +34,58 @@ public interface ISubjectAccessor extends IAccessor {
 	public abstract void notifyExpectedOutput(ISemanticObject<?> observable, String key);
 	
 	/**
-	 * Called once after the subject is created and placed in its context. If not the root
-	 * subject, the father context and the property that links us to it is also passed.
+	 * Called once after the subject is created and placed in its context, but before any states or
+	 * subjects are created (except those that were predefined). If not the root
+	 * subject, the father context and the property that links us to it are also passed. It is 
+	 * acceptable at this point to modify the scale according to the semantics - e.g. add boundaries
+	 * for a watershed within the predefined grid, etc.
 	 * 
-	 * @param context
+	 * @param subject the subject we are handling.
+	 * @param context the father object (may be null)
+	 * @param property the property linking us to the father object (null if the latter is null)
 	 * @throws ThinklabException
 	 */
-	public abstract void init(ISubject subject, ISubject context, IProperty property) throws ThinklabException;
+	public abstract void preinitialize(ISubject subject, ISubject context, IProperty property) throws ThinklabException;
 	
+	
+	/**
+	 * This one is called after all the data are created and initialized but before any subjects are 
+	 * created. It is not ok to modify the context in this one, but data states may be inspected and
+	 * values modified if necessary, as long as the context remains the same. 
+	 * 
+	 * @param subject the subject we are handling.
+	 * @param context the father object (may be null)
+	 * @param property the property linking us to the father object (null if the latter is null)
+	 */
+	public abstract void initialize(ISubject subject, ISubject context, IProperty property) throws ThinklabException;
+
+	/**
+	 * This one is called after all the data are created and initialized and all subjects are 
+	 * created. Data states may be inspected and modified if necessary, subjects may be modified or
+	 * deleted.  
+	 * 
+	 * @param subject the subject we are handling.
+	 * @param context the father object (may be null)
+	 * @param property the property linking us to the father object (null if the latter is null)
+	 */
+	public abstract void postinitialize(ISubject subject, ISubject context, IProperty property) throws ThinklabException;
+
 	/**
 	 * Compute anything the accessor computes over the expected context (which will
 	 * be the whole context our observer may have passed us, and is passed again here
-	 * for simplicity).
+	 * for simplicity). This is only called if the context of observation includes some
+	 * observation of time, after all the initialization sequence.
 	 * 
-	 * After this is called, the appropriate getState will
-	 * be called to retrieve the output(s).
+	 * After this is called, getState be called as needed to retrieve the output(s) using the keys 
+	 * previously notified through notifyExpectedOutput().
 	 * 
+	 * @param subject the subject we are handling.
+	 * @param context the father object (may be null)
+	 * @param property the property linking us to the father object (null if the latter is null)
+
 	 * @return
 	 */
-	public ISubject process(ISubject context) throws ThinklabException;
+	public ISubject process(ISubject subject, ISubject context, IProperty property) throws ThinklabException;
 	
 	/**
 	 * Return the computed state for the context passed to process().
