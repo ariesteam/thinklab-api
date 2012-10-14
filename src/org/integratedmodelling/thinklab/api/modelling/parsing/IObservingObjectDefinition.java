@@ -39,7 +39,7 @@ public abstract interface IObservingObjectDefinition extends IModelObjectDefinit
 	 * @param distribute 
 	 * @param whereCondition 
 	 * @param whenCondition 
-	 * @param contextModel 
+	 * @param contextGenerator 
 	 */
 	public void addDependency(
 			Object model, 
@@ -47,7 +47,7 @@ public abstract interface IObservingObjectDefinition extends IModelObjectDefinit
 			IPropertyDefinition property, 
 			boolean isOptional, 
 			boolean distribute, 
-			IModelDefinition contextModel, 
+			Object contextGenerator, 
 			Object whereCondition);
 
 	

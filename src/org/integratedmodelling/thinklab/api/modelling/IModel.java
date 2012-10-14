@@ -27,6 +27,16 @@ public interface IModel extends IObservingObject {
 	public List<ISemanticObject<?>> getObservables();
 	
 	/**
+	 * Return the names that all the observables are known to the model with. These
+	 * are used to refer to the observables in any computation. Languages will
+	 * want to make these user-definable but provide defaults that make sense.
+	 * 
+	 * @return list of IDs, corresponding in size and order to the result of
+	 *         getObservables(). At least one element is expected.
+	 */
+	public List<String> getObservableNames();
+	
+	/**
 	 * Return the datasource, if any. If we have a datasource, the observer 
 	 * defines its observable through its observed "endpoint" - either an
 	 * observable object or a model.

@@ -5,6 +5,15 @@ import org.integratedmodelling.thinklab.api.knowledge.IProperty;
 import org.integratedmodelling.thinklab.api.knowledge.ISemanticObject;
 
 /**
+ * ISubjectAccessors can be attached to subject models and when present, receive the fully computed
+ * state of the subject over the whole context. They do not exist by default, but user accessors may be
+ * defined to provide specific computations. Any complex model being wrapped semantically is essentially
+ * a ISubjectAccessor as an entry point. 
+ * 
+ * SubjectAccessors can modify the context for the object they handle and do pretty much what they
+ * want, compatibly with the semantics. So they can also handle context transformations such as
+ * GIS operations.
+ * 
  * @author  Ferd
  */
 public interface ISubjectAccessor extends IAccessor {
@@ -20,6 +29,7 @@ public interface ISubjectAccessor extends IAccessor {
 	 * 
 	 * @param key the formal name of the parameter that will be passed to the 
 	 * @param accessor the accessor that will be used to get the dependency.
+	 * @deprecated slated for removal - shouldn't be here
 	 */
 	public abstract void notifyDependency(IState state);
 
@@ -30,6 +40,8 @@ public interface ISubjectAccessor extends IAccessor {
 	 * 
 	 * @param observable
 	 * @param key
+	 * @deprecated slated for removal - shouldn't be here unless we use it to notify 
+	 * 	           functional properties from the semantics that are not in the dependencies.
 	 */
 	public abstract void notifyExpectedOutput(ISemanticObject<?> observable, String key);
 	

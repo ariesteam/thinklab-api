@@ -2,24 +2,17 @@ package org.integratedmodelling.thinklab.api.modelling;
 
 
 /**
- * Accessors give access to the raw values of observations. The IAccessor interface should not be implemented
- * directly but only through one of its subinterfaces. 
+ * Accessors give access to the raw values of observations and are used to process their data or objects.
  * 
- * ISerialAccessors operate state-by-state in a context, being passed each state in the sequence determined by the context's internal 
- * topologies, or in "parallel" producing states in a one-shot manner. 
+ * IStateAccessors operate serially in a context, being passed each state in the sequence determined by the context's internal 
+ * topologies. State models always have a default accessor and may be chained to a user-provided one for further processing.
  * 
- * ITransformingAccessors will receive the fully computed
- * states of their dependencies over the whole context, and produce their states in one operation
- * instead of successive calls to getValue(). 
+ * ISubjectAccessors can be attached to subject models and when present, receive the fully computed
+ * state of the subject over the whole context. They do not exist by default, but user accessors may be
+ * defined to provide specific computations. Any complex model being wrapped semantically is essentially
+ * a ISubjectAccessor as an entry point. 
  * 
- * An accessor implementing IContextTransformingAccessor is expected to modify the topologies of the context,
- * therefore producing a completely new context that will no longer contain the original states except in
- * provenance records. An example would be spatial clustering producing different polygons from originally 
- * different others or grids.
- * 
- * Classes implementing IAccessor may also be able to handle data extraction from an unchecked datasource or
- * mediate the output of another accessor to convert to a specified value semantics. This ability is signaled
- * by implementing the additional interface IMediatingAccessor.
+ * For now IAccessor is a tag interface only, the relevant methods are in IStateAccessor and ISubjectAccessor.
  * 
  * @author Ferdinando
  *
@@ -27,5 +20,4 @@ package org.integratedmodelling.thinklab.api.modelling;
 public abstract interface IAccessor {	
 	
 
-	
 }
