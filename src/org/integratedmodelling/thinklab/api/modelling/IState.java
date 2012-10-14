@@ -2,6 +2,7 @@ package org.integratedmodelling.thinklab.api.modelling;
 
 import org.integratedmodelling.exceptions.ThinklabException;
 import org.integratedmodelling.thinklab.api.knowledge.ISemanticLiteral;
+import org.integratedmodelling.thinklab.api.lang.IMetadataHolder;
 
 /**
  * An IState is the result of observing a quality. IStates only exists in the context of an ISubject
@@ -19,7 +20,7 @@ import org.integratedmodelling.thinklab.api.knowledge.ISemanticLiteral;
  * 
  * @author  Ferdinando
  */
-public interface IState extends ISemanticLiteral<Object>, IStateAccessor {
+public interface IState extends ISemanticLiteral<Object>, IStateAccessor, IMetadataHolder {
 
 	/**
 	 * Should endeavor to return doubles as long as it's not meaningless. Many 
@@ -42,19 +43,6 @@ public interface IState extends ISemanticLiteral<Object>, IStateAccessor {
 	 * @return
 	 */
 	public int getValueCount();
-
-//	/**
-//	 * Return a state with the given context dimension collapsed to one, and
-//	 * the data appropriately aggregated. Return self if the dimension is not
-//	 * in the context and throw an exception if data along that dimension cannot
-//	 * be aggregated. It's expected to handle the metadata appropriately, e.g. 
-//	 * modify the units if necessary.
-//	 * 
-//	 * @param concept
-//	 * @return
-//	 * @throws ThinklabException
-//	 */
-//	public IState aggregate(IConcept concept) throws ThinklabException;
 
 	/**
 	 * True if the owning ISubject has an observation of space with more than

@@ -10,7 +10,8 @@ package org.integratedmodelling.thinklab.api.modelling;
  *     existing model for a particular observable has computed each state.
  * 
  * @author Ferd
- *
+ * @deprecated scenarios are not necessary, they're just subjects with predefined data and 
+ * 			   hard-coded models.
  */
 public interface IScenario extends IModelObject {
 
